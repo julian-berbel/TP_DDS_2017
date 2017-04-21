@@ -1,0 +1,25 @@
+Ideas sobre la estructura del tp
+
+
+- Deberia haber 2-3 clases. Una que sea ecuacion, que de alguna forma tenga su coleccion de variables y operaciones y las vaya intercalando para armar la ecuacion. La ecuacion deberia tener un nombre, que es lo que aparece a la izquierda del igual
+
+- Una ecuacion deberia tener algo para indicar si es cuenta, indicador, o intermedia.
+
+- Si una ecuacion tiene producto y/o division, no puede tener sumas o restas. Para eso uso las ecuaciones intermedias (para el ROE se usaria una cuenta intermedia para hacer la resta, por ejemplo)
+
+- Los nombres de las variables en las ecuaciones no pueden contener espacios en blanco (' '). Solo pueden estar compuestas de letras (A-Z, a-z), guiones(-), y guiones bajos(_). Deben tener al menos una letra, y deben empezar con una.
+
+- Por lo expuesto en el item anterior, los nombres de variables no pueden tener nada que haga referencia a un operador (= ; + ; - ; .....).
+
+- El archivo que contiene las ecuaciones de cuentas y/o indicadores deberia seguir lo que dicen los items anteriores. Si algun nombre de variable contiene un caracter inválido, deberia emitirse un error y/o saltar a la siguiente ecuacion
+
+- El archivo de cuentas/indicadores deberia tener una ecuacion por linea. Se podria hacer el parser de modo tal de que se permitan lineas con comentarios (empezando con algo como *, // ó /*).
+  Esas lineas con comentarios podrian servir para mostrar el formato de las ecuaciones, por ejemplo.
+  
+- En cada linea del archivo de configuracion deberia haber algo despues de la ecuacion que me indique que tipo de ecuacion es. Otra idea sería poner un símbolo al inicio de cada ecuación para indicar de que tipo es.
+  
+- Deberia haber una clase, llámese 'sistema' por ejemplo, que contenga la lista de ecuaciones. En un principio esa lista de ecuaciones deberia ser cargada de un archivo de cuentas/indicadores.
+  Ese archivo debería ser confeccionado a mano, pero podría ser que en el futuro tambien se permita que el sistema agregue nuevas ecuaciones a ese archivo, o que el usuario lo cree desde el programa.
+  
+  
+
