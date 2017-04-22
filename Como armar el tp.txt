@@ -22,4 +22,8 @@ Ideas sobre la estructura del tp
   Ese archivo debería ser confeccionado a mano, pero podría ser que en el futuro tambien se permita que el sistema agregue nuevas ecuaciones a ese archivo, o que el usuario lo cree desde el programa.
   
   
+  
+ Lucid chart para ir armando las pantallas:
+ https://www.lucidchart.com/invitations/accept/5b0cf26f-d6dd-4175-a3c8-a59d1f61144e
+  
 
