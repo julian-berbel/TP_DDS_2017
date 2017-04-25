@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Parser 
 {
-	public static void parseCalculations(String path, Enterprise ent) // hago que cree los objetos aca por ahora
+	public static void parseCalculations(String path, EnterpriseList ent) // hago que cree los objetos aca por ahora
 	{																  //lo que me genera dudas es si los cambios que le haga a ent acá se reflejan en las otras clases que usan eso, o esto es una copia
 							
 		List<String> lines = new ArrayList<String>(/* aca tendria que poner algo para separar por lineas el txt */); 
