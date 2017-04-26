@@ -5,7 +5,6 @@ import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.FileSelector;
 
 
@@ -30,7 +29,7 @@ public class LoadCalculationsWindow extends SimpleWindow<LoadCalculationsVM>
 		
 		
 		new Label(panel1).setText("Ruta de Archivo:");
-		new TextBox(panel1).setWidth(200).bindValueToProperty("filePath");
+	    new Label(panel1).setWidth(300).bindValueToProperty("filePath");
 		new FileSelector(panel1).setCaption("Elegir Archivo...").bindValueToProperty("filePath");
 		new Button(panel1).setCaption("Cargar").onClick(()->{LoadCalculationsVM.parseFile();}); //el onClick pide algo que devuelva 'Action'; parece que el hacer ese juego de simbolos me permite ejecutar el metodo que quiero
 		
