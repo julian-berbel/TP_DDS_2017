@@ -1,4 +1,4 @@
-Ideas sobre la estructura del tp
+﻿Ideas sobre la estructura del tp
 
 
 - Deberia haber 2-3 clases. Una que sea ecuacion, que de alguna forma tenga su coleccion de variables y operaciones y las vaya intercalando para armar la ecuacion. La ecuacion deberia tener un nombre, que es lo que aparece a la izquierda del igual
@@ -21,7 +21,29 @@ Ideas sobre la estructura del tp
 - Deberia haber una clase, llámese 'sistema' por ejemplo, que contenga la lista de ecuaciones. En un principio esa lista de ecuaciones deberia ser cargada de un archivo de cuentas/indicadores.
   Ese archivo debería ser confeccionado a mano, pero podría ser que en el futuro tambien se permita que el sistema agregue nuevas ecuaciones a ese archivo, o que el usuario lo cree desde el programa.
   
-  
+    =========================== LO DE ARRIBA SON IDEAS PARA LOS INDICADORES, NO SIRVEN POR AHORA =====================================
+(esto de abajo es lo que habia agregado el 21/4 pero no se subio al git)
+
+
+Para el TP1, Gaston me dijo que las cuentas son valores que pertenecen al balance de una empresa, por ejemplo.
+Por tanto, vamos a tomar que hay un archivo de cuentas por cada empresa. En cada renglon me ponen un atributo y su valor (separados por '\t').
+
+En el programa vamos a tener que armar una clase 'Empresa' que tenga una coleccion de cuentas.
+Despues, hay una clase 'Cuenta' que tiene un nombre y un valor. De esta forma no tengo que tener hardcodeado los valores que puede tener cada empresa.
+
+
+
+Si agregamos el tema de los periodos, la empresa deberia tener una coleccion de cuentas por periodo, la cuenta tiene una coleccion de atributos y un periodo
+y el atributo tiene un nombre y un valor
+Para hacer esto en el archivo, creo que seria mas comodo hacer una linea que diga periodo=xxxx, y los valores valor1=123 valor2=... (cada valor separado por '\t')
+Podria haber algo al principio del archivo que indique que empresa es, asi se puede buscar si ya estan cargados esos datos o no. Lo mismo con el periodo
+
+Si no hay una linea al principio del archivo que me dice que empresa es, tiro error.
+Lo mismo si cualquier otra linea no me dice algo como 'periodo=...' --> tiro error y si quiero puedo saltar a procesar otra linea
+
+Podria permitir que hayan lineas con comentarios, para mostrar al usuario como tiene que escribir las cosas  
+
+
   
  Lucid chart para ir armando las pantallas:
  https://www.lucidchart.com/invitations/accept/5b0cf26f-d6dd-4175-a3c8-a59d1f61144e

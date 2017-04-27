@@ -38,7 +38,7 @@ public class Parser
 	    			
 	    			if(attribute[0] == "PERIODO")		//Por ahora no hay nada que verifique si ya cargué el nombre de empresa/periodo, o si una cuenta ya fue cargada para ese periodo
 	    			{
-	    				p.setPeriod(attribute[1]);
+	    				p.setPeriodName(attribute[1]);
 	    				continue;
 	    			}
 	    			

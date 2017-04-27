@@ -1,2 +1,0 @@
-- A que se refieren con "cargar archivo de cuentas para varias empresas". Que son esas cuentas; contienen valores o son solo ecuaciones?
-  Si son solo ecuaciones, va con las ideas que puse en el otro archivo.

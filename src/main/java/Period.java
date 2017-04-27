@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Period 
 {
-	private String period;						// el periodo podria ser algo como "2016-2017"
+	private String periodName;						// el periodo podria ser algo como "2016-2017"
 	private List<Calculation> calculations;
 	
 	public Period()
@@ -19,12 +19,12 @@ public class Period
 	{
 		this.calculations.add(calc);
 	}	
-	public void setPeriod(String p)
+	public void setPeriodName(String p)
 	{
-		this.period = p;
+		this.periodName = p;
 	}
-	public String getPeriod()
+	public String getPeriodName()
 	{
-		return period;
+		return periodName;
 	}
 }
