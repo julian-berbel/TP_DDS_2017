@@ -4,8 +4,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Parser 
+public class Parser_old 
 {
+	/* Esto sigue el siguiente formato, que se dejo de lado por un archivo JSON:
+	 * 
+	 * EMPRESA=algo
+	 * PERIODO=sdasd;CUENTA1=12312;CUENTA2=.....
+	 * PERIODO=asda;CUENTAx=234;CUENTAy=....
+	 * .
+	 * .
+	 * .
+	 * ......
+	 */
+	
+	
 	public static Enterprise parseCalculations(String path) throws Exception // hago que cree los objetos aca por ahora
 	{	
 	    	File f1 = new File(path);						//Despues de separar por lineas, la primer linea es la empresa; separo ambos strings del '=' y asigno el 2do string al nombre del objeto 'Enterprise'

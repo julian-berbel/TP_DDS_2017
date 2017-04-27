@@ -1,5 +1,8 @@
+import java.io.FileReader;
 import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
 @Observable
 public class LoadCalculationsVM 
@@ -25,8 +28,8 @@ public class LoadCalculationsVM
 	{
 		try
 		{
-			Enterprise enterprise = Parser.parseCalculations(filePath);
-			Application.getEnterpriseList().addEnterprise(enterprise); //Hago que el parser me cargue la empresa en un objeto y la agrego a la lista. Entonces, cada vez que pongo para cargar los datos, crea otro objeto empresa y lo agrega a la lista... faltaria verificar si la empresa ya fue cargada, y de ser asi la elimino y la vuelvo a cargar (si no tengo que andar buscando si los periodos del archivo ya fueron cargados o no, y es un lio)		
+			Enterprise enterprise = parseJson();
+			Application.getEnterpriseList().addEnterprise(enterprise); // la cargo en esa clase para que sea parte de una lista global de empresas		
 			showLoadedData(enterprise);
 		}
 		catch(Exception e)
@@ -49,5 +52,13 @@ public class LoadCalculationsVM
 			}
 		}
 		
+	}
+	
+	private static Enterprise parseJson() throws Exception
+	{
+		Gson gson = new Gson();
+		JsonReader reader = new JsonReader(new FileReader(filePath));
+		Enterprise enterprise = gson.fromJson(reader, Enterprise.class);		
+		return enterprise;
 	}
 }
