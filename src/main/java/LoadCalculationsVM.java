@@ -7,11 +7,11 @@ import com.google.gson.stream.JsonReader;
 @Observable
 public class LoadCalculationsVM 
 {
-	private String filePath;			
+	private static String filePath;			// Los puse static porque me rompe las pelotas el 'parseFile'
 	
 	public LoadCalculationsVM()
 	{
-		filePath = "";
+		
 	}
 	
 	public void setFilePath(String path)
@@ -24,7 +24,7 @@ public class LoadCalculationsVM
 	}
 	
 	
-	public void parseFile()	
+	public static void parseFile()	
 	{
 		try
 		{
@@ -34,12 +34,11 @@ public class LoadCalculationsVM
 		}
 		catch(Exception e)
 		{
-			//e.printStackTrace();
 			throw new UserException(e.toString()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
 		}
 	}		
 
-	private void showLoadedData(Enterprise ent) // lo muestro por consola; seria mas lindo por messagebox, pero se haría un lio si son muchos periodos
+	private static void showLoadedData(Enterprise ent) // lo muestro por consola; seria mas lindo por messagebox, pero se haría un lio si son muchos periodos
 	{
 		System.out.println("Estos fueron los datos extraidos del archivo:\n" + ent.getEnterpriseName());
 		
@@ -55,7 +54,7 @@ public class LoadCalculationsVM
 		
 	}
 	
-	private Enterprise parseJson() throws Exception
+	private static Enterprise parseJson() throws Exception
 	{
 		Gson gson = new Gson();
 		JsonReader reader = new JsonReader(new FileReader(filePath));
