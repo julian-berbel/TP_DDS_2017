@@ -1,7 +1,6 @@
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.layout.VerticalLayout;
-import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -28,6 +27,7 @@ public class LoadCalculationsWindow extends SimpleWindow<LoadCalculationsVM>
 		new Button(mainPanel).setCaption("Cargar Archivo").onClick(()->{ this.getModelObject().parseFile(); }); //El onClick pide algo que devuelva 'Action';
 																											 	//El ()->{} es una lambda		
 																												//this.getModelObject() me devuelve el ViewModel de esta vista (especificado arriba en el super del contsructor)
+
 	}
 	
 	@Override	

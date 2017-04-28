@@ -11,26 +11,27 @@ public class LoadCalculationsVM
 	
 	public LoadCalculationsVM()
 	{
+
 		filePath = "";
 	}
 	
-	public void setFilePath(String path)
-	{
-		filePath = path;
-	}
-	public String getFilePath()
-	{
+	public String getFilePath() {
 		return filePath;
 	}
-	
-	
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
 	public void parseFile()	
 	{
 		try
 		{
-			Enterprise enterprise = parseJson();
-			Application.getEnterpriseList().addEnterprise(enterprise); // la cargo en esa clase para que sea parte de una lista global de empresas		
-			showLoadedData(enterprise);
+
+			EnterpriseList enterpriseList = this.parseJson();
+			Application.setEnterpriseList(enterpriseList); // la cargo en esa clase para que sea parte de una lista global de empresas		
+
+			showLoadedData(enterpriseList);
 		}
 		catch(Exception e)
 		{
@@ -39,27 +40,31 @@ public class LoadCalculationsVM
 		}
 	}		
 
-	private void showLoadedData(Enterprise ent) // lo muestro por consola; seria mas lindo por messagebox, pero se har�a un lio si son muchos periodos
+	private static void showLoadedData(EnterpriseList entlist) // lo muestro por consola; seria mas lindo por messagebox, pero se har�ｿｽa un lio si son muchos periodos
+
 	{
-		System.out.println("Estos fueron los datos extraidos del archivo:\n" + ent.getEnterpriseName());
-		
-		for(Period p : ent.getPeriods())
-		{
-			System.out.println("Periodo: " + p.getPeriodName() + "\nCuentas:");
+		System.out.println("Estos fueron los datos extraidos del archivo:\n");
+		for(Enterprise ent: entlist.getEnterpriseList()){
+			System.out.println(ent.getEnterpriseName());
 			
-			for(Calculation c : p.getCalculations())
+			for(Period p : ent.getPeriods())
 			{
-				System.out.println(c.getName() + ": " + c.getValue());
+				System.out.println("Periodo: " + p.getPeriodName() + "\nCuentas:");
+				
+				for(Calculation c : p.getCalculations())
+				{
+					System.out.println(c.getName() + ": " + c.getValue());
+				}
 			}
 		}
-		
 	}
 	
-	private Enterprise parseJson() throws Exception
+	private EnterpriseList parseJson() throws Exception
+
 	{
 		Gson gson = new Gson();
 		JsonReader reader = new JsonReader(new FileReader(filePath));
-		Enterprise enterprise = gson.fromJson(reader, Enterprise.class);		
+		EnterpriseList enterprise = gson.fromJson(reader, EnterpriseList.class);		
 		return enterprise;
 	}
 }

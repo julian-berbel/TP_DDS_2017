@@ -14,6 +14,7 @@ public class EnterpriseList
 	{
 		enterpriseList.add(ent);
 	}
+	
 	public List<Enterprise> getEnterpriseList()
 	{
 		return enterpriseList;
