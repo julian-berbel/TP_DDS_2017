@@ -29,7 +29,7 @@ public class LoadCalculationsVM
 		try
 		{
 			Enterprise enterprise = parseJson();
-			Application.getEnterpriseList().addEnterprise(enterprise); // la cargo en esa clase para que sea parte de una lista global de empresas		
+//			Application.getEnterpriseList().addEnterprise(enterprise); // la cargo en esa clase para que sea parte de una lista global de empresas		
 			showLoadedData(enterprise);
 		}
 		catch(Exception e)
@@ -38,7 +38,7 @@ public class LoadCalculationsVM
 		}
 	}		
 
-	private static void showLoadedData(Enterprise ent) // lo muestro por consola; seria mas lindo por messagebox, pero se haría un lio si son muchos periodos
+	private static void showLoadedData(Enterprise ent) // lo muestro por consola; seria mas lindo por messagebox, pero se harï¿½a un lio si son muchos periodos
 	{
 		System.out.println("Estos fueron los datos extraidos del archivo:\n" + ent.getEnterpriseName());
 		
