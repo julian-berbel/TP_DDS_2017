@@ -11,9 +11,9 @@ import org.uqbar.arena.windows.MainWindow;
 
 
 @SuppressWarnings("serial")
-public class FirstWindow extends MainWindow<MainVM>
+public class MainView extends MainWindow<MainVM>
 {
-	public FirstWindow()
+	public MainView()
 	{
 		super(new MainVM());
 	}
@@ -59,13 +59,13 @@ public class FirstWindow extends MainWindow<MainVM>
 	private void showFeatureNotAvailableMessage()
 	{
 		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Information);
-		msgBox.setMessage("Esta funcionalidad a�n no ha sido implementada!");
+		msgBox.setMessage("Esta funcionalidad aun no ha sido implementada!");
 		msgBox.open();
 	}
 	
 		
 	public static void main(String[] args)
 	{
-		new FirstWindow().startApplication();
+		new MainView().startApplication();
 	}
 }

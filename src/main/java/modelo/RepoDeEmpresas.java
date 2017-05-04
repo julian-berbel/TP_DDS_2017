@@ -20,14 +20,15 @@ public class RepoDeEmpresas
 	{
 		return repoDeEmpresas;
 	}
-	public static void setEnterpriseList(List<Enterprise> enterprises) {
+	public static void setEnterpriseList(List<Enterprise> enterprises)
+	{
 		repoDeEmpresas = enterprises;
 	}
 	
 	public static List<String> getEnterprisesNameList()
 	{
 		List<String> enterpriseNameList= new ArrayList<String>();
-		for(int index=0;index<(repoDeEmpresas.size());index++)
+		for(int index=0;index < (repoDeEmpresas.size());index++)
 		{
 			enterpriseNameList.add(repoDeEmpresas.get(index).getEnterpriseName());
 		}
@@ -35,33 +36,28 @@ public class RepoDeEmpresas
 	}
 	
 	public static List<String> getEnterprisePeriodsList(String enterpriseName)
-	{
-		
+	{		
 		int index=0;
 		while(repoDeEmpresas.get(index).getEnterpriseName()!=enterpriseName)
 		{
 			index++;			
 		}
 		
-		return repoDeEmpresas.get(index).getPeriodsNames();
-		
-		
+		return repoDeEmpresas.get(index).getPeriodsNames();		
 	}
 	
 	
 	public static List<Calculation> getPeriodAccountList(String enterpriseName,String periodName)
-	{
+	{		
+		int index=0;
 		
-		int index213=0;
-		while(repoDeEmpresas.get(index213).getEnterpriseName()!=enterpriseName)
+		for(; index < (repoDeEmpresas.size()); index++)
 		{
-			index213++;			
+			if(repoDeEmpresas.get(index).getEnterpriseName() == enterpriseName)
+				break;
 		}
 		
-		return repoDeEmpresas.get(index213).getPeriodCalculations(periodName);
-		
-		
-		
+		return repoDeEmpresas.get(index).getPeriodCalculations(periodName);		
 	}
 	
 	

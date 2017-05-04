@@ -54,7 +54,6 @@ public class LoadCalculationsVM
 	
 	
 	private void parseJson() 
-
 	{
 		try
 		{
@@ -71,10 +70,6 @@ public class LoadCalculationsVM
 		catch(JsonSyntaxException jsonFormatException)
 		{
 			throw new JsonMappingException("Error en el formato del archivo de Empresas");
-		}
-		
-		
-		
-		
+		}		
 	}
 }
