@@ -7,6 +7,6 @@ public class LoadCalculationsTest {
 		LoadCalculationsVM cargador = new LoadCalculationsVM();
 		cargador.setFilePath("docs/archivo de prueba de empresas.txt");
 		cargador.parseFile();
-		assertEquals(Application.getEnterpriseList().getEnterpriseList().get(0).getEnterpriseName(), "PepeHermanos");
+		assertEquals(EnterpriseList.getEnterpriseList().get(0).getEnterpriseName(), "PepeHermanos");
 	}
 }

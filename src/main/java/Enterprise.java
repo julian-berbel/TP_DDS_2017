@@ -27,4 +27,26 @@ public class Enterprise
 	{
 		return enterpriseName;
 	}
+	public List<String>  getPeriodsNames()
+	{
+		List<String> enterprisePeriodsNameList= new ArrayList<String>();
+		for(int index=0;index<(periods.size());index++)
+		{
+			enterprisePeriodsNameList.add(periods.get(index).getPeriodName());
+		}
+		return enterprisePeriodsNameList;
+	}
+	
+	public List<Calculation>  getPeriodCalculations(String periodName)
+	{
+		
+		int index=0;
+		while(periods.get(index).getPeriodName()!=periodName)
+		{
+			index++;			
+		}
+		return periods.get(index).getCalculations();
+		 
+	}
+	
 }

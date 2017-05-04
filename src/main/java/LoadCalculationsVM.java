@@ -1,8 +1,9 @@
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
+import com.google.gson.JsonSyntaxException;
+import exceptions.JsonMappingException;
+import exceptions.ReadingFileException;
 
 @Observable
 public class LoadCalculationsVM 
@@ -21,6 +22,7 @@ public class LoadCalculationsVM
 
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+		this.parseFile();
 	}
 
 	public void parseFile()	
@@ -28,43 +30,48 @@ public class LoadCalculationsVM
 		try
 		{
 
-			EnterpriseList enterpriseList = this.parseJson();
-			Application.setEnterpriseList(enterpriseList); // la cargo en esa clase para que sea parte de una lista global de empresas		
-
-			showLoadedData(enterpriseList);
+			this.parseJson();
+			//Application.setEnterpriseList(enterpriseList); // la cargo en esa clase para que sea parte de una lista global de empresas		
+			
+			
 		}
-		catch(Exception e)
+		catch(ReadingFileException readingFileException)
 		{
-			throw new UserException(e.toString()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
+			throw new UserException(readingFileException.toString()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
 			//e.printStackTrace();
 		}
+		catch(JsonMappingException jsonMappingException)
+		{
+			throw new UserException(jsonMappingException.toString()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
+			//e.printStackTrace();
+		}
+		
 	}		
 
-	private static void showLoadedData(EnterpriseList entlist) // lo muestro por consola; seria mas lindo por messagebox, pero se har�ｿｽa un lio si son muchos periodos
-
-	{
-		System.out.println("Estos fueron los datos extraidos del archivo:\n");
-		for(Enterprise ent: entlist.getEnterpriseList()){
-			System.out.println(ent.getEnterpriseName());
-			
-			for(Period p : ent.getPeriods())
-			{
-				System.out.println("Periodo: " + p.getPeriodName() + "\nCuentas:");
-				
-				for(Calculation c : p.getCalculations())
-				{
-					System.out.println(c.getName() + ": " + c.getValue());
-				}
-			}
-		}
-	}
 	
-	private EnterpriseList parseJson() throws Exception
+	
+	private void parseJson() 
 
 	{
-		Gson gson = new Gson();
-		JsonReader reader = new JsonReader(new FileReader(filePath));
-		EnterpriseList enterprise = gson.fromJson(reader, EnterpriseList.class);		
-		return enterprise;
+		try
+		{
+			FileLoader fileLoader = new FileLoader(filePath);
+			JsonMapper jsonMapper = new JsonMapper();
+			jsonMapper.mapper(fileLoader.reader());		
+		
+		}
+		catch(FileNotFoundException fileReaderException)	
+		{						
+			throw new ReadingFileException("Error en la letura del archivo de Empresas");
+		}
+		
+		catch(JsonSyntaxException jsonFormatException)
+		{
+			throw new JsonMappingException("Error en el formato del archivo de Empresas");
+		}
+		
+		
+		
+		
 	}
 }

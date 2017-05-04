@@ -44,7 +44,7 @@ public class FirstWindow extends MainWindow<FirstVM>
 		
 		new Button(panel1)
 			.setCaption("Consultar Cuentas")
-			.onClick(()->{ showFeatureNotAvailableMessage(); });	
+			.onClick(()->{ new ConsultAccountsWindow(this).open(); });	
 		
 		new Button(panel1)
 			.setCaption("Analizar Empresa")
@@ -55,7 +55,7 @@ public class FirstWindow extends MainWindow<FirstVM>
 	private void showFeatureNotAvailableMessage()
 	{
 		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Information);
-		msgBox.setMessage("Esta funcionalidad aún no ha sido implementada!");
+		msgBox.setMessage("Esta funcionalidad aï¿½n no ha sido implementada!");
 		msgBox.open();
 	}
 	

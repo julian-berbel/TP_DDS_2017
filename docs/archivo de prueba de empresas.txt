@@ -1,5 +1,4 @@
-{
-	"enterpriseList":
+
 	[
 		{
 			"enterpriseName":"PepeHermanos",
@@ -38,4 +37,3 @@
 			]
 		}
 	]
-}
