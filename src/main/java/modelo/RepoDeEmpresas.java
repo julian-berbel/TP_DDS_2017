@@ -1,34 +1,35 @@
+package modelo;
 import java.util.List;
 import java.util.ArrayList;
 
-public class EnterpriseList 
+public class RepoDeEmpresas 
 {
-	private static List<Enterprise> enterpriseList;
+	private static List<Enterprise> repoDeEmpresas;
 	
-	public EnterpriseList()
+	public RepoDeEmpresas()
 	{
-		enterpriseList = new ArrayList<Enterprise>();
+		repoDeEmpresas = new ArrayList<Enterprise>();
 	}
 	
 	public static void addEnterprise(Enterprise ent)
 	{
-		enterpriseList.add(ent);
+		repoDeEmpresas.add(ent);
 	}
 	
 	public static List<Enterprise> getEnterpriseList()
 	{
-		return enterpriseList;
+		return repoDeEmpresas;
 	}
 	public static void setEnterpriseList(List<Enterprise> enterprises) {
-		enterpriseList = enterprises;
+		repoDeEmpresas = enterprises;
 	}
 	
 	public static List<String> getEnterprisesNameList()
 	{
 		List<String> enterpriseNameList= new ArrayList<String>();
-		for(int index=0;index<(enterpriseList.size());index++)
+		for(int index=0;index<(repoDeEmpresas.size());index++)
 		{
-			enterpriseNameList.add(enterpriseList.get(index).getEnterpriseName());
+			enterpriseNameList.add(repoDeEmpresas.get(index).getEnterpriseName());
 		}
 		return enterpriseNameList;
 	}
@@ -37,12 +38,12 @@ public class EnterpriseList
 	{
 		
 		int index=0;
-		while(enterpriseList.get(index).getEnterpriseName()!=enterpriseName)
+		while(repoDeEmpresas.get(index).getEnterpriseName()!=enterpriseName)
 		{
 			index++;			
 		}
 		
-		return enterpriseList.get(index).getPeriodsNames();
+		return repoDeEmpresas.get(index).getPeriodsNames();
 		
 		
 	}
@@ -52,12 +53,12 @@ public class EnterpriseList
 	{
 		
 		int index213=0;
-		while(enterpriseList.get(index213).getEnterpriseName()!=enterpriseName)
+		while(repoDeEmpresas.get(index213).getEnterpriseName()!=enterpriseName)
 		{
 			index213++;			
 		}
 		
-		return enterpriseList.get(index213).getPeriodCalculations(periodName);
+		return repoDeEmpresas.get(index213).getPeriodCalculations(periodName);
 		
 		
 		

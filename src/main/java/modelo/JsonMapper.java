@@ -1,3 +1,4 @@
+package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,6 @@ public class JsonMapper {
 		
 		
 		ArrayList<Enterprise> enterpriseList = gson.fromJson(reader, new TypeToken<List<Enterprise>>(){}.getType());
-		EnterpriseList.setEnterpriseList(enterpriseList);
+		RepoDeEmpresas.setEnterpriseList(enterpriseList);
 	}
 }

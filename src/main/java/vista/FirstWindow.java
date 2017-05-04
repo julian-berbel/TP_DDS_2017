@@ -1,4 +1,8 @@
+package vista;
 import org.uqbar.arena.windows.MessageBox;
+
+import viewModel.MainVM;
+
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
@@ -7,11 +11,11 @@ import org.uqbar.arena.windows.MainWindow;
 
 
 @SuppressWarnings("serial")
-public class FirstWindow extends MainWindow<FirstVM>
+public class FirstWindow extends MainWindow<MainVM>
 {
 	public FirstWindow()
 	{
-		super(new FirstVM());
+		super(new MainVM());
 	}
 	
 	@Override	

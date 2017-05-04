@@ -1,3 +1,4 @@
+package modelo;
 import org.uqbar.commons.utils.Observable;
 
 @Observable

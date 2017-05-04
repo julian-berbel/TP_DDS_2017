@@ -1,7 +1,12 @@
+package vista;
 
 
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
+
+import modelo.Calculation;
+import modelo.Enterprise;
+import viewModel.ConsultAccountVM;
 
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
