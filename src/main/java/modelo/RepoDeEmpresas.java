@@ -1,5 +1,6 @@
 package modelo;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 
 public class RepoDeEmpresas 
@@ -27,37 +28,22 @@ public class RepoDeEmpresas
 	
 	public static List<String> getEnterprisesNameList()
 	{
-		List<String> enterpriseNameList= new ArrayList<String>();
-		for(int index=0;index < (repoDeEmpresas.size());index++)
-		{
-			enterpriseNameList.add(repoDeEmpresas.get(index).getEnterpriseName());
-		}
-		return enterpriseNameList;
+		return repoDeEmpresas.stream().map(empresa -> empresa.getEnterpriseName()).collect(Collectors.toList());
 	}
 	
 	public static List<String> getEnterprisePeriodsList(String enterpriseName)
 	{		
-		int index=0;
-		while(repoDeEmpresas.get(index).getEnterpriseName()!=enterpriseName)
-		{
-			index++;			
-		}
-		
-		return repoDeEmpresas.get(index).getPeriodsNames();		
+		Enterprise searchedEnterprise = repoDeEmpresas.stream().filter(enterprise -> enterprise.getEnterpriseName() == enterpriseName).findFirst().get();
+
+		return searchedEnterprise.getPeriodsNames();		
 	}
 	
 	
 	public static List<Calculation> getPeriodAccountList(String enterpriseName,String periodName)
-	{		
-		int index=0;
+	{
+		Enterprise searchedEnterprise = repoDeEmpresas.stream().filter(enterprise -> enterprise.getEnterpriseName() == enterpriseName).findFirst().get();
 		
-		for(; index < (repoDeEmpresas.size()); index++)
-		{
-			if(repoDeEmpresas.get(index).getEnterpriseName() == enterpriseName)
-				break;
-		}
-		
-		return repoDeEmpresas.get(index).getPeriodCalculations(periodName);		
+		return searchedEnterprise.getPeriodCalculations(periodName);		
 	}
 	
 	

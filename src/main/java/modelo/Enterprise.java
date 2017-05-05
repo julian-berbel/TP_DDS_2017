@@ -1,6 +1,7 @@
 package modelo;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Enterprise 
 {
@@ -32,28 +33,17 @@ public class Enterprise
 		return enterpriseName;
 	}
 	
-	public List<String>  getPeriodsNames()
+	public List<String> getPeriodsNames()
 	{
-		List<String> enterprisePeriodsNameList= new ArrayList<String>();
-		
-		for(int index=0; index<(periods.size()); index++)
-		{
-			enterprisePeriodsNameList.add(periods.get(index).getPeriodName());
-		}
-		return enterprisePeriodsNameList;
+		return periods.stream().map(Period::getPeriodName).collect(Collectors.toList());
 	}
 	
 	public List<Calculation> getPeriodCalculations(String periodName)
 	{
-		int i=0;
+
+		Period searchedPeriod = periods.stream().filter(period -> period.getPeriodName() == periodName).findFirst().get();
 		
-		for(; i < (periods.size() - 1); i++) //con ese '-1' ****magico**** no tira errores, pero algunas cuentas no las toma como deberia
-		{
-			if(periods.get(i).getPeriodName() == periodName)
-				break;
-		}
-		
-		return periods.get(i).getCalculations();		 
+		return searchedPeriod.getCalculations();		 
 	}
 	
 }
