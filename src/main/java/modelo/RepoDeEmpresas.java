@@ -33,7 +33,7 @@ public class RepoDeEmpresas
 	
 	public static List<String> getEnterprisePeriodsList(String enterpriseName)
 	{		
-		Enterprise searchedEnterprise = repoDeEmpresas.stream().filter(enterprise -> enterprise.getEnterpriseName() == enterpriseName).findFirst().get();
+		Enterprise searchedEnterprise = repoDeEmpresas.stream().filter(enterprise -> enterprise.getEnterpriseName().equals(enterpriseName)).findFirst().get();
 
 		return searchedEnterprise.getPeriodsNames();		
 	}
@@ -41,7 +41,7 @@ public class RepoDeEmpresas
 	
 	public static List<Calculation> getPeriodAccountList(String enterpriseName,String periodName)
 	{
-		Enterprise searchedEnterprise = repoDeEmpresas.stream().filter(enterprise -> enterprise.getEnterpriseName() == enterpriseName).findFirst().get();
+		Enterprise searchedEnterprise = repoDeEmpresas.stream().filter(enterprise -> enterprise.getEnterpriseName().equals(enterpriseName)).findFirst().get();
 		
 		return searchedEnterprise.getPeriodCalculations(periodName);		
 	}

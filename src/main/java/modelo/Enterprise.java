@@ -40,9 +40,7 @@ public class Enterprise
 	
 	public List<Calculation> getPeriodCalculations(String periodName)
 	{
-
-		Period searchedPeriod = periods.stream().filter(period -> period.getPeriodName() == periodName).findFirst().get();
-		
+		Period searchedPeriod = periods.stream().filter(period -> period.getPeriodName().equals(periodName) ).findFirst().get();
 		return searchedPeriod.getCalculations();		 
 	}
 	

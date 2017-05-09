@@ -15,6 +15,7 @@ public class ConsultAccountVM {
 	private List<Calculation> calculations;	
 	
 	
+	
 	public ConsultAccountVM()
 	{
 		enterprises =  RepoDeEmpresas.getEnterprisesNameList();		
@@ -34,13 +35,6 @@ public class ConsultAccountVM {
 	{
 		return selectedEnterprise;
 	}
-	
-	public void setSelectedEnterprise(String selectedEnterpris) 
-	{
-		selectedEnterprise = selectedEnterpris;
-		periods=RepoDeEmpresas.getEnterprisePeriodsList(selectedEnterprise);			
-	}
-	
 	public List<String> getPeriods() 
 	{
 		return periods;
@@ -55,12 +49,6 @@ public class ConsultAccountVM {
 	{
 		return selectedPeriod;
 	}
-
-	public void setSelectedPeriod(String selectedPeriodd) 
-	{		
-		selectedPeriod = selectedPeriodd;	
-		calculations = RepoDeEmpresas.getPeriodAccountList(selectedEnterprise, selectedPeriod);
-	}	
 	
 	public List<Calculation> getCalculations() 
 	{
@@ -71,4 +59,24 @@ public class ConsultAccountVM {
 	{
 		calculations = calculationss;
 	}
+	public void setSelectedEnterprise(String selectedEnterpris) 
+	{
+		
+		selectedEnterprise = selectedEnterpris;
+		periods=RepoDeEmpresas.getEnterprisePeriodsList(selectedEnterprise);			
+	}
+	
+	
+
+	public void setSelectedPeriod(String selectedPeriodd) 
+	{		
+		
+		selectedPeriod = selectedPeriodd;			
+		if(selectedPeriod!= null)
+		{
+			calculations = RepoDeEmpresas.getPeriodAccountList(selectedEnterprise, selectedPeriod);
+		}	
+	}	
+	
+	
 }
