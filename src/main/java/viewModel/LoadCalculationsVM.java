@@ -40,12 +40,12 @@ public class LoadCalculationsVM
 		}
 		catch(ReadingFileException readingFileException)
 		{
-			throw new UserException(readingFileException.toString()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
+			throw new UserException(readingFileException.getMessage()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
 			//e.printStackTrace();
 		}
 		catch(JsonMappingException jsonMappingException)
 		{
-			throw new UserException(jsonMappingException.toString()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
+			throw new UserException(jsonMappingException.getMessage()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
 			//e.printStackTrace();
 		}
 		
@@ -64,12 +64,12 @@ public class LoadCalculationsVM
 		}
 		catch(FileNotFoundException fileReaderException)	
 		{						
-			throw new ReadingFileException("Error en la letura del archivo de Empresas");
+			throw new ReadingFileException("Error en la lectura del archivo de Empresas");
 		}
 		
 		catch(JsonSyntaxException jsonFormatException)
 		{
 			throw new JsonMappingException("Error en el formato del archivo de Empresas");
-		}		
+		}	
 	}
 }

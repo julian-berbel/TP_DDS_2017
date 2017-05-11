@@ -29,7 +29,7 @@ public class LoadCalculationsWindow extends SimpleWindow<LoadCalculationsVM>
 //		new Button(mainPanel).setCaption("Cargar Archivo").onClick(()->{ this.getModelObject().parseFile(); }); //El onClick pide algo que devuelva 'Action';
 																											 	//El ()->{} es una lambda		
 																												//this.getModelObject() me devuelve el ViewModel de esta vista (especificado arriba en el super del contsructor)
-
+		
 	}
 	
 	@Override	

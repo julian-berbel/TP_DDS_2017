@@ -1,15 +1,12 @@
 package vista;
 import org.uqbar.arena.windows.MessageBox;
-
 import viewModel.MainVM;
-
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.MainWindow;
 import java.lang.NullPointerException;
-import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class MainView extends MainWindow<MainVM>
@@ -29,8 +26,8 @@ public class MainView extends MainWindow<MainVM>
 	
 		new Button(panel1)
 			.setCaption("Cargar Cuentas")
-			.onClick(()->{ new LoadCalculationsWindow(this).open(); });	
-		
+			.onClick(()->{ new LoadCalculationsWindow(this).open(); });
+				
 		new Button(panel1)
 			.setCaption("Cargar Indicadores")
 			.onClick(()->{ showFeatureNotAvailableMessage(); });	
@@ -56,7 +53,7 @@ public class MainView extends MainWindow<MainVM>
 				}
 				catch(NullPointerException nullPointerException)
 				{
-					JOptionPane.showMessageDialog(null, "No se ha cargado el archivo de cuentas");
+					noFileLoadedMessage();	
 				}});
 		
 		new Button(panel1)
@@ -72,7 +69,13 @@ public class MainView extends MainWindow<MainVM>
 		msgBox.open();
 	}
 	
-		
+	private void noFileLoadedMessage()
+	{
+		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
+		msgBox.setMessage("No se ha cargado el archivo de cuentas");
+		msgBox.open();
+	}
+	
 	public static void main(String[] args)
 	{
 		new MainView().startApplication();
