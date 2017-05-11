@@ -8,7 +8,8 @@ import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.MainWindow;
-
+import java.lang.NullPointerException;
+import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class MainView extends MainWindow<MainVM>
@@ -48,7 +49,15 @@ public class MainView extends MainWindow<MainVM>
 		
 		new Button(panel1)
 			.setCaption("Consultar Cuentas")
-			.onClick(()->{ new ConsultAccountsWindow(this).open(); });	
+			.onClick(()->{ 
+				try
+				{
+					new ConsultAccountsWindow(this).open(); 	
+				}
+				catch(NullPointerException nullPointerException)
+				{
+					JOptionPane.showMessageDialog(null, "No se ha cargado el archivo de cuentas");
+				}});
 		
 		new Button(panel1)
 			.setCaption("Analizar Empresa")
