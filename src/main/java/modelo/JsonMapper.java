@@ -14,6 +14,6 @@ public class JsonMapper {
 		
 		
 		ArrayList<Enterprise> enterpriseList = gson.fromJson(reader, new TypeToken<List<Enterprise>>(){}.getType());
-		RepoDeEmpresas.setEnterpriseList(enterpriseList);
+		EnterpriseRepository.setEnterpriseList(enterpriseList);
 	}
 }

@@ -30,7 +30,7 @@ public class MainView extends MainWindow<MainVM>
 				
 		new Button(panel1)
 			.setCaption("Cargar Indicadores")
-			.onClick(()->{ showFeatureNotAvailableMessage(); });	
+			.onClick(()->{ new LoadIndicatorsWindow(this).open(); });	
 		
 		new Button(panel1)
 			.setCaption("Cargar Metodologia")

@@ -3,7 +3,7 @@ package viewModel;
 import java.util.List;
 import org.uqbar.commons.utils.Observable;
 import modelo.Calculation;
-import modelo.RepoDeEmpresas;
+import modelo.EnterpriseRepository;
 
 @Observable
 public class ConsultAccountVM {
@@ -18,7 +18,7 @@ public class ConsultAccountVM {
 	
 	public ConsultAccountVM()
 	{
-		enterprises =  RepoDeEmpresas.getEnterprisesNameList();		
+		enterprises =  EnterpriseRepository.getEnterprisesNameList();		
 	}	
 	
 	public List<String> getEnterprises() 
@@ -63,7 +63,7 @@ public class ConsultAccountVM {
 	{
 		
 		selectedEnterprise = selectedEnterpris;
-		periods=RepoDeEmpresas.getEnterprisePeriodsList(selectedEnterprise);			
+		periods=EnterpriseRepository.getEnterprisePeriodsList(selectedEnterprise);			
 	}
 	
 	
@@ -74,7 +74,7 @@ public class ConsultAccountVM {
 		selectedPeriod = selectedPeriodd;			
 		if(selectedPeriod!= null)
 		{
-			calculations = RepoDeEmpresas.getPeriodAccountList(selectedEnterprise, selectedPeriod);
+			calculations = EnterpriseRepository.getPeriodAccountList(selectedEnterprise, selectedPeriod);
 		}	
 	}	
 	
