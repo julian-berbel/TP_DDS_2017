@@ -99,27 +99,36 @@ public class AddIndicatorsVM {
 	{
 		this.selectedCalculation = selectedCalculation;
 	}
+	
 	public void addIndicatorToFormula()
 	{
 		if(indicatorFormula.isEmpty())
 		{
 			throw new IndicatorFormulaIsEmptyException("Debe introducir el nombre del nuevo indicador antes de agregar elementos a la formula");
-		}else
-		{
-			indicatorFormula = indicatorFormula.concat(selectedIndicator);
-			formulaFlag = false;
-		}
+		}else if(formulaFlag)
+			{
+				indicatorFormula = indicatorFormula.concat(selectedIndicator);
+				formulaFlag = false;
+			} else
+			{
+				throw new OperatorException("Debe introducir un operador antes de otro indicador");
+			}
 	}
+	
 	public void addCalculationToFormula()
 	{
 		if(indicatorFormula.isEmpty())
 		{
 			throw new IndicatorFormulaIsEmptyException("Debe introducir el nombre del nuevo indicador antes de agregar elementos a la formula");
 
-		}else{
-			indicatorFormula = indicatorFormula.concat(selectedCalculation);
-			formulaFlag = false;
-		}
+		}else if(formulaFlag)
+			{ 
+				indicatorFormula = indicatorFormula.concat(selectedCalculation);
+				formulaFlag = false;
+			} else
+			{
+				throw new OperatorException("Debe introducir un operador antes de otra cuenta");
+			}
 		
 	}	
 	
@@ -140,6 +149,7 @@ public class AddIndicatorsVM {
 			}
 		
 	}
+	
 	public void addMinusToFormula()
 	{
 		if(indicatorFormula.isEmpty())
@@ -156,6 +166,7 @@ public class AddIndicatorsVM {
 			formulaFlag = true;
 		}
 	}	
+	
 	public void addMultiplicationToFormula()
 	{
 		if(indicatorFormula.isEmpty())
@@ -172,7 +183,8 @@ public class AddIndicatorsVM {
 			formulaFlag = true;
 		}
 	
-}
+	}
+	
 	public void addDivisionToFormula()
 	{
 		if(indicatorFormula.isEmpty())
@@ -189,10 +201,11 @@ public class AddIndicatorsVM {
 			formulaFlag = true;
 		}
 	
-}
-	public void excepcion()
+	}
+	
+/*	public void excepcion() esto esta al p2 parece
 	{
 		throw new IndicatorFormulaIsEmptyException("asdf");
-	}
+	}*/
 	
 }

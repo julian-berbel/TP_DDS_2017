@@ -66,6 +66,14 @@ public class AddIndicatorsWindow extends SimpleWindow<AddIndicatorsVM>
 	    	{
 	    		this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
 	    	}
+	    	catch(OperatorException operatorException)
+		    {
+		    	this.missingOperatorMessage(operatorException.getMessage());
+		    }
+	    	catch(NullPointerException nullPointerException)
+	    	{
+	    		this.noIndicatorSelectedMessage();
+	    	}
 	    });
 	    
 	    new Button(panel2).setCaption("Agregar cuenta a la formula").onClick(()->{
@@ -76,6 +84,14 @@ public class AddIndicatorsWindow extends SimpleWindow<AddIndicatorsVM>
 	    	catch(IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
 	    	{
 	    		this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
+	    	}
+	    	catch(OperatorException operatorException)
+		    {
+		    	this.missingOperatorMessage(operatorException.getMessage());
+		    }
+	    	catch(NullPointerException nullPointerException)
+	    	{
+	    		this.noCalculationSelectedMessage();
 	    	}
 	    });
 	     
@@ -146,16 +162,31 @@ public class AddIndicatorsWindow extends SimpleWindow<AddIndicatorsVM>
 	
 	private void IndicatorFormulaIsEmptyMessage(String mensaje)
 	{
-		System.out.println(mensaje);
+//		System.out.println(mensaje);  creo que esto esta de mas
 		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
 		msgBox.setMessage(mensaje);
 		msgBox.open();
 	}
+	
 	private void missingOperatorMessage(String mensaje)
 	{
 		
 		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
 		msgBox.setMessage(mensaje);
+		msgBox.open();
+	}
+	
+	private void noIndicatorSelectedMessage()
+	{
+		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
+		msgBox.setMessage("Seleccione el indicador que desea agregar");
+		msgBox.open();
+	}
+	
+	private void noCalculationSelectedMessage()
+	{
+		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
+		msgBox.setMessage("Seleccione la cuenta que desea agregar");
 		msgBox.open();
 	}
 	
