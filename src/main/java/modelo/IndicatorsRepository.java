@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IndicatorsRepository 
 {
@@ -30,6 +31,11 @@ public class IndicatorsRepository
 	{
 		
 		indicators.add(indicator);
+	}
+	
+	public static List<String> getIndicatorsNameList()
+	{
+		 return indicators.stream().map(indicator -> indicator.getName()).collect(Collectors.toList());
 	}
 	
 	

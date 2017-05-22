@@ -1,5 +1,6 @@
 package modelo;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 
@@ -44,6 +45,11 @@ public class EnterpriseRepository
 		Enterprise searchedEnterprise = enterprises.stream().filter(enterprise -> enterprise.getEnterpriseName().equals(enterpriseName)).findFirst().get();
 		
 		return searchedEnterprise.getPeriodCalculations(periodName);		
+	}
+	
+	public static Set<String> getEnterprisesCalculationsName()
+	{
+		return  enterprises.stream().map(enterprise -> enterprise.getPeriodsCalculationsName()).flatMap(List::stream).collect(Collectors.toSet());
 	}
 	
 	

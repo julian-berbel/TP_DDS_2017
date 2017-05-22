@@ -44,4 +44,13 @@ public class Enterprise
 		return searchedPeriod.getCalculations();		 
 	}
 	
+	public List<String> getPeriodsCalculationsName()
+	{
+		return this.getPeriods().stream().map(period->period.getCalculationsName())
+		        .flatMap(List::stream)
+		        .collect(Collectors.toList());
+			
+				
+	}
+	
 }

@@ -1,6 +1,7 @@
 package modelo;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Period 
 {
@@ -27,5 +28,10 @@ public class Period
 	public String getPeriodName()
 	{
 		return periodName;
+	}
+	public List<String> getCalculationsName()
+	{
+		
+		return calculations.stream().map(calculation->calculation.getName()).collect(Collectors.toList());
 	}
 }
