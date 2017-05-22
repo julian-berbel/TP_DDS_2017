@@ -41,6 +41,8 @@ public class AddIndicatorsWindow extends SimpleWindow<AddIndicatorsVM>
 		panel2.setLayout(new ColumnLayout(2));
 		Panel panel3 = new Panel(mainPanel);
 		panel3.setLayout(new HorizontalLayout());
+		Panel panel4 = new Panel(mainPanel);
+		panel4.setLayout(new HorizontalLayout());
 		
 		new Label(panel1).setText("Nombre del nuevo indicador:");
 	    new TextBox(panel1).setWidth(500).bindValueToProperty("newIndicator");
@@ -157,6 +159,8 @@ public class AddIndicatorsWindow extends SimpleWindow<AddIndicatorsVM>
 	    
 	    new Label(mainPanel).setWidth(500).bindValueToProperty("indicatorFormula");
 	    
+	    new Button(panel4).setCaption("Borrar todo").onClick(()->{this.getModelObject().limpiarCampos();});	    
+	    
 		
 	}
 	
@@ -189,6 +193,7 @@ public class AddIndicatorsWindow extends SimpleWindow<AddIndicatorsVM>
 		msgBox.setMessage("Seleccione la cuenta que desea agregar");
 		msgBox.open();
 	}
+	
 	
 	@Override
 	protected void addActions(Panel actions) 

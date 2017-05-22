@@ -203,6 +203,21 @@ public class AddIndicatorsVM {
 	
 	}
 	
+	public void limpiarCampos()
+	{
+		indicatorFormula = "";
+		newIndicator = "";
+		formulaFlag = true;
+	}
+
+
+/*	private List<String> indicators;	
+	private String selectedIndicator;
+	private Set<String> calculations;
+	private String selectedCalculation;
+
+	private List<String> usedCalculations;
+	private List<String> usedIndicators;*/
 /*	public void excepcion() esto esta al p2 parece
 	{
 		throw new IndicatorFormulaIsEmptyException("asdf");
