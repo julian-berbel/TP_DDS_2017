@@ -57,75 +57,87 @@ public class AddIndicatorsWindow extends SimpleWindow<AddIndicatorsVM>
 	    lstCalculations.setWidth(220);
 	    lstCalculations.setHeight(220);
 	    
-	    try
-	    { 
-	    	new Button(panel2).setCaption("Agregar indicador a la formula").onClick(()->{this.getModelObject().addIndicatorToFormula(); });
-	    }
-	    catch (IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
-	    {
-	    	this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
-	    }
+	    new Button(panel2).setCaption("Agregar indicador a la formula").onClick(()->{
+	    	try
+	    	{
+	    		this.getModelObject().addIndicatorToFormula(); 
+	    	} 
+	    	catch(IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
+	    	{
+	    		this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
+	    	}
+	    });
 	    
-	    try
-	    {
-	    	new Button(panel2).setCaption("Agregar cuenta a la formula").onClick(()->{this.getModelObject().addCalculationToFormula(); });
-	    }
-	    catch (IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
-	    {
-	    	this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
-		}
+	    new Button(panel2).setCaption("Agregar cuenta a la formula").onClick(()->{
+	    	try
+	    	{
+	    		this.getModelObject().addCalculationToFormula(); 
+	    	} 
+	    	catch(IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
+	    	{
+	    		this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
+	    	}
+	    });
+	     
+	    new Button(panel3).setCaption("\t\t\t+\t\t\t").onClick(()->{
+	    	try
+	    	{
+	    		this.getModelObject().addPlusToFormula(); 
+	    	} 
+	    	catch(IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
+	    	{
+	    		this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
+	    	}
+	    	catch(OperatorException operatorException)
+		    {
+		    	this.missingOperatorMessage(operatorException.getMessage());
+		    }
+	    });
+	    	
+	    new Button(panel3).setCaption("\t\t\t-\t\t\t").onClick(()->{
+	    	try
+	    	{
+	    		this.getModelObject().addMinusToFormula(); 
+	    	} 
+	    	catch(IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
+	    	{
+	    		this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
+	    	}
+	    	catch(OperatorException operatorException)
+		    {
+		    	this.missingOperatorMessage(operatorException.getMessage());
+		    }
+	    });
 	    
-	    try
-	    { 
-	    	new Button(panel3).setCaption("\t\t\t+\t\t\t").onClick(()->{this.getModelObject().addPlusToFormula(); });
-	    }
-	    catch (IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
-	    {
-	    	this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
-		}
-	    catch(OperatorException operatorException)
-	    {
-	    	this.missingOperatorMessage(operatorException.getMessage());
-	    }
-	   
-	    try
-	    { 
-	    	new Button(panel3).setCaption("\t\t\t-\t\t\t").onClick(()->{this.getModelObject().addMinusToFormula(); });
-	    }
-	    catch (IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
-	    {
-	    	this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
-		}	   
-	    catch(OperatorException operatorException)
-	    {
-	    	this.missingOperatorMessage(operatorException.getMessage());
-	    }
+	    new Button(panel3).setCaption("\t\t\t*\t\t\t").onClick(()->{
+	    	try
+	    	{
+	    		this.getModelObject().addMultiplicationToFormula(); 
+	    	} 
+	    	catch(IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
+	    	{
+	    		this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
+	    	}
+	    	catch(OperatorException operatorException)
+		    {
+		    	this.missingOperatorMessage(operatorException.getMessage());
+		    }
+	    });
 	    
-	    try
-	    { 
-	    	new Button(panel3).setCaption("\t\t\t*\t\t\t").onClick(()->{this.getModelObject().addMultiplicationToFormula(); });
-	    }
-	    catch (IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
-	    {
-	    	this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
-		}
-	    catch(OperatorException operatorException)
-	    {
-	    	this.missingOperatorMessage(operatorException.getMessage());
-	    }
-	    
-	    try
-	    { 
-	    	new Button(panel3).setCaption("\t\t\t/\t\t\t").onClick(()->{this.getModelObject().addDivisionToFormula(); });
-	    }
-	    catch (IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
-	    {
-	    	this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
-		}
-	    catch(OperatorException operatorException)
-	    {
-	    	this.missingOperatorMessage(operatorException.getMessage());
-	    }
+	    new Button(panel3).setCaption("\t\t\t/\t\t\t").onClick(()->{
+	    	try
+	    	{
+	    		this.getModelObject().addDivisionToFormula(); 
+	    	} 
+	    	catch(IndicatorFormulaIsEmptyException indicatorFormulaIsEmptyException) 
+	    	{
+	    		this.IndicatorFormulaIsEmptyMessage(indicatorFormulaIsEmptyException.getMessage());
+	    	}
+	    	catch(OperatorException operatorException)
+		    {
+		    	this.missingOperatorMessage(operatorException.getMessage());
+		    }
+	    });
 	    
 	    new Label(mainPanel).setWidth(500).bindValueToProperty("indicatorFormula");
 	    
