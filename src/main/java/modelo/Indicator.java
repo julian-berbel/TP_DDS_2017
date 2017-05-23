@@ -1,9 +1,12 @@
 package modelo;
 
-public class Indicator 
+import math.Operable;
+
+public class Indicator implements Operable
 {
 	private String name = "";
 	private String content = "";
+	private Operable value;
 	
 	public String getName() 
 	{
@@ -25,4 +28,7 @@ public class Indicator
 		this.content = content;
 	}
 
+	public double reduce(){
+		return value.reduce();
+	}
 }
