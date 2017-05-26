@@ -25,5 +25,13 @@ public class AlgebraicOperationTest {
 	@Test
 	public void division() {
 		assertEquals(new Division(firstOperand, secondOperand).reduce(), 0.5, 0);
-	}	
+	}
+	
+	@Test
+	public void complex(){
+		Addition add = new Addition(firstOperand, secondOperand);
+		Multiplication mult = new Multiplication(add, new Constant(2));
+		
+		assertEquals(mult.reduce(), 24, 0);
+	}
 }

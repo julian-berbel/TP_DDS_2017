@@ -1,0 +1,75 @@
+options {
+    LOOKAHEAD = 100;
+}
+
+PARSER_BEGIN(IndicatorParser)
+package parser;
+import math.*;
+import modelo.Application;
+
+public class IndicatorParser {
+
+}
+
+PARSER_END(IndicatorParser)
+
+SKIP :
+{
+  " "
+}
+
+TOKEN : /* LITERALS */
+{
+  < CONSTANT: (["0"-"9"])+ ("."(["0"-"9"])+)? >
+}
+
+TOKEN : /* IDENTIFIERS */
+{
+  < IDENTIFIER: ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9"])* >
+}
+
+/** Main production. */
+Operable Start()       : {Operable exp;}
+{
+  exp = Expression()
+  { return exp; }
+}
+
+Operable Expression() : {Operable op1, op2;}
+{
+    (op1 = Term() "+" op2 = Expression()) {return new Addition(op1, op2);} 
+    |
+    (op1 = Term() "-" op2 = Expression()) {return new Subtraction(op1, op2);}
+    |
+    op1 = Term() {return op1;}
+}
+
+Operable Term() : {Operable op1, op2;}
+{
+    (op1 = Factor() "*" op2 = Term()) {return new Multiplication(op1, op2);} 
+    |
+    (op1 = Factor() "/" op2 = Term()) {return new Division(op1, op2);}
+    |
+    op1 = Factor() {return op1;}
+}
+
+Operable Factor() : {Operable op1;}
+{
+    ("(" op1 = Expression() ")") {return op1;} 
+    |
+    op1 = Constant() {return op1;}
+    |
+    op1 = Identifier() {return op1;}
+}
+
+/** An Identifier. */
+Operable Identifier()       : {Token t;}
+{
+  t=<IDENTIFIER> { return Application.getIdentifier(t.image); }
+}
+
+/** A Constant. */
+Constant Constant()       : {Token t;}
+{
+  t=<CONSTANT> { return new Constant(Double.parseDouble(t.image)); }
+}
