@@ -1,14 +1,11 @@
 package modelo;
 import org.uqbar.commons.utils.Observable;
 
-import math.Operable;
-
 @Observable
-public class Calculation implements Operable
+public class Calculation
 {
 	private String name;
-	private String value; 	// le dejo string, para que me puedan poner algo como $100 y sea mas facil parsearlo, pero podria dejarlo double tambien
-	
+	private double value; 	// le dejo string, para que me puedan poner algo como $100 y sea mas facil parsearlo, pero podria dejarlo double tambien
 	
 	public void setName(String attributeName)
 	{
@@ -18,16 +15,16 @@ public class Calculation implements Operable
 	{
 		return name;
 	}
-	public void setValue(String attributeValue)
+	public void setValue(double attributeValue)
 	{
 		this.value = attributeValue;
 	}
-	public String getValue()
+	public double getValue()
 	{
 		return value;
 	}
 	
-	public double reduce(){
-		return Double.parseDouble(value);
+	public static Calculation getCalculation(Enterprise enterprise, String name, int year){
+		return enterprise.getCalculationOnYear(name, year);
 	}
 }

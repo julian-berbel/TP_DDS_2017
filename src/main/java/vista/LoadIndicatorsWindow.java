@@ -27,7 +27,7 @@ public class LoadIndicatorsWindow extends SimpleWindow<LoadIndicatorsVM>
 		new Label(mainPanel).setText("Ruta de Archivo:");
 	    new Label(mainPanel).setWidth(500).bindValueToProperty("filePath");
 		new FileSelector(mainPanel).setCaption("Elegir Archivo").bindValueToProperty("filePath");
-		new Button(mainPanel).setCaption("Agregar Indicadores").onClick(()->{ new AddIndicatorsWindow(this,this.getModelObject().getFilePath()).open(); }); //El onClick pide algo que devuelva 'Action';
+//		new Button(mainPanel).setCaption("Agregar Indicadores").onClick(()->{ new AddIndicatorsWindow(this,this.getModelObject().getFilePath()).open(); }); //El onClick pide algo que devuelva 'Action';
 																											 	//El ()->{} es una lambda		
 																												//this.getModelObject() me devuelve el ViewModel de esta vista (especificado arriba en el super del contsructor)
 		

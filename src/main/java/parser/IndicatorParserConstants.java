@@ -13,7 +13,9 @@ public interface IndicatorParserConstants {
   /** RegularExpression Id. */
   int CONSTANT = 2;
   /** RegularExpression Id. */
-  int IDENTIFIER = 3;
+  int INDICATOR = 3;
+  /** RegularExpression Id. */
+  int CALCULATION = 4;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -23,7 +25,8 @@ public interface IndicatorParserConstants {
     "<EOF>",
     "\" \"",
     "<CONSTANT>",
-    "<IDENTIFIER>",
+    "<INDICATOR>",
+    "<CALCULATION>",
     "\"+\"",
     "\"-\"",
     "\"*\"",

@@ -33,24 +33,30 @@ public class Enterprise
 		return enterpriseName;
 	}
 	
-	public List<String> getPeriodsNames()
+	public List<Integer> getPeriodsYears()
 	{
-		return periods.stream().map(Period::getPeriodName).collect(Collectors.toList());
+		return periods.stream().map(period -> period.getYear()).collect(Collectors.toList());
 	}
 	
-	public List<Calculation> getPeriodCalculations(String periodName)
+	public List<Calculation> getPeriodCalculations(int year)
 	{
-		Period searchedPeriod = periods.stream().filter(period -> period.getPeriodName().equals(periodName) ).findFirst().get();
+		Period searchedPeriod = periods.stream().filter(period -> period.getYear() == year).findFirst().get();
 		return searchedPeriod.getCalculations();		 
 	}
 	
 	public List<String> getPeriodsCalculationsName()
 	{
-		return this.getPeriods().stream().map(period->period.getCalculationsName())
+		return this.getPeriods().stream().map(period->period.getCalculationsNames())
 		        .flatMap(List::stream)
-		        .collect(Collectors.toList());
-			
-				
+		        .collect(Collectors.toList());	
+	}
+	
+	public Calculation getCalculationOnYear(String name, int year){
+		return periods.stream()
+				.filter(period -> period.getYear() == year)
+				.findFirst()
+				.get()
+				.getCalculation(name);
 	}
 	
 }

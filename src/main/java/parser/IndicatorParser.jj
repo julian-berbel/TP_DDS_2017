@@ -4,11 +4,23 @@ options {
 
 PARSER_BEGIN(IndicatorParser)
 package parser;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
+
 import math.*;
-import modelo.Application;
+import modelo.IndicatorRepository;
 
 public class IndicatorParser {
-
+	public static Operable parseIndicator(String formula){
+		Operable value = null;
+		IndicatorParser.ReInit(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
+		try{
+			value = IndicatorParser.Start();
+		} catch(Exception e){
+			System.out.println(e);
+		}
+		return value;
+	}
 }
 
 PARSER_END(IndicatorParser)
@@ -25,7 +37,9 @@ TOKEN : /* LITERALS */
 
 TOKEN : /* IDENTIFIERS */
 {
-  < IDENTIFIER: ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9"])* >
+  < INDICATOR: "@" ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9"])* >
+  |
+  < CALCULATION: "#" ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9"])* >
 }
 
 /** Main production. */
@@ -63,9 +77,19 @@ Operable Factor() : {Operable op1;}
 }
 
 /** An Identifier. */
-Operable Identifier()       : {Token t;}
+Operable Identifier() : {Operable op;}
 {
-  t=<IDENTIFIER> { return Application.getIdentifier(t.image); }
+	(op = Indicator() | op = Calculation()) {return op;}
+}
+
+Operable Indicator() : {Token t;}
+{
+  t=<INDICATOR> { return IndicatorRepository.getIndicator(t.image); }
+}
+
+Operable Calculation() : {Token t;}
+{
+  t=<CALCULATION> { return new OperableCalculation(t.image);}
 }
 
 /** A Constant. */

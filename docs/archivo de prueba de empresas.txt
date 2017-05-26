@@ -1,39 +1,39 @@
 
-	[
-		{
-			"enterpriseName":"PepeHermanos",
-			"periods":
-			[
-				{
-					"periodName":"2012-2013",
-					"calculations":[{"name":"cuenta1","value":"valor1"},{"name":"cuenta2","value":"valor2"} ]
-				},
-				{
-					"periodName":"2014-2015",
-					"calculations":[{ "name":"cuenta3","value":"valor3" } ]
-				},
-				{
-					"periodName":"2015-2016",
-					"calculations":[{"name":"cuenta4","value":"valor4"},{"name":"cuenta5","value":"valor5"} ]
-				}
-			]
-		},
-		{
-			"enterpriseName":"los pollos hermanos",
-			"periods":
-			[
-				{
-					"periodName":"2010-2011",
-					"calculations":[{"name":"cuenta6","value":"valor6"},{"name":"cuenta7","value":"valor7"} ]
-				},
-				{
-					"periodName":"2012-2013",
-					"calculations":[{"name":"cuenta8","value":"valor8" },{"name":"tuviejaen","value":"4"} ]
-				},
-				{
-					"periodName":"2014-2015",
-					"calculations":[{"name":"cuenta9","value":"valor9"},{"name":"cuenta10","value":"valor10"} ]
-				}
-			]
-		}
-	]
+[
+	{
+		"enterpriseName":"PepeHermanos",
+		"periods":
+		[
+			{
+				"year":2012,
+				"calculations":[{"name":"cuenta1","value":1},{"name":"cuenta2","value":2} ]
+			},
+			{
+				"year":2014,
+				"calculations":[{ "name":"cuenta3","value":3} ]
+			},
+			{
+				"year":2015,
+				"calculations":[{"name":"cuenta4","value":4},{"name":"cuenta5","value":5} ]
+			}
+		]
+	},
+	{
+		"enterpriseName":"los pollos hermanos",
+		"periods":
+		[
+			{
+				"year":2010,
+				"calculations":[{"name":"cuenta6","value":6},{"name":"cuenta7","value":7} ]
+			},
+			{
+				"year":2012,
+				"calculations":[{"name":"cuenta8","value":8},{"name":"tuviejaen","value":9} ]
+			},
+			{
+				"year":2014,
+				"calculations":[{"name":"cuenta9","value":10},{"name":"cuenta10","value":11} ]
+			}
+		]
+	}
+]

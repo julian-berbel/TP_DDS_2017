@@ -12,6 +12,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 import jxl.read.biff.BiffException;
+import parser.IndicatorParser;
 
 public class IndicatorsLoader
 {
@@ -46,12 +47,11 @@ public class IndicatorsLoader
             
 	        while(!cellIsEmpty(sheet.getCell(columnIndex,rowIndex)))
 	        {
-	        	Indicator indicator = new Indicator();
 	        	rowIndex++;
-	        	indicator.setName(sheet.getCell(columnIndex,rowIndex).getContents());	        	
-	        	indicator.setContent(sheet.getCell(columnIndex+1,rowIndex).getContents());
-	        	list.add(indicator); 
-	        	
+	        	String name = sheet.getCell(columnIndex,rowIndex).getContents();
+	        	String formula = sheet.getCell(columnIndex+1,rowIndex).getContents();
+	        	Indicator indicator = new Indicator(name, formula, IndicatorParser.parseIndicator(formula));
+	        	list.add(indicator);
 	        }
 	        	IndicatorsRepository.setIndicators(list);
 	        	
@@ -85,11 +85,7 @@ public class IndicatorsLoader
 	
 	public Boolean cellIsEmpty(Cell cell)
 	{
-		if(cell.getContents().length() == 0)
-		{
-			return true;
-		}
-		return false;
+		return cell.getContents().isEmpty();
 	}
 	
 	

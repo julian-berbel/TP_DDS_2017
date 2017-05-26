@@ -1,6 +1,8 @@
 package viewModel;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.uqbar.commons.utils.Observable;
 import modelo.Calculation;
 import modelo.EnterpriseRepository;
@@ -40,9 +42,9 @@ public class ConsultAccountVM {
 		return periods;
 	}
 	
-	public void setPeriods(List<String> periodss) 
+	public void setPeriods(List<String> periods) 
 	{
-		periods = periodss;
+		this.periods = periods;
 	}
 	
 	public String getSelectedPeriod() 
@@ -63,18 +65,18 @@ public class ConsultAccountVM {
 	{
 		
 		selectedEnterprise = selectedEnterpris;
-		periods=EnterpriseRepository.getEnterprisePeriodsList(selectedEnterprise);			
+		periods= EnterpriseRepository.getEnterprisePeriodsList(selectedEnterprise).stream()
+				.map(year -> year.toString()).collect(Collectors.toList());
 	}
 	
 	
 
-	public void setSelectedPeriod(String selectedPeriodd) 
-	{		
-		
-		selectedPeriod = selectedPeriodd;			
+	public void setSelectedPeriod(String selectedPeriod) 
+	{
 		if(selectedPeriod!= null)
 		{
-			calculations = EnterpriseRepository.getPeriodAccountList(selectedEnterprise, selectedPeriod);
+			Integer _selectedPeriod = Integer.parseInt(selectedPeriod);
+			calculations = EnterpriseRepository.getPeriodAccountList(selectedEnterprise, _selectedPeriod);
 		}	
 	}	
 	

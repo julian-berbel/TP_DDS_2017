@@ -4,9 +4,15 @@ import math.Operable;
 
 public class Indicator implements Operable
 {
-	private String name = "";
-	private String content = "";
+	private String name;
+	private String formula;
 	private Operable value;
+	
+	public Indicator(String name, String formula, Operable value){
+		this.name = name;
+		this.formula = formula;
+		this.value = value;
+	}
 	
 	public String getName() 
 	{
@@ -17,18 +23,16 @@ public class Indicator implements Operable
 	{
 		this.name = name;
 	}
-	
-	public String getContent() 
-	{
-		return content;
-	}
-	
-	public void setContent(String content) 
-	{
-		this.content = content;
+
+	public String getFormula() {
+		return formula;
 	}
 
-	public double reduce(){
-		return value.reduce();
+	public void setFormula(String formula) {
+		this.formula = formula;
+	}
+
+	public double reduce(Enterprise enterprise, int year){
+		return value.reduce(enterprise, year);
 	}
 }

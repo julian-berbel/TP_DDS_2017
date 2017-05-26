@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Period 
 {
-	private String periodName;						// el periodo podria ser algo como "2016-2017"
+	private int year;
 	private List<Calculation> calculations;
 	
 	public Period()
@@ -21,17 +21,25 @@ public class Period
 	{
 		this.calculations.add(calc);
 	}	
-	public void setPeriodName(String p)
-	{
-		this.periodName = p;
+	
+	public int getYear() {
+		return year;
 	}
-	public String getPeriodName()
-	{
-		return periodName;
+
+	public void setYear(int year) {
+		this.year = year;
 	}
-	public List<String> getCalculationsName()
+	
+	public List<String> getCalculationsNames()
 	{
 		
 		return calculations.stream().map(calculation->calculation.getName()).collect(Collectors.toList());
+	}
+	
+	public Calculation getCalculation(String name){
+		return calculations.stream()
+				.filter(calculation -> calculation.getName() == name)
+				.findFirst()
+				.get();
 	}
 }

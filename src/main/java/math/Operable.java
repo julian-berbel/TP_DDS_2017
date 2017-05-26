@@ -1,5 +1,7 @@
 package math;
 
+import modelo.Enterprise;
+
 public interface Operable {
-	public double reduce();
+	public double reduce(Enterprise enterprise, int year);
 }

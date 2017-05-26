@@ -1,5 +1,7 @@
 package math;
 
+import modelo.Enterprise;
+
 public abstract class AlgebraicOperation implements Operable {
 	private Operable firstOperand;
 	private Operable secondOperand;
@@ -11,7 +13,7 @@ public abstract class AlgebraicOperation implements Operable {
 	
 	protected abstract double apply(double firstOp, double secondOp);
 	
-	public double reduce(){
-		return this.apply(firstOperand.reduce(), secondOperand.reduce());
+	public double reduce(Enterprise enterprise, int year){
+		return this.apply(firstOperand.reduce(enterprise, year), secondOperand.reduce(enterprise, year));
 	}
 }

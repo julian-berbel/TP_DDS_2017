@@ -32,19 +32,19 @@ public class EnterpriseRepository
 		return enterprises.stream().map(empresa -> empresa.getEnterpriseName()).collect(Collectors.toList());
 	}
 	
-	public static List<String> getEnterprisePeriodsList(String enterpriseName)
+	public static List<Integer> getEnterprisePeriodsList(String enterpriseName)
 	{		
 		Enterprise searchedEnterprise = enterprises.stream().filter(enterprise -> enterprise.getEnterpriseName().equals(enterpriseName)).findFirst().get();
 
-		return searchedEnterprise.getPeriodsNames();		
+		return searchedEnterprise.getPeriodsYears();		
 	}
 	
 	
-	public static List<Calculation> getPeriodAccountList(String enterpriseName,String periodName)
+	public static List<Calculation> getPeriodAccountList(String enterpriseName, int year)
 	{
 		Enterprise searchedEnterprise = enterprises.stream().filter(enterprise -> enterprise.getEnterpriseName().equals(enterpriseName)).findFirst().get();
 		
-		return searchedEnterprise.getPeriodCalculations(periodName);		
+		return searchedEnterprise.getPeriodCalculations(year);		
 	}
 	
 	public static Set<String> getEnterprisesCalculationsName()
