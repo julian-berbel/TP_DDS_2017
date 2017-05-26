@@ -10,7 +10,4 @@ public class Addition extends AlgebraicOperation {
 		return firstOp + secondOp;
 	}
 
-	public Operable a(){
-		return this;
-	}
 }
