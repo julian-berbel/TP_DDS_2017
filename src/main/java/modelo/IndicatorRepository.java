@@ -11,9 +11,9 @@ public class IndicatorRepository
 		indicators = new ArrayList<Indicator>();
 	}
 	
-	public static void addIndicator(Indicator ent)
+	public static void addIndicator(Indicator indicator)
 	{
-		indicators.add(ent);
+		indicators.add(indicator);
 	}
 	
 	public static List<Indicator> getIndicatorList()

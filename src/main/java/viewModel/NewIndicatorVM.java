@@ -1,8 +1,5 @@
 package viewModel;
 
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
-
 import org.uqbar.commons.utils.Observable;
 
 import modelo.Indicator;
@@ -32,7 +29,6 @@ public class NewIndicatorVM {
 	}
 
 	public void newIndicator(){
-		IndicatorParser.ReInit(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
 		IndicatorRepository.addIndicator(new Indicator(this.name, this.formula, IndicatorParser.parseIndicator(this.formula)));
 	}
 }

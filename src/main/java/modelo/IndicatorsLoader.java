@@ -53,7 +53,7 @@ public class IndicatorsLoader
 	        	Indicator indicator = new Indicator(name, formula, IndicatorParser.parseIndicator(formula));
 	        	list.add(indicator);
 	        }
-	        	IndicatorsRepository.setIndicators(list);
+	        	IndicatorRepository.setIndicatorList(list);
 	        	
         } catch (BiffException e) //Esta excepcion es por que este API solo lee .xls, Hay que catchearlo en la window para que le informe al usuario que solo soporta .xls
         {

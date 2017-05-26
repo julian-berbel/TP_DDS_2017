@@ -1,5 +1,9 @@
 package vista;
 import org.uqbar.arena.windows.MessageBox;
+
+import modelo.EnterpriseRepository;
+import modelo.IndicatorRepository;
+import parser.IndicatorParser;
 import viewModel.MainVM;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -78,6 +82,9 @@ public class MainView extends MainWindow<MainVM>
 	
 	public static void main(String[] args)
 	{
+		new EnterpriseRepository();
+		new IndicatorRepository();
+		new IndicatorParser(System.in);
 		new MainView().startApplication();
 	}
 }

@@ -15,7 +15,7 @@ import viewModel.NewIndicatorVM;
 @SuppressWarnings("serial")
 public class NewIndicatorWindow extends Dialog<NewIndicatorVM> 
 {
-	public NewIndicatorWindow(WindowOwner owner,String filePath)
+	public NewIndicatorWindow(WindowOwner owner)
 	{
 		super(owner, new NewIndicatorVM());
 	}
