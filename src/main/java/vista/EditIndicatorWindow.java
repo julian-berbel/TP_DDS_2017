@@ -9,15 +9,16 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import viewModel.NewIndicatorVM;
+import modelo.Indicator;
+import viewModel.EditIndicatorVM;
 
 
 @SuppressWarnings("serial")
-public class NewIndicatorWindow extends Dialog<NewIndicatorVM> 
+public class EditIndicatorWindow extends Dialog<EditIndicatorVM> 
 {
-	public NewIndicatorWindow(WindowOwner owner)
+	public EditIndicatorWindow(WindowOwner owner, Indicator indicadorAEditar)
 	{
-		super(owner, new NewIndicatorVM());
+		super(owner, new EditIndicatorVM(indicadorAEditar));
 	}
 
 	@Override

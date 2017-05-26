@@ -102,12 +102,14 @@ public class IndicatorParser implements IndicatorParserConstants {
   }
 
   static final public Operable Indicator() throws ParseException {Token t;
+    jj_consume_token(11);
     t = jj_consume_token(INDICATOR);
 {if ("" != null) return IndicatorRepository.getIndicator(t.image);}
     throw new Error("Missing return statement in function");
   }
 
   static final public Operable Calculation() throws ParseException {Token t;
+    jj_consume_token(12);
     t = jj_consume_token(CALCULATION);
 {if ("" != null) return new OperableCalculation(t.image);}
     throw new Error("Missing return statement in function");
@@ -225,12 +227,6 @@ public class IndicatorParser implements IndicatorParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_6()
- {
-    if (jj_scan_token(INDICATOR)) return true;
-    return false;
-  }
-
   static private boolean jj_3_9()
  {
     if (jj_3R_5()) return true;
@@ -343,15 +339,23 @@ public class IndicatorParser implements IndicatorParserConstants {
     return false;
   }
 
+  static private boolean jj_3R_7()
+ {
+    if (jj_scan_token(12)) return true;
+    if (jj_scan_token(CALCULATION)) return true;
+    return false;
+  }
+
   static private boolean jj_3R_4()
  {
     if (jj_scan_token(CONSTANT)) return true;
     return false;
   }
 
-  static private boolean jj_3R_7()
+  static private boolean jj_3R_6()
  {
-    if (jj_scan_token(CALCULATION)) return true;
+    if (jj_scan_token(11)) return true;
+    if (jj_scan_token(INDICATOR)) return true;
     return false;
   }
 
@@ -576,7 +580,7 @@ public class IndicatorParser implements IndicatorParserConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[11];
+    boolean[] la1tokens = new boolean[13];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -590,7 +594,7 @@ public class IndicatorParser implements IndicatorParserConstants {
         }
       }
     }
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 13; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

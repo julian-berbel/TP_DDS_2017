@@ -37,9 +37,9 @@ TOKEN : /* LITERALS */
 
 TOKEN : /* IDENTIFIERS */
 {
-  < INDICATOR: "@" ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9"])* >
+  < INDICATOR: ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9"])* >
   |
-  < CALCULATION: "#" ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9"])* >
+  < CALCULATION: ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9"])* >
 }
 
 /** Main production. */
@@ -84,12 +84,12 @@ Operable Identifier() : {Operable op;}
 
 Operable Indicator() : {Token t;}
 {
-  t=<INDICATOR> { return IndicatorRepository.getIndicator(t.image); }
+	"@" t=<INDICATOR> { return IndicatorRepository.getIndicator(t.image); }
 }
 
 Operable Calculation() : {Token t;}
 {
-  t=<CALCULATION> { return new OperableCalculation(t.image);}
+	"#" t=<CALCULATION> { return new OperableCalculation(t.image);}
 }
 
 /** A Constant. */

@@ -33,15 +33,11 @@ public class MainView extends MainWindow<MainVM>
 			.onClick(()->{ new LoadCalculationsWindow(this).open(); });
 				
 		new Button(panel1)
-			.setCaption("Cargar Indicadores")
-			.onClick(()->{ new LoadIndicatorsWindow(this).open(); });	
+			.setCaption("Indicadores")
+			.onClick(()->{ new IndicatorsWindow(this).open(); });	
 		
 		new Button(panel1)
 			.setCaption("Cargar Metodologia")
-			.onClick(()->{ showFeatureNotAvailableMessage(); });	
-		
-		new Button(panel1)
-			.setCaption("Consultar Indicadores")
 			.onClick(()->{ showFeatureNotAvailableMessage(); });	
 		
 		new Button(panel1)

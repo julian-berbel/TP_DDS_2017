@@ -29,7 +29,7 @@ public class IndicatorRepository
 
 	public static Indicator getIndicator(String name){
 		return indicators.stream()
-				.filter(indicator -> indicator.getName() == name)
+				.filter(indicator -> indicator.getName().equals(name))
 				.findFirst()
 				.get();
 	}

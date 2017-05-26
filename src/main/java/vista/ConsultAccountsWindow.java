@@ -61,7 +61,7 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 		columnCalculations.setTitle("Cuentas").bindContentsToProperty("name");
 		
 		Column<Calculation> columnValues = new Column<Calculation>(tableCalculations);
-		columnValues.setTitle("Valores").bindContentsToProperty("value");		
+		columnValues.setTitle("Valores").bindContentsToProperty("value");
 	}	
 	
 	

@@ -33,6 +33,8 @@ public interface IndicatorParserConstants {
     "\"/\"",
     "\"(\"",
     "\")\"",
+    "\"@\"",
+    "\"#\"",
   };
 
 }

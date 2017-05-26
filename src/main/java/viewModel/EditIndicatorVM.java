@@ -3,14 +3,20 @@ package viewModel;
 import org.uqbar.commons.utils.Observable;
 
 import modelo.Indicator;
-import modelo.IndicatorRepository;
 import parser.IndicatorParser;
 
 @Observable
-public class NewIndicatorVM {
+public class EditIndicatorVM {
 	
 	private String name;
 	private String formula;
+	private Indicator indicadorAEditar;
+	
+	public EditIndicatorVM(Indicator indicadorAEditar){
+		this.indicadorAEditar = indicadorAEditar;
+		name = indicadorAEditar.getName();
+		formula = indicadorAEditar.getFormula();
+	}
 	
 	public String getName() {
 		return name;
@@ -29,6 +35,8 @@ public class NewIndicatorVM {
 	}
 
 	public void newIndicator(){
-		IndicatorRepository.addIndicator(new Indicator(this.name, this.formula, IndicatorParser.parseIndicator(this.formula)));
+		indicadorAEditar.setName(name);
+		indicadorAEditar.setFormula(formula);
+		indicadorAEditar.setValue(IndicatorParser.parseIndicator(this.formula));
 	}
 }

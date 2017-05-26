@@ -1,13 +1,16 @@
 package modelo;
 
+import org.uqbar.commons.utils.Observable;
+
 import math.Operable;
 
+@Observable
 public class Indicator implements Operable
 {
 	private String name;
 	private String formula;
 	private Operable value;
-	
+
 	public Indicator(String name, String formula, Operable value){
 		this.name = name;
 		this.formula = formula;
@@ -30,6 +33,14 @@ public class Indicator implements Operable
 
 	public void setFormula(String formula) {
 		this.formula = formula;
+	}
+	
+	public Operable getValue() {
+		return value;
+	}
+
+	public void setValue(Operable value) {
+		this.value = value;
 	}
 
 	public double reduce(Enterprise enterprise, int year){
