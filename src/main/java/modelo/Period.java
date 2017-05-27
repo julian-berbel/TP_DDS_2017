@@ -42,4 +42,9 @@ public class Period
 				.findFirst()
 				.get();
 	}
+	
+	@Override
+	public String toString(){
+		return String.valueOf(year);
+	}
 }

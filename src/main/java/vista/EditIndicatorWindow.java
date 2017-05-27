@@ -24,7 +24,6 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 	@Override
 	protected void createFormPanel(Panel mainPanel) 
 	{
-		this.setTitle("Nuevo Indicador");
 		mainPanel.setLayout(new VerticalLayout());
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new ColumnLayout(2));

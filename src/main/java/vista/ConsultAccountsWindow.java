@@ -34,7 +34,6 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new ColumnLayout(2));
 		
-		//new Label(panel1).setText("\t\t\tEmpresas");
 		new Label(panel1).setText("Empresas");
 		new Label(panel1).setText("Periodos");
 		

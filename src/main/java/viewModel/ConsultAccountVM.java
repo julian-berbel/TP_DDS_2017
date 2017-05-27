@@ -1,53 +1,52 @@
 package viewModel;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.uqbar.commons.utils.Observable;
 import modelo.Calculation;
+import modelo.Enterprise;
 import modelo.EnterpriseRepository;
+import modelo.Period;
 
 @Observable
 public class ConsultAccountVM {
 
-	private List<String> enterprises;
-	private String selectedEnterprise;
-	private List<String> periods;
-	private String selectedPeriod;
+	private List<Enterprise> enterprises;
+	private Enterprise selectedEnterprise;
+	private List<Period> periods;
+	private Period selectedPeriod;
 	private List<Calculation> calculations;	
-	
-	
 	
 	public ConsultAccountVM()
 	{
-		enterprises =  EnterpriseRepository.getEnterprisesNameList();		
+		enterprises =  EnterpriseRepository.getEnterpriseList();		
 	}	
 	
-	public List<String> getEnterprises() 
+	public List<Enterprise> getEnterprises() 
 	{
 		return enterprises;
 	}
 	
-	public void setEnterprises(List<String> enterprise)
+	public void setEnterprises(List<Enterprise> enterprise)
 	{
 		this.enterprises = enterprise;
 	}	
 	
-	public String getSelectedEnterprise() 
+	public Enterprise getSelectedEnterprise() 
 	{
 		return selectedEnterprise;
 	}
-	public List<String> getPeriods() 
+	public List<Period> getPeriods() 
 	{
 		return periods;
 	}
 	
-	public void setPeriods(List<String> periods) 
+	public void setPeriods(List<Period> periods) 
 	{
 		this.periods = periods;
 	}
 	
-	public String getSelectedPeriod() 
+	public Period getSelectedPeriod() 
 	{
 		return selectedPeriod;
 	}
@@ -57,28 +56,20 @@ public class ConsultAccountVM {
 		return calculations;
 	}
 
-	public void setCalculations(List<Calculation> calculationss) 
+	public void setCalculations(List<Calculation> calculations) 
 	{
-		calculations = calculationss;
+		this.calculations = calculations;
 	}
-	public void setSelectedEnterprise(String selectedEnterpris) 
+	
+	public void setSelectedEnterprise(Enterprise selectedEnterprise) 
 	{
 		
-		selectedEnterprise = selectedEnterpris;
-		periods= EnterpriseRepository.getEnterprisePeriodsList(selectedEnterprise).stream()
-				.map(year -> year.toString()).collect(Collectors.toList());
+		this.selectedEnterprise = selectedEnterprise;
+		periods = selectedEnterprise.getPeriods();
 	}
 	
-	
-
-	public void setSelectedPeriod(String selectedPeriod) 
-	{
-		if(selectedPeriod!= null)
-		{
-			Integer _selectedPeriod = Integer.parseInt(selectedPeriod);
-			calculations = EnterpriseRepository.getPeriodAccountList(selectedEnterprise, _selectedPeriod);
-		}	
+	public void setSelectedPeriod(Period selectedPeriod){
+			calculations = selectedPeriod.getCalculations();
 	}	
-	
 	
 }

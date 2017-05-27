@@ -59,4 +59,8 @@ public class Enterprise
 				.getCalculation(name);
 	}
 	
+	@Override
+	public String toString(){
+		return enterpriseName;
+	}
 }
