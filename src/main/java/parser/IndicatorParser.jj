@@ -6,6 +6,7 @@ PARSER_BEGIN(IndicatorParser)
 package parser;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import exceptions.ParsingFailureException;
 
 import math.*;
 import modelo.IndicatorRepository;
@@ -17,7 +18,7 @@ public class IndicatorParser {
 		try{
 			value = IndicatorParser.Start();
 		} catch(Exception e){
-			System.out.println(e);
+			throw new ParsingFailureException();
 		}
 		return value;
 	}
@@ -67,13 +68,15 @@ Operable Term() : {Operable op1, op2;}
     op1 = Factor() {return op1;}
 }
 
-Operable Factor() : {Operable op1;}
+Operable Factor() : {Operable op;}
 {
-    ("(" op1 = Expression() ")") {return op1;} 
+    ("(" op = Expression() ")") {return op;} 
     |
-    op1 = Constant() {return op1;}
+    op = Constant() {return op;}
     |
-    op1 = Identifier() {return op1;}
+    op = Identifier() {return op;}
+    |
+    "-" op = Factor() {return new Negative(op);}
 }
 
 /** An Identifier. */

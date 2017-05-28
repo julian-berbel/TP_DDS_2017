@@ -14,4 +14,7 @@ public class Negative implements Operable {
 		return - value.reduce(enterprise, year);
 	}
 
+	public String toString(){
+		return "-" + value.toString();
+	}
 }

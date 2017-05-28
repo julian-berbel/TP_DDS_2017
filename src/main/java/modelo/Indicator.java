@@ -46,4 +46,13 @@ public class Indicator implements Operable
 	public double reduce(Enterprise enterprise, int year){
 		return value.reduce(enterprise, year);
 	}
+	
+	public String normalize(){
+		return value.toString();
+	}
+	
+	@Override
+	public String toString(){
+		return "@" + name;
+	}
 }

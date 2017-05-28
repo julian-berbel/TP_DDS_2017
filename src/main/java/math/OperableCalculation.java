@@ -12,4 +12,8 @@ public class OperableCalculation implements Operable{
 	public double reduce(Enterprise enterprise, int year){
 		return enterprise.getCalculationOnYear(name, year).getValue();
 	}
+	
+	public String toString(){
+		return name;
+	}
 }

@@ -10,4 +10,7 @@ public class Subtraction extends AlgebraicOperation {
 		return firstOp - secondOp;
 	}
 	
+	protected String operationString(){
+		return " - ";
+	}
 }

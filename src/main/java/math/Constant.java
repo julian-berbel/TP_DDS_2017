@@ -12,4 +12,8 @@ public class Constant implements Operable {
 	public double reduce(Enterprise enterprise, int year){
 		return value;
 	}
+	
+	public String toString(){
+		return String.valueOf(value);
+	}
 }

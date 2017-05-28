@@ -10,4 +10,7 @@ public class Multiplication extends AlgebraicOperation{
 		return firstOp * secondOp;
 	}
 	
+	protected String operationString(){
+		return " * ";
+	}
 }

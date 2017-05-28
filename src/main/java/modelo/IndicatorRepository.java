@@ -1,5 +1,8 @@
 package modelo;
 import java.util.List;
+
+import exceptions.MissingIndicatorException;
+
 import java.util.ArrayList;
 
 public class IndicatorRepository 
@@ -31,7 +34,7 @@ public class IndicatorRepository
 		return indicators.stream()
 				.filter(indicator -> indicator.getName().equals(name))
 				.findFirst()
-				.get();
+				.orElseThrow(() -> new MissingIndicatorException(name));
 	}
 	
 }
