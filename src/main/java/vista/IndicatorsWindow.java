@@ -48,7 +48,8 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 																this.getModelObject().addNewIndicator();});
 		new Button(panel2).setCaption("Editar").onClick(() -> new EditIndicatorWindow(this, this.getModelObject().editIndicator()).open());
 		new Button(panel2).setCaption("Borrar").onClick(() -> this.getModelObject().deleteIndicator());
-		new Button(panel2).setCaption("Cargar archivo").onClick(() -> new LoadIndicatorsWindow(this).open());
+		new Button(panel2).setCaption("Cargar archivo").onClick(() -> { new LoadIndicatorsWindow(this).open(); 
+																		this.getModelObject().refreshList();});
 	}
 	
 	@Override
