@@ -38,7 +38,7 @@ public class Period
 	
 	public Calculation getCalculation(String name){
 		return calculations.stream()
-				.filter(calculation -> calculation.getName() == name)
+				.filter(calculation -> calculation.getName().equals(name))
 				.findFirst()
 				.get();
 	}

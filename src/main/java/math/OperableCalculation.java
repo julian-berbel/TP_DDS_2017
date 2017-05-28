@@ -14,6 +14,6 @@ public class OperableCalculation implements Operable{
 	}
 	
 	public String toString(){
-		return name;
+		return "#" + name;
 	}
 }
