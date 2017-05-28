@@ -6,7 +6,6 @@ PARSER_BEGIN(IndicatorParser)
 package parser;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
-import exceptions.ParsingFailureException;
 
 import math.*;
 import modelo.IndicatorRepository;
@@ -18,7 +17,7 @@ public class IndicatorParser {
 		try{
 			value = IndicatorParser.Start();
 		} catch(Exception e){
-			throw new ParsingFailureException();
+			System.out.println(e);
 		}
 		return value;
 	}

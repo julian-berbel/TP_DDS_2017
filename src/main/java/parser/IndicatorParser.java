@@ -68,18 +68,22 @@ public class IndicatorParser implements IndicatorParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-  static final public Operable Factor() throws ParseException {Operable op1;
+  static final public Operable Factor() throws ParseException {Operable op;
     if (jj_2_7(100)) {
       jj_consume_token(9);
-      op1 = Expression();
+      op = Expression();
       jj_consume_token(10);
-{if ("" != null) return op1;}
+{if ("" != null) return op;}
     } else if (jj_2_8(100)) {
-      op1 = Constant();
-{if ("" != null) return op1;}
+      op = Constant();
+{if ("" != null) return op;}
     } else if (jj_2_9(100)) {
-      op1 = Identifier();
-{if ("" != null) return op1;}
+      op = Identifier();
+{if ("" != null) return op;}
+    } else if (jj_2_10(100)) {
+      jj_consume_token(6);
+      op = Factor();
+{if ("" != null) return new Negative(op);}
     } else {
       jj_consume_token(-1);
       throw new ParseException();
@@ -89,9 +93,9 @@ public class IndicatorParser implements IndicatorParserConstants {
 
 /** An Identifier. */
   static final public Operable Identifier() throws ParseException {Operable op;
-    if (jj_2_10(100)) {
+    if (jj_2_11(100)) {
       op = Indicator();
-    } else if (jj_2_11(100)) {
+    } else if (jj_2_12(100)) {
       op = Calculation();
     } else {
       jj_consume_token(-1);
@@ -210,20 +214,29 @@ public class IndicatorParser implements IndicatorParserConstants {
     finally { jj_save(10, xla); }
   }
 
-  static private boolean jj_3_10()
+  static private boolean jj_2_12(int xla)
  {
-    if (jj_3R_6()) return true;
-    return false;
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_12(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(11, xla); }
   }
 
   static private boolean jj_3R_5()
  {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_10()) {
+    if (jj_3_11()) {
     jj_scanpos = xsp;
-    if (jj_3_11()) return true;
+    if (jj_3_12()) return true;
     }
+    return false;
+  }
+
+  static private boolean jj_3_10()
+ {
+    if (jj_scan_token(6)) return true;
+    if (jj_3R_3()) return true;
     return false;
   }
 
@@ -255,7 +268,10 @@ public class IndicatorParser implements IndicatorParserConstants {
     jj_scanpos = xsp;
     if (jj_3_8()) {
     jj_scanpos = xsp;
-    if (jj_3_9()) return true;
+    if (jj_3_9()) {
+    jj_scanpos = xsp;
+    if (jj_3_10()) return true;
+    }
     }
     }
     return false;
@@ -297,7 +313,7 @@ public class IndicatorParser implements IndicatorParserConstants {
     return false;
   }
 
-  static private boolean jj_3_11()
+  static private boolean jj_3_12()
  {
     if (jj_3R_7()) return true;
     return false;
@@ -359,6 +375,12 @@ public class IndicatorParser implements IndicatorParserConstants {
     return false;
   }
 
+  static private boolean jj_3_11()
+ {
+    if (jj_3R_6()) return true;
+    return false;
+  }
+
   static private boolean jj_initialized_once = false;
   /** Generated Token Manager. */
   static public IndicatorParserTokenManager token_source;
@@ -379,7 +401,7 @@ public class IndicatorParser implements IndicatorParserConstants {
    private static void jj_la1_init_0() {
       jj_la1_0 = new int[] {};
    }
-  static final private JJCalls[] jj_2_rtns = new JJCalls[11];
+  static final private JJCalls[] jj_2_rtns = new JJCalls[12];
   static private boolean jj_rescan = false;
   static private int jj_gc = 0;
 
@@ -621,7 +643,7 @@ public class IndicatorParser implements IndicatorParserConstants {
 
   static private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 12; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -639,6 +661,7 @@ public class IndicatorParser implements IndicatorParserConstants {
             case 8: jj_3_9(); break;
             case 9: jj_3_10(); break;
             case 10: jj_3_11(); break;
+            case 11: jj_3_12(); break;
           }
         }
         p = p.next;
