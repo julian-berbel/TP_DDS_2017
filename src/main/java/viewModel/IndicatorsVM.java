@@ -43,10 +43,12 @@ public class IndicatorsVM {
 
 	public void deleteIndicator(){
 		indicators.remove(selectedIndicator);
+		ObservableUtils.firePropertyChanged(this, "indicators");
 	}
 	
 	public void addNewIndicator(){
 		IndicatorRepository.addIndicator(selectedIndicator);
+		IndicatorRepository.addNewIndicator(selectedIndicator);
 		ObservableUtils.firePropertyChanged(this, "indicators");
 	}
 	

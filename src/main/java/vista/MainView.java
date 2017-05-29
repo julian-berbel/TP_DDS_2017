@@ -59,7 +59,12 @@ public class MainView extends MainWindow<MainVM>
 		new Button(panel1)
 			.setCaption("Analizar Empresa")
 			.onClick(()->{ showFeatureNotAvailableMessage(); });	
-	}
+	
+		new Button(panel1)
+		.setCaption("Guardar cambios")
+		.onClick(()->{ new SaveIndicatorsWindow(this).open(); });
+		
+	}	
 	
 	
 	private void showFeatureNotAvailableMessage()

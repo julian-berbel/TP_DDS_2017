@@ -3,7 +3,8 @@ package viewModel;
 import java.io.IOException;
 
 import org.uqbar.commons.utils.Observable;
-import modelo.IndicatorsLoader;
+
+import modelo.IndicatorsManager;
 
 @Observable
 public class LoadIndicatorsVM {
@@ -30,9 +31,9 @@ public class LoadIndicatorsVM {
 	
 	public void loadIndicators()
 	{
-		IndicatorsLoader indicatorsLoader = new IndicatorsLoader(filePath);
+		IndicatorsManager.setFilePath(filePath);
 		try{
-			indicatorsLoader.read();                   				// hay que catchear una excepcion del read que diga que el formato del archivo es invalido por que tiene que ser .xls
+			IndicatorsManager.read();                   				// hay que catchear una excepcion del read que diga que el formato del archivo es invalido por que tiene que ser .xls
 		}
 		catch(IOException e)
 		{
