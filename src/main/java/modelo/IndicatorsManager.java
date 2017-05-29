@@ -105,26 +105,30 @@ public class IndicatorsManager
 	public static void writeExcel(Indicator indicator) throws BiffException
 
 	{
-		int cellIndex[] = new int[2];
-	    int rowToFill;
-	    int columnToFill;
-
-	    try
+		try
 	    {
-	    	cellIndex= nextEmptyCell();
-	        columnToFill = cellIndex[0];
-	        rowToFill =cellIndex[1];
+	    	
 	        WorkbookSettings wkbkSet = new WorkbookSettings();
         	wkbkSet.setSuppressWarnings(true);
 	        Workbook target_workbook = Workbook.getWorkbook(new File(filePath),wkbkSet);
 	        WritableWorkbook workbook = Workbook.createWorkbook(new File(filePath), target_workbook);
 	        
 	        WritableSheet sheet = workbook.getSheet(sheetName);
-	            
+	        Cell indicators = getCellWithString(sheet,"Indicadores");
+            
+	        int columnNumber = indicators.getColumn();
+	        int rowNumber = indicators.getRow();
+	        int columnIndex = columnNumber;
+	        int rowIndex = rowNumber+1;	
+            
+	        while(!cellIsEmpty(sheet.getCell(columnNumber,rowIndex)))
+	        {        	
+	        	rowIndex++;
+	        }
 	        
-	        Label label = new Label(columnToFill, rowToFill, indicator.getName());
+	        Label label = new Label(columnIndex, rowIndex, indicator.getName());
 	        sheet.addCell(label);
-	        Label label2 = new Label(columnToFill+1, rowToFill, indicator.getFormula());
+	        Label label2 = new Label(columnIndex+1, rowIndex, indicator.getFormula());
 	        sheet.addCell(label2);
 	        
 
@@ -135,49 +139,14 @@ public class IndicatorsManager
 	        }
 	    catch (IOException ex)
 	    {
-	    	System.out.println("Error al crear el fichero.");
+	    	System.out.println("Error al crear el fichero.");//Por las pruebas, hacer con excepciones
 	    }
 	    catch (WriteException ex)
 	    {
-	    	System.out.println("Error al escribir el fichero.");
+	    	System.out.println("Error al escribir el fichero.");//Por las pruebas, hacer con excepciones
 	    }
 
 	}
 	
-	public static int[] nextEmptyCell() throws IOException
-	{
-		int[] cellIndex=new int[2];
-		
-		File inputWorkbook = new File(filePath);
-        Workbook w;
-       
-        try 
-        {
-        	WorkbookSettings wkbkSet = new WorkbookSettings();
-        	wkbkSet.setSuppressWarnings(true);
-            w = Workbook.getWorkbook(inputWorkbook,wkbkSet);     
-            Sheet sheet = w.getSheet(sheetName);           
-            Cell indicators = getCellWithString(sheet,"Indicadores");
-            
-	        int columnNumber = indicators.getColumn();
-	        int rowNumber = indicators.getRow();
-	        cellIndex[0] = columnNumber;
-	        int rowIndex = rowNumber+1;	
-            
-	        while(!cellIsEmpty(sheet.getCell(columnNumber,rowIndex)))
-	        {        	
-	        	rowIndex++;
-	        }
-	        cellIndex[1] = rowIndex;
-	        w.close();
-	        return cellIndex;	
-	        	
-        } catch (BiffException e) //Esta excepcion es por que este API solo lee .xls, Hay que catchearlo en la window para que le informe al usuario que solo soporta .xls
-        {
-            e.printStackTrace();
-        }
-		return null; //Nunca va a pasar pero lo pide
-		
-	}	
 		
 }
