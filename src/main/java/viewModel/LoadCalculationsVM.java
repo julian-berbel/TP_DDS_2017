@@ -23,9 +23,12 @@ public class LoadCalculationsVM
 		return filePath;
 	}
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-		this.parseFile();
+	public void setFilePath(String filePath_) {
+		this.filePath = filePath_;
+		if(filePath != null)
+		{
+			this.parseFile();
+		}
 	}
 
 	public void parseFile()	

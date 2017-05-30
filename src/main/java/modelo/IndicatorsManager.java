@@ -16,6 +16,7 @@ import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 import parser.IndicatorParser;
 
 
@@ -41,6 +42,7 @@ public class IndicatorsManager
             
             // Para usar la primera hoja
             Sheet sheet = w.getSheet(0); 
+          
             sheetName = sheet.getName();
             Cell indicators = getCellWithString(sheet,"Indicadores");
             
@@ -96,13 +98,26 @@ public class IndicatorsManager
 	     }
 		 return null;
 	 }
+	 
+	 public static void deleteSheetContents(WritableSheet sheet) throws RowsExceededException, WriteException
+	 {
+		 for (int j = 0; j < sheet.getColumns(); j++) 
+	     {
+			 for (int i = 0; i < sheet.getRows(); i++) 
+	         {			 
+	             Label label = new Label(j, i, new String());
+	 	         sheet.addCell(label);                 
+	        }
+	     }
+		
+	 }
 	
 	public static Boolean cellIsEmpty(Cell cell)
 	{
 		return cell.getContents().isEmpty();
 	}
 	
-	public static void writeExcel(Indicator indicator) throws BiffException
+	public static void writeExcel() throws BiffException
 
 	{
 		try
@@ -114,22 +129,27 @@ public class IndicatorsManager
 	        WritableWorkbook workbook = Workbook.createWorkbook(new File(filePath), target_workbook);
 	        
 	        WritableSheet sheet = workbook.getSheet(sheetName);
-	        Cell indicators = getCellWithString(sheet,"Indicadores");
-            
+	        Cell indicators = getCellWithString(sheet,"Indicadores");            
 	        int columnNumber = indicators.getColumn();
-	        int rowNumber = indicators.getRow();
+	        int rowNumber = indicators.getRow();	        
 	        int columnIndex = columnNumber;
 	        int rowIndex = rowNumber+1;	
-            
-	        while(!cellIsEmpty(sheet.getCell(columnNumber,rowIndex)))
-	        {        	
-	        	rowIndex++;
-	        }
 	        
-	        Label label = new Label(columnIndex, rowIndex, indicator.getName());
+	        deleteSheetContents(sheet);
+	        
+	        Label label = new Label(columnNumber, rowNumber, "Indicadores");
 	        sheet.addCell(label);
-	        Label label2 = new Label(columnIndex+1, rowIndex, indicator.getFormula());
+	        Label label2 = new Label(columnNumber+1, rowNumber, "Formula");
 	        sheet.addCell(label2);
+            
+	        for(int index =0;index<IndicatorRepository.getIndicatorList().size();index++)
+	        {
+	        	Label indicator = new Label(columnIndex, rowIndex, IndicatorRepository.getIndicatorList().get(index).getName());
+		        sheet.addCell(indicator);
+		        Label formula = new Label(columnIndex+1, rowIndex, IndicatorRepository.getIndicatorList().get(index).getFormula());
+		        sheet.addCell(formula);
+		        rowIndex++;
+	        }
 	        
 
 

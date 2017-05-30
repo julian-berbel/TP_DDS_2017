@@ -3,6 +3,7 @@ package vista;
 
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
@@ -31,15 +32,7 @@ public class SaveIndicatorsWindow extends Dialog<SaveIndicatorsVM>
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new VerticalLayout());	
 		
-		Table<Indicator> indicatorTable = new Table<Indicator>(panel1, Indicator.class);
-		indicatorTable.bindItemsToProperty("newIndicators");
-		indicatorTable.bindValueToProperty("selectedIndicator");
-		indicatorTable.setWidth(600);
-		indicatorTable.setHeight(200);
-		indicatorTable.setNumberVisibleRows(10);
-				
-		Column<Indicator> columnName = new Column<Indicator>(indicatorTable);
-		columnName.setTitle("Nuevo indicador").setFixedSize(100).bindContentsToProperty("name");
+		new Label(panel1).setText("Guardar Indicadores");
 	
 	}
 	

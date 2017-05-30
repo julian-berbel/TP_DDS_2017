@@ -23,10 +23,13 @@ public class LoadIndicatorsVM {
 		return filePath;
 	}
 
-	public void setFilePath(String filePath) 
+	public void setFilePath(String filePath_) 
 	{
-		this.filePath = filePath;
-		this.loadIndicators();
+		this.filePath = filePath_;
+		if(filePath != null)
+		{
+			this.loadIndicators();
+		}	
 	}
 	
 	public void loadIndicators()

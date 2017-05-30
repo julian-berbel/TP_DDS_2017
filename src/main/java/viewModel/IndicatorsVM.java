@@ -47,8 +47,7 @@ public class IndicatorsVM {
 	}
 	
 	public void addNewIndicator(){
-		IndicatorRepository.addIndicator(selectedIndicator);
-		IndicatorRepository.addNewIndicator(selectedIndicator);
+		IndicatorRepository.addIndicator(selectedIndicator);		
 		ObservableUtils.firePropertyChanged(this, "indicators");
 	}
 	
