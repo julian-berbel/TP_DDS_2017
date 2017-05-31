@@ -56,7 +56,7 @@ public class LoadCalculationsVM
 
 	
 	
-	private void parseJson() 
+	private void parseJson()
 	{
 		try
 		{

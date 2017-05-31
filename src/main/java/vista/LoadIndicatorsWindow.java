@@ -1,5 +1,4 @@
 package vista;
-
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 import viewModel.LoadIndicatorsVM;

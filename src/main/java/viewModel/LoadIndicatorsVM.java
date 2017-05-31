@@ -1,6 +1,8 @@
 package viewModel;
 import java.io.IOException;
 import org.uqbar.commons.utils.Observable;
+import org.uqbar.arena.windows.MessageBox;
+import jxl.read.biff.BiffException;
 import modelo.IndicatorsManager;
 
 
@@ -12,8 +14,7 @@ public class LoadIndicatorsVM {
 	{
 		filePath = "";
 	}
-	
-	
+		
 	
 	public String getFilePath() 
 	{
@@ -21,28 +22,31 @@ public class LoadIndicatorsVM {
 		return filePath;
 	}
 
-	public void setFilePath(String filePath_) 
+	public void setFilePath(String filePath_) throws IOException, BiffException
 	{
-		this.filePath = filePath_;
-		if(filePath != null)
+		try
 		{
-			this.loadIndicators();
-		}	
+			this.filePath = filePath_;
+			if(filePath != null)
+			{
+				this.loadIndicators();
+			}	
+		}
+		catch(IOException e)		// no se si habrá forma de pasar esto a la vista, ya que no tengo forma de controlar el bindValueToPropery (o si?)
+		{
+			System.out.println("\nError al abrir el archivo\n");
+			e.printStackTrace();
+		}
+		catch(BiffException e)
+		{
+			System.out.println("\nEl archivo indicado no es valido o no es un archivo Excel (.xls)\n");
+			e.printStackTrace();
+		}
 	}
 	
-	public void loadIndicators()
+	public void loadIndicators() throws IOException, BiffException
 	{
-		IndicatorsManager.setFilePath(filePath);
-		try{
-			IndicatorsManager.read();                   				// hay que catchear una excepcion del read que diga que el formato del archivo es invalido por que tiene que ser .xls
-		}
-		catch(IOException e)
-		{
-			// Hacer algo si lanza IO exception, no se que habria que informarle al cliente, por que no se si el lo podria solucionar. 
-			// La del .xls si por que el tiene que cambiar el archivo.
-		}
-	}
-	
-	
-	
+		IndicatorsManager.setFilePath(filePath);	
+		IndicatorsManager.read();		
+	}	
 }

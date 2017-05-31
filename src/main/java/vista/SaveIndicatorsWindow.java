@@ -1,18 +1,16 @@
 package vista;
 
 
+import java.io.IOException;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.tables.Column;
-import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
+import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
-
 import jxl.read.biff.BiffException;
-import modelo.Indicator;
-
+import jxl.write.WriteException;
 import viewModel.SaveIndicatorsVM;
 
 
@@ -43,14 +41,36 @@ public class SaveIndicatorsWindow extends Dialog<SaveIndicatorsVM>
 	}
 	
 	@Override
-	protected void executeTask() {
-		try {
+	protected void executeTask() 
+	{		
+		try 
+		{			
 			this.getModelObject().SaveIndicators();
-		} catch (BiffException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (BiffException e) 
+		{
+			showMessageBox("El archivo indicado no es valido o no es un archivo Excel (.xls)");
 			e.printStackTrace();
 		}
+		catch(IOException e)
+		{
+			showMessageBox("Error al abrir/escribir el archivo");
+			e.printStackTrace();
+		}
+		catch(WriteException e)
+		{
+			showMessageBox("Error al crear el archivo");
+			e.printStackTrace();
+		}
+		
 		super.executeTask();
+	}
+	
+	private void showMessageBox(String message)
+	{
+		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
+		msgBox.setMessage(message);
+		msgBox.open();
 	}
 }
 
