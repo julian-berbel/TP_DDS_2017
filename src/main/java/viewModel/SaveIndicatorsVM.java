@@ -1,12 +1,6 @@
 package viewModel;
-
-import java.util.List;
-
 import org.uqbar.commons.utils.Observable;
-
 import jxl.read.biff.BiffException;
-import modelo.Indicator;
-import modelo.IndicatorRepository;
 import modelo.IndicatorsManager;
 
 @Observable

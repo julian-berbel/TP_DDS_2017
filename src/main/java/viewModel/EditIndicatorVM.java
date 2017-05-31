@@ -1,9 +1,8 @@
 package viewModel;
-
 import org.uqbar.commons.utils.Observable;
-
 import modelo.Indicator;
 import parser.IndicatorParser;
+
 
 @Observable
 public class EditIndicatorVM {

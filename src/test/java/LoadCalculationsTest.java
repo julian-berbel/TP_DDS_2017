@@ -8,7 +8,7 @@ public class LoadCalculationsTest {
 	@Test
 	public void evaluatesExpression() {
 		LoadCalculationsVM cargador = new LoadCalculationsVM();
-		cargador.setFilePath("docs/archivo de prueba de empresas.txt");
+		cargador.setFilePath("files/archivo de prueba de empresas.txt");
 		cargador.parseFile();
 		assertEquals(EnterpriseRepository.getEnterpriseList().get(0).getEnterpriseName(), "PepeHermanos");
 	}

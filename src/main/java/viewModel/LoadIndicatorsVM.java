@@ -1,10 +1,8 @@
 package viewModel;
-
 import java.io.IOException;
-
 import org.uqbar.commons.utils.Observable;
-
 import modelo.IndicatorsManager;
+
 
 @Observable
 public class LoadIndicatorsVM {
