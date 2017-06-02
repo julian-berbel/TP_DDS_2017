@@ -1,7 +1,12 @@
 package viewModel;
+
 import org.uqbar.commons.utils.Observable;
+
+import exceptions.FormulaErrorException;
+import exceptions.MissingIndicatorException;
 import modelo.Indicator;
 import parser.IndicatorParser;
+
 
 
 @Observable
@@ -34,9 +39,28 @@ public class EditIndicatorVM {
 	}
 
 	public void newIndicator(){
-		indicadorAEditar.setName(name);
-		indicadorAEditar.setFormula(formula);
-		indicadorAEditar.setValue(IndicatorParser.parseIndicator(this.formula));
+		try
+		{
+			indicadorAEditar.setName(name);
+			indicadorAEditar.setFormula(formula);
+			indicadorAEditar.setValue(IndicatorParser.parseIndicator(this.formula));
+		} catch (FormulaErrorException formulaErrorException)
+		{
+			indicadorAEditar.setName(null);
+			indicadorAEditar.setFormula(null);
+			indicadorAEditar.setValue(null);
+			throw new FormulaErrorException(formulaErrorException.getMessage());
+		} catch (MissingIndicatorException missingIndicatorException)
+		{
+			indicadorAEditar.setName(null);
+			indicadorAEditar.setFormula(null);
+			indicadorAEditar.setValue(null);
+			throw new MissingIndicatorException(missingIndicatorException.getMessage());
+		}
+		
+		
+			
 //		System.out.println(indicadorAEditar.normalize());
 	}
+	
 }

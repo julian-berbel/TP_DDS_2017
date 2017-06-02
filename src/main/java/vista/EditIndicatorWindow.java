@@ -7,9 +7,13 @@ import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
+import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
 
+import exceptions.FormulaErrorException;
+import exceptions.MissingIndicatorException;
 import modelo.Indicator;
+import parser.ParseException;
 import viewModel.EditIndicatorVM;
 
 
@@ -41,7 +45,19 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Aceptar").onClick(this:: accept);
+		new Button(actions).setCaption("Aceptar").onClick(()->{ 
+			try
+			{
+				this.accept(); 	
+			}
+			catch(FormulaErrorException formulaErrorException)
+			{
+				parserError(formulaErrorException.getMessage());	
+			}
+			catch (MissingIndicatorException missingIndicatorException)
+			{
+				missingIndicatorMsg(missingIndicatorException.getMessage());
+			}});
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
 	}
 	
@@ -49,6 +65,18 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 	protected void executeTask() {
 		this.getModelObject().newIndicator();
 		super.executeTask();
+	}
+	private void parserError(String msj)
+	{
+		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
+		msgBox.setMessage(msj);
+		msgBox.open();
+	}
+	private void missingIndicatorMsg(String msj)
+	{
+		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
+		msgBox.setMessage(msj);
+		msgBox.open();
 	}
 }
 

@@ -4,17 +4,19 @@ package parser;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 
+import exceptions.FormulaErrorException;
 import math.*;
 import modelo.IndicatorRepository;
 
 public class IndicatorParser implements IndicatorParserConstants {
-        public static Operable parseIndicator(String formula){
+        public static Operable parseIndicator(String formula) {
                 Operable value = null;
                 IndicatorParser.ReInit(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
                 try{
                         value = IndicatorParser.Start();
-                } catch(Exception e){
-                        System.out.println(e);
+                } catch(ParseException parseException){
+                        System.out.println(parseException);
+                        throw new FormulaErrorException(parseException.getMessage());
                 }
                 return value;
         }

@@ -44,8 +44,12 @@ public class IndicatorsVM {
 	}
 	
 	public void addNewIndicator(){
-		IndicatorRepository.addIndicator(selectedIndicator);		
-		ObservableUtils.firePropertyChanged(this, "indicators");
+		if(selectedIndicator.getName() != null)
+		{
+			IndicatorRepository.addIndicator(selectedIndicator);		
+			ObservableUtils.firePropertyChanged(this, "indicators");
+		}
+		
 	}
 	
 	public void refreshList(){
