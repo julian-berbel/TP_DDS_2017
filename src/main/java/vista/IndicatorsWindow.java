@@ -6,9 +6,12 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
+import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
+import exceptions.RepeatedIndicatorExcelException;
+import exceptions.RepeatedIndicatorInSystemException;
 import modelo.Indicator;
 import viewModel.IndicatorsVM;
 
@@ -48,13 +51,34 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 																this.getModelObject().addNewIndicator();});
 		new Button(panel2).setCaption("Editar").onClick(() -> new EditIndicatorWindow(this, this.getModelObject().editIndicator()).open());
 		new Button(panel2).setCaption("Borrar").onClick(() -> this.getModelObject().deleteIndicator());
-		new Button(panel2).setCaption("Cargar archivo").onClick(() -> { new LoadIndicatorsWindow(this).open(); 
-																		this.getModelObject().refreshList();});
+		new Button(panel2).setCaption("Cargar archivo")	
+		.onClick(()->{ 
+			try
+			{
+				new LoadIndicatorsWindow(this).open(); 
+				this.getModelObject().refreshList();	
+			}
+			catch(RepeatedIndicatorExcelException repeatedIndicatorExcelException)
+			{
+				messageBox("El indicador "+ repeatedIndicatorExcelException.getMessage() + " esta repetido en la hoja de excel, modifiquela y vuelva a cargar el archivo");
+			}
+			catch(RepeatedIndicatorInSystemException repeatedIndicatorInSystemException)
+			{
+				messageBox("El indicador "+ repeatedIndicatorInSystemException.getMessage() + " de la hoja de excel, ya existe en el sistema, modifique el archivo y vuelva a cargar el archivo"			);
+			}
+			});
 	}
 	
 	@Override
 	protected void addActions(Panel actions) {
 		new Button(actions).setCaption("Volver").onClick(this:: close);
+	}
+	
+	private void messageBox(String msg)
+	{
+		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
+		msgBox.setMessage(msg);
+		msgBox.open();
 	}
 }
 

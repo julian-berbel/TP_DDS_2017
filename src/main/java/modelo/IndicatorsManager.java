@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import exceptions.RepeatedIndicatorExcelException;
+import exceptions.RepeatedIndicatorInSystemException;
 import jxl.Cell;
 import jxl.CellType;
 import jxl.Sheet;
@@ -15,6 +17,7 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 import parser.IndicatorParser;
+
 
 
 public class IndicatorsManager
@@ -45,22 +48,35 @@ public class IndicatorsManager
             
 	    int columnNumber = indicators.getColumn();
 	    int rowNumber = indicators.getRow();
-	    int columnIndex = columnNumber;
-	    int rowIndex = rowNumber+1;  
 	    
-		List<Indicator> list = new ArrayList<Indicator>();
-            
-	    while(!cellIsEmpty(sheet.getCell(columnIndex,rowIndex)))
+	    String repeatedString= null;
+	    if((repeatedString=repeatedIndicatorExcel(sheet, columnNumber, rowNumber+1))!=null)
 	    {
-	      	String name = sheet.getCell(columnIndex,rowIndex).getContents();
-	       	String formula = sheet.getCell(columnIndex+1,rowIndex).getContents();
-	       	Indicator indicator = new Indicator(name, formula, IndicatorParser.parseIndicator(formula));
-	       	list.add(indicator);	        	
-	        	
-	       	rowIndex++;	        	
+	    	throw new RepeatedIndicatorExcelException(repeatedString);
 	    }
-	       	w.close();
-	       	IndicatorRepository.setIndicatorList(list);
+	    else if((repeatedString=repeatedIndicatorSystem(sheet, columnNumber, rowNumber+1))!=null)
+	    {
+	    	throw new RepeatedIndicatorInSystemException(repeatedString);
+	    }
+	    else 
+	    {
+	    	int columnIndex = columnNumber;
+		    int rowIndex = rowNumber+1;  
+		    
+			List<Indicator> list = new ArrayList<Indicator>();            
+		    while(!cellIsEmpty(sheet.getCell(columnIndex,rowIndex)))
+		    {
+		      	String name = sheet.getCell(columnIndex,rowIndex).getContents();
+		       	String formula = sheet.getCell(columnIndex+1,rowIndex).getContents();
+		       
+		       	Indicator indicator = new Indicator(name, formula, IndicatorParser.parseIndicator(formula));
+		       	list.add(indicator);	        	
+		        	
+		       	rowIndex++;	        	
+		    }
+		       	w.close();
+		       	IndicatorRepository.setIndicatorList(list);
+	    }	    
     }
 	
 	
@@ -81,6 +97,46 @@ public class IndicatorsManager
 	                 }
 	             }	                 
 	        }
+	     }
+		 
+		 return null;
+	 }
+
+	 public static String repeatedIndicatorSystem(Sheet sheet,int columnNumber,int rawNumber)
+	 {
+		 
+		 for (int i = rawNumber; i < sheet.getRows(); i++) 
+	     {
+			 Cell cell = sheet.getCell(columnNumber, i);
+	         String indicatorName = cell.getContents();
+	         
+	        if(IndicatorRepository.repeatedIndicator(indicatorName)){
+	        	return indicatorName;
+	        }	        
+	     }
+		 
+		 return null;
+	 }
+	 public static String repeatedIndicatorExcel(Sheet sheet,int columnNumber,int rawNumber)
+	 {
+		 
+		 for (int i = rawNumber; i < sheet.getRows(); i++) 
+	     {
+			 Cell cell = sheet.getCell(columnNumber, i);
+	         String indicatorName = cell.getContents();
+	         if(indicatorName !="" )
+	         {
+	        	 
+	        	 for (int i2 = rawNumber+1; i2 < sheet.getRows(); i2++) 
+	        	 { 
+	        		 
+	        		 Cell cell2 = sheet.getCell(columnNumber, i2);
+	        		 if(indicatorName.equals(cell2.getContents()))
+	        		 {
+	        			 return indicatorName;
+	        		 }
+	        	 }
+	         }
 	     }
 		 
 		 return null;

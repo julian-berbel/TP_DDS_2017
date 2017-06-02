@@ -11,9 +11,11 @@ import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
 
 import exceptions.FormulaErrorException;
+import exceptions.MissingFormulaException;
 import exceptions.MissingIndicatorException;
+import exceptions.RepeatedIndicatorNameException;
 import modelo.Indicator;
-import parser.ParseException;
+
 import viewModel.EditIndicatorVM;
 
 
@@ -52,12 +54,23 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 			}
 			catch(FormulaErrorException formulaErrorException)
 			{
-				parserError(formulaErrorException.getMessage());	
+				messageBox(formulaErrorException.getMessage());	
 			}
-			catch (MissingIndicatorException missingIndicatorException)
+			catch (MissingIndicatorException missingIndicatorException)	
+			{				
+				
+				messageBox("El indicador @"+ missingIndicatorException.getMessage() + " no existe" );
+				
+			}
+			catch(MissingFormulaException missingFormulaException)
 			{
-				missingIndicatorMsg(missingIndicatorException.getMessage());
-			}});
+				messageBox("Debe introducir una formula para el nuevo indicador");
+			}
+			catch(RepeatedIndicatorNameException repeatedIndicatorNameException)
+			{			
+				messageBox("El nombre de indicador "+repeatedIndicatorNameException.getMessage()+" ya fue utilizado, introduzca otro nombre");
+			}
+			});
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
 	}
 	
@@ -66,17 +79,14 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 		this.getModelObject().newIndicator();
 		super.executeTask();
 	}
-	private void parserError(String msj)
+
+	private void messageBox(String message)
 	{
+		
 		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
-		msgBox.setMessage(msj);
+		msgBox.setMessage(message);
 		msgBox.open();
 	}
-	private void missingIndicatorMsg(String msj)
-	{
-		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
-		msgBox.setMessage(msj);
-		msgBox.open();
-	}
+	
 }
 

@@ -31,15 +31,29 @@ public class IndicatorRepository
 	
 	public static void setIndicatorList(List<Indicator> _indicators)
 	{
-		indicators = _indicators;
+		if(indicators.size()== 0)
+		{	
+			indicators = _indicators;
+		}else
+		{
+			indicators.addAll(_indicators);
+		}
 	}
 	
 
 	public static Indicator getIndicator(String name){
+		
 		return indicators.stream()
 				.filter(indicator -> indicator.getName().equals(name))
 				.findFirst()
 				.orElseThrow(() -> new MissingIndicatorException(name));
+	}
+	
+	public static Boolean repeatedIndicator(String newIndicatorName)
+	{
+		 return indicators.stream()
+			.map(indicator -> indicator.getName())
+			.anyMatch(indicatorName->indicatorName.equals(newIndicatorName));
 	}
 	
 }

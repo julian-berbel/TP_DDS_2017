@@ -2,6 +2,7 @@ package modelo;
 
 import org.uqbar.commons.utils.Observable;
 
+import exceptions.RepeatedIndicatorNameException;
 import math.Operable;
 
 @Observable
@@ -24,7 +25,15 @@ public class Indicator implements Operable
 	
 	public void setName(String name) 
 	{
-		this.name = name;
+		if(IndicatorRepository.repeatedIndicator(name))
+		{
+			this.name = new String();
+			throw new RepeatedIndicatorNameException(name);
+		}
+		else
+		{
+			this.name = name;
+		}
 	}
 
 	public String getFormula() {

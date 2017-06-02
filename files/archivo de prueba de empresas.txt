@@ -6,7 +6,7 @@
 		[
 			{
 				"year":2012,
-				"calculations":[{"name":"cuenta1","value":1},{"name":"cuenta2","value":2} ]
+				"calculations":[{"name":"C1","value":1},{"name":"C2","value":2} ]
 			},
 			{
 				"year":2014,

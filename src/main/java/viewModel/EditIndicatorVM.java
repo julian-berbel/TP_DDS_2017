@@ -3,6 +3,7 @@ package viewModel;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.FormulaErrorException;
+import exceptions.MissingFormulaException;
 import exceptions.MissingIndicatorException;
 import modelo.Indicator;
 import parser.IndicatorParser;
@@ -26,8 +27,8 @@ public class EditIndicatorVM {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String name) {	
+			this.name = name;		
 	}
 
 	public String getFormula() {
@@ -44,19 +45,29 @@ public class EditIndicatorVM {
 			indicadorAEditar.setName(name);
 			indicadorAEditar.setFormula(formula);
 			indicadorAEditar.setValue(IndicatorParser.parseIndicator(this.formula));
-		} catch (FormulaErrorException formulaErrorException)
+		} 
+		catch (FormulaErrorException formulaErrorException)
 		{
 			indicadorAEditar.setName(null);
 			indicadorAEditar.setFormula(null);
 			indicadorAEditar.setValue(null);
-			throw new FormulaErrorException(formulaErrorException.getMessage());
-		} catch (MissingIndicatorException missingIndicatorException)
+			throw new FormulaErrorException("Hay un error en el formato de la formula");
+		} 
+		catch (MissingIndicatorException missingIndicatorException)
 		{
 			indicadorAEditar.setName(null);
 			indicadorAEditar.setFormula(null);
 			indicadorAEditar.setValue(null);
 			throw new MissingIndicatorException(missingIndicatorException.getMessage());
 		}
+		catch(NullPointerException nullPointerException)
+		{
+			indicadorAEditar.setName(null);
+			indicadorAEditar.setFormula(null);
+			indicadorAEditar.setValue(null);
+			throw new MissingFormulaException();
+		}
+		
 		
 		
 			
