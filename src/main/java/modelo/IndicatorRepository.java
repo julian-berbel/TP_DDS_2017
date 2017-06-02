@@ -8,22 +8,17 @@ import java.util.ArrayList;
 public class IndicatorRepository 
 {
 	private static List<Indicator> indicators;
-	
-	
+		
 	public IndicatorRepository()
 	{
 		indicators = new ArrayList<Indicator>();		
 	}	
-	
-
-	
+		
 	public static void addIndicator(Indicator indicator)
 	{
 		indicators.add(indicator);
 	}
-	
-	
-	
+		
 	public static List<Indicator> getIndicatorList()
 	{
 		return indicators;

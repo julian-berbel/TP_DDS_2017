@@ -9,18 +9,20 @@ import java.nio.charset.StandardCharsets;
 
 import math.*;
 import modelo.IndicatorRepository;
+import exceptions.FormulaErrorException;
 
+@SuppressWarnings({"unused", "static-access"})
 public class IndicatorParser {
-	public static Operable parseIndicator(String formula){
-		Operable value = null;
-		IndicatorParser.ReInit(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
-		try{
-			value = IndicatorParser.Start();
-		} catch(Exception e){
-			System.out.println(e);
-		}
-		return value;
-	}
+	public static Operable parseIndicator(String formula) {
+	    Operable value = null;
+	    IndicatorParser.ReInit(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
+	    try{
+            value = IndicatorParser.Start();
+	    } catch(ParseException parseException){
+            throw new FormulaErrorException(parseException.getMessage());
+	    }
+	    return value;
+    }
 }
 
 PARSER_END(IndicatorParser)

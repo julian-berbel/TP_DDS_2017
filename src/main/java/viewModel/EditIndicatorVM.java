@@ -7,8 +7,6 @@ import exceptions.MissingIndicatorException;
 import modelo.Indicator;
 import parser.IndicatorParser;
 
-
-
 @Observable
 public class EditIndicatorVM {
 	
@@ -38,29 +36,10 @@ public class EditIndicatorVM {
 		this.formula = formula;
 	}
 
-	public void newIndicator(){
-		try
-		{
-			indicadorAEditar.setName(name);
-			indicadorAEditar.setFormula(formula);
-			indicadorAEditar.setValue(IndicatorParser.parseIndicator(this.formula));
-		} catch (FormulaErrorException formulaErrorException)
-		{
-			indicadorAEditar.setName(null);
-			indicadorAEditar.setFormula(null);
-			indicadorAEditar.setValue(null);
-			throw new FormulaErrorException(formulaErrorException.getMessage());
-		} catch (MissingIndicatorException missingIndicatorException)
-		{
-			indicadorAEditar.setName(null);
-			indicadorAEditar.setFormula(null);
-			indicadorAEditar.setValue(null);
-			throw new MissingIndicatorException(missingIndicatorException.getMessage());
-		}
-		
-		
-			
-//		System.out.println(indicadorAEditar.normalize());
+	public void newIndicator() throws FormulaErrorException, MissingIndicatorException{
+		indicadorAEditar.setName(name);
+		indicadorAEditar.setFormula(formula);
+		indicadorAEditar.setValue(IndicatorParser.parseIndicator(this.formula));
 	}
 	
 }

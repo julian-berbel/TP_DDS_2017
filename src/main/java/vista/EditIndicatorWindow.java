@@ -10,10 +10,11 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
 
+import exceptions.EmptyFieldException;
+import exceptions.ExistingIndicatorException;
 import exceptions.FormulaErrorException;
 import exceptions.MissingIndicatorException;
 import modelo.Indicator;
-import parser.ParseException;
 import viewModel.EditIndicatorVM;
 
 
@@ -50,13 +51,9 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 			{
 				this.accept(); 	
 			}
-			catch(FormulaErrorException formulaErrorException)
+			catch(MissingIndicatorException | FormulaErrorException | EmptyFieldException | ExistingIndicatorException exception)
 			{
-				parserError(formulaErrorException.getMessage());	
-			}
-			catch (MissingIndicatorException missingIndicatorException)
-			{
-				missingIndicatorMsg(missingIndicatorException.getMessage());
+				printError(exception.getMessage());	
 			}});
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
 	}
@@ -66,13 +63,8 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 		this.getModelObject().newIndicator();
 		super.executeTask();
 	}
-	private void parserError(String msj)
-	{
-		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
-		msgBox.setMessage(msj);
-		msgBox.open();
-	}
-	private void missingIndicatorMsg(String msj)
+	
+	private void printError(String msj)
 	{
 		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
 		msgBox.setMessage(msj);

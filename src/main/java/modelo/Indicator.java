@@ -2,6 +2,7 @@ package modelo;
 
 import org.uqbar.commons.utils.Observable;
 
+import exceptions.EmptyFieldException;
 import math.Operable;
 
 @Observable
@@ -24,6 +25,7 @@ public class Indicator implements Operable
 	
 	public void setName(String name) 
 	{
+		if(name == null) throw new EmptyFieldException("Nombre");
 		this.name = name;
 	}
 
@@ -32,6 +34,7 @@ public class Indicator implements Operable
 	}
 
 	public void setFormula(String formula) {
+		if(formula == null) throw new EmptyFieldException("Formula");
 		this.formula = formula;
 	}
 	
