@@ -10,7 +10,7 @@ public class IndicatorsManagerTest {
 	
 	@Test
 	public void readTest(){
-		IndicatorsManager.setFilePath("testfiles/TestIndicadores");
+		IndicatorsManager.setFilePath("testfiles/TestIndicadores.xls");
 		Indicator dummyIndicator = new Indicator("IngresoNeto", "#C1 + #C2", IndicatorParser.parseIndicator("#C1 + #C2") );
 		try{
 			IndicatorsManager.read();
