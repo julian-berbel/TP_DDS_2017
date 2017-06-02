@@ -127,7 +127,7 @@ public class IndicatorsManager
 	         if(indicatorName !="" )
 	         {
 	        	 
-	        	 for (int i2 = rawNumber+1; i2 < sheet.getRows(); i2++) 
+	        	 for (int i2 = i+1; i2 < sheet.getRows(); i2++) 
 	        	 { 
 	        		 
 	        		 Cell cell2 = sheet.getCell(columnNumber, i2);

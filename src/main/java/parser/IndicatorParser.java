@@ -4,22 +4,22 @@ package parser;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 
-import exceptions.FormulaErrorException;
 import math.*;
 import modelo.IndicatorRepository;
+import exceptions.FormulaErrorException;
 
+@SuppressWarnings({"unused", "static-access"})
 public class IndicatorParser implements IndicatorParserConstants {
         public static Operable parseIndicator(String formula) {
-                Operable value = null;
-                IndicatorParser.ReInit(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
-                try{
-                        value = IndicatorParser.Start();
-                } catch(ParseException parseException){
-                        System.out.println(parseException);
-                        throw new FormulaErrorException(parseException.getMessage());
-                }
-                return value;
-        }
+            Operable value = null;
+            IndicatorParser.ReInit(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
+            try{
+            value = IndicatorParser.Start();
+            } catch(ParseException parseException){
+            throw new FormulaErrorException(parseException.getMessage());
+            }
+            return value;
+    }
 
 /** Main production. */
   static final public Operable Start() throws ParseException {Operable exp;
@@ -225,12 +225,6 @@ public class IndicatorParser implements IndicatorParserConstants {
     finally { jj_save(11, xla); }
   }
 
-  static private boolean jj_3_11()
- {
-    if (jj_3R_6()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_5()
  {
     Token xsp;
@@ -381,6 +375,12 @@ public class IndicatorParser implements IndicatorParserConstants {
  {
     if (jj_scan_token(10)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_11()
+ {
+    if (jj_3R_6()) return true;
     return false;
   }
 

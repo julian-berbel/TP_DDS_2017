@@ -10,6 +10,8 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
 
+import exceptions.EmptyFieldException;
+import exceptions.ExistingIndicatorException;
 import exceptions.FormulaErrorException;
 import exceptions.MissingFormulaException;
 import exceptions.MissingIndicatorException;
@@ -54,6 +56,7 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 			}
 			catch(FormulaErrorException formulaErrorException)
 			{
+
 				messageBox(formulaErrorException.getMessage());	
 			}
 			catch (MissingIndicatorException missingIndicatorException)	
@@ -71,6 +74,7 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 				messageBox("El nombre de indicador "+repeatedIndicatorNameException.getMessage()+" ya fue utilizado, introduzca otro nombre");
 			}
 			});
+
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
 	}
 	
@@ -80,8 +84,8 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 		super.executeTask();
 	}
 
-	private void messageBox(String message)
-	{
+
+	private void messageBox(String message)	{
 		
 		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
 		msgBox.setMessage(message);

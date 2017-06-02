@@ -8,8 +8,6 @@ import exceptions.MissingIndicatorException;
 import modelo.Indicator;
 import parser.IndicatorParser;
 
-
-
 @Observable
 public class EditIndicatorVM {
 	
@@ -38,6 +36,7 @@ public class EditIndicatorVM {
 	public void setFormula(String formula) {
 		this.formula = formula;
 	}
+
 
 	public void newIndicator(){
 		try
@@ -72,6 +71,7 @@ public class EditIndicatorVM {
 		
 			
 //		System.out.println(indicadorAEditar.normalize());
+
 	}
 	
 }

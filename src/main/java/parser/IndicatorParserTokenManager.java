@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import math.*;
 import modelo.IndicatorRepository;
+import exceptions.FormulaErrorException;
 
 /** Token Manager. */
 @SuppressWarnings("unused")public class IndicatorParserTokenManager implements IndicatorParserConstants {
