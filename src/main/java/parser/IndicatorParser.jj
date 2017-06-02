@@ -43,7 +43,7 @@ TOKEN : /* IDENTIFIERS */
 /** Main production. */
 Operable Start()       : {Operable exp;}
 {
-  exp = Expression()
+  exp = Expression() <EOF>
   { return exp; }
 }
 

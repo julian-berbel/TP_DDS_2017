@@ -37,6 +37,6 @@ public class EditIndicatorVM {
 		indicadorAEditar.setName(name);
 		indicadorAEditar.setFormula(formula);
 		indicadorAEditar.setValue(IndicatorParser.parseIndicator(this.formula));
-		
+//		System.out.println(indicadorAEditar.normalize());
 	}
 }

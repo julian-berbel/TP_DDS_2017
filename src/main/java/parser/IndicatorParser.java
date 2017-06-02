@@ -22,6 +22,7 @@ public class IndicatorParser implements IndicatorParserConstants {
 /** Main production. */
   static final public Operable Start() throws ParseException {Operable exp;
     exp = Expression();
+    jj_consume_token(0);
 {if ("" != null) return exp;}
     throw new Error("Missing return statement in function");
   }

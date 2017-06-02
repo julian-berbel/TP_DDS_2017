@@ -1,7 +1,6 @@
 package viewModel;
 import java.io.IOException;
 import org.uqbar.commons.utils.Observable;
-import org.uqbar.arena.windows.MessageBox;
 import jxl.read.biff.BiffException;
 import modelo.IndicatorsManager;
 
@@ -32,7 +31,7 @@ public class LoadIndicatorsVM {
 				this.loadIndicators();
 			}	
 		}
-		catch(IOException e)		// no se si habrá forma de pasar esto a la vista, ya que no tengo forma de controlar el bindValueToPropery (o si?)
+		catch(IOException e)		// no se si habrï¿½ forma de pasar esto a la vista, ya que no tengo forma de controlar el bindValueToPropery (o si?)
 		{
 			System.out.println("\nError al abrir el archivo\n");
 			e.printStackTrace();
