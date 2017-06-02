@@ -62,7 +62,7 @@ public class MainView extends MainWindow<MainVM>
 	
 		new Button(panel1)
 		.setCaption("Guardar cambios")
-		.onClick(()->{ new SaveIndicatorsWindow(this).open(); });
+		.onClick(()->{ new SaveChangesWindow(this).open(); });
 		
 	}	
 	

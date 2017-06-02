@@ -11,16 +11,16 @@ import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
-import viewModel.SaveIndicatorsVM;
+import viewModel.SaveChangesVM;
 
 
 
 @SuppressWarnings("serial")
-public class SaveIndicatorsWindow extends Dialog<SaveIndicatorsVM> 
+public class SaveChangesWindow extends Dialog<SaveChangesVM> 
 {
-	public SaveIndicatorsWindow(WindowOwner owner)
+	public SaveChangesWindow(WindowOwner owner)
 	{
-		super(owner, new SaveIndicatorsVM());
+		super(owner, new SaveChangesVM());
 	}
 
 	@Override
@@ -46,29 +46,30 @@ public class SaveIndicatorsWindow extends Dialog<SaveIndicatorsVM>
 		try 
 		{			
 			this.getModelObject().SaveIndicators();
+			showMessageBox("Los cambios fueron guardados con exito!", MessageBox.Type.Information);
 		} 
 		catch (BiffException e) 
 		{
-			showMessageBox("El archivo indicado no es valido o no es un archivo Excel (.xls)");
+			showMessageBox("El archivo indicado no es valido o no es un archivo Excel (.xls)", MessageBox.Type.Error);
 			e.printStackTrace();
 		}
 		catch(IOException e)
 		{
-			showMessageBox("Error al abrir/escribir el archivo");
+			showMessageBox("Error al abrir/escribir el archivo", MessageBox.Type.Error);
 			e.printStackTrace();
 		}
 		catch(WriteException e)
 		{
-			showMessageBox("Error al crear el archivo");
+			showMessageBox("Error al crear el archivo", MessageBox.Type.Error);
 			e.printStackTrace();
 		}
 		
 		super.executeTask();
 	}
 	
-	private void showMessageBox(String message)
+	private void showMessageBox(String message, MessageBox.Type messageType)
 	{
-		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
+		MessageBox msgBox = new MessageBox(this, messageType);
 		msgBox.setMessage(message);
 		msgBox.open();
 	}
