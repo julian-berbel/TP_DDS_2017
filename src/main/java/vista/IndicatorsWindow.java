@@ -10,6 +10,7 @@ import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
+import exceptions.EmptyFieldException;
 import exceptions.RepeatedIndicatorExcelException;
 import exceptions.RepeatedIndicatorInSystemException;
 import modelo.Indicator;
@@ -47,9 +48,29 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		Column<Indicator> columnFormula = new Column<Indicator>(indicatorTable);
 		columnFormula.setTitle("Formula").setFixedSize(500).bindContentsToProperty("formula");
 		
-		new Button(panel2).setCaption("Nuevo").onClick(() -> { 	new EditIndicatorWindow(this, this.getModelObject().newIndicator()).open();
-																this.getModelObject().addNewIndicator();});
-		new Button(panel2).setCaption("Editar").onClick(() -> new EditIndicatorWindow(this, this.getModelObject().editIndicator()).open());
+		new Button(panel2).setCaption("Nuevo").onClick(()->{ 
+			try
+			{
+				new EditIndicatorWindow(this, this.getModelObject().newIndicator()).open();
+				this.getModelObject().addNewIndicator();	
+			}
+			catch(EmptyFieldException emptyFieldException)
+			{
+				messageBox("El campo " + emptyFieldException.getMessage() + " no puede estar vacio");
+			}
+			
+			});
+		new Button(panel2).setCaption("Editar").onClick(()->{ 
+			try
+			{
+				new EditIndicatorWindow(this, this.getModelObject().editIndicator()).open();	
+			}
+			catch(EmptyFieldException emptyFieldException)
+			{
+				messageBox("El campo " + emptyFieldException.getMessage() + " no puede estar vacio");
+			}
+			
+			});
 		new Button(panel2).setCaption("Borrar").onClick(() -> this.getModelObject().deleteIndicator());
 		new Button(panel2).setCaption("Cargar archivo")	
 		.onClick(()->{ 

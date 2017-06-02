@@ -73,6 +73,10 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 			{			
 				messageBox("El nombre de indicador "+repeatedIndicatorNameException.getMessage()+" ya fue utilizado, introduzca otro nombre");
 			}
+			catch(EmptyFieldException emptyFieldException)
+			{			
+				messageBox("El campo "+emptyFieldException.getMessage()+" no puede estar vacio");
+			}
 			});
 
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);

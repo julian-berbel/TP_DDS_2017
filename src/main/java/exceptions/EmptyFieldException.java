@@ -4,6 +4,6 @@ package exceptions;
 public class EmptyFieldException extends RuntimeException {
 	public EmptyFieldException(String campo)
 	{
-		super("El campo " + campo + " no puede estar vacio!" );
+		super(campo);
 	}
 }

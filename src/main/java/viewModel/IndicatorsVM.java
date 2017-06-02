@@ -1,6 +1,8 @@
 package viewModel;
 import java.util.List;
 import org.uqbar.commons.utils.Observable;
+
+import exceptions.EmptyFieldException;
 import modelo.Indicator;
 import modelo.IndicatorRepository;
 import org.uqbar.commons.model.ObservableUtils;
@@ -48,6 +50,10 @@ public class IndicatorsVM {
 		{
 			IndicatorRepository.addIndicator(selectedIndicator);		
 			ObservableUtils.firePropertyChanged(this, "indicators");
+		}
+		if((selectedIndicator.getName() == null))
+		{
+			throw new EmptyFieldException("Nombre del nuevo indicador");
 		}
 		
 	}

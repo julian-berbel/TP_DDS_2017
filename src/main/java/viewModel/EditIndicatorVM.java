@@ -2,6 +2,7 @@ package viewModel;
 
 import org.uqbar.commons.utils.Observable;
 
+import exceptions.EmptyFieldException;
 import exceptions.FormulaErrorException;
 import exceptions.MissingFormulaException;
 import exceptions.MissingIndicatorException;
@@ -44,6 +45,10 @@ public class EditIndicatorVM {
 			indicadorAEditar.setName(name);
 			indicadorAEditar.setFormula(formula);
 			indicadorAEditar.setValue(IndicatorParser.parseIndicator(this.formula));
+			if(name.equals(""))
+			{
+				throw new EmptyFieldException("Nombre del nuevo indicador");
+			}
 		} 
 		catch (FormulaErrorException formulaErrorException)
 		{
@@ -65,6 +70,11 @@ public class EditIndicatorVM {
 			indicadorAEditar.setFormula(null);
 			indicadorAEditar.setValue(null);
 			throw new MissingFormulaException();
+		}
+		catch(EmptyFieldException emptyFieldException)
+		{
+			
+			throw new EmptyFieldException(emptyFieldException.getMessage());
 		}
 		
 		
