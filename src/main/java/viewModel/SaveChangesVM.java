@@ -7,7 +7,7 @@ import jxl.write.WriteException;
 import modelo.IndicatorsManager;
 
 @Observable
-public class SaveIndicatorsVM {
+public class SaveChangesVM {
 	
 	//hay que hacerlo con try y catch con una excpcion nuestra (En realidad no por que esto es para que tire excepcion 
 	//si el archivono es xls pero como ya se verifica en e momento de abrir el archivo en un principio)
