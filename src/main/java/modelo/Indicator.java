@@ -2,10 +2,9 @@ package modelo;
 
 import org.uqbar.commons.utils.Observable;
 
-
-import exceptions.RepeatedIndicatorNameException;
-
+import exceptions.EmptyFieldException;
 import math.Operable;
+import parser.IndicatorParser;
 
 @Observable
 public class Indicator implements Operable
@@ -14,46 +13,25 @@ public class Indicator implements Operable
 	private String formula;
 	private Operable value;
 
-	public Indicator(String name, String formula, Operable value){
+	public Indicator(String name, String formula){
+		if(name == null) throw new EmptyFieldException("Nombre");
+		if(formula == null) throw new EmptyFieldException("Formula");
 		this.name = name;
 		this.formula = formula;
-		this.value = value;
+		this.value = IndicatorParser.parseIndicator(formula);
 	}
 	
 	public String getName() 
 	{
 		return name;
 	}
-	
-	public void setName(String name) 
-	{
-
-		if(IndicatorRepository.repeatedIndicator(name))
-		{
-			this.name = new String();
-			throw new RepeatedIndicatorNameException(name);
-		}
-		else
-		{
-			this.name = name;
-		}
-
-	}
 
 	public String getFormula() {
 		return formula;
 	}
-
-	public void setFormula(String formula) {		
-		this.formula = formula;
-	}
 	
 	public Operable getValue() {
 		return value;
-	}
-
-	public void setValue(Operable value) {
-		this.value = value;
 	}
 
 	public double reduce(Enterprise enterprise, int year){
@@ -67,5 +45,13 @@ public class Indicator implements Operable
 	@Override
 	public String toString(){
 		return "@" + name;
+	}
+	
+	public Boolean uses(Indicator indicator){
+		return value.includes(indicator);
+	}
+	
+	public Boolean includes(Indicator indicator){
+		return this == indicator || uses(indicator);
 	}
 }

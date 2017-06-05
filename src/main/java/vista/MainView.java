@@ -1,5 +1,4 @@
 package vista;
-import org.uqbar.arena.windows.MessageBox;
 
 import modelo.EnterpriseRepository;
 import modelo.IndicatorRepository;
@@ -69,16 +68,12 @@ public class MainView extends MainWindow<MainVM>
 	
 	private void showFeatureNotAvailableMessage()
 	{
-		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Information);
-		msgBox.setMessage("Esta funcionalidad aun no ha sido implementada!");
-		msgBox.open();
+		Error.show(this, "Esta funcionalidad aun no ha sido implementada!");
 	}
 	
 	private void noFileLoadedMessage()
 	{
-		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
-		msgBox.setMessage("No se ha cargado el archivo de cuentas");
-		msgBox.open();
+		Error.show(this, "No se ha cargado el archivo de cuentas");
 	}
 	
 	public static void main(String[] args)

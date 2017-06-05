@@ -5,6 +5,6 @@ public class MissingIndicatorException extends RuntimeException {
 
 	public MissingIndicatorException(String name)
 	{
-		super(name);
+		super("El indicador @" + name + " no existe!");
 	}
 }

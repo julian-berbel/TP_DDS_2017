@@ -1,32 +1,31 @@
 package vista;
 
 import org.uqbar.arena.layout.VerticalLayout;
+
+import java.util.Optional;
+
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
-import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
 
 import exceptions.EmptyFieldException;
 import exceptions.ExistingIndicatorException;
 import exceptions.FormulaErrorException;
-import exceptions.MissingFormulaException;
 import exceptions.MissingIndicatorException;
-import exceptions.RepeatedIndicatorNameException;
 import modelo.Indicator;
-
 import viewModel.EditIndicatorVM;
 
 
 @SuppressWarnings("serial")
 public class EditIndicatorWindow extends Dialog<EditIndicatorVM> 
 {
-	public EditIndicatorWindow(WindowOwner owner, Indicator indicadorAEditar)
+	public EditIndicatorWindow(WindowOwner owner, Optional<Indicator> targetIndicator)
 	{
-		super(owner, new EditIndicatorVM(indicadorAEditar));
+		super(owner, new EditIndicatorVM(targetIndicator));
 	}
 
 	@Override
@@ -54,47 +53,28 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 			{
 				this.accept(); 	
 			}
-			catch(FormulaErrorException formulaErrorException)
+			catch(MissingIndicatorException | FormulaErrorException | EmptyFieldException | ExistingIndicatorException exception)
 			{
-
-				messageBox(formulaErrorException.getMessage());	
-			}
-			catch (MissingIndicatorException missingIndicatorException)	
-			{				
-				
-				messageBox("El indicador @"+ missingIndicatorException.getMessage() + " no existe" );
-				
-			}
-			catch(MissingFormulaException missingFormulaException)
-			{
-				messageBox("Debe introducir una formula para el nuevo indicador");
-			}
-			catch(RepeatedIndicatorNameException repeatedIndicatorNameException)
-			{			
-				messageBox("El nombre de indicador "+repeatedIndicatorNameException.getMessage()+" ya fue utilizado, introduzca otro nombre");
-			}
-			catch(EmptyFieldException emptyFieldException)
-			{			
-				messageBox("El campo "+emptyFieldException.getMessage()+" no puede estar vacio");
-			}
-			});
-
+				Error.show(this, exception.getMessage());	
+			}});
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
 	}
 	
 	@Override
-	protected void executeTask() {
-		this.getModelObject().newIndicator();
-		super.executeTask();
-	}
-
-
-	private void messageBox(String message)	{
-		
-		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
-		msgBox.setMessage(message);
-		msgBox.open();
+	public void cancel(){
+		this.getModelObject().cancel();
+		super.cancel();
 	}
 	
+	@Override
+	protected void executeTask() {
+		this.getModelObject().accept();
+		super.executeTask();
+	}
+		
+	public Optional<Indicator> openWithReturn(){
+		this.open();
+		return getModelObject().getTargetIndicator();
+	}
 }
 

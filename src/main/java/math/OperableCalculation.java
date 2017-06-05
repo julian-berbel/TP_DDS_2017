@@ -1,6 +1,7 @@
 package math;
 
 import modelo.Enterprise;
+import modelo.Indicator;
 
 public class OperableCalculation implements Operable{
 	private String name;
@@ -15,5 +16,9 @@ public class OperableCalculation implements Operable{
 	
 	public String toString(){
 		return "#" + name;
+	}
+	
+	public Boolean includes(Indicator indicator){
+		return false;
 	}
 }

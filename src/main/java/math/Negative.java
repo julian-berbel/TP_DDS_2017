@@ -1,6 +1,7 @@
 package math;
 
 import modelo.Enterprise;
+import modelo.Indicator;
 
 public class Negative implements Operable {
 
@@ -16,5 +17,9 @@ public class Negative implements Operable {
 
 	public String toString(){
 		return "-" + value.toString();
+	}
+	
+	public Boolean includes(Indicator indicator){
+		return value.includes(indicator);
 	}
 }

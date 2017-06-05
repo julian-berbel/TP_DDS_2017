@@ -50,17 +50,17 @@ public class SaveChangesWindow extends Dialog<SaveChangesVM>
 		} 
 		catch (BiffException e) 
 		{
-			showMessageBox("El archivo indicado no es valido o no es un archivo Excel (.xls)", MessageBox.Type.Error);
+			Error.show(this, "El archivo indicado no es valido o no es un archivo Excel (.xls)");
 			e.printStackTrace();
 		}
 		catch(IOException e)
 		{
-			showMessageBox("Error al abrir/escribir el archivo", MessageBox.Type.Error);
+			Error.show(this, "Error al abrir/escribir el archivo");
 			e.printStackTrace();
 		}
 		catch(WriteException e)
 		{
-			showMessageBox("Error al crear el archivo", MessageBox.Type.Error);
+			Error.show(this, "Error al crear el archivo");
 			e.printStackTrace();
 		}
 		

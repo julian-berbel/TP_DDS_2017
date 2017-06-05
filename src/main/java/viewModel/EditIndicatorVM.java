@@ -1,33 +1,37 @@
 package viewModel;
 
+import java.util.Optional;
+
 import org.uqbar.commons.utils.Observable;
 
-import exceptions.EmptyFieldException;
-import exceptions.FormulaErrorException;
-import exceptions.MissingFormulaException;
-import exceptions.MissingIndicatorException;
+import exceptions.ExistingIndicatorException;
 import modelo.Indicator;
-import parser.IndicatorParser;
+import modelo.IndicatorRepository;
 
 @Observable
 public class EditIndicatorVM {
 	
 	private String name;
 	private String formula;
-	private Indicator indicadorAEditar;
+	private Optional<Indicator> targetIndicator;
+	private Boolean editing = false;
 	
-	public EditIndicatorVM(Indicator indicadorAEditar){
-		this.indicadorAEditar = indicadorAEditar;
-		name = indicadorAEditar.getName();
-		formula = indicadorAEditar.getFormula();
+	public Optional<Indicator> getTargetIndicator() {
+		return targetIndicator;
+	}
+
+	public EditIndicatorVM(Optional<Indicator> target){
+		target.ifPresent(_target -> {	name = _target.getName();
+										formula = _target.getFormula();
+										editing = true;});
 	}
 	
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {	
-			this.name = name;		
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getFormula() {
@@ -38,50 +42,14 @@ public class EditIndicatorVM {
 		this.formula = formula;
 	}
 
-
-	public void newIndicator(){
-		try
-		{
-			indicadorAEditar.setName(name);
-			indicadorAEditar.setFormula(formula);
-			indicadorAEditar.setValue(IndicatorParser.parseIndicator(this.formula));
-			if(name.equals(""))
-			{
-				throw new EmptyFieldException("Nombre del nuevo indicador");
-			}
-		} 
-		catch (FormulaErrorException formulaErrorException)
-		{
-			indicadorAEditar.setName(null);
-			indicadorAEditar.setFormula(null);
-			indicadorAEditar.setValue(null);
-			throw new FormulaErrorException("Hay un error en el formato de la formula");
-		} 
-		catch (MissingIndicatorException missingIndicatorException)
-		{
-			indicadorAEditar.setName(null);
-			indicadorAEditar.setFormula(null);
-			indicadorAEditar.setValue(null);
-			throw new MissingIndicatorException(missingIndicatorException.getMessage());
-		}
-		catch(NullPointerException nullPointerException)
-		{
-			indicadorAEditar.setName(null);
-			indicadorAEditar.setFormula(null);
-			indicadorAEditar.setValue(null);
-			throw new MissingFormulaException();
-		}
-		catch(EmptyFieldException emptyFieldException)
-		{
-			
-			throw new EmptyFieldException(emptyFieldException.getMessage());
-		}
+	public void accept(){
+		if(!editing && IndicatorRepository.alreadyExists(name)) throw new ExistingIndicatorException(name);
 		
-		
-		
-			
-//		System.out.println(indicadorAEditar.normalize());
-
+		targetIndicator = Optional.of(new Indicator(name, formula));
+	}
+	
+	public void cancel(){
+		targetIndicator = Optional.empty();
 	}
 	
 }

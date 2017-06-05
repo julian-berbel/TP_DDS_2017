@@ -8,7 +8,8 @@ import modelo.IndicatorRepository;
 import exceptions.FormulaErrorException;
 
 /** Token Manager. */
-@SuppressWarnings("unused")public class IndicatorParserTokenManager implements IndicatorParserConstants {
+@SuppressWarnings({"unused", "static-access"})
+public class IndicatorParserTokenManager implements IndicatorParserConstants {
 
   /** Debug output. */
   public static  java.io.PrintStream debugStream = System.out;

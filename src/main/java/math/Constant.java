@@ -1,6 +1,7 @@
 package math;
 
 import modelo.Enterprise;
+import modelo.Indicator;
 
 public class Constant implements Operable {
 	public double value;
@@ -15,5 +16,9 @@ public class Constant implements Operable {
 	
 	public String toString(){
 		return String.valueOf(value);
+	}
+	
+	public Boolean includes(Indicator indicator){
+		return false;
 	}
 }

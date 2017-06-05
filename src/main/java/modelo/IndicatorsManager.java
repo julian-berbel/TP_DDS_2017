@@ -16,9 +16,6 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
-import parser.IndicatorParser;
-
-
 
 public class IndicatorsManager
 {
@@ -69,7 +66,7 @@ public class IndicatorsManager
 		      	String name = sheet.getCell(columnIndex,rowIndex).getContents();
 		       	String formula = sheet.getCell(columnIndex+1,rowIndex).getContents();
 		       
-		       	Indicator indicator = new Indicator(name, formula, IndicatorParser.parseIndicator(formula));
+		       	Indicator indicator = new Indicator(name, formula);
 		       	list.add(indicator);	        	
 		        	
 		       	rowIndex++;	        	
@@ -110,7 +107,7 @@ public class IndicatorsManager
 			 Cell cell = sheet.getCell(columnNumber, i);
 	         String indicatorName = cell.getContents();
 	         
-	        if(IndicatorRepository.repeatedIndicator(indicatorName)){
+	        if(IndicatorRepository.alreadyExists(indicatorName)){
 	        	return indicatorName;
 	        }	        
 	     }

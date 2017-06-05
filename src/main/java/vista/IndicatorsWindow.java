@@ -1,16 +1,18 @@
 package vista;
 
 import org.uqbar.arena.layout.VerticalLayout;
+
+import java.util.Optional;
+
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
-import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import exceptions.EmptyFieldException;
+import exceptions.DeleteUsedIndicatorException;
 import exceptions.RepeatedIndicatorExcelException;
 import exceptions.RepeatedIndicatorInSystemException;
 import modelo.Indicator;
@@ -49,29 +51,23 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		columnFormula.setTitle("Formula").setFixedSize(500).bindContentsToProperty("formula");
 		
 		new Button(panel2).setCaption("Nuevo").onClick(()->{ 
-			try
-			{
-				new EditIndicatorWindow(this, this.getModelObject().newIndicator()).open();
-				this.getModelObject().addNewIndicator();	
-			}
-			catch(EmptyFieldException emptyFieldException)
-			{
-				messageBox("El campo " + emptyFieldException.getMessage() + " no puede estar vacio");
-			}
-			
+				Optional<Indicator> newIndicator = new EditIndicatorWindow(this, Optional.empty()).openWithReturn();
+				this.getModelObject().addNewIndicator(newIndicator);	
 			});
+		
 		new Button(panel2).setCaption("Editar").onClick(()->{ 
-			try
-			{
-				new EditIndicatorWindow(this, this.getModelObject().editIndicator()).open();	
-			}
-			catch(EmptyFieldException emptyFieldException)
-			{
-				messageBox("El campo " + emptyFieldException.getMessage() + " no puede estar vacio");
-			}
-			
+				Optional<Indicator> targetIndicator = new EditIndicatorWindow(this, Optional.of(this.getModelObject().getSelectedIndicator())).openWithReturn();
+				this.getModelObject().replaceSelectedIndicatorWith(targetIndicator);	
 			});
-		new Button(panel2).setCaption("Borrar").onClick(() -> this.getModelObject().deleteIndicator());
+		
+		new Button(panel2).setCaption("Borrar").onClick(() -> {
+			try{
+				this.getModelObject().deleteIndicator();
+			}catch(DeleteUsedIndicatorException exception){
+				Error.show(this, exception.getMessage());
+			}
+		});
+		
 		new Button(panel2).setCaption("Cargar archivo")	
 		.onClick(()->{ 
 			try
@@ -81,11 +77,11 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 			}
 			catch(RepeatedIndicatorExcelException repeatedIndicatorExcelException)
 			{
-				messageBox("El indicador "+ repeatedIndicatorExcelException.getMessage() + " esta repetido en la hoja de excel, modifiquela y vuelva a cargar el archivo");
+				Error.show(this, "El indicador "+ repeatedIndicatorExcelException.getMessage() + " esta repetido en la hoja de excel, modifiquela y vuelva a cargar el archivo");
 			}
 			catch(RepeatedIndicatorInSystemException repeatedIndicatorInSystemException)
 			{
-				messageBox("El indicador "+ repeatedIndicatorInSystemException.getMessage() + " de la hoja de excel, ya existe en el sistema, modifique el archivo y vuelva a cargar el archivo"			);
+				Error.show(this, "El indicador "+ repeatedIndicatorInSystemException.getMessage() + " de la hoja de excel, ya existe en el sistema, modifique el archivo y vuelva a cargar el archivo"			);
 			}
 			});
 	}
@@ -93,13 +89,6 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 	@Override
 	protected void addActions(Panel actions) {
 		new Button(actions).setCaption("Volver").onClick(this:: close);
-	}
-	
-	private void messageBox(String msg)
-	{
-		MessageBox msgBox = new MessageBox(this, MessageBox.Type.Error);
-		msgBox.setMessage(msg);
-		msgBox.open();
 	}
 }
 

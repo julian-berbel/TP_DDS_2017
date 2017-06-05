@@ -69,10 +69,4 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 	{
 		new Button(actions).setCaption("Volver").onClick(this:: close);
 	}
-	
-	
-	public void clearTable()
-	{
-		// cada vez que selecciono otra empresa, tiene que sacar la seleccion del periodo (si se puede) y limpiar la tabla
-	}
 }

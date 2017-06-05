@@ -8,7 +8,6 @@ import jxl.read.biff.BiffException;
 
 import modelo.Indicator;
 import modelo.IndicatorRepository;
-import parser.IndicatorParser;
 import viewModel.LoadIndicatorsVM;
 
 public class LoadIndicatorsTest {
@@ -18,7 +17,7 @@ public class LoadIndicatorsTest {
 	{
 		LoadIndicatorsVM loader = new LoadIndicatorsVM();
 		List<Indicator> indicatorList = new ArrayList<Indicator>();
-		Indicator dummyIndicator = new Indicator("IngresoNeto", "#C1 + #C2", IndicatorParser.parseIndicator("#C1 + #C2") );
+		Indicator dummyIndicator = new Indicator("IngresoNeto", "#C1 + #C2");
 		indicatorList.add(dummyIndicator);
 		
 		try

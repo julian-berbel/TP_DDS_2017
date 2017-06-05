@@ -1,6 +1,7 @@
 package math;
 
 import modelo.Enterprise;
+import modelo.Indicator;
 
 public abstract class AlgebraicOperation implements Operable {
 	private Operable firstOperand;
@@ -20,5 +21,9 @@ public abstract class AlgebraicOperation implements Operable {
 	
 	public String toString(){
 		return "(" + firstOperand.toString() + this.operationString() + secondOperand.toString() + ")";
+	}
+	
+	public Boolean includes(Indicator indicator){
+		return firstOperand.includes(indicator) || secondOperand.includes(indicator);
 	}
 }
