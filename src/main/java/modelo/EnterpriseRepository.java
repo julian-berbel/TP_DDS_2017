@@ -1,7 +1,5 @@
 package modelo;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.ArrayList;
 
 public class EnterpriseRepository 
@@ -22,35 +20,10 @@ public class EnterpriseRepository
 	{
 		return enterprises;
 	}
+	
 	public static void setEnterpriseList(List<Enterprise> _enterprises)
 	{
 		enterprises = _enterprises;
 	}
-	
-	public static List<String> getEnterprisesNameList()
-	{
-		return enterprises.stream().map(empresa -> empresa.getEnterpriseName()).collect(Collectors.toList());
-	}
-	
-	public static List<Integer> getEnterprisePeriodsList(String enterpriseName)
-	{		
-		Enterprise searchedEnterprise = enterprises.stream().filter(enterprise -> enterprise.getEnterpriseName().equals(enterpriseName)).findFirst().get();
-
-		return searchedEnterprise.getPeriodsYears();		
-	}
-	
-	
-	public static List<Calculation> getPeriodAccountList(String enterpriseName, int year)
-	{
-		Enterprise searchedEnterprise = enterprises.stream().filter(enterprise -> enterprise.getEnterpriseName().equals(enterpriseName)).findFirst().get();
-		
-		return searchedEnterprise.getPeriodCalculations(year);		
-	}
-	
-	public static Set<String> getEnterprisesCalculationsName()
-	{
-		return  enterprises.stream().map(enterprise -> enterprise.getPeriodsCalculationsName()).flatMap(List::stream).collect(Collectors.toSet());
-	}
-	
 	
 }

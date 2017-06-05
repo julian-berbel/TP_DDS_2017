@@ -1,7 +1,6 @@
 package modelo;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Enterprise 
 {
@@ -31,24 +30,6 @@ public class Enterprise
 	public String getEnterpriseName()
 	{
 		return enterpriseName;
-	}
-	
-	public List<Integer> getPeriodsYears()
-	{
-		return periods.stream().map(period -> period.getYear()).collect(Collectors.toList());
-	}
-	
-	public List<Calculation> getPeriodCalculations(int year)
-	{
-		Period searchedPeriod = periods.stream().filter(period -> period.getYear() == year).findFirst().get();
-		return searchedPeriod.getCalculations();		 
-	}
-	
-	public List<String> getPeriodsCalculationsName()
-	{
-		return this.getPeriods().stream().map(period->period.getCalculationsNames())
-		        .flatMap(List::stream)
-		        .collect(Collectors.toList());	
 	}
 	
 	public Calculation getCalculationOnYear(String name, int year){

@@ -1,7 +1,6 @@
 package modelo;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Period 
 {
@@ -28,12 +27,6 @@ public class Period
 
 	public void setYear(int year) {
 		this.year = year;
-	}
-	
-	public List<String> getCalculationsNames()
-	{
-		
-		return calculations.stream().map(calculation->calculation.getName()).collect(Collectors.toList());
 	}
 	
 	public Calculation getCalculation(String name){

@@ -12,11 +12,9 @@ public class IndicatorParserTest {
 	public void parser() {
 		double resultado = 0;
 		new IndicatorParser(System.in);
-		try{
-			resultado = IndicatorParser.parseIndicator("(11 - 7) * 18 / 2").reduce(dummyEnterprise, 0);
-		} catch(Exception e){
-			System.out.println(e);
-		}
+		
+		resultado = IndicatorParser.parseIndicator("(11 - 7) * 18 / 2").reduce(dummyEnterprise, 0);
+
 		assertEquals(36, resultado, 0);
 	}
 	

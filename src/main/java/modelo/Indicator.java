@@ -52,6 +52,6 @@ public class Indicator implements Operable
 	}
 	
 	public Boolean includes(Indicator indicator){
-		return this == indicator || uses(indicator);
+		return this == indicator || value.includes(indicator);
 	}
 }

@@ -14,9 +14,9 @@ public class IndicatorParser implements IndicatorParserConstants {
             Operable value = null;
             IndicatorParser.ReInit(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
             try{
-            value = IndicatorParser.Start();
+            	value = IndicatorParser.Start();
             } catch(ParseException parseException){
-            throw new FormulaErrorException(parseException.getMessage());
+            	throw new FormulaErrorException(parseException.getMessage());
             }
             return value;
     }
