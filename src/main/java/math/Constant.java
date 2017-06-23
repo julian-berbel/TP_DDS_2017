@@ -1,16 +1,17 @@
 package math;
 
+import java.math.BigDecimal;
 import modelo.Enterprise;
 import modelo.Indicator;
 
 public class Constant implements Operable {
-	public double value;
+	public BigDecimal value;
 	
-	public Constant(double value){
+	public Constant(BigDecimal value){
 		this.value = value;
 	}
 	
-	public double reduce(Enterprise enterprise, int year){
+	public BigDecimal reduce(Enterprise enterprise, int year){
 		return value;
 	}
 	

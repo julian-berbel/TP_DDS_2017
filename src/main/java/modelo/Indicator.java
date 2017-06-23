@@ -1,7 +1,7 @@
 package modelo;
 
+import java.math.BigDecimal;
 import org.uqbar.commons.utils.Observable;
-
 import exceptions.EmptyFieldException;
 import math.Operable;
 import parser.IndicatorParser;
@@ -34,7 +34,7 @@ public class Indicator implements Operable
 		return value;
 	}
 
-	public double reduce(Enterprise enterprise, int year){
+	public BigDecimal reduce(Enterprise enterprise, int year){
 		return value.reduce(enterprise, year);
 	}
 	

@@ -1,5 +1,6 @@
 package math;
 
+import java.math.BigDecimal;
 import modelo.Enterprise;
 import modelo.Indicator;
 
@@ -10,7 +11,7 @@ public class OperableCalculation implements Operable{
 		this.name = name;
 	}
 	
-	public double reduce(Enterprise enterprise, int year){
+	public BigDecimal reduce(Enterprise enterprise, int year){
 		return enterprise.getCalculationOnYear(name, year).getValue();
 	}
 	

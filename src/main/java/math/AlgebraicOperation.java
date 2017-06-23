@@ -1,5 +1,6 @@
 package math;
 
+import java.math.BigDecimal;
 import modelo.Enterprise;
 import modelo.Indicator;
 
@@ -12,10 +13,10 @@ public abstract class AlgebraicOperation implements Operable {
 		this.secondOperand = secondOperand;
 	}
 	
-	protected abstract double apply(double firstOp, double secondOp);
+	protected abstract BigDecimal apply(BigDecimal firstOp, BigDecimal secondOp);
 	protected abstract String operationString();
 	
-	public double reduce(Enterprise enterprise, int year){
+	public BigDecimal reduce(Enterprise enterprise, int year){
 		return this.apply(firstOperand.reduce(enterprise, year), secondOperand.reduce(enterprise, year));
 	}
 	

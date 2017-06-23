@@ -1,12 +1,17 @@
 package viewModel;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.DeleteUsedIndicatorException;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import modelo.Indicator;
 import modelo.IndicatorRepository;
+import modelo.IndicatorsManager;
+
 import org.uqbar.commons.model.ObservableUtils;
 
 
@@ -15,8 +20,10 @@ public class IndicatorsVM {
 	
 	private List<Indicator> indicators;
 	private Indicator selectedIndicator;
+	private Boolean indicatorsChanged;
 	
 	public IndicatorsVM(){
+		indicatorsChanged = false;
 		refreshList();
 	}
 	
@@ -55,5 +62,20 @@ public class IndicatorsVM {
 	public void refreshList(){
 		indicators = IndicatorRepository.getIndicatorList();
 		ObservableUtils.firePropertyChanged(this, "indicators");
+	}
+	
+	public Boolean verifyIfSomethingChanged()
+	{
+		return indicatorsChanged;
+	}
+	
+	public void somethingChanged()
+	{
+		indicatorsChanged = true;
+	}
+	
+	public void saveChanges() throws BiffException, WriteException, IOException
+	{		
+		IndicatorsManager.writeExcel();		
 	}
 }

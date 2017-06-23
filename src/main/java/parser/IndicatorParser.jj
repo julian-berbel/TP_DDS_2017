@@ -97,5 +97,5 @@ Operable Calculation() : {Token t;}
 /** A Constant. */
 Constant Constant()       : {Token t;}
 {
-  t=<CONSTANT> { return new Constant(Double.parseDouble(t.image)); }
+  t=<CONSTANT> { return new Constant(new BigDecimal(t.image)); }
 }

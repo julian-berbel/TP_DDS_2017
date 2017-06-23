@@ -1,5 +1,6 @@
 package math;
 
+import java.math.BigDecimal;
 import modelo.Enterprise;
 import modelo.Indicator;
 
@@ -11,8 +12,8 @@ public class Negative implements Operable {
 		this.value = value;
 	}
 	
-	public double reduce(Enterprise enterprise, int year){
-		return - value.reduce(enterprise, year);
+	public BigDecimal reduce(Enterprise enterprise, int year){
+		return (value.reduce(enterprise, year)).negate();
 	}
 
 	public String toString(){

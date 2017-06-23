@@ -2,19 +2,24 @@ package vista;
 
 import org.uqbar.arena.layout.VerticalLayout;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Optional;
-
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
+import org.uqbar.arena.windows.Dialog;
+import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
-
 import exceptions.DeleteUsedIndicatorException;
 import exceptions.RepeatedIndicatorExcelException;
 import exceptions.RepeatedIndicatorInSystemException;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import modelo.Indicator;
 import viewModel.IndicatorsVM;
 
@@ -60,13 +65,16 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 				this.getModelObject().replaceSelectedIndicatorWith(targetIndicator);	
 			});
 		
-		new Button(panel2).setCaption("Borrar").onClick(() -> {
-			try{
+		new Button(panel2).setCaption("Borrar").onClick(()->{
+			try
+			{
 				this.getModelObject().deleteIndicator();
-			}catch(DeleteUsedIndicatorException exception){
+			}
+			catch(DeleteUsedIndicatorException exception)
+			{
 				Error.show(this, exception.getMessage());
 			}
-		});
+			});
 		
 		new Button(panel2).setCaption("Cargar archivo")	
 		.onClick(()->{ 
@@ -81,14 +89,62 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 			}
 			catch(RepeatedIndicatorInSystemException repeatedIndicatorInSystemException)
 			{
-				Error.show(this, "El indicador "+ repeatedIndicatorInSystemException.getMessage() + " de la hoja de excel, ya existe en el sistema, modifique el archivo y vuelva a cargar el archivo"			);
+				Error.show(this, "El indicador "+ repeatedIndicatorInSystemException.getMessage() + " de la hoja de excel, ya existe en el sistema, modifique el archivo y vuelva a cargar el archivo");
 			}
 			});
 	}
 	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Volver").onClick(this:: close);
+		new Button(actions).setCaption("Volver").onClick(()->verifyChangesAndSave()); // el "() -> <metodo>" lo transforma en tipo 'Action' 
+																					  // y permite ejecutar ese metodo
+	}
+	
+	protected void showMessageBox(String message, MessageBox.Type messageType)
+	{
+		MessageBox msgBox = new MessageBox(this, messageType);
+		msgBox.setMessage(message);
+		msgBox.open();
+	}
+	
+	private void verifyChangesAndSave()
+	{
+		//Verifico si se hicieron cambios
+		if(this.getModelObject().verifyIfSomethingChanged())
+		{
+			//Si se hicieron cambios, muestro un dialogo preguntando si se quieren guardar esos cambios
+			//Luego guardo los cambios o salgo de la ventana, dependiendo de la eleccion del usuario
+			
+			SaveChangesWindow window = new SaveChangesWindow(this);			
+			window.onAccept(()->applySave());
+			window.open();
+		}		
+		
+		this.close();
+	}
+	
+	private void applySave()
+	{
+		try
+		{				
+			this.getModelObject().saveChanges();
+		}
+		catch(BiffException e)	//es la excepcion que tira al invocar el metodo, que a su vez contiene la excepcion que tira el metodo
+		{	
+			showMessageBox("El archivo no existe o no es un archivo '.xls'", MessageBox.Type.Error);
+			e.printStackTrace();
+		}
+		catch(WriteException e)
+		{
+			showMessageBox("No se a podido modificar el archivo", MessageBox.Type.Error);
+			e.printStackTrace();
+		}
+		catch(IOException e)
+		{
+			showMessageBox("El archivo que se intenta abrir no existe", MessageBox.Type.Error);
+			e.printStackTrace();
+		}
+		
 	}
 }
 

@@ -1,77 +1,38 @@
 package vista;
 
-
-import java.io.IOException;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
-import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
-import jxl.read.biff.BiffException;
-import jxl.write.WriteException;
 import viewModel.SaveChangesVM;
-
 
 
 @SuppressWarnings("serial")
 public class SaveChangesWindow extends Dialog<SaveChangesVM> 
 {
+	
 	public SaveChangesWindow(WindowOwner owner)
-	{
+	{		
 		super(owner, new SaveChangesVM());
 	}
 
 	@Override
 	protected void createFormPanel(Panel mainPanel) 
 	{
+		this.setTitle("Save changes...");
 		mainPanel.setLayout(new VerticalLayout());
-		Panel panel1 = new Panel(mainPanel);
-		panel1.setLayout(new VerticalLayout());	
 		
-		new Label(panel1).setText("Guardar Indicadores");
-	
+		new Label(mainPanel).setText("¿Desea guardar los cambios?");	
 	}
-	
+
 	@Override
-	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Aceptar").onClick(this:: accept);
-		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
-	}
-	
-	@Override
-	protected void executeTask() 
-	{		
-		try 
-		{			
-			this.getModelObject().SaveIndicators();
-			showMessageBox("Los cambios fueron guardados con exito!", MessageBox.Type.Information);
-		} 
-		catch (BiffException e) 
-		{
-			Error.show(this, "El archivo indicado no es valido o no es un archivo Excel (.xls)");
-			e.printStackTrace();
-		}
-		catch(IOException e)
-		{
-			Error.show(this, "Error al abrir/escribir el archivo");
-			e.printStackTrace();
-		}
-		catch(WriteException e)
-		{
-			Error.show(this, "Error al crear el archivo");
-			e.printStackTrace();
-		}
-		
-		super.executeTask();
-	}
-	
-	private void showMessageBox(String message, MessageBox.Type messageType)
+	protected void addActions(Panel actions) 
 	{
-		MessageBox msgBox = new MessageBox(this, messageType);
-		msgBox.setMessage(message);
-		msgBox.open();
-	}
+		new Button(actions).setCaption("Si").onClick(this::accept);
+				
+		new Button(actions).setCaption("No").onClick(this::cancel);
+	}	
 }
 

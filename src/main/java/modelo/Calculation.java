@@ -1,11 +1,13 @@
 package modelo;
+import java.math.BigDecimal;
+
 import org.uqbar.commons.utils.Observable;
 
 @Observable
 public class Calculation
 {
 	private String name;
-	private double value;
+	private BigDecimal value;
 	
 	public void setName(String attributeName)
 	{
@@ -17,12 +19,12 @@ public class Calculation
 		return name;
 	}
 	
-	public void setValue(double attributeValue)
+	public void setValue(BigDecimal attributeValue)
 	{
 		this.value = attributeValue;
 	}
 	
-	public double getValue()
+	public BigDecimal getValue()
 	{
 		return value;
 	}

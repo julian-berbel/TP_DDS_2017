@@ -1,7 +1,7 @@
 package viewModel;
 
+import java.math.BigDecimal;
 import java.util.List;
-
 import org.uqbar.commons.utils.Observable;
 import modelo.Enterprise;
 import modelo.EnterpriseRepository;
@@ -18,19 +18,19 @@ public class AnalyzeEnterpriseVM {
 	private Period selectedPeriod;
 	private List<Indicator> indicators;	
 	private Indicator selectedIndicator;
-	private double value;
+	private BigDecimal value;
 	
-	public double getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 
 	public AnalyzeEnterpriseVM()
 	{
-		enterprises =  EnterpriseRepository.getEnterpriseList();		
+		enterprises =  EnterpriseRepository.getEnterpriseList();
 	}	
 	
 	public List<Enterprise> getEnterprises() 
