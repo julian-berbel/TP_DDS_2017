@@ -62,6 +62,7 @@ public class IndicatorsVM {
 	public void refreshList(){
 		indicators = IndicatorRepository.getIndicatorList();
 		ObservableUtils.firePropertyChanged(this, "indicators");
+		indicatorsChanged = true;
 	}
 	
 	public Boolean verifyIfSomethingChanged()
