@@ -1,7 +1,14 @@
 package vista;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
+
+import exceptions.RepeatedIndicatorExcelException;
+import exceptions.RepeatedIndicatorInSystemException;
+import jxl.read.biff.BiffException;
 import viewModel.LoadIndicatorsVM;
+
+import java.io.IOException;
+
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -25,13 +32,40 @@ public class LoadIndicatorsWindow extends SimpleWindow<LoadIndicatorsVM>
 		
 		new Label(mainPanel).setText("Ruta de Archivo:");
 	    new Label(mainPanel).setWidth(500).bindValueToProperty("filePath");
-		new FileSelector(mainPanel).setCaption("Elegir Archivo").bindValueToProperty("filePath");
-//		new Button(mainPanel).setCaption("Agregar Indicadores").onClick(()->{ new AddIndicatorsWindow(this,this.getModelObject().getFilePath()).open(); });
+		new FileSelector(mainPanel).extensions("*.xls").setCaption("Elegir Archivo").bindValueToProperty("filePath");
+		new Button(mainPanel).setCaption("Aceptar").onClick(()->{ 
+			try
+			{
+				this.getModelObject().loadIndicators();
+				this.close();
+			}
+			catch(IOException ioException)
+			{
+					Error.show(this, "Error al abrir el archivo");
+			}
+			catch(BiffException biffException)
+			{
+				Error.show(this, "Archivo invalido o no es un archivo Excel (.xls)");
+			}
+			catch(RepeatedIndicatorExcelException repeatedIndicator)
+			{
+				Error.show(this, "El indicador: "+repeatedIndicator.getMessage()+" esta repetido en la hoja de excel, modifiquela y vuelva a cargar el archivo");
+			}
+			catch(RepeatedIndicatorInSystemException repeatedIndicator)
+			{
+				Error.show(this, "El indicador: " + repeatedIndicator.getMessage()+" de la hoja de excel ya existe en el sistema. Modifique el archivo y vuelva a cargarlo");
+			}
+		
+		});
 	}
+	
+	
 	
 	@Override	
 	protected void addActions(Panel actions)
 	{
 		new Button(actions).setCaption("Volver").onClick(this:: close);
 	}
+	
+	
 }

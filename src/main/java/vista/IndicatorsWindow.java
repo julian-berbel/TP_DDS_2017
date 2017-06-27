@@ -57,12 +57,21 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		
 		new Button(panel2).setCaption("Nuevo").onClick(()->{ 
 				Optional<Indicator> newIndicator = new EditIndicatorWindow(this, Optional.empty()).openWithReturn();
-				this.getModelObject().addNewIndicator(newIndicator);	
+				if(newIndicator != null)
+				{
+					this.getModelObject().addNewIndicator(newIndicator);	
+				} 
+				
 			});
 		
 		new Button(panel2).setCaption("Editar").onClick(()->{ 
-				Optional<Indicator> targetIndicator = new EditIndicatorWindow(this, Optional.of(this.getModelObject().getSelectedIndicator())).openWithReturn();
-				this.getModelObject().replaceSelectedIndicatorWith(targetIndicator);	
+				
+				if(this.getModelObject().getIndicators().size()>0)
+				{
+					Optional<Indicator> targetIndicator = new EditIndicatorWindow(this, Optional.of(this.getModelObject().getSelectedIndicator())).openWithReturn();
+					this.getModelObject().replaceSelectedIndicatorWith(targetIndicator);	
+				}
+				
 			});
 		
 		new Button(panel2).setCaption("Borrar").onClick(()->{
@@ -78,19 +87,8 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		
 		new Button(panel2).setCaption("Cargar archivo")	
 		.onClick(()->{ 
-			try
-			{
 				new LoadIndicatorsWindow(this).open(); 
 				this.getModelObject().refreshList();	
-			}
-			catch(RepeatedIndicatorExcelException repeatedIndicatorExcelException)
-			{
-				Error.show(this, "El indicador "+ repeatedIndicatorExcelException.getMessage() + " esta repetido en la hoja de excel, modifiquela y vuelva a cargar el archivo");
-			}
-			catch(RepeatedIndicatorInSystemException repeatedIndicatorInSystemException)
-			{
-				Error.show(this, "El indicador "+ repeatedIndicatorInSystemException.getMessage() + " de la hoja de excel, ya existe en el sistema, modifique el archivo y vuelva a cargar el archivo");
-			}
 			});
 	}
 	
@@ -131,17 +129,17 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		}
 		catch(BiffException e)	//es la excepcion que tira al invocar el metodo, que a su vez contiene la excepcion que tira el metodo
 		{	
-			showMessageBox("El archivo no existe o no es un archivo '.xls'", MessageBox.Type.Error);
+			Error.show(this, "El archivo no existe o no es un archivo '.xls'  ");
 			e.printStackTrace();
 		}
 		catch(WriteException e)
 		{
-			showMessageBox("No se a podido modificar el archivo", MessageBox.Type.Error);
+			Error.show(this, "No se a podido modificar el archivo");
 			e.printStackTrace();
 		}
 		catch(IOException e)
 		{
-			showMessageBox("El archivo que se intenta abrir no existe", MessageBox.Type.Error);
+			Error.show(this, "El archivo que se intenta abrir no existe");
 			e.printStackTrace();
 		}
 		

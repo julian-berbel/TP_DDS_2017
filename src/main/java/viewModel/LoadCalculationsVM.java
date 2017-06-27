@@ -4,7 +4,9 @@ import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
 import com.google.gson.JsonSyntaxException;
 import exceptions.JsonMappingException;
+import exceptions.NoFileSelectedException;
 import exceptions.ReadingFileException;
+import javassist.compiler.SyntaxError;
 import modelo.FileLoader;
 import modelo.JsonMapper;
 
@@ -25,38 +27,25 @@ public class LoadCalculationsVM
 
 	public void setFilePath(String filePath_) {
 		this.filePath = filePath_;
-		if(filePath != null)
-		{
-			this.parseFile();
-		}
+		
 	}
 
 	public void parseFile()	
 	{
-		try
+		if(filePath != null)
 		{
-
 			this.parseJson();
-			//Application.setEnterpriseList(enterpriseList); // la cargo en esa clase para que sea parte de una lista global de empresas		
-			
-			
 		}
-		catch(ReadingFileException readingFileException)
+		else
 		{
-			throw new UserException(readingFileException.getMessage()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
-			//e.printStackTrace();
-		}
-		catch(JsonMappingException jsonMappingException)
-		{
-			throw new UserException(jsonMappingException.getMessage()); //La SimpleWindow deberia tirar un messagebox cuando le tiro una UserException
-			//e.printStackTrace();
+			throw new NoFileSelectedException("No se ha cargado un archivo");
 		}
 		
 	}		
 
 	
 	
-	private void parseJson()
+	private void parseJson()  
 	{
 		try
 		{

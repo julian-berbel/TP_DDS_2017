@@ -191,15 +191,5 @@ public class IndicatorsManager
 	        workbook.write();
 	        workbook.close();
 
-	        
-/*	    catch (IOException ex)
-	    {
-	    	System.out.println("Error al crear el fichero.");//Por las pruebas, hacer con excepciones
-	    }
-	    catch (WriteException ex)
-	    {
-	    	System.out.println("Error al escribir el fichero.");//Por las pruebas, hacer con excepciones
-	    }*/
-
 	}		
 }
