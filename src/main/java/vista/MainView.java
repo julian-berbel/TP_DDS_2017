@@ -37,7 +37,7 @@ public class MainView extends MainWindow<MainVM>
 		
 		new Button(panel1)
 			.setCaption("Metodologias")
-			.onClick(()->{ showFeatureNotAvailableMessage(); });	
+			.onClick(()->{ new MethodWindow(this) .open();});	
 		
 		new Button(panel1)
 			.setCaption("Visualizar Graficos de Indicadores")
