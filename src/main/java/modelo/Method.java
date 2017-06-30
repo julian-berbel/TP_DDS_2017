@@ -2,34 +2,21 @@ package modelo;
 
 import java.util.List;
 
-import org.uqbar.commons.utils.Observable;
-
-import parser.IndicatorParser;
-
-import java.util.ArrayList;
+import org.jooq.lambda.Seq;
+import org.uqbar.commons.utils.Observable; //?
 
 @Observable
 public class Method {
 
 	private String name;
-	private List<OrderCriteria> orderCriteria;
-	private List<FilterCriteria> filterCriteria;
-	private List<Indicator> indicators;
-	private String formula;
+	private OrderCriterion orderCriterion;
+	private List<FilterCriterion> filterCriteria;
 
-	public Method(String name, String formula) 
+	public Method(String name, OrderCriterion orderCriterion, List<FilterCriterion> filterCriteria) 
 	{
-		orderCriteria = new ArrayList<OrderCriteria>();
-		filterCriteria = new ArrayList<FilterCriteria>();
-		indicators = new ArrayList<Indicator>();
 		this.name = name;
-		this.formula = formula;
-//		this.value = IndicatorParser.parseIndicator(formula);
-	}
-
-	public void setName(String _name) 
-	{
-		name = _name;
+		this.orderCriterion = orderCriterion;
+		this.filterCriteria = filterCriteria;
 	}
 
 	public String getName() 
@@ -37,53 +24,19 @@ public class Method {
 		return name;
 	}
 	
-	public String getFormula()
-	{
-		return formula;
-	}
-
-	public List<FilterCriteria> getFilterCriteriaList() 
+	public List<FilterCriterion> getFilterCriteriaList() 
 	{
 		return filterCriteria;
 	}
-
-	public void setFilterCriteriaList(List<FilterCriteria> list) 
+	
+	public OrderCriterion getOrderCriterion() 
 	{
-		filterCriteria = list;
+		return orderCriterion;
 	}
-
-	public void addFilterCriteria(FilterCriteria _filterCriteria) 
-	{
-		filterCriteria.add(_filterCriteria);		
-	}
-
-	public List<OrderCriteria> geOrderCriteriaList() 
-	{
-		return orderCriteria;
-	}
-
-	public void setOrderCriteriaList(List<OrderCriteria> list) 
-	{
-		orderCriteria = list;
-	}
-
-	public void addIndicator(Indicator indicator) 
-	{
-		indicators.add(indicator);
-	}
-
-	public List<Indicator> getIndicatorList() 
-	{
-		return indicators;
-	}
-
-	public void setIndicatorList(List<Indicator> list)
-	{
-		indicators = list;
-	}
-
-	public void addOrderCriteria(OrderCriteria _orderCriteria) 
-	{
-		orderCriteria.add(_orderCriteria);
+	
+	public List<Enterprise> apply(List<Enterprise> enterprises){
+		return orderCriterion.apply(
+				Seq.seq(filterCriteria.stream())
+					.foldLeft(enterprises, (enterprise, filter) -> filter.apply(enterprise)));
 	}
 }
