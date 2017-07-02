@@ -130,7 +130,10 @@ public class IndicatorsManager
 	        		 Cell cell2 = sheet.getCell(columnNumber, i2);
 	        		 if(indicatorName.equals(cell2.getContents()))
 	        		 {
-	        			 return indicatorName;
+	        			 if(indicatorName.isEmpty()==false)
+	        			 {
+	        				 return indicatorName;
+	        			 }
 	        		 }
 	        	 }
 	         }

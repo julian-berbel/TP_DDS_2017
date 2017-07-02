@@ -87,7 +87,7 @@ public class AnalyzeEnterpriseVM {
 	
 	public void setSelectedPeriod(Period selectedPeriod){
 		this.selectedPeriod = selectedPeriod;
-		indicators = IndicatorRepository.getIndicatorList();
+		indicators = IndicatorRepository.getAvailableIndicatorForPeriodList(selectedEnterprise,selectedPeriod);
 	}	
 	
 }

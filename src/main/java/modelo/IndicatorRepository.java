@@ -1,5 +1,6 @@
 package modelo;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import exceptions.MissingIndicatorException;
 
@@ -29,7 +30,8 @@ public class IndicatorRepository
 		indicators = _indicators;
 	}
 
-	public static Indicator getIndicator(String name){
+	public static Indicator getIndicator(String name)
+	{
 		return indicators.stream()
 				.filter(indicator -> indicator.getName().equals(name))
 				.findFirst()
@@ -43,11 +45,20 @@ public class IndicatorRepository
 			.anyMatch(indicatorName->indicatorName.equals(newIndicatorName));
 	}
 	
-	public static void replace(Indicator oldIndicator, Indicator newIndicator){
+	public static void replace(Indicator oldIndicator, Indicator newIndicator)
+	{
 		indicators.replaceAll(indicator -> indicator == oldIndicator ? newIndicator:indicator);
 	}
 	
-	public static Boolean anyUses(Indicator indicator){
+	public static Boolean anyUses(Indicator indicator)
+	{
 		return indicators.stream().anyMatch(_indicator -> _indicator.uses(indicator));
+	}
+	
+	public static List<Indicator> getAvailableIndicatorForPeriodList(Enterprise enterprise,Period period)
+	{
+		return indicators.stream()
+				.filter(indicator -> indicator.tryReduce(enterprise, period.getYear())).collect(Collectors.toList());
+				
 	}
 }

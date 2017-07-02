@@ -1,6 +1,8 @@
 package modelo;
 
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
+
 import org.uqbar.commons.utils.Observable;
 import exceptions.EmptyFieldException;
 import math.Operable;
@@ -37,6 +39,19 @@ public class Indicator implements Operable
 	public BigDecimal reduce(Enterprise enterprise, int year){
 		return value.reduce(enterprise, year);
 	}
+	
+	public boolean tryReduce(Enterprise enterprise, int year)
+	{
+		try
+		{
+			reduce(enterprise, year);
+			return true;
+		}
+		catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+	
 	
 	public String normalize(){
 		return value.toString();
