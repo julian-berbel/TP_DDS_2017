@@ -59,20 +59,21 @@ public class IndicatorsManager
 	    {
 	    	int columnIndex = columnNumber;
 		    int rowIndex = rowNumber+1;  
-		    
-			List<Indicator> list = new ArrayList<Indicator>();            
+		       
 		    while(!cellIsEmpty(sheet.getCell(columnIndex,rowIndex)))
 		    {
 		      	String name = sheet.getCell(columnIndex,rowIndex).getContents();
 		       	String formula = sheet.getCell(columnIndex+1,rowIndex).getContents();
 		       
 		       	Indicator indicator = new Indicator(name, formula);
-		       	list.add(indicator);	        	
+   
+		       	IndicatorRepository.addIndicator(indicator);
 		        	
 		       	rowIndex++;	        	
 		    }
 		       	w.close();
-		       	IndicatorRepository.setIndicatorList(list);
+		       	/* se estaban leyendo todos los indicadores y recien a lo ultimo se agregaban a indicatorRepository, entonces al 
+		       	   leer la cuenta 'Margen' que usa el @IngresoNeto tiraba error porque @IngresoNeto no existia en indicatorRepository todavia */
 	    }	    
     }
 	

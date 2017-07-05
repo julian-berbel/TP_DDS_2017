@@ -45,10 +45,8 @@ public class MethodWindow  extends SimpleWindow<MethodVM> {
 		indicatorTable.setNumberVisibleRows(10);
 				
 		Column<Method> columnName = new Column<Method>(indicatorTable);
-		columnName.setTitle("Metodologia").setFixedSize(100).bindContentsToProperty("name");
+		columnName.setTitle("Metodologia").setFixedSize(300).bindContentsToProperty("name");
 		
-		Column<Method> columnFormula = new Column<Method>(indicatorTable);
-		columnFormula.setTitle("Formula").setFixedSize(500).bindContentsToProperty("formula");
 		
 		new Button(panel2).setCaption("Nuevo").onClick(()->{});
 		
