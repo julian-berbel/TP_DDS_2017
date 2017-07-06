@@ -44,6 +44,8 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 	    new TextBox(panel1).setWidth(200).bindValueToProperty("formula");
 	    
 	    new Label(panel2).setText("Referencia:\nIndicadores: @<nombre del indicador>\nCuentas: #<nombre de la cuenta>");
+	    
+	 
 	}
 	
 	@Override

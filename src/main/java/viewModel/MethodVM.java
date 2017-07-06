@@ -2,14 +2,16 @@ package viewModel;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
-
+import modelo.IndicatorRepository;
 import modelo.Method;
+import modelo.MethodRepository;
 
 @Observable
 public class MethodVM {
@@ -19,7 +21,7 @@ public class MethodVM {
 	private Boolean methodsChanged;
 	
 	public MethodVM(){
-		methodsChanged = false;
+		setMethodsChanged(false);
 //		refreshList();
 	}
 	
@@ -27,7 +29,7 @@ public class MethodVM {
 		return methods;
 	}
 	
-	public void setMethod(List<Method> Method) {
+	public void setMethod(List<Method> methods) {
 		this.methods = methods;
 	}
 	
@@ -38,8 +40,26 @@ public class MethodVM {
 	public void setSelectedMethod(Method selectedMethod) {
 		this.selectedMethod = selectedMethod;
 	}
+
+	public void addNewMethod(Optional<Method> newMethod) {
+		newMethod.ifPresent(method -> MethodRepository.addMethod(method));
+//		refreshList();
+		
+	}
+
+	public Boolean getMethodsChanged() {
+		return methodsChanged;
+	}
+
+	public void setMethodsChanged(Boolean methodsChanged) {
+		this.methodsChanged = methodsChanged;
+	}
 	
-	
+	public void refreshList(){
+		methods = MethodRepository.getMethods();
+		ObservableUtils.firePropertyChanged(this, "methods");
+		methodsChanged = true;
+	}
 	
 /*	public void refreshList(){
 		indicators = IndicatorRepository.getIndicatorList();

@@ -16,6 +16,7 @@ import exceptions.DeleteUsedIndicatorException;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import viewModel.MethodVM;
+import modelo.Indicator;
 import modelo.Method;
 
 
@@ -48,7 +49,14 @@ public class MethodWindow  extends SimpleWindow<MethodVM> {
 		columnName.setTitle("Metodologia").setFixedSize(300).bindContentsToProperty("name");
 		
 		
-		new Button(panel2).setCaption("Nuevo").onClick(()->{});
+		new Button(panel2).setCaption("Nuevo").onClick(()->{
+			Optional<Method> newMethod = new EditMethodWindow(this, Optional.empty()).openWithReturn();
+			if(newMethod != null)
+			{
+				this.getModelObject().addNewMethod(newMethod);	
+			} 
+			
+		});
 		
 		new Button(panel2).setCaption("Editar").onClick(()->{ });
 		

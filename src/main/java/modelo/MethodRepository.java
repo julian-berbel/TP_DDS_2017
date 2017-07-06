@@ -5,19 +5,19 @@ import java.util.List;
 
 public class MethodRepository {
 
-	private List<Method> methods;
+	private static List<Method> methods;
 	
 	public MethodRepository()
 	{
 		methods = new ArrayList<Method>();
 	}
 	
-	public void addMethod(Method method)
+	public static void addMethod(Method method)
 	{
 		methods.add(method);
 	}
 	
-	public List<Method> getMethods()
+	public static List<Method> getMethods()
 	{
 		return methods;
 	}
