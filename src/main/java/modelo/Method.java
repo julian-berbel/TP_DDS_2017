@@ -9,14 +9,12 @@ import org.uqbar.commons.utils.Observable; //?
 public class Method {
 
 	private String name;
-	private OrderCriterion orderCriterion;
-	private List<FilterCriterion> filterCriteria;
+	private List<Criterion> criteria;
 
-	public Method(String name, OrderCriterion orderCriterion, List<FilterCriterion> filterCriteria) 
+	public Method(String name, List<Criterion> criteria) 
 	{
 		this.name = name;
-		this.orderCriterion = orderCriterion;
-		this.filterCriteria = filterCriteria;
+		this.criteria = criteria;
 	}
 
 	public String getName() 
@@ -24,19 +22,13 @@ public class Method {
 		return name;
 	}
 	
-	public List<FilterCriterion> getFilterCriteriaList() 
+	public List<Criterion> getCriteriaList() 
 	{
-		return filterCriteria;
-	}
-	
-	public OrderCriterion getOrderCriterion() 
-	{
-		return orderCriterion;
+		return criteria;
 	}
 	
 	public List<Enterprise> apply(List<Enterprise> enterprises){
-		return orderCriterion.apply(
-				Seq.seq(filterCriteria.stream())
-					.foldLeft(enterprises, (enterprise, filter) -> filter.apply(enterprise)));
+		return Seq.seq(criteria.stream())
+					.foldLeft(enterprises, (enterprise, criterion) -> criterion.apply(enterprise));
 	}
 }
