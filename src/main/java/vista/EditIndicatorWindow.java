@@ -16,7 +16,7 @@ import exceptions.EmptyFieldException;
 import exceptions.ExistingIndicatorException;
 import exceptions.FormulaErrorException;
 import exceptions.MissingIndicatorException;
-import modelo.Indicator;
+import modelo.indicator.Indicator;
 import viewModel.EditIndicatorVM;
 
 

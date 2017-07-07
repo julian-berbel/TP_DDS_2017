@@ -1,10 +1,11 @@
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import modelo.IndicatorRepository;
-import modelo.IndicatorsManager;
-import parser.IndicatorParser;
-import modelo.Indicator;
+
+import modelo.indicator.Indicator;
+import modelo.indicator.IndicatorRepository;
+import modelo.indicator.IndicatorsManager;
+import modelo.indicator.parser.IndicatorParser;
 
 public class IndicatorsManagerTest {
 	

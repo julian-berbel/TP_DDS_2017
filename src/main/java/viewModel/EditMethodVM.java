@@ -7,11 +7,11 @@ import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.ExistingIndicatorException;
-import modelo.Criterion;
-import modelo.Indicator;
-import modelo.IndicatorRepository;
-import modelo.Method;
-import modelo.MethodRepository;
+import modelo.indicator.Indicator;
+import modelo.indicator.IndicatorRepository;
+import modelo.method.Method;
+import modelo.method.MethodRepository;
+import modelo.method.criteria.Criterion;
 
 @Observable
 public class EditMethodVM {

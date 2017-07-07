@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import jxl.read.biff.BiffException;
-import modelo.Indicator;
-import modelo.IndicatorRepository;
+import modelo.indicator.Indicator;
+import modelo.indicator.IndicatorRepository;
 import viewModel.LoadIndicatorsVM;
 
 public class LoadIndicatorsTest {

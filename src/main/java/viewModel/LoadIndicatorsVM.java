@@ -4,7 +4,7 @@ import org.uqbar.commons.utils.Observable;
 
 import exceptions.RepeatedIndicatorExcelException;
 import jxl.read.biff.BiffException;
-import modelo.IndicatorsManager;
+import modelo.indicator.IndicatorsManager;
 
 
 @Observable

@@ -2,8 +2,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import org.junit.Test;
-import modelo.Enterprise;
-import parser.*;
+
+import modelo.enterprise.Enterprise;
+import modelo.indicator.parser.*;
 
 public class IndicatorParserTest {
 	Enterprise dummyEnterprise = new Enterprise(); 

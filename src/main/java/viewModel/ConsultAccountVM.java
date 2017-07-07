@@ -3,10 +3,11 @@ package viewModel;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
-import modelo.Calculation;
-import modelo.Enterprise;
-import modelo.EnterpriseRepository;
-import modelo.Period;
+
+import modelo.enterprise.Calculation;
+import modelo.enterprise.Enterprise;
+import modelo.enterprise.EnterpriseRepository;
+import modelo.enterprise.Period;
 
 @Observable
 public class ConsultAccountVM {

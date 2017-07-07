@@ -9,9 +9,9 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import modelo.Enterprise;
-import modelo.Indicator;
-import modelo.Period;
+import modelo.enterprise.Enterprise;
+import modelo.enterprise.Period;
+import modelo.indicator.Indicator;
 import viewModel.AnalyzeEnterpriseVM;
 
 @SuppressWarnings("serial")

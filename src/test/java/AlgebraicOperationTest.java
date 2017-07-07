@@ -2,8 +2,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import org.junit.Test;
-import modelo.Enterprise;
-import math.*;
+
+import modelo.enterprise.Enterprise;
+import modelo.indicator.math.*;
 
 public class AlgebraicOperationTest {
 	Constant firstOperand = new Constant(new BigDecimal(4));

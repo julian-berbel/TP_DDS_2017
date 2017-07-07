@@ -20,9 +20,9 @@ import exceptions.EmptyFieldException;
 import exceptions.ExistingIndicatorException;
 import exceptions.FormulaErrorException;
 import exceptions.MissingIndicatorException;
-import modelo.Indicator;
-import modelo.Method;
-import modelo.Criterion;
+import modelo.indicator.Indicator;
+import modelo.method.Method;
+import modelo.method.criteria.Criterion;
 import viewModel.EditIndicatorVM;
 import viewModel.EditMethodVM;
 

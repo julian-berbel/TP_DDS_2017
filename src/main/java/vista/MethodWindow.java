@@ -16,8 +16,8 @@ import exceptions.DeleteUsedIndicatorException;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import viewModel.MethodVM;
-import modelo.Indicator;
-import modelo.Method;
+import modelo.indicator.Indicator;
+import modelo.method.Method;
 
 
 @SuppressWarnings("serial")

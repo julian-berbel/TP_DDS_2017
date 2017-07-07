@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import modelo.Indicator;
-import modelo.IndicatorRepository;
+import modelo.indicator.Indicator;
+import modelo.indicator.IndicatorRepository;
 import viewModel.IndicatorsVM;
 
 public class IndicatorsTest {

@@ -20,7 +20,7 @@ import exceptions.RepeatedIndicatorExcelException;
 import exceptions.RepeatedIndicatorInSystemException;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
-import modelo.Indicator;
+import modelo.indicator.Indicator;
 import viewModel.IndicatorsVM;
 
 

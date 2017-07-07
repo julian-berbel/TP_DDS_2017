@@ -6,6 +6,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+import modelo.enterprise.Enterprise;
+import modelo.enterprise.EnterpriseRepository;
+
 public class JsonMapper {
 
 	public void mapper(JsonReader reader)

@@ -8,9 +8,9 @@ import org.uqbar.commons.utils.Observable;
 import exceptions.DeleteUsedIndicatorException;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
-import modelo.Indicator;
-import modelo.IndicatorRepository;
-import modelo.IndicatorsManager;
+import modelo.indicator.Indicator;
+import modelo.indicator.IndicatorRepository;
+import modelo.indicator.IndicatorsManager;
 
 import org.uqbar.commons.model.ObservableUtils;
 
