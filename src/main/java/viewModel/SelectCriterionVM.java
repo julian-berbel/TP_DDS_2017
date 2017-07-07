@@ -1,7 +1,7 @@
 package viewModel;
 
 
-import modelo.Criterion;
+import modelo.method.criteria.Criterion;
 
 public class SelectCriterionVM {
 

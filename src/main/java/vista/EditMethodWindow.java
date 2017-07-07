@@ -16,9 +16,8 @@ import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 
-
-import modelo.Method;
-import modelo.Criterion;
+import modelo.method.Method;
+import modelo.method.criteria.Criterion;
 import viewModel.EditMethodVM;
 
 @SuppressWarnings("serial")

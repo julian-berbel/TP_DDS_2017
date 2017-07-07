@@ -13,7 +13,7 @@ import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
 import viewModel.MethodVM;
-import modelo.Method;
+import modelo.method.Method;
 
 
 @SuppressWarnings("serial")
@@ -67,44 +67,5 @@ public class MethodWindow  extends SimpleWindow<MethodVM> {
 		new Button(actions).setCaption("Volver").onClick(()->this.close()); //hacer lo de guardar
 	}
 	
-/*	private void verifyChangesAndSave()
-	{
-		//Verifico si se hicieron cambios
-		if(this.getModelObject().verifyIfSomethingChanged())
-		{
-			//Si se hicieron cambios, muestro un dialogo preguntando si se quieren guardar esos cambios
-			//Luego guardo los cambios o salgo de la ventana, dependiendo de la eleccion del usuario
-			
-			SaveChangesWindow window = new SaveChangesWindow(this);			
-			window.onAccept(()->applySave());
-			window.open();
-		}		
-		
-		this.close();
-	}
-	
-	private void applySave()
-	{
-		try
-		{				
-			this.getModelObject().saveChanges();
-		}
-		catch(BiffException e)	//es la excepcion que tira al invocar el metodo, que a su vez contiene la excepcion que tira el metodo
-		{	
-			Error.show(this, "El archivo no existe o no es un archivo '.xls'  ");
-			e.printStackTrace();
-		}
-		catch(WriteException e)
-		{
-			Error.show(this, "No se a podido modificar el archivo");
-			e.printStackTrace();
-		}
-		catch(IOException e)
-		{
-			Error.show(this, "El archivo que se intenta abrir no existe");
-			e.printStackTrace();
-		}
-		
-	}*/
 	
 }

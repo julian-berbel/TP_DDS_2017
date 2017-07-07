@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.ExistingIndicatorException;
-import modelo.Indicator;
-import modelo.IndicatorRepository;
+import modelo.indicator.Indicator;
+import modelo.indicator.IndicatorRepository;
 
 @Observable
 public class EditIndicatorVM {

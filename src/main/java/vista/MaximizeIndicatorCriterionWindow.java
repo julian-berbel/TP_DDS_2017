@@ -1,22 +1,20 @@
 package vista;
 
+
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
-
-import java.util.Optional;
-
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
 
-import modelo.Criterion;
-import modelo.Indicator;
-import modelo.MaximizeIndicatorCriterion;
-import modelo.Method;
 import viewModel.MaximizeIndicatorCriterionVM;
+import modelo.method.criteria.Criterion;
+import modelo.indicator.Indicator;
+import modelo.method.criteria.order.MaximizeIndicatorCriterion;
+
 
 @SuppressWarnings("serial")
 
@@ -49,7 +47,8 @@ public class MaximizeIndicatorCriterionWindow extends SimpleWindow<MaximizeIndic
 		indicatorTable.setHeight(200);
 		indicatorTable.setNumberVisibleRows(10);
 		
-		new Button(panel2).setCaption("Aceptar").onClick(()->{
+		new Button(panel2).setCaption("Aceptar").onClick(()->
+		{
 			Criterion newCriterion = new MaximizeIndicatorCriterion("nombre", this.getModelObject().getSelectedIndicator());	
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
@@ -60,7 +59,8 @@ public class MaximizeIndicatorCriterionWindow extends SimpleWindow<MaximizeIndic
 	@Override
 	protected void addActions(Panel actionsPanel) {}
 	
-	public Criterion openWithReturn(){
+	public Criterion openWithReturn()
+	{
 		this.getModelObject().refreshList();
 		this.open();
 		return getModelObject().getTargetCriterion();

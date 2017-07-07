@@ -8,7 +8,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import modelo.Criterion;
+import modelo.method.criteria.Criterion;
 import viewModel.SelectCriterionVM;
 
 @SuppressWarnings("serial")

@@ -9,9 +9,9 @@ import org.uqbar.commons.utils.Observable;
 
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
-import modelo.IndicatorRepository;
-import modelo.Method;
-import modelo.MethodRepository;
+import modelo.indicator.IndicatorRepository;
+import modelo.method.Method;
+import modelo.method.MethodRepository;
 
 @Observable
 public class MethodVM {

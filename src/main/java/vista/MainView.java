@@ -1,8 +1,8 @@
 package vista;
 
-import modelo.EnterpriseRepository;
-import modelo.IndicatorRepository;
-import parser.IndicatorParser;
+import modelo.enterprise.EnterpriseRepository;
+import modelo.indicator.IndicatorRepository;
+import modelo.indicator.parser.IndicatorParser;
 import viewModel.MainVM;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.layout.ColumnLayout;

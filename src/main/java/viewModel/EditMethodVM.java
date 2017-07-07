@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import modelo.Criterion;
-import modelo.Method;
+import modelo.method.Method;
+import modelo.method.criteria.Criterion;
 
 @Observable
 public class EditMethodVM 

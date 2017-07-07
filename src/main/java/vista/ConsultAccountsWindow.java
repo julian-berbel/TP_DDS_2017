@@ -12,8 +12,8 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import modelo.Calculation;
-import modelo.Enterprise;
+import modelo.enterprise.Calculation;
+import modelo.enterprise.Enterprise;
 import viewModel.ConsultAccountVM;
 
 

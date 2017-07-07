@@ -1,14 +1,13 @@
 package viewModel;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import modelo.Criterion;
-import modelo.Indicator;
-import modelo.IndicatorRepository;
+import modelo.method.criteria.Criterion;
+import modelo.indicator.Indicator;
+import modelo.indicator.IndicatorRepository;
 
 @Observable
 public class MaximizeIndicatorCriterionVM {
