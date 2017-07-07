@@ -1,6 +1,6 @@
 package vista;
 
-import java.io.IOException;
+
 import java.util.Optional;
 
 import org.uqbar.arena.layout.ColumnLayout;
@@ -12,11 +12,7 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import exceptions.DeleteUsedIndicatorException;
-import jxl.read.biff.BiffException;
-import jxl.write.WriteException;
 import viewModel.MethodVM;
-import modelo.Indicator;
 import modelo.Method;
 
 
@@ -38,18 +34,19 @@ public class MethodWindow  extends SimpleWindow<MethodVM> {
 		Panel panel2 = new Panel(mainPanel);
 		panel2.setLayout(new ColumnLayout(4));
 		
-		Table<Method> indicatorTable = new Table<Method>(panel1, Method.class);
-		indicatorTable.bindItemsToProperty("method");
-		indicatorTable.bindValueToProperty("selectedMethod");
-		indicatorTable.setWidth(600);
-		indicatorTable.setHeight(200);
-		indicatorTable.setNumberVisibleRows(10);
+		Table<Method> MethodTable = new Table<Method>(panel1, Method.class);
+		MethodTable.bindItemsToProperty("method");
+		MethodTable.bindValueToProperty("selectedMethod");
+		MethodTable.setWidth(600);
+		MethodTable.setHeight(200);
+		MethodTable.setNumberVisibleRows(10);
 				
-		Column<Method> columnName = new Column<Method>(indicatorTable);
+		Column<Method> columnName = new Column<Method>(MethodTable);
 		columnName.setTitle("Metodologia").setFixedSize(300).bindContentsToProperty("name");
 		
 		
-		new Button(panel2).setCaption("Nuevo").onClick(()->{
+		new Button(panel2).setCaption("Nuevo").onClick(()->
+		{
 			Optional<Method> newMethod = new EditMethodWindow(this, Optional.empty()).openWithReturn();
 			if(newMethod != null)
 			{

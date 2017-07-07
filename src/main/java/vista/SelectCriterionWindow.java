@@ -1,5 +1,6 @@
 package vista;
 
+
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
@@ -7,6 +8,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
+import modelo.Criterion;
 import viewModel.SelectCriterionVM;
 
 @SuppressWarnings("serial")
@@ -28,7 +30,11 @@ public class SelectCriterionWindow extends SimpleWindow<SelectCriterionVM>
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new ColumnLayout(2));
 		
-		new Button(panel1).setCaption("Maximizar indicador                                      ").onClick(()->{ });
+		new Button(panel1).setCaption("Maximizar indicador                                      ").onClick(()->{ 
+			Criterion newCriterion = new MaximizeIndicatorCriterionWindow(this).openWithReturn();
+			this.getModelObject().setTargetCriterion(newCriterion);
+			this.close();
+		});
 		new Button(panel1).setCaption("Minimizar indicador                                       ").onClick(()->{ });
 		new Button(panel1).setCaption("Mejor indicador en los ultimos N años").onClick(()->{ });
 		new Button(panel1).setCaption("Antigüedad de empresa                               ").onClick(()->{ });
@@ -37,8 +43,16 @@ public class SelectCriterionWindow extends SimpleWindow<SelectCriterionVM>
 	
 
 	@Override
-	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Volver").onClick(()->this.close());
-		
+	protected void addActions(Panel actions)
+	{
+		new Button(actions).setCaption("Volver").onClick(()->this.close());	
 	}
+	
+	public Criterion openWithReturn() 
+	{
+		this.open();
+		return getModelObject().getTargetCriterion();
+	}
+	
+	
 }
