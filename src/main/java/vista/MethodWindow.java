@@ -50,11 +50,20 @@ public class MethodWindow  extends SimpleWindow<MethodVM> {
 		Column<Method> columnFormula = new Column<Method>(indicatorTable);
 		columnFormula.setTitle("Formula").setFixedSize(500).bindContentsToProperty("formula");
 		
-		new Button(panel2).setCaption("Nuevo").onClick(()->{});
+		new Button(panel2).setCaption("Nuevo").onClick(()->{
+			Optional<Method> newMethod = new EditMethodWindow(this, Optional.empty()).openWithReturn();
+			if(newMethod != null)
+			{
+				this.getModelObject().addNewMethod(newMethod);
+			}
+		});
 		
-		new Button(panel2).setCaption("Editar").onClick(()->{ });
+		new Button(panel2).setCaption("Editar").onClick(()->{			
+			Optional<Method> targetMethod = new EditMethodWindow(this, Optional.of(this.getModelObject().getSelectedMethod())).openWithReturn();
+			this.getModelObject().replaceSelectedMethod(targetMethod);
+		});
 		
-		new Button(panel2).setCaption("Borrar").onClick(()->{});
+		new Button(panel2).setCaption("Borrar").onClick(()->{this.getModelObject().deleteMethod();});
 		
 		new Button(panel2).setCaption("Ejecutar").onClick(()->{ });
 	}

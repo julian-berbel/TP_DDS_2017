@@ -2,6 +2,7 @@ package viewModel;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
@@ -37,6 +38,21 @@ public class MethodVM {
 	
 	public void setSelectedMethod(Method selectedMethod) {
 		this.selectedMethod = selectedMethod;
+	}
+	
+	public void deleteMethod()
+	{
+		
+	}
+	
+	public void addNewMethod(Optional<Method> method)
+	{
+		
+	}
+	
+	public void replaceSelectedMethod(Optional<Method> method)
+	{
+		
 	}
 	
 	

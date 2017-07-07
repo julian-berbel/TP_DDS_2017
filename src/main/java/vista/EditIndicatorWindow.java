@@ -37,10 +37,10 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 		Panel panel2 = new Panel(mainPanel);
 		panel2.setLayout(new VerticalLayout());
 		
-		new Label(panel1).setText("Nombre del nuevo indicador:");
+		new Label(panel1).setText("Nombre del indicador:");
 	    new TextBox(panel1).setWidth(200).bindValueToProperty("name");
 	    
-	    new Label(panel1).setText("Formula del nuevo indicador:");
+	    new Label(panel1).setText("Formula del indicador:");
 	    new TextBox(panel1).setWidth(200).bindValueToProperty("formula");
 	    
 	    new Label(panel2).setText("Referencia:\nIndicadores: @<nombre del indicador>\nCuentas: #<nombre de la cuenta>");
