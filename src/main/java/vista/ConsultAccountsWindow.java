@@ -43,13 +43,11 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 		lstEnterprises.setWidth(220);
 		lstEnterprises.setHeight(220);
 		
-		//new Label(panel1).setText("\t\t\t\t\t\t\t\tPeriodos");
 		List<Enterprise> lstPeriods = new List<Enterprise>(panel1);
 		lstPeriods.bindItemsToProperty("periods");
 		lstPeriods.bindValueToProperty("selectedPeriod");
 		lstPeriods.setWidth(220);
 		lstPeriods.setHeight(220);
-		
 		
 		Table<Calculation> tableCalculations = new Table<Calculation>(mainPanel, Calculation.class);		
 		tableCalculations.setNumberVisibleRows(10).bindItemsToProperty("calculations");
