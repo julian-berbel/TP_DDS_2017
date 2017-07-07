@@ -22,6 +22,7 @@ import exceptions.FormulaErrorException;
 import exceptions.MissingIndicatorException;
 import modelo.Indicator;
 import modelo.Method;
+import modelo.Criterion;
 import viewModel.EditIndicatorVM;
 import viewModel.EditMethodVM;
 
@@ -56,13 +57,11 @@ public class EditMethodWindow extends Dialog<EditMethodVM> {
 		MethodTable.setNumberVisibleRows(10);
 		
 		new Button(panel2).setCaption("Agregar criterio").onClick(()->{
-			
-			
+			new SelectCriterionWindow(this).open();
 		});
 		
 		new Button(panel2).setCaption("Borrar criterio seleccionado").onClick(()->{
-			
-			
+			this.getModelObject().deleteCriteria();	
 		});
 	}
 	
