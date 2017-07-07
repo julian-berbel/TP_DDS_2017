@@ -31,11 +31,11 @@ public class MethodVM {
 		}	
 	}
 	
-	public List<Method> getMethod() {
+	public List<Method> getMethods() {
 		return methods;
 	}
 	
-	public void setMethod(List<Method> methods) {
+	public void setMethods(List<Method> methods) {
 		this.methods = methods;
 	}
 	

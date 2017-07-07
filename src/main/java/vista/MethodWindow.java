@@ -35,7 +35,7 @@ public class MethodWindow  extends SimpleWindow<MethodVM> {
 		panel2.setLayout(new ColumnLayout(4));
 		
 		Table<Method> MethodTable = new Table<Method>(panel1, Method.class);
-		MethodTable.bindItemsToProperty("method");
+		MethodTable.bindItemsToProperty("methods");
 		MethodTable.bindValueToProperty("selectedMethod");
 		MethodTable.setWidth(600);
 		MethodTable.setHeight(200);
@@ -61,7 +61,7 @@ public class MethodWindow  extends SimpleWindow<MethodVM> {
 		
 		new Button(panel2).setCaption("Borrar").onClick(()->{});
 		
-		new Button(panel2).setCaption("Ejecutar").onClick(()->{ });
+		new Button(panel2).setCaption("Ejecutar").onClick(()-> new MethodResultWindow(this, this.getModelObject().getSelectedMethod()).open());
 	}
 	
 	@Override
