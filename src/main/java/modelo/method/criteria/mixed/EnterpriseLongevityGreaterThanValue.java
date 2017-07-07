@@ -1,29 +1,13 @@
 package modelo.method.criteria.mixed;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import modelo.method.criteria.MixedCriterion;
+import modelo.method.criteria.filter.EnterpriseMinimumLongevityCriterion;
+import modelo.method.criteria.order.EnterpriseAgeCriterion;
 
-import modelo.enterprise.Enterprise;
-import modelo.method.criteria.FilterCriterion;
-
-public class EnterpriseLongevityGreaterThanValue extends FilterCriterion{
-	private int  numberYears;
-	
-	
-	
-	
-	public EnterpriseLongevityGreaterThanValue(String name, int years) 
+public class EnterpriseLongevityGreaterThanValue extends MixedCriterion{
+	public EnterpriseLongevityGreaterThanValue(int years) 
 	{
-		super(name);		
-		this.numberYears = years;
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public boolean criterion(Enterprise enterprise) 
-	{
-		return enterprise.getPeriods().stream()
-				.map(period -> period.getYear())
-				.anyMatch(year->year<=new Date().getYear()+ 1900-numberYears);
+		this.filterCriterion = new EnterpriseMinimumLongevityCriterion(years);
+		this.orderCriterion = new EnterpriseAgeCriterion();
 	}
 }

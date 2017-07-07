@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 
 import modelo.indicator.Indicator;
 
-public class IndicatorMedianHigherThanValueCriterion extends IndicatorMedianCompare
+public class IndicatorMedianHigherThanValueCriterion extends IndicatorMedianCompareCriterion
 {
-	public IndicatorMedianHigherThanValueCriterion(String name,Indicator indicator, BigDecimal value, int years) 
+	public IndicatorMedianHigherThanValueCriterion(Indicator indicator, BigDecimal value, int years) 
 	{
-		super(name, indicator, value, years);
+		super(indicator, value, years);
 	}
 	
 	protected boolean compare(int result){

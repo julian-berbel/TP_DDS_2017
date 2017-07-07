@@ -1,4 +1,5 @@
 package modelo.enterprise;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,13 @@ public class Enterprise
 				.findFirst()
 				.get()
 				.getCalculation(name);
+	}
+	
+	public int age(){
+		return Year.now().getValue() - this.getPeriods().stream()
+											.mapToInt(period -> period.getYear())
+											.min()
+											.getAsInt();
 	}
 	
 	@Override

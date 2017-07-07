@@ -7,26 +7,14 @@ import java.util.stream.Stream;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.Period;
 import modelo.indicator.Indicator;
-import modelo.method.criteria.FilterCriterion;
 
-public abstract class IndicatorAverageCompare extends FilterCriterion
+public abstract class IndicatorAverageCompareCriterion extends IndicatorStatisticCompareCriterion
 {
-
-	private int lastNYears;
-	private BigDecimal value;
-	Indicator indicator;
-	
-	public IndicatorAverageCompare(String name, Indicator indicator, BigDecimal value, int years) 
+	public IndicatorAverageCompareCriterion(Indicator indicator, BigDecimal value, int years) 
 	{
-		super(name);
-		this.value = value;
-		this.indicator = indicator;
-		this.lastNYears = years;
+		super(indicator, value, years);
 	}
 	
-	protected abstract boolean compare(int result);
-
-	@Override
 	public boolean criterion(Enterprise enterprise) 
 	{
 		Stream<Period> periods = enterprise.getPeriods().stream();
@@ -36,5 +24,4 @@ public abstract class IndicatorAverageCompare extends FilterCriterion
 								.divide(new BigDecimal(periods.count()));
 		return compare(average.compareTo(value));
 	}
-
 }

@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 
 import modelo.indicator.Indicator;
 
-public class IndicatorAverageHigherThanValueCriterion extends IndicatorAverageCompare
+public class IndicatorAverageHigherThanValueCriterion extends IndicatorAverageCompareCriterion
 {
-	public IndicatorAverageHigherThanValueCriterion(String name, Indicator indicator, BigDecimal value, int years) 
+	public IndicatorAverageHigherThanValueCriterion(Indicator indicator, BigDecimal value, int years) 
 	{
-		super(name, indicator, value, years);
+		super(indicator, value, years);
 	}
 
 	protected boolean compare(int result){
