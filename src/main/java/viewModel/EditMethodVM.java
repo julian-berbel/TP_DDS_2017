@@ -3,6 +3,7 @@ package viewModel;
 import java.util.List;
 import java.util.Optional;
 
+import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.ExistingIndicatorException;
@@ -59,6 +60,16 @@ public class EditMethodVM {
 
 	public void setSelectedCriteria(Criterion selectedCriteria) {
 		this.selectedCriteria = selectedCriteria;
+	}
+
+	public void deleteCriteria() {
+		criteria.remove(selectedCriteria);
+		refreshList();
+	}
+
+	public void refreshList(){
+		ObservableUtils.firePropertyChanged(this, "criteria");
+		editing = true;
 	}
 
 	
