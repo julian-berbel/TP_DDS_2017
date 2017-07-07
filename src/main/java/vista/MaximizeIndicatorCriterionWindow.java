@@ -49,7 +49,7 @@ public class MaximizeIndicatorCriterionWindow extends SimpleWindow<MaximizeIndic
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = new MaximizeIndicatorCriterion("nombre", this.getModelObject().getSelectedIndicator());	
+			Criterion newCriterion = new MaximizeIndicatorCriterion( this.getModelObject().getSelectedIndicator());	
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});
