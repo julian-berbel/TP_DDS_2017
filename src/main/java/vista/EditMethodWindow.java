@@ -13,9 +13,16 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
+
+import exceptions.EmptyFieldException;
+import exceptions.ExistingIndicatorException;
+import exceptions.FormulaErrorException;
+import exceptions.MissingIndicatorException;
+
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 
+import modelo.indicator.Indicator;
 import modelo.method.Method;
 import modelo.method.criteria.Criterion;
 import viewModel.EditMethodVM;
@@ -79,12 +86,26 @@ public class EditMethodWindow extends Dialog<EditMethodVM> {
 		});
 	}
 	
+	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Volver").onClick(this::close); 
+		new Button(actions).setCaption("Aceptar").onClick(this::accept);
+		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
 	}
 	
-	public Optional<Method> openWithReturn(){
+	@Override
+	public void cancel(){
+		this.getModelObject().cancel();
+		super.cancel();
+	}
+	
+	@Override
+	protected void executeTask() {
+		this.getModelObject().accept();
+		super.executeTask();
+	}
+		
+		public Optional<Method> openWithReturn(){
 		this.open();
 		return getModelObject().getTargetMethod();
 	}

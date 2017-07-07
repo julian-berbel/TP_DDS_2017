@@ -7,8 +7,10 @@ import java.util.Optional;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
+import exceptions.ExistingIndicatorException;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
+import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 import modelo.method.Method;
 import modelo.method.MethodRepository;
@@ -22,7 +24,11 @@ public class MethodVM {
 	
 	public MethodVM(){
 		setMethodsChanged(false);
-//		refreshList();
+		if(MethodRepository.getMethods() !=null)
+		{
+			
+			refreshList();
+		}	
 	}
 	
 	public List<Method> getMethod() {
@@ -42,8 +48,9 @@ public class MethodVM {
 	}
 
 	public void addNewMethod(Optional<Method> newMethod) {
-		newMethod.ifPresent(method -> MethodRepository.addMethod(method));
-//		refreshList();
+		
+		newMethod.ifPresent(method ->MethodRepository.addMethod(method));
+		refreshList();
 		
 	}
 
@@ -56,6 +63,7 @@ public class MethodVM {
 	}
 	
 	public void refreshList(){
+		
 		methods = MethodRepository.getMethods();
 		ObservableUtils.firePropertyChanged(this, "methods");
 		methodsChanged = true;

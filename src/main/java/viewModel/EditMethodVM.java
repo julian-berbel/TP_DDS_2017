@@ -7,7 +7,11 @@ import java.util.Optional;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
+import exceptions.ExistingIndicatorException;
+import modelo.indicator.Indicator;
+import modelo.indicator.IndicatorRepository;
 import modelo.method.Method;
+import modelo.method.MethodRepository;
 import modelo.method.criteria.Criterion;
 
 @Observable
@@ -87,7 +91,15 @@ public class EditMethodVM
 		editing = true;
 	}
 
+	public void accept(){
+		//if(!editing && MethodRepository.alreadyExists(name)) throw new ExistingIndicatorException(name);
+		
+		targetMethod = Optional.of(new Method(name, criteria));
+	}
 	
+	public void cancel(){
+		targetMethod = Optional.empty();
+	}
 	
 	
 	

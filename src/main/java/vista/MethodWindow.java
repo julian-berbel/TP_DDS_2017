@@ -48,8 +48,10 @@ public class MethodWindow  extends SimpleWindow<MethodVM> {
 		new Button(panel2).setCaption("Nuevo").onClick(()->
 		{
 			Optional<Method> newMethod = new EditMethodWindow(this, Optional.empty()).openWithReturn();
+			
 			if(newMethod != null)
 			{
+				
 				this.getModelObject().addNewMethod(newMethod);	
 			} 
 			
