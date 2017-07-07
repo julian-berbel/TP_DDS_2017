@@ -30,28 +30,37 @@ public class SelectCriterionWindow extends SimpleWindow<SelectCriterionVM>
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new ColumnLayout(2));
 		
-		new Button(panel1).setCaption("Maximizar indicador                                      ").onClick(()->{ 
+		new Button(panel1).setCaption("Maximizar indicador").onClick(()->{ 
 			Criterion newCriterion = new MaximizeIndicatorCriterionWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		});
-		new Button(panel1).setCaption("Minimizar indicador                                       ").onClick(()->{
+		}).setWidth(300);
+		new Button(panel1).setCaption("Minimizar indicador").onClick(()->{
 			Criterion newCriterion = new MinimizeIndicatorCriterionWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		});
-		new Button(panel1).setCaption("Mejor indicador en los ultimos N años").onClick(()->{ });
-		new Button(panel1).setCaption("Antigüedad de empresa                               ").onClick(()->{ });
-		new Button(panel1).setCaption("Indicador mayor a cierto valor                 ").onClick(()->{
+		}).setWidth(300);
+		new Button(panel1).setCaption("Mejor indicador en los ultimos N años").onClick(()->{ }).setWidth(300);
+	
+		new Button(panel1).setCaption("Antigüedad de empresa").onClick(()->{ }).setWidth(300);
+		new Button(panel1).setCaption("Indicador mayor a cierto valor").onClick(()->{
 			Criterion newCriterion = new IndicatorGreaterThanValueWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		});
-		new Button(panel1).setCaption("Indicador menor a cierto valor                 ").onClick(()->{
+		}).setWidth(300);
+		new Button(panel1).setCaption("Indicador menor a cierto valor                        ").onClick(()->{
 			Criterion newCriterion = new IndicatorLessThanValueWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		});
+		}).setWidth(300);
+		new Button(panel1).setCaption("Indicador creciente en los ultimos N años").onClick(()->{ }).setWidth(300);
+		new Button(panel1).setCaption("Indicador decreciente en los ultimos N años").onClick(()->{ }).setWidth(300);
+		new Button(panel1).setCaption("Promedio mayor a cierto valor").onClick(()->{
+			new AverageHigherThanValueWindow();
+		}).setWidth(300);
+		new Button(panel1).setCaption("Promedio menor a cierto valor").onClick(()->{
+			new AverageLessThanValueWindow();
+		}).setWidth(300);
 	}
 	
 
