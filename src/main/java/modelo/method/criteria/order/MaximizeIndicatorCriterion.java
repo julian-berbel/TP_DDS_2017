@@ -16,7 +16,7 @@ public class MaximizeIndicatorCriterion extends OrderCriterion {
 
 	public int criterion(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
 		int currentYear = Year.now().getValue();
-		return indicator.reduce(oneEnterprise, currentYear).compareTo(indicator.reduce(anotherEnterprise, currentYear));
+		return indicator.reduce(anotherEnterprise, currentYear).compareTo(indicator.reduce(oneEnterprise, currentYear));
 	}
 
 }
