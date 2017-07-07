@@ -3,9 +3,9 @@ package modelo;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class FilterCriterion 
+public abstract class FilterCriterion implements Criterion
 {
-	String filterName;
+	private String filterName;
 	
 	public FilterCriterion(String name)
 	{

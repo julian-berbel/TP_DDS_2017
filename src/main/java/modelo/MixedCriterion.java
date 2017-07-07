@@ -2,7 +2,8 @@ package modelo;
 
 import java.util.List;
 
-public class MixedCriterion {
+public class MixedCriterion implements Criterion
+{
 	private OrderCriterion orderCriterion;
 	private FilterCriterion filterCriterion;
 	
