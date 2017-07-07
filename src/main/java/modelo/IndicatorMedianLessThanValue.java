@@ -4,6 +4,7 @@ package modelo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class IndicatorMedianLessThanValue extends FilterCriterion
 {
@@ -27,7 +28,7 @@ public class IndicatorMedianLessThanValue extends FilterCriterion
 		int  i = numberYears;
 		BigDecimal centinelValue = new BigDecimal("0");
 		ArrayList<BigDecimal> arrayListBigDecimal = new ArrayList<BigDecimal>();
-		for(int actualYear = 2017;i>0;i--)
+		for(int actualYear =(new Date().getYear())+ 1900;i>0;i--)
 		{
 			arrayListBigDecimal.add(indicator.reduce(enterprise, actualYear-i)) ;
 		}

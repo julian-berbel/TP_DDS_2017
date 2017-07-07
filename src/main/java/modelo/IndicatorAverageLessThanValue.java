@@ -2,6 +2,7 @@
 package modelo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class IndicatorAverageLessThanValue extends FilterCriterion{
 	private int  numberYears;
@@ -22,7 +23,7 @@ public class IndicatorAverageLessThanValue extends FilterCriterion{
 	{
 		int  i = numberYears;
 		BigDecimal centinelValue = new BigDecimal("0");
-		for(int actualYear = 2017;i>0;i--)
+		for(int actualYear =(new Date().getYear())+ 1900;i>0;i--)
 		{
 			centinelValue = centinelValue.add(indicator.reduce(enterprise, actualYear-i)) ;
 		

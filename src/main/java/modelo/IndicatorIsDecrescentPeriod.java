@@ -2,6 +2,7 @@ package modelo;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class IndicatorIsDecrescentPeriod extends FilterCriterion
@@ -24,7 +25,7 @@ public class IndicatorIsDecrescentPeriod extends FilterCriterion
 		int  i = numberYears;
 		ArrayList<BigDecimal> arrayListBigDecimal = new ArrayList<BigDecimal>();
 		
-		for(int actualYear = 2017;i>0;i--)
+		for(int actualYear =(new Date().getYear())+ 1900;i>0;i--)
 		{
 			arrayListBigDecimal.add(indicator.reduce(enterprise, actualYear-i)) ;
 		}	
