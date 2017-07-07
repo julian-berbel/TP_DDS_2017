@@ -9,6 +9,7 @@ import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
 import modelo.method.criteria.Criterion;
+import modelo.method.criteria.filter.IncreasingIndicatorValueCriterion;
 import viewModel.SelectCriterionVM;
 
 @SuppressWarnings("serial")
@@ -34,33 +35,49 @@ public class SelectCriterionWindow extends SimpleWindow<SelectCriterionVM>
 			Criterion newCriterion = new MaximizeIndicatorCriterionWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(300);
+		}).setWidth(325);
+		
 		new Button(panel1).setCaption("Minimizar indicador").onClick(()->{
 			Criterion newCriterion = new MinimizeIndicatorCriterionWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(300);
-		new Button(panel1).setCaption("Mejor indicador en los ultimos N años").onClick(()->{ }).setWidth(300);
+		}).setWidth(325);
+		
+		new Button(panel1).setCaption("Mejor indicador en los ultimos N años").onClick(()->{ }).setWidth(325);
 	
-		new Button(panel1).setCaption("Antigüedad de empresa").onClick(()->{ }).setWidth(300);
+		new Button(panel1).setCaption("Antigüedad de empresa").onClick(()->{ }).setWidth(325);
+		
 		new Button(panel1).setCaption("Indicador mayor a cierto valor").onClick(()->{
 			Criterion newCriterion = new IndicatorGreaterThanValueWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(300);
-		new Button(panel1).setCaption("Indicador menor a cierto valor                        ").onClick(()->{
+		}).setWidth(325);
+		
+		new Button(panel1).setCaption("Indicador menor a cierto valor").onClick(()->{
 			Criterion newCriterion = new IndicatorLessThanValueWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(300);
-		new Button(panel1).setCaption("Indicador creciente en los ultimos N años").onClick(()->{ }).setWidth(300);
-		new Button(panel1).setCaption("Indicador decreciente en los ultimos N años").onClick(()->{ }).setWidth(300);
+		}).setWidth(325);
+		
+		new Button(panel1).setCaption("Indicador creciente en los ultimos N años").onClick(()->{
+			Criterion newCriterion = new IncreasingIndicatorValueCriterionWindow(this).openWithReturn();
+			this.getModelObject().setTargetCriterion(newCriterion);
+			this.close();
+		}).setWidth(325);
+		
+		new Button(panel1).setCaption("Indicador decreciente en los ultimos N años").onClick(()->{
+			Criterion newCriterion = new DecreasingIndicatorValueCriterionWindow(this).openWithReturn();
+			this.getModelObject().setTargetCriterion(newCriterion);
+			this.close();
+		}).setWidth(325);
+		
 		new Button(panel1).setCaption("Promedio mayor a cierto valor").onClick(()->{
 			new AverageHigherThanValueWindow();
-		}).setWidth(300);
+		}).setWidth(325);
+		
 		new Button(panel1).setCaption("Promedio menor a cierto valor").onClick(()->{
 			new AverageLessThanValueWindow();
-		}).setWidth(300);
+		}).setWidth(325);
 	}
 	
 
