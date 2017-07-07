@@ -3,7 +3,7 @@ package modelo;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class OrderCriterion 
+public abstract class OrderCriterion implements Criterion
 {
 	private String criterionName;
 	
