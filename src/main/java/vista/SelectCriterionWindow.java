@@ -35,10 +35,23 @@ public class SelectCriterionWindow extends SimpleWindow<SelectCriterionVM>
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});
-		new Button(panel1).setCaption("Minimizar indicador                                       ").onClick(()->{ });
+		new Button(panel1).setCaption("Minimizar indicador                                       ").onClick(()->{
+			Criterion newCriterion = new MinimizeIndicatorCriterionWindow(this).openWithReturn();
+			this.getModelObject().setTargetCriterion(newCriterion);
+			this.close();
+		});
 		new Button(panel1).setCaption("Mejor indicador en los ultimos N años").onClick(()->{ });
 		new Button(panel1).setCaption("Antigüedad de empresa                               ").onClick(()->{ });
-		new Button(panel1).setCaption("Indicador mayor a cierto valor                 ").onClick(()->{ });
+		new Button(panel1).setCaption("Indicador mayor a cierto valor                 ").onClick(()->{
+			Criterion newCriterion = new IndicatorGreaterThanValueWindow(this).openWithReturn();
+			this.getModelObject().setTargetCriterion(newCriterion);
+			this.close();
+		});
+		new Button(panel1).setCaption("Indicador menor a cierto valor                 ").onClick(()->{
+			Criterion newCriterion = new IndicatorLessThanValueWindow(this).openWithReturn();
+			this.getModelObject().setTargetCriterion(newCriterion);
+			this.close();
+		});
 	}
 	
 
