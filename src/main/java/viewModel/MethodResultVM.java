@@ -14,6 +14,7 @@ public class MethodResultVM {
 	private List<Enterprise> results;
 	
 	public MethodResultVM(Method selectedMethod){
+		
 		results = selectedMethod.apply(EnterpriseRepository.getEnterpriseList());
 	}
 

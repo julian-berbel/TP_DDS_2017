@@ -56,10 +56,14 @@ public class SelectCriterionWindow extends SimpleWindow<SelectCriterionVM>
 		new Button(panel1).setCaption("Indicador creciente en los ultimos N años").onClick(()->{ }).setWidth(300);
 		new Button(panel1).setCaption("Indicador decreciente en los ultimos N años").onClick(()->{ }).setWidth(300);
 		new Button(panel1).setCaption("Promedio mayor a cierto valor").onClick(()->{
-			new AverageHigherThanValueWindow();
+			Criterion newCriterion = new AverageHigherThanValueWindow(this).openWithReturn();
+			this.getModelObject().setTargetCriterion(newCriterion);
+			this.close();
 		}).setWidth(300);
 		new Button(panel1).setCaption("Promedio menor a cierto valor").onClick(()->{
-			new AverageLessThanValueWindow();
+			Criterion newCriterion = new AverageLessThanValueWindow(this).openWithReturn();
+			this.getModelObject().setTargetCriterion(newCriterion);
+			this.close();
 		}).setWidth(300);
 	}
 	
