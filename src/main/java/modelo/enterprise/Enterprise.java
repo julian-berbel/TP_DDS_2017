@@ -3,6 +3,8 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
+@Observable
 public class Enterprise 
 {
 	private String enterpriseName;
