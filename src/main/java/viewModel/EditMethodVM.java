@@ -92,7 +92,7 @@ public class EditMethodVM
 	}
 
 	public void accept(){
-		//if(!editing && MethodRepository.alreadyExists(name)) throw new ExistingIndicatorException(name);
+		if(!editing && MethodRepository.alreadyExists(name)) throw new ExistingIndicatorException(name);
 		
 		targetMethod = Optional.of(new Method(name, criteria));
 	}
