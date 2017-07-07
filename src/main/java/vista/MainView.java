@@ -30,19 +30,23 @@ public class MainView extends MainWindow<MainVM>
 	
 		new Button(panel1)
 			.setCaption("Cargar Cuentas")
-			.onClick(()->{ new LoadCalculationsWindow(this).open(); });
+			.onClick(()->{ new LoadCalculationsWindow(this).open(); })
+			.setWidth(300);
 				
 		new Button(panel1)
 			.setCaption("Indicadores")
-			.onClick(()->{ new IndicatorsWindow(this).open(); });	
+			.onClick(()->{ new IndicatorsWindow(this).open(); })
+			.setWidth(300);	
 		
 		new Button(panel1)
 			.setCaption("Metodologias")
-			.onClick(()->{ new MethodWindow(this) .open();});	
+			.onClick(()->{ new MethodWindow(this) .open();})
+			.setWidth(300);	
 		
 		new Button(panel1)
 			.setCaption("Visualizar Graficos de Indicadores")
-			.onClick(()->{ showFeatureNotAvailableMessage(); });	
+			.onClick(()->{ showFeatureNotAvailableMessage(); })
+			.setWidth(300);	
 		
 		new Button(panel1)
 			.setCaption("Consultar Cuentas")
@@ -54,11 +58,13 @@ public class MainView extends MainWindow<MainVM>
 				catch(NullPointerException nullPointerException)
 				{
 					noFileLoadedMessage();	
-				}});
+				}})
+			.setWidth(300);
 		
 		new Button(panel1)
 			.setCaption("Analizar Empresa")
-			.onClick(()-> new AnalyzeEnterpriseWindow(this).open());		
+			.onClick(()-> new AnalyzeEnterpriseWindow(this).open())
+			.setWidth(300);		
 	}	
 	
 	
