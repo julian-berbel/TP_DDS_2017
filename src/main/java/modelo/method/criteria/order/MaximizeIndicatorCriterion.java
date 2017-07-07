@@ -1,5 +1,7 @@
 package modelo.method.criteria.order;
 
+import java.time.Year;
+
 import modelo.enterprise.Enterprise;
 import modelo.indicator.Indicator;
 import modelo.method.criteria.OrderCriterion;
@@ -7,13 +9,14 @@ import modelo.method.criteria.OrderCriterion;
 public class MaximizeIndicatorCriterion extends OrderCriterion {
 	private Indicator indicator;
 	
-	public MaximizeIndicatorCriterion(String name, Indicator indicator){
-		super(name);
+	public MaximizeIndicatorCriterion(Indicator indicator){
+		super();
 		this.indicator = indicator;
 	}
 
 	public int criterion(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
-		return indicator.reduce(oneEnterprise, 0).compareTo(indicator.reduce(anotherEnterprise, 0)); //TODO de donde saco el anio?
+		int currentYear = Year.now().getValue();
+		return indicator.reduce(oneEnterprise, currentYear).compareTo(indicator.reduce(anotherEnterprise, currentYear));
 	}
-		
+
 }

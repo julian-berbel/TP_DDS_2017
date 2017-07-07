@@ -7,26 +7,14 @@ import java.util.stream.Collectors;
 
 import modelo.enterprise.Enterprise;
 import modelo.indicator.Indicator;
-import modelo.method.criteria.FilterCriterion;
 
-public abstract class IndicatorMedianCompare extends FilterCriterion
+public abstract class IndicatorMedianCompareCriterion extends IndicatorStatisticCompareCriterion
 {
-
-	private int lastNYears;
-	private BigDecimal value;
-	Indicator indicator;
-
-	public IndicatorMedianCompare(String name,Indicator indicator, BigDecimal value, int years) 
+	public IndicatorMedianCompareCriterion(Indicator indicator, BigDecimal value, int years) 
 	{
-		super(name);
-		this.value=value;
-		this.indicator=indicator;
-		this.lastNYears = years;
+		super(indicator, value, years);
 	}
-	
-	protected abstract boolean compare(int result);
 
-	@Override	
 	public boolean criterion(Enterprise enterprise) 
 	{
 		List<BigDecimal> values = enterprise.getPeriods().stream()
