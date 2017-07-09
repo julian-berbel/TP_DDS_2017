@@ -1,6 +1,4 @@
-
 package vista;
-
 
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Table;
@@ -11,16 +9,12 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
 
-import viewModel.MaximizeIndicatorCriterionVM;
 import viewModel.MinimizeIndicatorCriterionVM;
 import modelo.method.criteria.Criterion;
 import modelo.indicator.Indicator;
-import modelo.method.criteria.order.MaximizeIndicatorCriterion;
 import modelo.method.criteria.order.MinimizeIndicatorCriterion;
 
-
 @SuppressWarnings("serial")
-
 public class MinimizeIndicatorCriterionWindow extends SimpleWindow<MinimizeIndicatorCriterionVM>
 {
 	public MinimizeIndicatorCriterionWindow(WindowOwner owner)

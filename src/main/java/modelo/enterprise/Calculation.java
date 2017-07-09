@@ -9,19 +9,14 @@ public class Calculation
 	private String name;
 	private BigDecimal value;
 	
-	public void setName(String attributeName)
-	{
-		this.name = attributeName;
+	public Calculation(String name, BigDecimal value){
+		this.name = name;
+		this.value = value;
 	}
 	
 	public String getName()
 	{
 		return name;
-	}
-	
-	public void setValue(BigDecimal attributeValue)
-	{
-		this.value = attributeValue;
 	}
 	
 	public BigDecimal getValue()

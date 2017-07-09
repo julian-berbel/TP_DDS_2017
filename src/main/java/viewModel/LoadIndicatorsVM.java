@@ -2,7 +2,6 @@ package viewModel;
 import java.io.IOException;
 import org.uqbar.commons.utils.Observable;
 
-import exceptions.RepeatedIndicatorExcelException;
 import jxl.read.biff.BiffException;
 import modelo.indicator.IndicatorsManager;
 

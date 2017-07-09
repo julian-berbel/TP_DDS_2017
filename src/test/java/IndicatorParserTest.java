@@ -1,13 +1,16 @@
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import modelo.enterprise.Enterprise;
+import modelo.enterprise.Period;
 import modelo.indicator.parser.*;
 
 public class IndicatorParserTest {
-	Enterprise dummyEnterprise = new Enterprise(); 
+	Enterprise dummyEnterprise = new Enterprise("", new ArrayList<Period>()); 
 	
 	@Test
 	public void parser() {

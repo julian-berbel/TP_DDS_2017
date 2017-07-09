@@ -8,8 +8,6 @@ import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.ExistingIndicatorException;
-import modelo.indicator.Indicator;
-import modelo.indicator.IndicatorRepository;
 import modelo.method.Method;
 import modelo.method.MethodRepository;
 import modelo.method.criteria.Criterion;

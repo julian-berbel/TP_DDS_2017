@@ -10,6 +10,6 @@ public class IncreasingIndicatorValueCriterion extends VariatingIndicatorValueCr
 	}
 	
 	protected boolean compare(int result){
-		return result > 0;
+		return result < 0;
 	}
 }

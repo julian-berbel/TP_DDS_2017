@@ -1,6 +1,5 @@
 package vista;
 
-
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
@@ -9,7 +8,6 @@ import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
 import modelo.method.criteria.Criterion;
-import modelo.method.criteria.filter.IncreasingIndicatorValueCriterion;
 import viewModel.SelectCriterionVM;
 
 @SuppressWarnings("serial")

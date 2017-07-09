@@ -1,17 +1,11 @@
 package viewModel;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import exceptions.ExistingIndicatorException;
-import jxl.read.biff.BiffException;
-import jxl.write.WriteException;
-import modelo.indicator.Indicator;
-import modelo.indicator.IndicatorRepository;
 import modelo.method.Method;
 import modelo.method.MethodRepository;
 
@@ -69,21 +63,4 @@ public class MethodVM {
 		methodsChanged = true;
 	}
 	
-/*	public void refreshList(){
-		indicators = IndicatorRepository.getIndicatorList();
-		ObservableUtils.firePropertyChanged(this, "indicators");
-		indicatorsChanged = true;
-	}
-	
-	public Boolean verifyIfSomethingChanged()
-	{
-		return methodsChanged;
-	}
-	
-	public void somethingChanged()
-	{
-		methodsChanged = true;
-	}
-	*/
-
 }

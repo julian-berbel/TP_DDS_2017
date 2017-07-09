@@ -1,34 +1,37 @@
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import modelo.enterprise.Enterprise;
+import modelo.enterprise.Period;
 import modelo.indicator.math.*;
 
 public class AlgebraicOperationTest {
 	Constant firstOperand = new Constant(new BigDecimal(4));
 	Constant secondOperand = new Constant(new BigDecimal(8));
-	Enterprise dummyEnterprise = new Enterprise();
+	Enterprise dummyEnterprise = new Enterprise("", new ArrayList<Period>());
 	
 	@Test
 	public void addition() {
-		assertEquals(new Addition(firstOperand, secondOperand).reduce(dummyEnterprise, 0), 12);
+		assertEquals(new Addition(firstOperand, secondOperand).reduce(dummyEnterprise, 0), new BigDecimal(12));
 	}
 	
 	@Test
 	public void subtraction() {	
-		assertEquals(new Subtraction(firstOperand, secondOperand).reduce(dummyEnterprise, 0), -4);
+		assertEquals(new Subtraction(firstOperand, secondOperand).reduce(dummyEnterprise, 0), new BigDecimal(-4));
 	}
 	
 	@Test
 	public void multiplication() {		
-		assertEquals(new Multiplication(firstOperand, secondOperand).reduce(dummyEnterprise, 0), 32);
+		assertEquals(new Multiplication(firstOperand, secondOperand).reduce(dummyEnterprise, 0), new BigDecimal(32));
 	}
 	
 	@Test
 	public void division() {
-		assertEquals(new Division(firstOperand, secondOperand).reduce(dummyEnterprise, 0), 0.5);
+		assertEquals(new Division(firstOperand, secondOperand).reduce(dummyEnterprise, 0), new BigDecimal(0.5));
 	}
 	
 	@Test

@@ -2,20 +2,20 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Test;
 
 import java.util.Optional;
 
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
+import modelo.indicator.parser.IndicatorParser;
 import viewModel.IndicatorsVM;
 
 public class IndicatorsTest {
-
 	@Test
 	public void testAddNewIndicator()
 	{
-		new IndicatorRepository();
 		Indicator indicator = new Indicator("Indicator1", "#C1+#C2");
 		IndicatorRepository.addIndicator(indicator);	
 		
@@ -35,7 +35,6 @@ public class IndicatorsTest {
 	@Test
 	public void testDeleteIndicator()
 	{
-		new IndicatorRepository();
 		Indicator indicator = new Indicator("Indicator1", "#C1+#C2");
 		IndicatorRepository.addIndicator(indicator);
 		

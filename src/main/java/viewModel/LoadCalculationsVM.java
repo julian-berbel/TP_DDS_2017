@@ -1,12 +1,10 @@
 package viewModel;
 import java.io.FileNotFoundException;
-import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
 import com.google.gson.JsonSyntaxException;
 import exceptions.JsonMappingException;
 import exceptions.NoFileSelectedException;
 import exceptions.ReadingFileException;
-import javassist.compiler.SyntaxError;
 import modelo.FileLoader;
 import modelo.JsonMapper;
 

@@ -1,7 +1,6 @@
 package modelo.method.criteria.filter;
 
 import java.math.BigDecimal;
-import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +16,7 @@ public abstract class IndicatorMedianCompareCriterion extends IndicatorStatistic
 
 	public boolean criterion(Enterprise enterprise) 
 	{
-		List<BigDecimal> values = enterprise.getPeriods().stream()
-										.filter(period -> period.getYear() > (Year.now().getValue() - lastNYears))
-										.map(period -> indicator.reduce(enterprise, period.getYear()))
+		List<BigDecimal> values = enterprise.getIndicatorValueFromLastNYears(indicator, lastNYears).stream()
 										.sorted()
 										.collect(Collectors.toList());
 		

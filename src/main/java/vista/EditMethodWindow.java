@@ -1,10 +1,8 @@
 package vista;
 
-
 import org.uqbar.arena.layout.VerticalLayout;
 
 import java.util.Optional;
-
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
@@ -14,15 +12,8 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import exceptions.EmptyFieldException;
-import exceptions.ExistingIndicatorException;
-import exceptions.FormulaErrorException;
-import exceptions.MissingIndicatorException;
-
-import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 
-import modelo.indicator.Indicator;
 import modelo.method.Method;
 import modelo.method.criteria.Criterion;
 import viewModel.EditMethodVM;

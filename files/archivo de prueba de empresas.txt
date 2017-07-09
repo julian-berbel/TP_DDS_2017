@@ -1,7 +1,7 @@
 
 [
 	{
-		"enterpriseName":"PepeHermanos",
+		"name":"PepeHermanos",
 		"periods":
 		[
 			{
@@ -19,7 +19,7 @@
 		]
 	},
 	{
-		"enterpriseName":"los pollos hermanos",
+		"name":"los pollos hermanos",
 		"periods":
 		[
 			{

@@ -64,7 +64,6 @@ public class ConsultAccountVM {
 	
 	public void setSelectedEnterprise(Enterprise selectedEnterprise) 
 	{
-		
 		this.selectedEnterprise = selectedEnterprise;
 		periods = selectedEnterprise.getPeriods();
 	}

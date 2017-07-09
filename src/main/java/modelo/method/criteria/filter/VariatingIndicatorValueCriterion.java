@@ -2,8 +2,7 @@
 package modelo.method.criteria.filter;
 
 import java.math.BigDecimal;
-import java.time.Year;
-import java.util.stream.Stream;
+import java.util.List;
 
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
@@ -20,13 +19,13 @@ public abstract class VariatingIndicatorValueCriterion extends IndicatorRelatedC
 	
 	public boolean criterion(Enterprise enterprise) 
 	{
-		Stream<BigDecimal> values = enterprise.getPeriods().stream()
-				.filter(period -> period.getYear() > (Year.now().getValue() - lastNYears))
-				.map(period -> indicator.reduce(enterprise, period.getYear()));
+		List<BigDecimal> values = enterprise.getIndicatorValueFromLastNYears(indicator, lastNYears);
 		
-		Tuple2<Boolean, BigDecimal> acumulador = new Tuple2<>(true, values.findFirst().get().subtract(BigDecimal.ONE));
+		if(values.isEmpty()) return true;
 		
-		return Seq.seq(values)
+		Tuple2<Boolean, BigDecimal> acumulador = new Tuple2<>(true, values.get(0));
+		
+		return Seq.seq(values).drop(1)
 				.foldLeft(acumulador, (tuple, value) -> new Tuple2<Boolean, BigDecimal>(tuple.v1 && compare(tuple.v2.compareTo(value)), value))
 				.v1;
 	}
