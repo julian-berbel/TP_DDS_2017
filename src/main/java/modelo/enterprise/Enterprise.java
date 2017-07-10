@@ -29,7 +29,7 @@ public class Enterprise
 	
 	public List<BigDecimal> getIndicatorValueFromLastNYears(Indicator indicator, int n){
 		return periods.stream()
-				.filter(period -> period.getYear() > (Year.now().getValue() - n))
+				.filter(period -> period.getYear() >= (Year.now().getValue() - n))
 				.map(period -> indicator.reduce(this, period.getYear()))
 				.collect(Collectors.toList());
 	}

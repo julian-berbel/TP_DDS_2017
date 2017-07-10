@@ -5,12 +5,7 @@ import java.util.List;
 
 public class MethodRepository {
 
-	private static List<Method> methods;
-	
-	public MethodRepository()
-	{
-		methods = new ArrayList<Method>();
-	}
+	private static List<Method> methods = new ArrayList<Method>();
 	
 	public static void addMethod(Method method)
 	{

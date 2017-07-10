@@ -11,6 +11,7 @@ public abstract class IndicatorAverageCompareCriterion extends IndicatorStatisti
 	public IndicatorAverageCompareCriterion(Indicator indicator, BigDecimal value, int years) 
 	{
 		super(indicator, value, years);
+		
 	}
 	
 	public boolean criterion(Enterprise enterprise) 

@@ -10,12 +10,7 @@ import java.util.ArrayList;
 
 public class IndicatorRepository 
 {
-	private static List<Indicator> indicators;
-		
-	public IndicatorRepository()
-	{
-		indicators = new ArrayList<Indicator>();		
-	}	
+	private static List<Indicator> indicators = new ArrayList<Indicator>();
 		
 	public static void addIndicator(Indicator indicator)
 	{

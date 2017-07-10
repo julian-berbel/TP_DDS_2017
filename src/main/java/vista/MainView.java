@@ -1,9 +1,5 @@
 package vista;
 
-import modelo.enterprise.EnterpriseRepository;
-import modelo.indicator.IndicatorRepository;
-import modelo.indicator.parser.IndicatorParser;
-import modelo.method.MethodRepository;
 import viewModel.MainVM;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -80,10 +76,6 @@ public class MainView extends MainWindow<MainVM>
 	
 	public static void main(String[] args)
 	{
-		new EnterpriseRepository();
-		new IndicatorRepository();
-		new MethodRepository();
-		new IndicatorParser(System.in);
 		new MainView().startApplication();
 	}
 }

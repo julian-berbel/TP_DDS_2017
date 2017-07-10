@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 public class EnterpriseRepository 
 {
-	private static List<Enterprise> enterprises;
-	
-	public EnterpriseRepository()
-	{
-		enterprises = new ArrayList<Enterprise>();
-	}
+	private static List<Enterprise> enterprises = new ArrayList<Enterprise>();
 	
 	public static void addEnterprise(Enterprise ent)
 	{

@@ -1,27 +1,29 @@
 options {
+	STATIC=false;
     LOOKAHEAD = 100;
 }
 
 PARSER_BEGIN(IndicatorParser)
-package parser;
+package modelo.indicator.parser;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import java.math.BigDecimal;
 
-import math.*;
-import modelo.IndicatorRepository;
+import modelo.indicator.math.*;
+import modelo.indicator.IndicatorRepository;
 import exceptions.FormulaErrorException;
 
-@SuppressWarnings({"unused", "static-access"})
+@SuppressWarnings("unused")
 public class IndicatorParser {
 	public static Operable parseIndicator(String formula) {
 	    Operable value = null;
-	    IndicatorParser.ReInit(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
-	    try{
-            value = IndicatorParser.Start();
-	    } catch(ParseException parseException){
-            throw new FormulaErrorException(parseException.getMessage());
-	    }
-	    return value;
+        IndicatorParser parser = new IndicatorParser(new ByteArrayInputStream(formula.getBytes(StandardCharsets.UTF_8)));
+        try{
+         value = parser.Start();
+        } catch(ParseException parseException){
+        throw new FormulaErrorException(parseException.getMessage());
+        }
+        return value;
     }
 }
 

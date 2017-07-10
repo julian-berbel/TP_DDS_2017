@@ -36,13 +36,13 @@ public class CriteriaTest {
 	@Test
 	public void indicatorAverageHigherThanValueCriterion()
 	{
-		assertTrue(new IndicatorAverageHigherThanValueCriterion(anIndicator, new BigDecimal("4.99"), 3).criterion(anEnterprise));
+		assertTrue(new IndicatorAverageHigherThanValueCriterion(anIndicator, new BigDecimal("2.49"), 3).criterion(anEnterprise));
 	}
 	
 	@Test
 	public void indicatorAverageLessThanValueCriterion()
 	{
-		assertTrue(new IndicatorAverageLessThanValueCriterion(anIndicator, new BigDecimal("5.01"), 3).criterion(anEnterprise));
+		assertTrue(new IndicatorAverageLessThanValueCriterion(anIndicator, new BigDecimal("2.51"), 3).criterion(anEnterprise));
 	}
 	
 	@Test
