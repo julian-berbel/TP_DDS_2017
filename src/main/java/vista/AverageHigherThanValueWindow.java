@@ -13,7 +13,7 @@ import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.NumericField;
 import viewModel.AverageHigherThanValueVM;
 import modelo.method.criteria.Criterion;
-import modelo.method.criteria.filter.IndicatorAverageHigherThanValueCriterion;
+import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
 
 
@@ -57,7 +57,7 @@ public class AverageHigherThanValueWindow extends SimpleWindow<AverageHigherThan
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = new IndicatorAverageHigherThanValueCriterion(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
+			Criterion newCriterion = FilterCriteria.indicatorAverageHigherThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});

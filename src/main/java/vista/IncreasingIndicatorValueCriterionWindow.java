@@ -16,7 +16,7 @@ import org.uqbar.arena.widgets.NumericField;
 import viewModel.IncreasingIndicatorValueCriterionVM;
 
 import modelo.method.criteria.Criterion;
-import modelo.method.criteria.filter.IncreasingIndicatorValueCriterion;
+import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
 
 
@@ -56,7 +56,7 @@ public class IncreasingIndicatorValueCriterionWindow extends SimpleWindow<Increa
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = new IncreasingIndicatorValueCriterion(this.getModelObject().getSelectedIndicator(), this.getModelObject().getNumberYears());
+			Criterion newCriterion = FilterCriteria.increasingIndicatorValue(this.getModelObject().getSelectedIndicator(), this.getModelObject().getNumberYears());
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});

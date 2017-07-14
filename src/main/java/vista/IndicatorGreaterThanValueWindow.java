@@ -18,7 +18,7 @@ import org.uqbar.arena.widgets.NumericField;
 import viewModel.IndicatorGreaterThanValueVM;
 
 import modelo.method.criteria.Criterion;
-import modelo.method.criteria.filter.IndicatorValueHigherThanCriterion;
+import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
 
 
@@ -62,7 +62,7 @@ public class IndicatorGreaterThanValueWindow extends SimpleWindow<IndicatorGreat
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = new IndicatorValueHigherThanCriterion(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
+			Criterion newCriterion = FilterCriteria.indicatorValueHigherThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});

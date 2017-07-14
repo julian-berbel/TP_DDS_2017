@@ -12,10 +12,8 @@ import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.NumericField;
 import viewModel.AverageLessThanValueVM;
 import modelo.method.criteria.Criterion;
-import modelo.method.criteria.filter.IndicatorAverageLessThanValueCriterion;
+import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
-
-
 
 @SuppressWarnings("serial")
 
@@ -56,7 +54,7 @@ public class AverageLessThanValueWindow extends SimpleWindow<AverageLessThanValu
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = new IndicatorAverageLessThanValueCriterion(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
+			Criterion newCriterion = FilterCriteria.indicatorAverageLowerThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});

@@ -13,7 +13,7 @@ import org.uqbar.arena.widgets.NumericField;
 
 import viewModel.IndicatorLessThanValueVM;
 import modelo.method.criteria.Criterion;
-import modelo.method.criteria.filter.IndicatorValueLessThanCriterion;
+import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
 
 @SuppressWarnings("serial")
@@ -54,7 +54,7 @@ public class IndicatorLessThanValueWindow extends SimpleWindow<IndicatorLessThan
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = new IndicatorValueLessThanCriterion(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
+			Criterion newCriterion = FilterCriteria.indicatorValueLowerThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});
