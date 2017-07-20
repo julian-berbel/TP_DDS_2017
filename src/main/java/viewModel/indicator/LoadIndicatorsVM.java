@@ -1,4 +1,4 @@
-package viewModel;
+package viewModel.indicator;
 import java.io.IOException;
 import org.uqbar.commons.utils.Observable;
 

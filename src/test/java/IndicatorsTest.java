@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
-import viewModel.IndicatorsVM;
+import viewModel.indicator.IndicatorsVM;
 
 public class IndicatorsTest {
 	@Test

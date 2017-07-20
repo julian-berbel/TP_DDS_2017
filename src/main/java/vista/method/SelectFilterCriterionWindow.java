@@ -31,25 +31,25 @@ public class SelectFilterCriterionWindow extends SelectCriterionWindow<FilterCri
 			FilterCriterion newCriterion = new IndicatorGreaterThanValueWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(325);
+		}).setWidth(300);
 		
 		new Button(panel1).setCaption("Indicador menor a cierto valor").onClick(()->{
 			FilterCriterion newCriterion = new IndicatorLessThanValueWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(325);
+		}).setWidth(300);
 		
-		new Button(panel1).setCaption("Indicador creciente en los ultimos N años").onClick(()->{
+		new Button(panel1).setCaption("Indicador creciente en los ultimos N anios").onClick(()->{
 			FilterCriterion newCriterion = new IncreasingIndicatorValueCriterionWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(325);
+		}).setWidth(300);
 		
-		new Button(panel1).setCaption("Indicador decreciente en los ultimos N años").onClick(()->{
+		new Button(panel1).setCaption("Indicador decreciente en los ultimos N anios").onClick(()->{
 			FilterCriterion newCriterion = new DecreasingIndicatorValueCriterionWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(325);
+		}).setWidth(300);
 		
 		new Button(panel1).setCaption("Promedio mayor a cierto valor").onClick(()->{
 			FilterCriterion newCriterion = new AverageHigherThanValueWindow(this).openWithReturn();

@@ -9,18 +9,17 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
 
-import viewModel.MinimizeIndicatorCriterionVM;
-import modelo.method.criteria.Criterion;
+import viewModel.OrderByIndicatorValueVM;
 import modelo.method.criteria.OrderCriterion;
 import modelo.indicator.Indicator;
 import modelo.method.criteria.order.MinimizeIndicatorCriterion;
 
 @SuppressWarnings("serial")
-public class MinimizeIndicatorCriterionWindow extends SimpleWindow<MinimizeIndicatorCriterionVM>
+public class MinimizeIndicatorCriterionWindow extends SimpleWindow<OrderByIndicatorValueVM>
 {
 	public MinimizeIndicatorCriterionWindow(WindowOwner owner)
 	{
-		super(owner, new MinimizeIndicatorCriterionVM());
+		super(owner, new OrderByIndicatorValueVM());
 	}
 	
 	@Override	

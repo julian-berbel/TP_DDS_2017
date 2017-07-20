@@ -2,7 +2,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import modelo.enterprise.EnterpriseRepository;
-import viewModel.LoadCalculationsVM;
+import viewModel.enterprise.LoadCalculationsVM;
 
 public class LoadCalculationsTest {
 	@Test

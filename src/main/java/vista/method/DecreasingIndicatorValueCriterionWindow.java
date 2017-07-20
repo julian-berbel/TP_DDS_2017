@@ -4,8 +4,6 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
 
-
-
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
@@ -13,20 +11,18 @@ import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.NumericField;
 
-import viewModel.DecreasingIndicatorValueCriterionVM;
-
-import modelo.method.criteria.Criterion;
+import viewModel.VariatingIndicatorValueVM;
 import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
 
 
 @SuppressWarnings("serial")
-public class DecreasingIndicatorValueCriterionWindow extends SimpleWindow<DecreasingIndicatorValueCriterionVM>
+public class DecreasingIndicatorValueCriterionWindow extends SimpleWindow<VariatingIndicatorValueVM>
 {
 	public DecreasingIndicatorValueCriterionWindow(WindowOwner owner)
 	{
-		super(owner, new DecreasingIndicatorValueCriterionVM());
+		super(owner, new VariatingIndicatorValueVM());
 	}
 	
 	@Override	

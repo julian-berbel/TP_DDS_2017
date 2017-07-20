@@ -103,7 +103,7 @@ public abstract class FilterCriteria
 	}
 	
 	public static FilterCriterion decreasingIndicatorValue(Indicator indicator, int years){
-		return new FilterCriterion(variatingIndicatorValue(indicator, years).apply(LowerThan), "Indicador " + indicator.getName() + " creciente durante los ultimos " + String.valueOf(years) + " anios");
+		return new FilterCriterion(variatingIndicatorValue(indicator, years).apply(LowerThan), "Indicador " + indicator.getName() + " decreciente durante los ultimos " + String.valueOf(years) + " anios");
 	}
 	
 	public static FilterCriterion minimumLongevity(int minimumAge){

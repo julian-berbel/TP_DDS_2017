@@ -1,35 +1,29 @@
 package vista.method;
 
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
-
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
+import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.NumericField;
-
-import viewModel.VariatingIndicatorValueVM;
-
+import viewModel.IndicatorStatisticCompareVM;
 import modelo.method.criteria.FilterCriterion;
-import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
 
-
 @SuppressWarnings("serial")
-public class IncreasingIndicatorValueCriterionWindow extends SimpleWindow<VariatingIndicatorValueVM> 
+public abstract class IndicatorStatisticCompareWindow extends SimpleWindow<IndicatorStatisticCompareVM>
 {
-	public IncreasingIndicatorValueCriterionWindow(WindowOwner owner)
+	public IndicatorStatisticCompareWindow(WindowOwner owner)
 	{
-		super(owner, new VariatingIndicatorValueVM());
+		super(owner, new IndicatorStatisticCompareVM());
 	}
-	
-	@Override	
-	protected void createFormPanel(Panel mainPanel)
+		
+	protected void createFormPanel(Panel mainPanel, String title)
 	{
-		this.setTitle("Indicador creciente en una cantidad de años");
+		this.setTitle(title);
 		
 		mainPanel.setLayout(new VerticalLayout());
 		
@@ -41,13 +35,14 @@ public class IncreasingIndicatorValueCriterionWindow extends SimpleWindow<Variat
 		
 		new Label(panel1).setText("Seleccione el indicador que desea comparar");
 		
-		Table<Indicator> indicatorTable = new Table<Indicator>(panel1, Indicator.class);
-		indicatorTable.bindItemsToProperty("indicators");
-		indicatorTable.bindValueToProperty("selectedIndicator");
-		indicatorTable.setWidth(600);
-		indicatorTable.setHeight(200);
-		indicatorTable.setNumberVisibleRows(10);
-		
+		List<Indicator> indicatorList= new List<Indicator>(panel1);
+		indicatorList.bindItemsToProperty("indicators");
+		indicatorList.bindValueToProperty("selectedIndicator");
+		indicatorList.setWidth(300);
+		indicatorList.setHeight(200);
+		new Label(panel1).setText("Ingrese el valor a comparar");
+
+		new NumericField(panel1).bindValueToProperty("value");
 		new Label(panel1).setText("Ingrese la cantidad de anios");
 
 		new NumericField(panel1).bindValueToProperty("numberYears");
@@ -55,13 +50,6 @@ public class IncreasingIndicatorValueCriterionWindow extends SimpleWindow<Variat
 	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Aceptar").onClick(()->
-		{
-			FilterCriterion newCriterion = FilterCriteria.increasingIndicatorValue(this.getModelObject().getSelectedIndicator(), this.getModelObject().getNumberYears());
-			this.getModelObject().setTargetCriterion(newCriterion);
-			this.close();
-		});
-		
 		new Button(actions).setCaption("Cancelar").onClick(this::close);
 	}
 	
@@ -71,8 +59,4 @@ public class IncreasingIndicatorValueCriterionWindow extends SimpleWindow<Variat
 		this.open();
 		return getModelObject().getTargetCriterion();
 	}
-	
 }
-
-
-

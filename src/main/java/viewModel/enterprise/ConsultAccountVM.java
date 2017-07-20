@@ -1,4 +1,4 @@
-package viewModel;
+package viewModel.enterprise;
 
 import java.util.List;
 

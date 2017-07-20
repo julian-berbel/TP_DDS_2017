@@ -17,7 +17,7 @@ import exceptions.ExistingIndicatorException;
 import exceptions.FormulaErrorException;
 import exceptions.MissingIndicatorException;
 import modelo.indicator.Indicator;
-import viewModel.EditIndicatorVM;
+import viewModel.indicator.EditIndicatorVM;
 import vista.Error;
 
 

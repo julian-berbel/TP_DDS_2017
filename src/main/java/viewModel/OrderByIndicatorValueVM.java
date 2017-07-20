@@ -1,23 +1,19 @@
-
 package viewModel;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import modelo.method.criteria.FilterCriterion;
+import modelo.method.criteria.OrderCriterion;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 
 @Observable
-public class IndicatorGreaterThanValueVM {
+public class OrderByIndicatorValueVM {
 
 	private List<Indicator> indicators;
-	private BigDecimal value;
-	private int numberYears;
-	private FilterCriterion targetCriterion;
+	private OrderCriterion targetCriterion;
 	private Indicator selectedIndicator;
 	
 	public void refreshList()
@@ -25,26 +21,12 @@ public class IndicatorGreaterThanValueVM {
 		setIndicators(IndicatorRepository.getIndicatorList());
 		ObservableUtils.firePropertyChanged(this, "indicators");
 	}
-	public int getNumberYears() {
-		return numberYears;
-	}
 
-	public void setNumberYears(int numberYears) {
-		this.numberYears = numberYears;
-	}
-	public BigDecimal getValue() {
-		return value;
-	}
-
-	public void setValue(BigDecimal value) {
-		this.value = value;
-	}
-	
-	public FilterCriterion getTargetCriterion() {
+	public OrderCriterion getTargetCriterion() {
 		return targetCriterion;
 	}
 
-	public void setTargetCriterion(FilterCriterion newCriterion) {
+	public void setTargetCriterion(OrderCriterion newCriterion) {
 		this.targetCriterion = newCriterion;
 	}
 

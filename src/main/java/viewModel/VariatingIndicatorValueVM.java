@@ -7,11 +7,10 @@ import org.uqbar.commons.utils.Observable;
 
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
-import modelo.method.criteria.Criterion;
 import modelo.method.criteria.FilterCriterion;
 
 @Observable
-public class IncreasingIndicatorValueCriterionVM 
+public class VariatingIndicatorValueVM 
 {
 
 	private List<Indicator> indicators;

@@ -1,4 +1,4 @@
-package viewModel;
+package viewModel.indicator;
 
 import java.util.Optional;
 

@@ -32,29 +32,33 @@ public class EditMethodWindow extends Dialog<EditMethodVM> {
 		this.setTitle("Crear metodologia");
 		
 		mainPanel.setLayout(new VerticalLayout());
+		
+		new Label(mainPanel).setText("Nombre de la nueva metodologia:");
+	    new TextBox(mainPanel).setWidth(400).bindValueToProperty("name");
+		
+		new Label(mainPanel).setText("Criterios de Filtro:");
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new VerticalLayout());
 		Panel panel2 = new Panel(mainPanel);
 		panel2.setLayout(new ColumnLayout(2));
+		
+		new Label(mainPanel).setText("Criterios de Orden:");
 		Panel panel3 = new Panel(mainPanel);
 		panel3.setLayout(new VerticalLayout());
 		Panel panel4 = new Panel(mainPanel);
 		panel4.setLayout(new ColumnLayout(2));
+		
+		new Label(mainPanel).setText("Criterios Mixtos:");
 		Panel panel5 = new Panel(mainPanel);
 		panel5.setLayout(new VerticalLayout());
 		Panel panel6 = new Panel(mainPanel);
 		panel6.setLayout(new ColumnLayout(2));
-		
-		new Label(panel1).setText("Nombre de la nueva metodologia:");
-	    new TextBox(panel1).setWidth(400).bindValueToProperty("name");
-	    
-	    new Label(panel1).setText("Criterios:");
-	    
+		  
 	    List<FilterCriterion> filterCriteriaList = new List<FilterCriterion>(panel1);
 	    filterCriteriaList.bindItemsToProperty("filterCriteria");
 	    filterCriteriaList.bindValueToProperty("selectedFilterCriterion");
-	    filterCriteriaList.setWidth(600);
-	    filterCriteriaList.setHeight(120);
+	    filterCriteriaList.setWidth(400);
+	    filterCriteriaList.setHeight(115);
 		
 		new Button(panel2).setCaption("Agregar criterio").onClick(()->{			
 			this.getModelObject()
@@ -68,8 +72,8 @@ public class EditMethodWindow extends Dialog<EditMethodVM> {
 		List<OrderCriterion> orderCriteriaTable = new List<OrderCriterion>(panel3);
 		orderCriteriaTable.bindItemsToProperty("orderCriteria");
 		orderCriteriaTable.bindValueToProperty("selectedOrderCriterion");
-		orderCriteriaTable.setWidth(600);
-		orderCriteriaTable.setHeight(120);
+		orderCriteriaTable.setWidth(400);
+		orderCriteriaTable.setHeight(115);
 		
 		new Button(panel4).setCaption("Agregar criterio").onClick(()->{
 			OrderCriterion newCriterion = new SelectOrderCriterionWindow(this).openWithReturn();			
@@ -84,8 +88,8 @@ public class EditMethodWindow extends Dialog<EditMethodVM> {
 		List<MixedCriterion> mixedCriteriaTable = new List<MixedCriterion>(panel5);
 		mixedCriteriaTable.bindItemsToProperty("mixedCriteria");
 		mixedCriteriaTable.bindValueToProperty("selectedMixedCriterion");
-		mixedCriteriaTable.setWidth(600);
-		mixedCriteriaTable.setHeight(120);
+		mixedCriteriaTable.setWidth(400);
+		mixedCriteriaTable.setHeight(115);
 		
 		new Button(panel6).setCaption("Agregar criterio").onClick(()->{
 			MixedCriterion newCriterion = new SelectMixedCriterionWindow(this).openWithReturn();			

@@ -6,7 +6,7 @@ import org.uqbar.arena.windows.WindowOwner;
 import exceptions.JsonMappingException;
 import exceptions.NoFileSelectedException;
 import exceptions.ReadingFileException;
-import viewModel.LoadCalculationsVM;
+import viewModel.enterprise.LoadCalculationsVM;
 import vista.Error;
 
 import org.uqbar.arena.layout.VerticalLayout;

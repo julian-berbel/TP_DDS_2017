@@ -27,6 +27,6 @@ public class SelectMixedCriterionWindow extends SelectCriterionWindow<MixedCrite
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new ColumnLayout(2));
 
-		new Button(panel1).setCaption("Antiguedad de empresa").onClick(()->{ }).setWidth(325);
+		new Button(panel1).setCaption("Antiguedad de empresa").onClick(()->{ }).setWidth(300);
 	}
 }

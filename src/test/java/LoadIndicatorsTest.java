@@ -7,7 +7,7 @@ import org.junit.Test;
 import jxl.read.biff.BiffException;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
-import viewModel.LoadIndicatorsVM;
+import viewModel.indicator.LoadIndicatorsVM;
 
 public class LoadIndicatorsTest {
 

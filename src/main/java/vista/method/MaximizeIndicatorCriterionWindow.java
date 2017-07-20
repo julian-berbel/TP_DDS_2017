@@ -1,6 +1,5 @@
 package vista.method;
 
-
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
@@ -10,20 +9,18 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
 
-import viewModel.MaximizeIndicatorCriterionVM;
-import modelo.method.criteria.Criterion;
+import viewModel.OrderByIndicatorValueVM;
 import modelo.method.criteria.OrderCriterion;
 import modelo.indicator.Indicator;
 import modelo.method.criteria.order.MaximizeIndicatorCriterion;
 
-
 @SuppressWarnings("serial")
 
-public class MaximizeIndicatorCriterionWindow extends SimpleWindow<MaximizeIndicatorCriterionVM>
+public class MaximizeIndicatorCriterionWindow extends SimpleWindow<OrderByIndicatorValueVM>
 {
 	public MaximizeIndicatorCriterionWindow(WindowOwner owner)
 	{
-		super(owner, new MaximizeIndicatorCriterionVM());
+		super(owner, new OrderByIndicatorValueVM());
 	}
 	
 	@Override	

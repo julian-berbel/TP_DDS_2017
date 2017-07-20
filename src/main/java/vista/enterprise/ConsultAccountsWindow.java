@@ -14,7 +14,7 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
-import viewModel.ConsultAccountVM;
+import viewModel.enterprise.ConsultAccountVM;
 
 
 

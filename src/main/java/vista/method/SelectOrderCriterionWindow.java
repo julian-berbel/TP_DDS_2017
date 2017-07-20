@@ -31,12 +31,12 @@ public class SelectOrderCriterionWindow extends SelectCriterionWindow<OrderCrite
 			OrderCriterion newCriterion = new MaximizeIndicatorCriterionWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(325);
+		}).setWidth(300);
 		
 		new Button(panel1).setCaption("Minimizar indicador").onClick(()->{
 			OrderCriterion newCriterion = new MinimizeIndicatorCriterionWindow(this).openWithReturn();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
-		}).setWidth(325);
+		}).setWidth(300);
 	}	
 }
