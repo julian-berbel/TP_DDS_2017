@@ -1,17 +1,17 @@
 package modelo.method.criteria;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Comparator;
+
+import org.uqbar.commons.utils.Observable;
 
 import modelo.enterprise.Enterprise;
 
-public abstract class OrderCriterion implements Criterion
-{		
-	public abstract int criterion(Enterprise oneEnterprise, Enterprise anotherEnterprise); // el que esto tenga que devolver int me deprime
-	
-	public List<Enterprise> apply(List<Enterprise> enterprises){
-		return enterprises.stream()
-				.sorted((oneEnterprise, anotherEnterprise) -> criterion(oneEnterprise, anotherEnterprise))
-				.collect(Collectors.toList());
+@Observable
+public abstract class OrderCriterion extends Criterion implements Comparator<Enterprise>
+{	
+	public abstract int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise);
+
+	public OrderCriterion(String description){
+		super(description);
 	}
 }

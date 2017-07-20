@@ -1,4 +1,4 @@
-package vista;
+package vista.indicator;
 
 import org.uqbar.arena.layout.VerticalLayout;
 
@@ -18,6 +18,7 @@ import exceptions.FormulaErrorException;
 import exceptions.MissingIndicatorException;
 import modelo.indicator.Indicator;
 import viewModel.EditIndicatorVM;
+import vista.Error;
 
 
 @SuppressWarnings("serial")

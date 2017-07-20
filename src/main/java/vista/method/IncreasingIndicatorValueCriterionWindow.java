@@ -1,4 +1,4 @@
-package vista;
+package vista.method;
 
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Table;
@@ -16,6 +16,7 @@ import org.uqbar.arena.widgets.NumericField;
 import viewModel.IncreasingIndicatorValueCriterionVM;
 
 import modelo.method.criteria.Criterion;
+import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
 
@@ -56,7 +57,7 @@ public class IncreasingIndicatorValueCriterionWindow extends SimpleWindow<Increa
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = FilterCriteria.increasingIndicatorValue(this.getModelObject().getSelectedIndicator(), this.getModelObject().getNumberYears());
+			FilterCriterion newCriterion = FilterCriteria.increasingIndicatorValue(this.getModelObject().getSelectedIndicator(), this.getModelObject().getNumberYears());
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});
@@ -67,7 +68,7 @@ public class IncreasingIndicatorValueCriterionWindow extends SimpleWindow<Increa
 	@Override
 	protected void addActions(Panel actionsPanel) {}
 	
-	public Criterion openWithReturn()
+	public FilterCriterion openWithReturn()
 	{
 		this.getModelObject().refreshList();
 		this.open();

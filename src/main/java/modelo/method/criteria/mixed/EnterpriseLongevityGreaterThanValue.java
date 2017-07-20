@@ -5,9 +5,8 @@ import modelo.method.criteria.filter.FilterCriteria;
 import modelo.method.criteria.order.EnterpriseAgeCriterion;
 
 public class EnterpriseLongevityGreaterThanValue extends MixedCriterion{
-	public EnterpriseLongevityGreaterThanValue(int years) 
+	public EnterpriseLongevityGreaterThanValue(int years)
 	{
-		this.filterCriterion = FilterCriteria.minimumLongevity(years);
-		this.orderCriterion = new EnterpriseAgeCriterion();
+		super(new EnterpriseAgeCriterion(), FilterCriteria.minimumLongevity(years), "Antiguedad de la empresa mayor a " + years + " anios, y mientras mas antigua sea mejor");
 	}
 }

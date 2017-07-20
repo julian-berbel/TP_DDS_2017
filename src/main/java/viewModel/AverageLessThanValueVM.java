@@ -5,6 +5,7 @@ import java.util.List;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 import modelo.method.criteria.Criterion;
+import modelo.method.criteria.FilterCriterion;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 
@@ -14,7 +15,7 @@ public class AverageLessThanValueVM {
 	private List<Indicator> indicators;
 	private BigDecimal value;
 	private int numberYears;
-	private Criterion targetCriterion;
+	private FilterCriterion targetCriterion;
 	private Indicator selectedIndicator;
 	
 	public void refreshList()
@@ -36,11 +37,11 @@ public class AverageLessThanValueVM {
 	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
-	public Criterion getTargetCriterion() {
+	public FilterCriterion getTargetCriterion() {
 		return targetCriterion;
 	}
 
-	public void setTargetCriterion(Criterion newCriterion) {
+	public void setTargetCriterion(FilterCriterion newCriterion) {
 		this.targetCriterion = newCriterion;
 	}
 

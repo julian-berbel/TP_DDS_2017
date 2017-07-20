@@ -3,14 +3,14 @@ package modelo.method.criteria.order;
 import modelo.enterprise.Enterprise;
 import modelo.method.criteria.OrderCriterion;
 
-public class EnterpriseAgeCriterion extends OrderCriterion {
+public class Unordered extends OrderCriterion {
 	
-	public EnterpriseAgeCriterion(){
-		super("Antiguedad de la empresa");
+	public Unordered(){
+		super("Sin Orden");
 	}
 
 	public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
-		return oneEnterprise.age() - anotherEnterprise.age();
+		return 0;
 	}
 
 }

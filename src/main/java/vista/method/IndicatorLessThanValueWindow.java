@@ -1,33 +1,34 @@
-package vista;
-
+package vista.method;
 
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
+
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.NumericField;
-import viewModel.AverageLessThanValueVM;
+
+import viewModel.IndicatorLessThanValueVM;
 import modelo.method.criteria.Criterion;
+import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
 
 @SuppressWarnings("serial")
-
-public class AverageLessThanValueWindow extends SimpleWindow<AverageLessThanValueVM>
+public class IndicatorLessThanValueWindow extends SimpleWindow<IndicatorLessThanValueVM>
 {
-	public AverageLessThanValueWindow(WindowOwner owner)
+	public IndicatorLessThanValueWindow(WindowOwner owner)
 	{
-		super(owner, new AverageLessThanValueVM());
+		super(owner, new IndicatorLessThanValueVM());
 	}
 	
 	@Override	
 	protected void createFormPanel(Panel mainPanel)
 	{
-		this.setTitle("Promedio menor a un valor segun cantidad de años indicados");
+		this.setTitle("Indicador menor a un valor segun cantidad de años indicados");
 		
 		mainPanel.setLayout(new VerticalLayout());
 		
@@ -54,7 +55,7 @@ public class AverageLessThanValueWindow extends SimpleWindow<AverageLessThanValu
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = FilterCriteria.indicatorAverageLowerThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
+			FilterCriterion newCriterion = FilterCriteria.indicatorValueLowerThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});
@@ -64,7 +65,7 @@ public class AverageLessThanValueWindow extends SimpleWindow<AverageLessThanValu
 	@Override
 	protected void addActions(Panel actionsPanel) {}
 	
-	public Criterion openWithReturn()
+	public FilterCriterion openWithReturn()
 	{
 		this.getModelObject().refreshList();
 		this.open();

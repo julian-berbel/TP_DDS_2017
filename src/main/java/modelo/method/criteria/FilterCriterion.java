@@ -1,22 +1,22 @@
 package modelo.method.criteria;
 
-import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
+import org.uqbar.commons.utils.Observable;
 
 import modelo.enterprise.Enterprise;
 
-public class FilterCriterion implements Criterion
+@Observable
+public class FilterCriterion extends Criterion
 {	
 	protected Function<Enterprise, Boolean> criterion;
 	
-	public FilterCriterion(Function<Enterprise, Boolean> criterion){
+	public FilterCriterion(Function<Enterprise, Boolean> criterion, String description){
+		super(description);
 		this.criterion = criterion;
 	}
 	
-	public List<Enterprise> apply(List<Enterprise> enterprises){
-		return enterprises.stream()
-				.filter(enterprise -> criterion.apply(enterprise))
-				.collect(Collectors.toList());
+	public Boolean isMetBy(Enterprise enterprise){
+		return criterion.apply(enterprise);
 	}
 }

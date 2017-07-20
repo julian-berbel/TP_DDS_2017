@@ -1,4 +1,4 @@
-package vista;
+package vista.enterprise;
 
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
@@ -7,6 +7,7 @@ import exceptions.JsonMappingException;
 import exceptions.NoFileSelectedException;
 import exceptions.ReadingFileException;
 import viewModel.LoadCalculationsVM;
+import vista.Error;
 
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;

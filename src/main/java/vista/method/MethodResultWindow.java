@@ -1,4 +1,4 @@
-package vista;
+package vista.method;
 
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;

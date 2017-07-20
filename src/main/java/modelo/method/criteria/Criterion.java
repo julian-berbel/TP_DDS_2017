@@ -1,9 +1,18 @@
 package modelo.method.criteria;
 
-import java.util.List;
-
-import modelo.enterprise.Enterprise;
-
-public interface Criterion {
-	public List<Enterprise> apply(List<Enterprise> enterprises);
+public abstract class Criterion {
+	private String description;
+	
+	public Criterion(String description){
+		this.description = description;
+	}
+	
+	public String getDescription(){
+		return description;
+	}
+	
+	@Override
+	public String toString(){
+		return description;
+	}
 }

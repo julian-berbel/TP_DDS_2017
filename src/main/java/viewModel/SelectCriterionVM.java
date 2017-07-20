@@ -1,18 +1,14 @@
 package viewModel;
 
+public class SelectCriterionVM<T> {
 
-import modelo.method.criteria.Criterion;
-
-public class SelectCriterionVM {
-
-	private Criterion targetCriterion;
+	private T targetCriterion;
 	
-	public Criterion getTargetCriterion() {
-		
+	public T getTargetCriterion() {
 		return targetCriterion;
 	}
 
-	public void setTargetCriterion(Criterion newCriterion) {
+	public void setTargetCriterion(T newCriterion) {
 		this.targetCriterion = newCriterion;
 	}
 }

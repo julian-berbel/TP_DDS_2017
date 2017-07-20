@@ -10,11 +10,11 @@ public class MaximizeIndicatorCriterion extends OrderCriterion {
 	private Indicator indicator;
 	
 	public MaximizeIndicatorCriterion(Indicator indicator){
-		super();
+		super("Maximizar indicador " + indicator.getName());
 		this.indicator = indicator;
 	}
 
-	public int criterion(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
+	public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
 		int currentYear = Year.now().getValue();
 		return indicator.reduce(anotherEnterprise, currentYear).compareTo(indicator.reduce(oneEnterprise, currentYear));
 	}

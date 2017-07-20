@@ -1,15 +1,24 @@
 package modelo.method.criteria;
 
-import java.util.List;
+import org.uqbar.commons.utils.Observable;
 
-import modelo.enterprise.Enterprise;
-
-public abstract class MixedCriterion implements Criterion
+@Observable
+public abstract class MixedCriterion extends Criterion
 {
-	protected OrderCriterion orderCriterion;
-	protected FilterCriterion filterCriterion;
+	private OrderCriterion orderCriterion;
+	private FilterCriterion filterCriterion;
 	
-	public List<Enterprise> apply(List<Enterprise> enterprises){
-		return orderCriterion.apply(filterCriterion.apply(enterprises));
+	public MixedCriterion(OrderCriterion orderCriterion, FilterCriterion filterCriterion, String description) {
+		super(description);
+		this.orderCriterion = orderCriterion;
+		this.filterCriterion = filterCriterion;
+	}
+	
+	public OrderCriterion getOrderCriterion() {
+		return orderCriterion;
+	}
+
+	public FilterCriterion getFilterCriterion() {
+		return filterCriterion;
 	}
 }

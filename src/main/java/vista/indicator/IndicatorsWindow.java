@@ -1,4 +1,4 @@
-package vista;
+package vista.indicator;
 
 import org.uqbar.arena.layout.VerticalLayout;
 
@@ -17,6 +17,8 @@ import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import modelo.indicator.Indicator;
 import viewModel.IndicatorsVM;
+import vista.Error;
+import vista.SaveChangesWindow;
 
 
 @SuppressWarnings("serial")

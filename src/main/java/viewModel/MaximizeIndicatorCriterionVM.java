@@ -6,6 +6,7 @@ import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import modelo.method.criteria.Criterion;
+import modelo.method.criteria.OrderCriterion;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 
@@ -13,7 +14,7 @@ import modelo.indicator.IndicatorRepository;
 public class MaximizeIndicatorCriterionVM {
 
 	private List<Indicator> indicators;
-	private Criterion targetCriterion;
+	private OrderCriterion targetCriterion;
 	private Indicator selectedIndicator;
 	
 	public void refreshList()
@@ -22,11 +23,11 @@ public class MaximizeIndicatorCriterionVM {
 		ObservableUtils.firePropertyChanged(this, "indicators");
 	}
 
-	public Criterion getTargetCriterion() {
+	public OrderCriterion getTargetCriterion() {
 		return targetCriterion;
 	}
 
-	public void setTargetCriterion(Criterion newCriterion) {
+	public void setTargetCriterion(OrderCriterion newCriterion) {
 		this.targetCriterion = newCriterion;
 	}
 

@@ -1,4 +1,5 @@
-package vista;
+package vista.method;
+
 
 
 import org.uqbar.arena.widgets.Panel;
@@ -9,26 +10,28 @@ import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
-
-import viewModel.MaximizeIndicatorCriterionVM;
+import org.uqbar.arena.widgets.NumericField;
+import viewModel.AverageHigherThanValueVM;
 import modelo.method.criteria.Criterion;
+import modelo.method.criteria.FilterCriterion;
+import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
-import modelo.method.criteria.order.MaximizeIndicatorCriterion;
+
 
 
 @SuppressWarnings("serial")
 
-public class MaximizeIndicatorCriterionWindow extends SimpleWindow<MaximizeIndicatorCriterionVM>
+public class AverageHigherThanValueWindow extends SimpleWindow<AverageHigherThanValueVM>
 {
-	public MaximizeIndicatorCriterionWindow(WindowOwner owner)
+	public AverageHigherThanValueWindow(WindowOwner owner)
 	{
-		super(owner, new MaximizeIndicatorCriterionVM());
+		super(owner, new AverageHigherThanValueVM());
 	}
 	
 	@Override	
 	protected void createFormPanel(Panel mainPanel)
 	{
-		this.setTitle("Maximizar criterio");
+		this.setTitle("Promedio mayor a un valor segun cantidad de años indicados");
 		
 		mainPanel.setLayout(new VerticalLayout());
 		
@@ -38,7 +41,7 @@ public class MaximizeIndicatorCriterionWindow extends SimpleWindow<MaximizeIndic
 		Panel panel2 = new Panel(mainPanel);
 		panel2.setLayout(new ColumnLayout(2));
 		
-		new Label(panel1).setText("Seleccione el indicador que desea maximizar");
+		new Label(panel1).setText("Seleccione el indicador que desea comparar");
 		
 		Table<Indicator> indicatorTable = new Table<Indicator>(panel1, Indicator.class);
 		indicatorTable.bindItemsToProperty("indicators");
@@ -46,10 +49,16 @@ public class MaximizeIndicatorCriterionWindow extends SimpleWindow<MaximizeIndic
 		indicatorTable.setWidth(600);
 		indicatorTable.setHeight(200);
 		indicatorTable.setNumberVisibleRows(10);
+		new Label(panel1).setText("Ingrese el valor a comparar");
+
+		new NumericField(panel1).bindValueToProperty("value");
+		new Label(panel1).setText("Ingrese la cantidad de años");
+
+		new NumericField(panel1).bindValueToProperty("numberYears");
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = new MaximizeIndicatorCriterion( this.getModelObject().getSelectedIndicator());	
+			FilterCriterion newCriterion = FilterCriteria.indicatorAverageHigherThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});
@@ -59,7 +68,7 @@ public class MaximizeIndicatorCriterionWindow extends SimpleWindow<MaximizeIndic
 	@Override
 	protected void addActions(Panel actionsPanel) {}
 	
-	public Criterion openWithReturn()
+	public FilterCriterion openWithReturn()
 	{
 		this.getModelObject().refreshList();
 		this.open();

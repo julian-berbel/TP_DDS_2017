@@ -1,41 +1,34 @@
-
-package vista;
+package vista.method;
 
 
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
-
-
-
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.NumericField;
-
-import viewModel.IndicatorGreaterThanValueVM;
-
+import viewModel.AverageLessThanValueVM;
 import modelo.method.criteria.Criterion;
+import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.filter.FilterCriteria;
 import modelo.indicator.Indicator;
 
-
-
 @SuppressWarnings("serial")
 
-public class IndicatorGreaterThanValueWindow extends SimpleWindow<IndicatorGreaterThanValueVM>
+public class AverageLessThanValueWindow extends SimpleWindow<AverageLessThanValueVM>
 {
-	public IndicatorGreaterThanValueWindow(WindowOwner owner)
+	public AverageLessThanValueWindow(WindowOwner owner)
 	{
-		super(owner, new IndicatorGreaterThanValueVM());
+		super(owner, new AverageLessThanValueVM());
 	}
 	
 	@Override	
 	protected void createFormPanel(Panel mainPanel)
 	{
-		this.setTitle("Indicador mayor a un valor segun cantidad de años indicados");
+		this.setTitle("Promedio menor a un valor segun cantidad de años indicados");
 		
 		mainPanel.setLayout(new VerticalLayout());
 		
@@ -62,7 +55,7 @@ public class IndicatorGreaterThanValueWindow extends SimpleWindow<IndicatorGreat
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = FilterCriteria.indicatorValueHigherThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
+			FilterCriterion newCriterion = FilterCriteria.indicatorAverageLowerThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});
@@ -72,7 +65,7 @@ public class IndicatorGreaterThanValueWindow extends SimpleWindow<IndicatorGreat
 	@Override
 	protected void addActions(Panel actionsPanel) {}
 	
-	public Criterion openWithReturn()
+	public FilterCriterion openWithReturn()
 	{
 		this.getModelObject().refreshList();
 		this.open();

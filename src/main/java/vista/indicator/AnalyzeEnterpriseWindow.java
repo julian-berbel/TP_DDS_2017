@@ -1,5 +1,4 @@
-package vista;
-
+package vista.indicator;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
@@ -7,29 +6,26 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.tables.Column;
-import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
-import viewModel.ConsultAccountVM;
-
-
+import modelo.enterprise.Period;
+import modelo.indicator.Indicator;
+import viewModel.AnalyzeEnterpriseVM;
 
 @SuppressWarnings("serial")
-public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
+public class AnalyzeEnterpriseWindow extends SimpleWindow<AnalyzeEnterpriseVM>
 {	
-	public ConsultAccountsWindow(WindowOwner owner)
+	public AnalyzeEnterpriseWindow(WindowOwner owner)
 	{
-		super(owner, new ConsultAccountVM());
+		super(owner, new AnalyzeEnterpriseVM());
 	}
 	
 	@Override	
 	protected void createFormPanel(Panel mainPanel)
 	{
-		this.setTitle("Consultar Cuentas");
+		this.setTitle("Analizar Empresa");
 		mainPanel.setLayout(new VerticalLayout());		
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new ColumnLayout(2));
@@ -43,24 +39,27 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 		lstEnterprises.setWidth(220);
 		lstEnterprises.setHeight(220);
 		
-		List<Enterprise> lstPeriods = new List<Enterprise>(panel1);
+		List<Period> lstPeriods = new List<Period>(panel1);
 		lstPeriods.bindItemsToProperty("periods");
 		lstPeriods.bindValueToProperty("selectedPeriod");
 		lstPeriods.setWidth(220);
 		lstPeriods.setHeight(220);
 		
-		Table<Calculation> tableCalculations = new Table<Calculation>(mainPanel, Calculation.class);		
-		tableCalculations.setNumberVisibleRows(10).bindItemsToProperty("calculations");
-		tableCalculations.setHeight(300);
-		tableCalculations.setWidth(600);
+		Panel panel3 = new Panel(panel1);
+		new Label(panel3).setText("Indicadores");
 		
-		Column<Calculation> columnCalculations = new Column<Calculation>(tableCalculations);
-		columnCalculations.setTitle("Cuentas").bindContentsToProperty("name");
+		List<Indicator> indicators = new List<Indicator>(panel3);
+		indicators.bindItemsToProperty("indicators");
+		indicators.bindValueToProperty("selectedIndicator");
+		indicators.setWidth(220);
+		indicators.setHeight(220);
 		
-		Column<Calculation> columnValues = new Column<Calculation>(tableCalculations);
-		columnValues.setTitle("Valores").bindContentsToProperty("value");
-	}	
-	
+		Panel panel2 = new Panel(panel1);
+		panel2.setLayout(new VerticalLayout());
+		
+		new Label(panel2).setText("valor:");
+		new Label(panel2).setText("").bindValueToProperty("value");
+	}
 	
 	@Override	
 	protected void addActions(Panel actions)

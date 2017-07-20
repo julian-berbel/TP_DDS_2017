@@ -8,6 +8,7 @@ import org.uqbar.commons.utils.Observable;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 import modelo.method.criteria.Criterion;
+import modelo.method.criteria.FilterCriterion;
 
 @Observable
 public class IncreasingIndicatorValueCriterionVM 
@@ -15,7 +16,7 @@ public class IncreasingIndicatorValueCriterionVM
 
 	private List<Indicator> indicators;
 	private int numberYears;
-	private Criterion targetCriterion;
+	private FilterCriterion targetCriterion;
 	private Indicator selectedIndicator;
 	
 	public void refreshList()
@@ -34,12 +35,12 @@ public class IncreasingIndicatorValueCriterionVM
 		this.numberYears = numberYears;
 	}
 
-	public Criterion getTargetCriterion()
+	public FilterCriterion getTargetCriterion()
 	{
 		return targetCriterion;
 	}
 
-	public void setTargetCriterion(Criterion newCriterion) 
+	public void setTargetCriterion(FilterCriterion newCriterion) 
 	{
 		this.targetCriterion = newCriterion;
 	}

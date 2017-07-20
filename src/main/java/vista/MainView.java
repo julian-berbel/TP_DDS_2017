@@ -1,6 +1,12 @@
 package vista;
 
 import viewModel.MainVM;
+import vista.enterprise.ConsultAccountsWindow;
+import vista.enterprise.LoadCalculationsWindow;
+import vista.indicator.AnalyzeEnterpriseWindow;
+import vista.indicator.IndicatorsWindow;
+import vista.method.MethodWindow;
+
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;

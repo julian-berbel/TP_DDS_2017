@@ -1,33 +1,32 @@
-package vista;
+package vista.method;
 
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
-
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
-import org.uqbar.arena.widgets.NumericField;
 
-import viewModel.IndicatorLessThanValueVM;
+import viewModel.MinimizeIndicatorCriterionVM;
 import modelo.method.criteria.Criterion;
-import modelo.method.criteria.filter.FilterCriteria;
+import modelo.method.criteria.OrderCriterion;
 import modelo.indicator.Indicator;
+import modelo.method.criteria.order.MinimizeIndicatorCriterion;
 
 @SuppressWarnings("serial")
-public class IndicatorLessThanValueWindow extends SimpleWindow<IndicatorLessThanValueVM>
+public class MinimizeIndicatorCriterionWindow extends SimpleWindow<MinimizeIndicatorCriterionVM>
 {
-	public IndicatorLessThanValueWindow(WindowOwner owner)
+	public MinimizeIndicatorCriterionWindow(WindowOwner owner)
 	{
-		super(owner, new IndicatorLessThanValueVM());
+		super(owner, new MinimizeIndicatorCriterionVM());
 	}
 	
 	@Override	
 	protected void createFormPanel(Panel mainPanel)
 	{
-		this.setTitle("Indicador menor a un valor segun cantidad de años indicados");
+		this.setTitle("Maximizar criterio");
 		
 		mainPanel.setLayout(new VerticalLayout());
 		
@@ -37,7 +36,7 @@ public class IndicatorLessThanValueWindow extends SimpleWindow<IndicatorLessThan
 		Panel panel2 = new Panel(mainPanel);
 		panel2.setLayout(new ColumnLayout(2));
 		
-		new Label(panel1).setText("Seleccione el indicador que desea comparar");
+		new Label(panel1).setText("Seleccione el indicador que desea minimizar");
 		
 		Table<Indicator> indicatorTable = new Table<Indicator>(panel1, Indicator.class);
 		indicatorTable.bindItemsToProperty("indicators");
@@ -45,16 +44,10 @@ public class IndicatorLessThanValueWindow extends SimpleWindow<IndicatorLessThan
 		indicatorTable.setWidth(600);
 		indicatorTable.setHeight(200);
 		indicatorTable.setNumberVisibleRows(10);
-		new Label(panel1).setText("Ingrese el valor a comparar");
-
-		new NumericField(panel1).bindValueToProperty("value");
-		new Label(panel1).setText("Ingrese la cantidad de años");
-
-		new NumericField(panel1).bindValueToProperty("numberYears");
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = FilterCriteria.indicatorValueLowerThan(this.getModelObject().getSelectedIndicator(), this.getModelObject().getValue(), this.getModelObject().getNumberYears());
+			OrderCriterion newCriterion = new MinimizeIndicatorCriterion( this.getModelObject().getSelectedIndicator());	
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});
@@ -64,7 +57,7 @@ public class IndicatorLessThanValueWindow extends SimpleWindow<IndicatorLessThan
 	@Override
 	protected void addActions(Panel actionsPanel) {}
 	
-	public Criterion openWithReturn()
+	public OrderCriterion openWithReturn()
 	{
 		this.getModelObject().refreshList();
 		this.open();

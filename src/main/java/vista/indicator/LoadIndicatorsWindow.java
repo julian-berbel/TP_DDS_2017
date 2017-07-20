@@ -1,4 +1,4 @@
-package vista;
+package vista.indicator;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
@@ -6,6 +6,7 @@ import exceptions.RepeatedIndicatorExcelException;
 import exceptions.RepeatedIndicatorInSystemException;
 import jxl.read.biff.BiffException;
 import viewModel.LoadIndicatorsVM;
+import vista.Error;
 
 import java.io.IOException;
 

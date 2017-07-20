@@ -75,40 +75,40 @@ public abstract class FilterCriteria
 	private static Function<Integer, Boolean> LowerThan = result -> result < 0;
 	
 	public static FilterCriterion indicatorValueHigherThan(Indicator indicator, BigDecimal value, int years){
-		return new FilterCriterion(indicatorValueCompare(indicator, value, years).apply(HigherThan));
+		return new FilterCriterion(indicatorValueCompare(indicator, value, years).apply(HigherThan), "Indicador " + indicator.getName() + " mayor a " + value.toString() + " durante los ultimos " + String.valueOf(years) + " anios");
 	}
 	
 	public static FilterCriterion indicatorValueLowerThan(Indicator indicator, BigDecimal value, int years){
-		return new FilterCriterion(indicatorValueCompare(indicator, value, years).apply(LowerThan));
+		return new FilterCriterion(indicatorValueCompare(indicator, value, years).apply(LowerThan), "Indicador " + indicator.getName() + " menor a " + value.toString() + " durante los ultimos " + String.valueOf(years) + " anios");
 	}
 	
 	public static FilterCriterion indicatorAverageHigherThan(Indicator indicator, BigDecimal value, int years){
-		return new FilterCriterion(indicatorAverageCompare(indicator, value, years).apply(HigherThan));
+		return new FilterCriterion(indicatorAverageCompare(indicator, value, years).apply(HigherThan), "Promedio del indicador " + indicator.getName() + " mayor a " + value.toString() + " durante los ultimos " + String.valueOf(years) + " anios");
 	}
 	
 	public static FilterCriterion indicatorAverageLowerThan(Indicator indicator, BigDecimal value, int years){
-		return new FilterCriterion(indicatorAverageCompare(indicator, value, years).apply(LowerThan));
+		return new FilterCriterion(indicatorAverageCompare(indicator, value, years).apply(LowerThan), "Promedio del indicador " + indicator.getName() + " menor a " + value.toString() + " durante los ultimos " + String.valueOf(years) + " anios");
 	}
 	
 	public static FilterCriterion indicatorMedianHigherThan(Indicator indicator, BigDecimal value, int years){
-		return new FilterCriterion(indicatorMedianCompare(indicator, value, years).apply(HigherThan));
+		return new FilterCriterion(indicatorMedianCompare(indicator, value, years).apply(HigherThan), "Media del indicador " + indicator.getName() + " mayor a " + value.toString() + " durante los ultimos " + String.valueOf(years) + " anios");
 	}
 	
 	public static FilterCriterion indicatorMedianLowerThan(Indicator indicator, BigDecimal value, int years){
-		return new FilterCriterion(indicatorMedianCompare(indicator, value, years).apply(LowerThan));
+		return new FilterCriterion(indicatorMedianCompare(indicator, value, years).apply(LowerThan), "Media del indicador " + indicator.getName() + " menor a " + value.toString() + " durante los ultimos " + String.valueOf(years) + " anios");
 	}
 	
 	public static FilterCriterion increasingIndicatorValue(Indicator indicator, int years){
-		return new FilterCriterion(variatingIndicatorValue(indicator, years).apply(HigherThan));
+		return new FilterCriterion(variatingIndicatorValue(indicator, years).apply(HigherThan), "Indicador " + indicator.getName() + " creciente durante los ultimos " + String.valueOf(years) + " anios");
 	}
 	
 	public static FilterCriterion decreasingIndicatorValue(Indicator indicator, int years){
-		return new FilterCriterion(variatingIndicatorValue(indicator, years).apply(LowerThan));
+		return new FilterCriterion(variatingIndicatorValue(indicator, years).apply(LowerThan), "Indicador " + indicator.getName() + " creciente durante los ultimos " + String.valueOf(years) + " anios");
 	}
 	
 	public static FilterCriterion minimumLongevity(int minimumAge){
 		return new FilterCriterion(enterprise -> {
 			return enterprise.age() > minimumAge;
-		});
+		}, "Antiguedad de la empresa mayor a " + String.valueOf(minimumAge) + " anios");
 	}
 }

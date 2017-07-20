@@ -1,4 +1,5 @@
-package vista;
+package vista.method;
+
 
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Table;
@@ -9,17 +10,20 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Label;
 
-import viewModel.MinimizeIndicatorCriterionVM;
+import viewModel.MaximizeIndicatorCriterionVM;
 import modelo.method.criteria.Criterion;
+import modelo.method.criteria.OrderCriterion;
 import modelo.indicator.Indicator;
-import modelo.method.criteria.order.MinimizeIndicatorCriterion;
+import modelo.method.criteria.order.MaximizeIndicatorCriterion;
+
 
 @SuppressWarnings("serial")
-public class MinimizeIndicatorCriterionWindow extends SimpleWindow<MinimizeIndicatorCriterionVM>
+
+public class MaximizeIndicatorCriterionWindow extends SimpleWindow<MaximizeIndicatorCriterionVM>
 {
-	public MinimizeIndicatorCriterionWindow(WindowOwner owner)
+	public MaximizeIndicatorCriterionWindow(WindowOwner owner)
 	{
-		super(owner, new MinimizeIndicatorCriterionVM());
+		super(owner, new MaximizeIndicatorCriterionVM());
 	}
 	
 	@Override	
@@ -35,7 +39,7 @@ public class MinimizeIndicatorCriterionWindow extends SimpleWindow<MinimizeIndic
 		Panel panel2 = new Panel(mainPanel);
 		panel2.setLayout(new ColumnLayout(2));
 		
-		new Label(panel1).setText("Seleccione el indicador que desea minimizar");
+		new Label(panel1).setText("Seleccione el indicador que desea maximizar");
 		
 		Table<Indicator> indicatorTable = new Table<Indicator>(panel1, Indicator.class);
 		indicatorTable.bindItemsToProperty("indicators");
@@ -46,7 +50,7 @@ public class MinimizeIndicatorCriterionWindow extends SimpleWindow<MinimizeIndic
 		
 		new Button(panel2).setCaption("Aceptar").onClick(()->
 		{
-			Criterion newCriterion = new MinimizeIndicatorCriterion( this.getModelObject().getSelectedIndicator());	
+			OrderCriterion newCriterion = new MaximizeIndicatorCriterion( this.getModelObject().getSelectedIndicator());	
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		});
@@ -56,7 +60,7 @@ public class MinimizeIndicatorCriterionWindow extends SimpleWindow<MinimizeIndic
 	@Override
 	protected void addActions(Panel actionsPanel) {}
 	
-	public Criterion openWithReturn()
+	public OrderCriterion openWithReturn()
 	{
 		this.getModelObject().refreshList();
 		this.open();
