@@ -49,10 +49,8 @@ public class Method {
 	}
 	
 	private Comparator<Enterprise> buildComparator(){
-		return //orderCriteria.isEmpty() ? new Unordered(): // no tiene sentido en absoluto pero por alguna razon esta linea hace romper el firepropertychanged en algun lado TODO
-			Seq.seq(orderCriteria.stream())
-				.drop(1)
-				.foldLeft((Comparator<Enterprise>) orderCriteria.get(0), (seed, comp) -> seed.thenComparing(comp));
+		return Seq.seq(orderCriteria.stream())
+				.foldLeft((Comparator<Enterprise>) new Unordered(), (seed, comp) -> seed.thenComparing(comp));
 	}
 	
 	public List<Enterprise> apply(List<Enterprise> enterprises){
