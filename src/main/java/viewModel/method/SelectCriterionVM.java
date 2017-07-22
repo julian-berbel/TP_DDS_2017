@@ -1,4 +1,4 @@
-package viewModel;
+package viewModel.method;
 
 public class SelectCriterionVM<T> {
 

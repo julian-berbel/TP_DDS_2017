@@ -10,8 +10,8 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import viewModel.MethodVM;
 import modelo.method.Method;
+import viewModel.method.MethodVM;
 
 @SuppressWarnings("serial")
 public class MethodWindow  extends SimpleWindow<MethodVM> {

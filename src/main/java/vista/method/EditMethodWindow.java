@@ -17,7 +17,7 @@ import modelo.method.Method;
 import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
 import modelo.method.criteria.OrderCriterion;
-import viewModel.EditMethodVM;
+import viewModel.method.EditMethodVM;
 
 @SuppressWarnings("serial")
 public class EditMethodWindow extends Dialog<EditMethodVM> {

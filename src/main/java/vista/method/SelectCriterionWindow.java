@@ -5,7 +5,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import viewModel.SelectCriterionVM;
+import viewModel.method.SelectCriterionVM;
 
 @SuppressWarnings("serial")
 public abstract class SelectCriterionWindow<T> extends SimpleWindow<SelectCriterionVM<T>>

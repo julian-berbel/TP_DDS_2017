@@ -1,32 +1,29 @@
-package viewModel;
+package viewModel.method;
 
 import java.util.List;
 
-import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import modelo.method.criteria.OrderCriterion;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 
 @Observable
-public class OrderByIndicatorValueVM {
+public abstract class CriterionVM<CriterionType> {
 
-	private List<Indicator> indicators;
-	private OrderCriterion targetCriterion;
-	private Indicator selectedIndicator;
+	protected List<Indicator> indicators;
+	protected CriterionType targetCriterion;
+	protected Indicator selectedIndicator;
 	
 	public void refreshList()
 	{
-		setIndicators(IndicatorRepository.getIndicatorList());
-		ObservableUtils.firePropertyChanged(this, "indicators");
+		indicators = IndicatorRepository.getIndicatorList();
 	}
 
-	public OrderCriterion getTargetCriterion() {
+	public CriterionType getTargetCriterion() {
 		return targetCriterion;
 	}
 
-	public void setTargetCriterion(OrderCriterion newCriterion) {
+	public void setTargetCriterion(CriterionType newCriterion) {
 		this.targetCriterion = newCriterion;
 	}
 
@@ -45,5 +42,6 @@ public class OrderByIndicatorValueVM {
 	public void setSelectedIndicator(Indicator selectedIndicator) {
 		this.selectedIndicator = selectedIndicator;
 	}
-
+	
+	public abstract void buildCriterion();
 }

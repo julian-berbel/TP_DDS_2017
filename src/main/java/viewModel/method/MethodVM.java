@@ -1,4 +1,4 @@
-package viewModel;
+package viewModel.method;
 
 import java.util.List;
 import java.util.Optional;
