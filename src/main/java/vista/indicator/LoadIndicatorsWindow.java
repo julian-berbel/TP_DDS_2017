@@ -6,7 +6,7 @@ import exceptions.RepeatedIndicatorExcelException;
 import exceptions.RepeatedIndicatorInSystemException;
 import jxl.read.biff.BiffException;
 import viewModel.indicator.LoadIndicatorsVM;
-import vista.Error;
+import vista.ErrorWindow;
 
 import java.io.IOException;
 
@@ -42,19 +42,19 @@ public class LoadIndicatorsWindow extends SimpleWindow<LoadIndicatorsVM>
 			}
 			catch(IOException ioException)
 			{
-					Error.show(this, "Error al abrir el archivo");
+					ErrorWindow.show(this, "Error al abrir el archivo");
 			}
 			catch(BiffException biffException)
 			{
-				Error.show(this, "Archivo invalido o no es un archivo Excel (.xls)");
+				ErrorWindow.show(this, "Archivo invalido o no es un archivo Excel (.xls)");
 			}
 			catch(RepeatedIndicatorExcelException repeatedIndicator)
 			{
-				Error.show(this, "El indicador: "+repeatedIndicator.getMessage()+" esta repetido en la hoja de excel, modifiquela y vuelva a cargar el archivo");
+				ErrorWindow.show(this, "El indicador: "+repeatedIndicator.getMessage()+" esta repetido en la hoja de excel, modifiquela y vuelva a cargar el archivo");
 			}
 			catch(RepeatedIndicatorInSystemException repeatedIndicator)
 			{
-				Error.show(this, "El indicador: " + repeatedIndicator.getMessage()+" de la hoja de excel ya existe en el sistema. Modifique el archivo y vuelva a cargarlo");
+				ErrorWindow.show(this, "El indicador: " + repeatedIndicator.getMessage()+" de la hoja de excel ya existe en el sistema. Modifique el archivo y vuelva a cargarlo");
 			}
 		
 		});

@@ -16,7 +16,7 @@ public class FilterCriterion extends Criterion
 		this.criterion = criterion;
 	}
 	
-	public Boolean isMetBy(Enterprise enterprise){
-		return criterion.apply(enterprise);
+	public Function<Enterprise, Boolean> getCriterion() {
+		return criterion;
 	}
 }

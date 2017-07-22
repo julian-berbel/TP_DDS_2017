@@ -7,7 +7,7 @@ import exceptions.JsonMappingException;
 import exceptions.NoFileSelectedException;
 import exceptions.ReadingFileException;
 import viewModel.enterprise.LoadCalculationsVM;
-import vista.Error;
+import vista.ErrorWindow;
 
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
@@ -40,7 +40,7 @@ public class LoadCalculationsWindow extends SimpleWindow<LoadCalculationsVM>
 			}
 			catch(ReadingFileException | JsonMappingException | NoFileSelectedException e)
 			{
-					Error.show(this, e.getMessage());
+					ErrorWindow.show(this, e.getMessage());
 			}	
 		});
 

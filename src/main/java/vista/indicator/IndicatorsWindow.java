@@ -17,7 +17,7 @@ import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import modelo.indicator.Indicator;
 import viewModel.indicator.IndicatorsVM;
-import vista.Error;
+import vista.ErrorWindow;
 import vista.SaveChangesWindow;
 
 
@@ -78,7 +78,7 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 			}
 			catch(DeleteUsedIndicatorException exception)
 			{
-				Error.show(this, exception.getMessage());
+				ErrorWindow.show(this, exception.getMessage());
 			}
 			});
 		
@@ -126,17 +126,17 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		}
 		catch(BiffException e)	//es la excepcion que tira al invocar el metodo, que a su vez contiene la excepcion que tira el metodo
 		{	
-			Error.show(this, "El archivo no existe o no es un archivo '.xls'  ");
+			ErrorWindow.show(this, "El archivo no existe o no es un archivo '.xls'  ");
 			e.printStackTrace();
 		}
 		catch(WriteException e)
 		{
-			Error.show(this, "No se a podido modificar el archivo");
+			ErrorWindow.show(this, "No se a podido modificar el archivo");
 			e.printStackTrace();
 		}
 		catch(IOException e)
 		{
-			Error.show(this, "El archivo que se intenta abrir no existe");
+			ErrorWindow.show(this, "El archivo que se intenta abrir no existe");
 			e.printStackTrace();
 		}
 		

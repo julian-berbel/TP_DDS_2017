@@ -6,13 +6,14 @@ import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
 import viewModel.method.SelectCriterionVM;
+import vista.method.criteria.CriterionWindow;
 
 @SuppressWarnings("serial")
-public abstract class SelectCriterionWindow<T> extends SimpleWindow<SelectCriterionVM<T>>
+public abstract class SelectCriterionWindow<CriterionType> extends SimpleWindow<SelectCriterionVM<CriterionType>>
 {
 	public SelectCriterionWindow(WindowOwner owner) 
 	{
-		super(owner, new SelectCriterionVM<T>());
+		super(owner, new SelectCriterionVM<CriterionType>());
 	}
 	
 	@Override
@@ -21,9 +22,17 @@ public abstract class SelectCriterionWindow<T> extends SimpleWindow<SelectCriter
 		new Button(actions).setCaption("Volver").onClick(()->this.close());	
 	}
 	
-	public T openWithReturn() 
+	public CriterionType openWithReturn() 
 	{
 		this.open();
 		return getModelObject().getTargetCriterion();
+	}
+	
+	protected void addCriterionButton(Panel panel, String caption, CriterionWindow<CriterionType, ?> window){
+		new Button(panel).setCaption(caption).onClick(() -> {
+			CriterionType newCriterion = window.openWithReturn();
+			this.getModelObject().setTargetCriterion(newCriterion);
+			this.close();
+		}).setWidth(300);
 	}
 }

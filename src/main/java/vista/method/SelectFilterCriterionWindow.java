@@ -2,10 +2,17 @@ package vista.method;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
-import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.WindowOwner;
 import modelo.method.criteria.FilterCriterion;
+import vista.method.criteria.filter.DecreasingIndicatorValueCriterionWindow;
+import vista.method.criteria.filter.IncreasingIndicatorValueCriterionWindow;
+import vista.method.criteria.filter.IndicatorAverageHigherThanWindow;
+import vista.method.criteria.filter.IndicatorAverageLowerThanWindow;
+import vista.method.criteria.filter.IndicatorMedianHigherThanWindow;
+import vista.method.criteria.filter.IndicatorMedianLowerThanWindow;
+import vista.method.criteria.filter.IndicatorValueHigherThanWindow;
+import vista.method.criteria.filter.IndicatorValueLowerThanWindow;
 
 @SuppressWarnings("serial")
 public class SelectFilterCriterionWindow extends SelectCriterionWindow<FilterCriterion>
@@ -40,13 +47,5 @@ public class SelectFilterCriterionWindow extends SelectCriterionWindow<FilterCri
 		addCriterionButton(panel1, "Mediana mayor a cierto valor", new IndicatorMedianHigherThanWindow(this));
 		
 		addCriterionButton(panel1, "Mediana menor a cierto valor", new IndicatorMedianLowerThanWindow(this));
-	}
-	
-	private void addCriterionButton(Panel panel, String caption, FilterCriterionWindow<?> window){
-		new Button(panel).setCaption(caption).onClick(() -> {
-			FilterCriterion newCriterion = window.openWithReturn();
-			this.getModelObject().setTargetCriterion(newCriterion);
-			this.close();
-		}).setWidth(300);
 	}
 }

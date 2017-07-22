@@ -18,7 +18,7 @@ import exceptions.FormulaErrorException;
 import exceptions.MissingIndicatorException;
 import modelo.indicator.Indicator;
 import viewModel.indicator.EditIndicatorVM;
-import vista.Error;
+import vista.ErrorWindow;
 
 
 @SuppressWarnings("serial")
@@ -58,7 +58,7 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 			}
 			catch(MissingIndicatorException | FormulaErrorException | EmptyFieldException | ExistingIndicatorException exception)
 			{
-				Error.show(this, exception.getMessage());	
+				ErrorWindow.show(this, exception.getMessage());	
 			}});
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
 	}

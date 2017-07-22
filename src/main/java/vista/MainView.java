@@ -72,12 +72,12 @@ public class MainView extends MainWindow<MainVM>
 	
 	private void showFeatureNotAvailableMessage()
 	{
-		Error.show(this, "Esta funcionalidad aun no ha sido implementada!");
+		ErrorWindow.show(this, "Esta funcionalidad aun no ha sido implementada!");
 	}
 	
 	private void noFileLoadedMessage()
 	{
-		Error.show(this, "No se ha cargado el archivo de cuentas");
+		ErrorWindow.show(this, "No se ha cargado el archivo de cuentas");
 	}
 	
 	public static void main(String[] args)

@@ -1,6 +1,8 @@
 package modelo.enterprise;
 import java.util.List;
 
+import exceptions.MissingCalculationInPeriodException;
+
 public class Period 
 {
 	private int year;
@@ -25,7 +27,7 @@ public class Period
 		return calculations.stream()
 				.filter(calculation -> calculation.getName().equals(name))
 				.findFirst()
-				.get();
+				.orElseThrow(() -> new MissingCalculationInPeriodException(name, this));
 	}
 	
 	@Override

@@ -12,6 +12,8 @@ import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
 import modelo.method.criteria.OrderCriterion;
 import modelo.method.criteria.order.Unordered;
+import modelo.method.result.Pass;
+import modelo.method.result.Result;
 
 @Observable
 public class Method {
@@ -53,13 +55,13 @@ public class Method {
 				.foldLeft((Comparator<Enterprise>) new Unordered(), (seed, comp) -> seed.thenComparing(comp));
 	}
 	
-	public List<Enterprise> apply(List<Enterprise> enterprises){
+	public List<Result> apply(List<Enterprise> enterprises){
 		return enterprises.stream()
-				.filter(enterprise -> 
-					filterCriteria.stream()
-						.allMatch(filterCriterion -> 
-							filterCriterion.isMetBy(enterprise)))
 				.sorted(buildComparator())
+				.map(enterprise -> 
+					Seq.seq(filterCriteria.stream())
+						.foldLeft((Result) new Pass(enterprise), (seed, filterCriterion) -> 
+							seed.eval(filterCriterion.getCriterion())))
 				.collect(Collectors.toList());
 	}
 	
