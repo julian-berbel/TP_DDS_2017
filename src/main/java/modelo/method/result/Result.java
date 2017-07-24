@@ -1,8 +1,7 @@
 package modelo.method.result;
 
-import java.util.function.Predicate;
-
 import modelo.enterprise.Enterprise;
+import modelo.method.criteria.FilterCriterion;
 
 public abstract class Result{
 	
@@ -12,11 +11,16 @@ public abstract class Result{
 		this.enterprise = enterprise;
 	}
 	
-	public Result eval(Predicate<Enterprise> f) {
+	public Result eval(FilterCriterion criterion) {
 		return this;
 	}
 	
 	public Enterprise getEnterprise(){
 		return enterprise;
+	}
+
+	@Override
+	public boolean equals(Object r){
+		return this.getClass() == r.getClass() && enterprise == ((Result)r).enterprise;
 	}
 }

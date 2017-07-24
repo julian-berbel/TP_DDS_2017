@@ -29,11 +29,11 @@ public abstract class SelectCriterionWindow<CriterionType> extends SimpleWindow<
 		this.open();
 		return getModelObject().getTargetCriterion();
 	}
-	
+
 	protected void addCriterionButton(Panel panel, String caption, CriterionWindow<CriterionType, ?> window){
 		addCriterionButton(panel, caption, () -> window.openWithReturn());
 	}
-		
+
 	protected void addCriterionButton(Panel panel, String caption, Supplier<CriterionType> action){
 		new Button(panel).setCaption(caption).onClick(() -> {
 			CriterionType newCriterion = action.get();

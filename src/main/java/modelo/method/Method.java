@@ -61,7 +61,7 @@ public class Method {
 				.map(enterprise -> 
 					Seq.seq(filterCriteria.stream())
 						.foldLeft((Result) new Pass(enterprise), (seed, filterCriterion) -> 
-							seed.eval(filterCriterion.getCriterion())))
+							seed.eval(filterCriterion)))
 				.collect(Collectors.toList());
 	}
 	

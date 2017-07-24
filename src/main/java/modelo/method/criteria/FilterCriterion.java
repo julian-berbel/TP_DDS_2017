@@ -19,4 +19,8 @@ public class FilterCriterion extends Criterion
 	public Predicate<Enterprise> getCriterion() {
 		return criterion;
 	}
+	
+	public Boolean test(Enterprise enterprise){
+		return criterion.test(enterprise);
+	}
 }

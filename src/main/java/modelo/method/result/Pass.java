@@ -1,8 +1,7 @@
 package modelo.method.result;
 
-import java.util.function.Predicate;
-
 import modelo.enterprise.Enterprise;
+import modelo.method.criteria.FilterCriterion;
 
 public class Pass extends Result {
 	
@@ -11,10 +10,10 @@ public class Pass extends Result {
 	}
 
 	@Override
-	public Result eval(Predicate<Enterprise> f) {
+	public Result eval(FilterCriterion criterion) {
 		Result result;
 		try{
-			result = f.test(enterprise) ? new Pass(enterprise) : new Fail(enterprise);
+			result = criterion.test(enterprise) ? new Pass(enterprise) : new Fail(enterprise);
 		} catch(Exception e){
 			result = new Error(enterprise, e);
 		}
