@@ -4,11 +4,11 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import modelo.method.criteria.OrderCriterion;
 import viewModel.method.criteria.order.MaximizeIndicatorVM;
-import vista.method.criteria.CriterionWindow;
+import vista.method.criteria.IndicatorRelatedCriterionWindow;
 
 @SuppressWarnings("serial")
 
-public class MaximizeIndicatorCriterionWindow extends CriterionWindow<OrderCriterion, MaximizeIndicatorVM>
+public class MaximizeIndicatorCriterionWindow extends IndicatorRelatedCriterionWindow<OrderCriterion, MaximizeIndicatorVM>
 {
 	public MaximizeIndicatorCriterionWindow(WindowOwner owner)
 	{

@@ -1,6 +1,6 @@
 package modelo.method.criteria;
 
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -9,14 +9,14 @@ import modelo.enterprise.Enterprise;
 @Observable
 public class FilterCriterion extends Criterion
 {	
-	protected Function<Enterprise, Boolean> criterion;
+	protected Predicate<Enterprise> criterion;
 	
-	public FilterCriterion(Function<Enterprise, Boolean> criterion, String description){
+	public FilterCriterion(Predicate<Enterprise> criterion, String description){
 		super(description);
 		this.criterion = criterion;
 	}
 	
-	public Function<Enterprise, Boolean> getCriterion() {
+	public Predicate<Enterprise> getCriterion() {
 		return criterion;
 	}
 }

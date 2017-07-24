@@ -2,11 +2,11 @@ package vista.method;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
-import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.WindowOwner;
 
 import modelo.method.criteria.MixedCriterion;
+import vista.method.criteria.mixed.EnterpriseLongevityGreaterThanWindow;
 
 @SuppressWarnings("serial")
 public class SelectMixedCriterionWindow extends SelectCriterionWindow<MixedCriterion>
@@ -27,6 +27,6 @@ public class SelectMixedCriterionWindow extends SelectCriterionWindow<MixedCrite
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new ColumnLayout(2));
 
-		new Button(panel1).setCaption("Antiguedad de empresa").onClick(()->{ }).setWidth(300);
+		addCriterionButton(panel1, "Longevidad", new EnterpriseLongevityGreaterThanWindow(this));
 	}
 }

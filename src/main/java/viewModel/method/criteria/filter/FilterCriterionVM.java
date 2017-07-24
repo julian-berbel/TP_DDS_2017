@@ -3,10 +3,10 @@ package viewModel.method.criteria.filter;
 import org.uqbar.commons.utils.Observable;
 
 import modelo.method.criteria.FilterCriterion;
-import viewModel.method.criteria.CriterionVM;
+import viewModel.method.criteria.IndicatorRelatedCriterionVM;
 
 @Observable
-public abstract class FilterCriterionVM extends CriterionVM<FilterCriterion>
+public abstract class FilterCriterionVM extends IndicatorRelatedCriterionVM<FilterCriterion>
 {
 	protected int years;
 	

@@ -12,11 +12,6 @@ public class Error extends Result {
 		super(enterprise);
 		this.exception = exception;
 	}
-
-	@Override
-	public Boolean isError(){
-		return true;
-	}
 	
 	public String getErrorMessage(){
 		return exception.getMessage();

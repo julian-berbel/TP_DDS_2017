@@ -1,6 +1,6 @@
 package modelo.method.result;
 
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 import modelo.enterprise.Enterprise;
 
@@ -11,20 +11,8 @@ public abstract class Result{
 	public Result(Enterprise enterprise){
 		this.enterprise = enterprise;
 	}
-
-	public Boolean isSuccess(){
-		return false;
-	}
 	
-	public Boolean isFailure(){
-		return false;
-	}
-	
-	public Boolean isError(){
-		return false;
-	}
-	
-	public Result eval(Function<Enterprise, Boolean> f) {
+	public Result eval(Predicate<Enterprise> f) {
 		return this;
 	}
 	

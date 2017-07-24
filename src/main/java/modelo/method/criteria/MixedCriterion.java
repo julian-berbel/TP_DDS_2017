@@ -21,4 +21,8 @@ public abstract class MixedCriterion extends Criterion
 	public FilterCriterion getFilterCriterion() {
 		return filterCriterion;
 	}
+	
+	public Boolean uses(Criterion criterion){
+		return orderCriterion == criterion || filterCriterion == criterion;
+	}
 }

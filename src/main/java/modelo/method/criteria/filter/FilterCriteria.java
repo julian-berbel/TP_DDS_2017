@@ -3,6 +3,7 @@ package modelo.method.criteria.filter;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.jooq.lambda.Seq;
@@ -14,16 +15,16 @@ import modelo.method.criteria.FilterCriterion;
 
 public abstract class FilterCriteria
 {
-	private static Function<Function<Integer, Boolean>, Function<Enterprise, Boolean>> indicatorValueCompare(Indicator indicator, BigDecimal value, int years){
+	private static Function<Predicate<Integer>, Predicate<Enterprise>> indicatorValueCompare(Indicator indicator, BigDecimal value, int years){
 		return compare -> {
 			return enterprise -> {
 				return enterprise.getIndicatorValueFromLastNYears(indicator, years).stream()
-						.allMatch(_value -> compare.apply(_value.compareTo(value)));
+						.allMatch(_value -> compare.test(_value.compareTo(value)));
 			};
 		};
 	}
 	
-	private static Function<Function<Integer, Boolean>, Function<Enterprise, Boolean>> indicatorAverageCompare(Indicator indicator, BigDecimal value, int years){
+	private static Function<Predicate<Integer>, Predicate<Enterprise>> indicatorAverageCompare(Indicator indicator, BigDecimal value, int years){
 		return compare -> {
 			return enterprise -> {
 				List<BigDecimal> values = enterprise.getIndicatorValueFromLastNYears(indicator, years);
@@ -32,12 +33,12 @@ public abstract class FilterCriteria
 										.reduce(BigDecimal.ZERO, BigDecimal::add)
 										.divide(new BigDecimal(values.size()));
 				
-				return compare.apply(average.compareTo(value));
+				return compare.test(average.compareTo(value));
 			};
 		};
 	}
 	
-	private static Function<Function<Integer, Boolean>, Function<Enterprise, Boolean>> indicatorMedianCompare(Indicator indicator, BigDecimal value, int years){
+	private static Function<Predicate<Integer>, Predicate<Enterprise>> indicatorMedianCompare(Indicator indicator, BigDecimal value, int years){
 		return compare -> {
 			return enterprise -> {
 				List<BigDecimal> values = enterprise.getIndicatorValueFromLastNYears(indicator, years).stream()
@@ -50,12 +51,12 @@ public abstract class FilterCriteria
 				if(values.size() % 2 == 0)
 				median = median.add(values.get(middle-1)).divide(new BigDecimal(2));
 	
-				return compare.apply(median.compareTo(value));
+				return compare.test(median.compareTo(value));
 			};
 		};
 	}
 	
-	private static Function<Function<Integer, Boolean>, Function<Enterprise, Boolean>> variatingIndicatorValue(Indicator indicator, int years){
+	private static Function<Predicate<Integer>, Predicate<Enterprise>> variatingIndicatorValue(Indicator indicator, int years){
 		return compare -> {
 			return enterprise -> {
 				List<BigDecimal> values = enterprise.getIndicatorValueFromLastNYears(indicator, years);
@@ -65,14 +66,14 @@ public abstract class FilterCriteria
 				Tuple2<Boolean, BigDecimal> acumulador = new Tuple2<>(true, values.get(0));
 				
 				return Seq.seq(values).drop(1)
-						.foldLeft(acumulador, (tuple, _value) -> new Tuple2<Boolean, BigDecimal>(tuple.v1 && compare.apply(tuple.v2.compareTo(_value)), _value))
+						.foldLeft(acumulador, (tuple, _value) -> new Tuple2<Boolean, BigDecimal>(tuple.v1 && compare.test(tuple.v2.compareTo(_value)), _value))
 						.v1;
 			};
 		};
 	}
 		
-	private static Function<Integer, Boolean> HigherThan = result -> result > 0;
-	private static Function<Integer, Boolean> LowerThan = result -> result < 0;
+	private static Predicate<Integer> HigherThan = result -> result > 0;
+	private static Predicate<Integer> LowerThan = result -> result < 0;
 	
 	public static FilterCriterion indicatorValueHigherThan(Indicator indicator, BigDecimal value, int years){
 		return new FilterCriterion(indicatorValueCompare(indicator, value, years).apply(HigherThan), "Indicador " + indicator.getName() + " mayor a " + value.toString() + " durante los ultimos " + String.valueOf(years) + " anios");

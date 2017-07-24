@@ -7,10 +7,10 @@ import org.uqbar.arena.widgets.NumericField;
 
 import modelo.method.criteria.FilterCriterion;
 import viewModel.method.criteria.filter.FilterCriterionVM;
-import vista.method.criteria.CriterionWindow;
+import vista.method.criteria.IndicatorRelatedCriterionWindow;
 
 @SuppressWarnings("serial")
-public abstract class FilterCriterionWindow<VMType extends FilterCriterionVM> extends CriterionWindow<FilterCriterion, VMType>
+public abstract class FilterCriterionWindow<VMType extends FilterCriterionVM> extends IndicatorRelatedCriterionWindow<FilterCriterion, VMType>
 {	
 	public FilterCriterionWindow(WindowOwner owner, VMType vm, String title)
 	{

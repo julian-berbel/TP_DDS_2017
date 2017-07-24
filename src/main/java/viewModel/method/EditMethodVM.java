@@ -1,6 +1,7 @@
 package viewModel.method;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.ExistingIndicatorException;
+import exceptions.SelectedCriterionBelongsToMixedCriterionException;
 import modelo.method.Method;
 import modelo.method.MethodRepository;
 import modelo.method.criteria.Criterion;
@@ -99,6 +101,8 @@ public class EditMethodVM
 	public void addMixedCriterion(MixedCriterion mixedCriterion)
 	{
 		mixedCriteria.add(mixedCriterion);
+		filterCriteria.add(mixedCriterion.getFilterCriterion());
+		orderCriteria.add(mixedCriterion.getOrderCriterion());
 		refreshList();
 	}
 	
@@ -128,18 +132,22 @@ public class EditMethodVM
 
 	public void deleteFilterCriterion() 
 	{
+		if(belongsToMixedCriterion(selectedFilterCriterion)) throw new SelectedCriterionBelongsToMixedCriterionException();
 		filterCriteria.remove(selectedFilterCriterion);
 		refreshList();
 	}
 	
 	public void deleteOrderCriterion() 
 	{
+		if(belongsToMixedCriterion(selectedOrderCriterion)) throw new SelectedCriterionBelongsToMixedCriterionException();
 		orderCriteria.remove(selectedOrderCriterion);
 		refreshList();
 	}
 	
 	public void deleteMixedCriterion() 
 	{
+		filterCriteria.remove(selectedMixedCriterion.getFilterCriterion());
+		orderCriteria.remove(selectedMixedCriterion.getOrderCriterion());
 		mixedCriteria.remove(selectedMixedCriterion);
 		refreshList();
 	}
@@ -161,7 +169,27 @@ public class EditMethodVM
 		targetMethod = Optional.empty();
 	}
 	
+	private Boolean belongsToMixedCriterion(Criterion criterion){
+		return mixedCriteria.stream().anyMatch(mixedCriterion -> mixedCriterion.uses(criterion));
+	}
 	
+	public void switchUp(){
+		swapWithRelativePosition(-1);
+	}
+	
+	public void switchDown(){
+		swapWithRelativePosition(1);
+	}
+	
+	public void swapWithRelativePosition(int b){
+		int selectedIndex = orderCriteria.indexOf(selectedOrderCriterion);
+		Collections.swap(orderCriteria, selectedIndex, selectedIndex + b);
+		OrderCriterion auxCriterion = selectedOrderCriterion;	// por alguna razon al swappear para arriba la vista no se actualiza
+		List<OrderCriterion> auxList = orderCriteria;			// y un firePropertyChanged no lo arregla tampoco
+		orderCriteria = null;									// ENCONTRAR UN FIX MEJOR! ESTO ES HORRIBLE! TODO
+		orderCriteria = auxList;
+		selectedOrderCriterion = auxCriterion;
+	}
 	
 }
 
