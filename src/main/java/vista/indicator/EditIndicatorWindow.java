@@ -59,14 +59,10 @@ public class EditIndicatorWindow extends Dialog<EditIndicatorVM>
 			catch(MissingIndicatorException | FormulaErrorException | EmptyFieldException | ExistingIndicatorException exception)
 			{
 				ErrorWindow.show(this, exception.getMessage());	
-			}});
+			}
+		});
+		
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
-	}
-	
-	@Override
-	public void cancel(){
-		this.getModelObject().cancel();
-		super.cancel();
 	}
 	
 	@Override

@@ -13,7 +13,7 @@ public class EditIndicatorVM {
 	
 	private String name;
 	private String formula;
-	private Optional<Indicator> targetIndicator;
+	private Optional<Indicator> targetIndicator = Optional.empty();
 	private Boolean editing = false;
 	
 	public Optional<Indicator> getTargetIndicator() {
@@ -21,9 +21,11 @@ public class EditIndicatorVM {
 	}
 
 	public EditIndicatorVM(Optional<Indicator> target){
-		target.ifPresent(_target -> {	name = _target.getName();
-										formula = _target.getFormula();
-										editing = true;});
+		target.ifPresent(_target -> {
+			name = _target.getName();
+			formula = _target.getFormula();
+			editing = true;
+		});
 	}
 	
 	public String getName() {
@@ -46,10 +48,6 @@ public class EditIndicatorVM {
 		if(!editing && IndicatorRepository.alreadyExists(name)) throw new ExistingIndicatorException(name);
 		
 		targetIndicator = Optional.of(new Indicator(name, formula));
-	}
-	
-	public void cancel(){
-		targetIndicator = Optional.empty();
 	}
 	
 }

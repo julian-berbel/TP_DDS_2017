@@ -14,7 +14,7 @@ import modelo.method.Method;
 import viewModel.method.MethodVM;
 
 @SuppressWarnings("serial")
-public class MethodWindow  extends SimpleWindow<MethodVM> {
+public class MethodWindow extends SimpleWindow<MethodVM> {
 	
 	public MethodWindow(WindowOwner owner)
 	{
@@ -26,38 +26,37 @@ public class MethodWindow  extends SimpleWindow<MethodVM> {
 	{
 		this.setTitle("Metodologias");
 		mainPanel.setLayout(new VerticalLayout());
-		Panel panel1 = new Panel(mainPanel);
-		panel1.setLayout(new VerticalLayout());
-		Panel panel2 = new Panel(mainPanel);
-		panel2.setLayout(new ColumnLayout(4));
 		
-		List<Method> MethodList= new List<Method>(panel1);
+		List<Method> MethodList= new List<Method>(mainPanel);
 		MethodList.bindItemsToProperty("methods");
 		MethodList.bindValueToProperty("selectedMethod");
 		MethodList.setWidth(300);
 		
-		new Button(panel2).setCaption("Nuevo").onClick(()->
+		Panel panel1 = new Panel(mainPanel);
+		panel1.setLayout(new ColumnLayout(4));
+		
+		new Button(panel1).setCaption("Nuevo").onClick(()->
 		{
 			Optional<Method> newMethod = new EditMethodWindow(this, Optional.empty()).openWithReturn();
 			
-			if(newMethod != null)
-			{
-				
-				this.getModelObject().addNewMethod(newMethod);	
-			} 
-			
+			this.getModelObject().addNewMethod(newMethod);	
 		});
 		
-		new Button(panel2).setCaption("Editar").onClick(()->{ });
+		new Button(panel1).setCaption("Editar").onClick(()->{
+			if(this.getModelObject().getSelectedMethod() != null){
+				Optional<Method> targetMethod = new EditMethodWindow(this, Optional.of(this.getModelObject().getSelectedMethod())).openWithReturn();
+				this.getModelObject().replaceSelectedMethodWith(targetMethod);
+			}
+		});
 		
-		new Button(panel2).setCaption("Borrar").onClick(()->{});
+		new Button(panel1).setCaption("Borrar").onClick(()->this.getModelObject().deleteMethod());
 		
-		new Button(panel2).setCaption("Ejecutar").onClick(()-> new MethodResultWindow(this, this.getModelObject().getSelectedMethod()).open());
+		new Button(panel1).setCaption("Ejecutar").onClick(()-> new MethodResultWindow(this, this.getModelObject().getSelectedMethod()).open());
 	}
 	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Volver").onClick(()->this.close()); //hacer lo de guardar
+		new Button(actions).setCaption("Volver").onClick(this::close); //hacer lo de guardar
 	}
 	
 	

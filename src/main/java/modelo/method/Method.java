@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.jooq.lambda.Seq;
 import org.uqbar.commons.utils.Observable;
 
+import exceptions.EmptyFieldException;
 import modelo.enterprise.Enterprise;
 import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
@@ -25,6 +26,7 @@ public class Method {
 
 	public Method(String name, List<FilterCriterion> filterCriteria, List<OrderCriterion> orderCriteria, List<MixedCriterion> mixedCriteria)
 	{
+		if(name == null) throw new EmptyFieldException("nombre");
 		this.name = name;
 		this.filterCriteria = filterCriteria;
 		this.orderCriteria = orderCriteria;

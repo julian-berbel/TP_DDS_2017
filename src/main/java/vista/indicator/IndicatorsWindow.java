@@ -20,7 +20,6 @@ import viewModel.indicator.IndicatorsVM;
 import vista.ErrorWindow;
 import vista.SaveChangesWindow;
 
-
 @SuppressWarnings("serial")
 public class IndicatorsWindow extends SimpleWindow<IndicatorsVM> 
 {
@@ -53,23 +52,17 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		columnFormula.setTitle("Formula").setFixedSize(500).bindContentsToProperty("formula");
 		
 		new Button(panel2).setCaption("Nuevo").onClick(()->{ 
-				Optional<Indicator> newIndicator = new EditIndicatorWindow(this, Optional.empty()).openWithReturn();
-				if(newIndicator != null)
-				{
-					this.getModelObject().addNewIndicator(newIndicator);	
-				} 
-				
-			});
+			Optional<Indicator> newIndicator = new EditIndicatorWindow(this, Optional.empty()).openWithReturn();
+			this.getModelObject().addNewIndicator(newIndicator);
+		});
 		
 		new Button(panel2).setCaption("Editar").onClick(()->{ 
-				
-				if(this.getModelObject().getIndicators().size()>0)
-				{
-					Optional<Indicator> targetIndicator = new EditIndicatorWindow(this, Optional.of(this.getModelObject().getSelectedIndicator())).openWithReturn();
-					this.getModelObject().replaceSelectedIndicatorWith(targetIndicator);	
-				}
-				
-			});
+			if(this.getModelObject().getSelectedIndicator() != null)
+			{
+				Optional<Indicator> targetIndicator = new EditIndicatorWindow(this, Optional.of(this.getModelObject().getSelectedIndicator())).openWithReturn();
+				this.getModelObject().replaceSelectedIndicatorWith(targetIndicator);	
+			}
+		});
 		
 		new Button(panel2).setCaption("Borrar").onClick(()->{
 			try
@@ -82,11 +75,10 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 			}
 			});
 		
-		new Button(panel2).setCaption("Cargar archivo")	
-		.onClick(()->{ 
-				new LoadIndicatorsWindow(this).open(); 
-				this.getModelObject().refreshList();	
-			});
+		new Button(panel2).setCaption("Cargar archivo").onClick(()->{ 
+			new LoadIndicatorsWindow(this).open(); 
+			this.getModelObject().refreshList();	
+		});
 	}
 	
 	@Override

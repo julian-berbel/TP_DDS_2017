@@ -1,14 +1,16 @@
 package viewModel.method;
 
+import java.util.Optional;
+
 public class SelectCriterionVM<T> {
 
-	private T targetCriterion;
+	private Optional<T> targetCriterion = Optional.empty();
 	
-	public T getTargetCriterion() {
+	public Optional<T> getTargetCriterion() {
 		return targetCriterion;
 	}
 
-	public void setTargetCriterion(T newCriterion) {
+	public void setTargetCriterion(Optional<T> newCriterion) {
 		this.targetCriterion = newCriterion;
 	}
 }

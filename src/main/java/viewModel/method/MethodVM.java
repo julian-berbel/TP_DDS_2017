@@ -12,18 +12,9 @@ import modelo.method.MethodRepository;
 @Observable
 public class MethodVM {
 
-	private List<Method> methods;
+	private List<Method> methods = MethodRepository.getMethods();;
 	private Method selectedMethod;
-	private Boolean methodsChanged;
-	
-	public MethodVM(){
-		setMethodsChanged(false);
-		if(MethodRepository.getMethods() !=null)
-		{
-			
-			refreshList();
-		}	
-	}
+	private Boolean methodsChanged = false;
 	
 	public List<Method> getMethods() {
 		return methods;
@@ -42,10 +33,8 @@ public class MethodVM {
 	}
 
 	public void addNewMethod(Optional<Method> newMethod) {
-		
 		newMethod.ifPresent(method ->MethodRepository.addMethod(method));
 		refreshList();
-		
 	}
 
 	public Boolean getMethodsChanged() {
@@ -57,10 +46,18 @@ public class MethodVM {
 	}
 	
 	public void refreshList(){
-		
-		methods = MethodRepository.getMethods();
 		ObservableUtils.firePropertyChanged(this, "methods");
 		methodsChanged = true;
+	}
+	
+	public void deleteMethod(){
+		methods.remove(selectedMethod);
+		refreshList();
+	}
+	
+	public void replaceSelectedMethodWith(Optional<Method> newMethod){
+		newMethod.ifPresent(method -> MethodRepository.replace(selectedMethod, method));
+		refreshList();
 	}
 	
 }

@@ -1,5 +1,7 @@
 package viewModel.method.criteria.mixed;
 
+import java.util.Optional;
+
 import org.uqbar.commons.utils.Observable;
 
 import modelo.method.criteria.MixedCriterion;
@@ -20,6 +22,6 @@ public class EnterpriseLongevityGreaterThanVM extends CriterionVM<MixedCriterion
 	}
 	
 	public void buildCriterion(){
-		targetCriterion = new EnterpriseLongevityHigherThan(years);
+		targetCriterion = Optional.of(new EnterpriseLongevityHigherThan(years));
 	}
 }

@@ -2,6 +2,9 @@ package vista.method.criteria;
 
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
+
+import java.util.Optional;
+
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.windows.WindowOwner;
@@ -38,7 +41,7 @@ public class CriterionWindow<CriterionType, VMType extends CriterionVM<Criterion
 		new Button(actions).setCaption("Cancelar").onClick(this::close);
 	}
 	
-	public CriterionType openWithReturn()
+	public Optional<CriterionType> openWithReturn()
 	{
 		this.open();
 		return getModelObject().getTargetCriterion();

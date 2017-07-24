@@ -1,5 +1,6 @@
 package vista.method;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.uqbar.arena.widgets.Button;
@@ -24,7 +25,7 @@ public abstract class SelectCriterionWindow<CriterionType> extends SimpleWindow<
 		new Button(actions).setCaption("Volver").onClick(()->this.close());	
 	}
 	
-	public CriterionType openWithReturn() 
+	public Optional<CriterionType> openWithReturn() 
 	{
 		this.open();
 		return getModelObject().getTargetCriterion();
@@ -34,9 +35,9 @@ public abstract class SelectCriterionWindow<CriterionType> extends SimpleWindow<
 		addCriterionButton(panel, caption, () -> window.openWithReturn());
 	}
 
-	protected void addCriterionButton(Panel panel, String caption, Supplier<CriterionType> action){
+	protected void addCriterionButton(Panel panel, String caption, Supplier<Optional<CriterionType>> action){
 		new Button(panel).setCaption(caption).onClick(() -> {
-			CriterionType newCriterion = action.get();
+			Optional<CriterionType> newCriterion = action.get();
 			this.getModelObject().setTargetCriterion(newCriterion);
 			this.close();
 		}).setWidth(300);

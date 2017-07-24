@@ -14,11 +14,13 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import exceptions.EmptyFieldException;
 import modelo.method.Method;
 import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
 import modelo.method.criteria.OrderCriterion;
 import viewModel.method.EditMethodVM;
+import vista.ErrorWindow;
 
 @SuppressWarnings("serial")
 public class EditMethodWindow extends Dialog<EditMethodVM> {
@@ -38,95 +40,82 @@ public class EditMethodWindow extends Dialog<EditMethodVM> {
 	    new TextBox(mainPanel).setWidth(400).bindValueToProperty("name");
 		
 		new Label(mainPanel).setText("Criterios de Filtro:");
-		Panel panel1 = new Panel(mainPanel);
-		panel1.setLayout(new VerticalLayout());
-		Panel panel2 = new Panel(mainPanel);
-		panel2.setLayout(new ColumnLayout(2));
 		
-		new Label(mainPanel).setText("Criterios de Orden:");
-		Panel _panel3 = new Panel(mainPanel).setLayout(new VerticalLayout());
-		Panel __panel3 = new Panel(_panel3).setLayout(new HorizontalLayout());
-		Panel panel3 = new Panel(__panel3);
-		panel3.setLayout(new VerticalLayout()).setWidth(350);
-		Panel ___panel3 = new Panel(__panel3).setLayout(new VerticalLayout()).setWidth(50);
-		Panel panel4 = new Panel(mainPanel);
-		panel4.setLayout(new ColumnLayout(2));
-		
-		new Label(mainPanel).setText("Criterios Mixtos:");
-		Panel panel5 = new Panel(mainPanel);
-		panel5.setLayout(new VerticalLayout());
-		Panel panel6 = new Panel(mainPanel);
-		panel6.setLayout(new ColumnLayout(2));
-		  
-	    List<FilterCriterion> filterCriteriaList = new List<FilterCriterion>(panel1);
+		List<FilterCriterion> filterCriteriaList = new List<FilterCriterion>(mainPanel);
 	    filterCriteriaList.bindItemsToProperty("filterCriteria");
 	    filterCriteriaList.bindValueToProperty("selectedFilterCriterion");
 	    filterCriteriaList.setWidth(400);
 	    filterCriteriaList.setHeight(100);
+	    
+		Panel panel2 = new Panel(mainPanel).setLayout(new ColumnLayout(2));
 		
 		new Button(panel2).setCaption("Agregar criterio").onClick(()->{			
-			this.getModelObject()
-				.addFilterCriterion(new SelectFilterCriterionWindow(this).openWithReturn());
+			this.getModelObject().addFilterCriterion(new SelectFilterCriterionWindow(this).openWithReturn());
 		});
 		
 		new Button(panel2).setCaption("Borrar criterio seleccionado").onClick(()->{
 			this.getModelObject().deleteFilterCriterion();	
 		});
+				
+		new Label(mainPanel).setText("Criterios de Orden:");
+		Panel panel3 = new Panel(mainPanel).setLayout(new HorizontalLayout());
 		
 		List<OrderCriterion> orderCriteriaTable = new List<OrderCriterion>(panel3);
 		orderCriteriaTable.bindItemsToProperty("orderCriteria");
 		orderCriteriaTable.bindValueToProperty("selectedOrderCriterion");
-		orderCriteriaTable.setWidth(350);
+		orderCriteriaTable.setWidth(370);
 		orderCriteriaTable.setHeight(100);
+
+		Panel panel4 = new Panel(panel3).setLayout(new VerticalLayout());
 		
-		new Button(___panel3).setCaption("ª").onClick(()->{
+		new Button(panel4).setCaption("ª").onClick(()->{
 			this.getModelObject().switchUp();
 		});
 		
-		new Button(___panel3).setCaption("«").onClick(()->{
+		new Button(panel4).setCaption("«").onClick(()->{
 			this.getModelObject().switchDown();
 		});
 		
-		new Button(panel4).setCaption("Agregar criterio").onClick(()->{
-			OrderCriterion newCriterion = new SelectOrderCriterionWindow(this).openWithReturn();			
-			
-			this.getModelObject().addOrderCriterion(newCriterion);
+		Panel panel5 = new Panel(mainPanel).setLayout(new ColumnLayout(2));
+		
+		new Button(panel5).setCaption("Agregar criterio").onClick(()->{
+			this.getModelObject().addOrderCriterion(new SelectOrderCriterionWindow(this).openWithReturn());
 		});
 		
-		new Button(panel4).setCaption("Borrar criterio seleccionado").onClick(()->{
-				this.getModelObject().deleteOrderCriterion();	
-			});
+		new Button(panel5).setCaption("Borrar criterio seleccionado").onClick(()->{
+			this.getModelObject().deleteOrderCriterion();	
+		});
 		
-		List<MixedCriterion> mixedCriteriaTable = new List<MixedCriterion>(panel5);
+		new Label(mainPanel).setText("Criterios Mixtos:");
+		
+		List<MixedCriterion> mixedCriteriaTable = new List<MixedCriterion>(mainPanel);
 		mixedCriteriaTable.bindItemsToProperty("mixedCriteria");
 		mixedCriteriaTable.bindValueToProperty("selectedMixedCriterion");
 		mixedCriteriaTable.setWidth(400);
 		mixedCriteriaTable.setHeight(100);
 		
+		Panel panel6 = new Panel(mainPanel).setLayout(new ColumnLayout(2));
+		
 		new Button(panel6).setCaption("Agregar criterio").onClick(()->{
-			MixedCriterion newCriterion = new SelectMixedCriterionWindow(this).openWithReturn();			
-			
-			this.getModelObject().addMixedCriterion(newCriterion);
+			this.getModelObject().addMixedCriterion(new SelectMixedCriterionWindow(this).openWithReturn());
 		});
 		
 		new Button(panel6).setCaption("Borrar criterio seleccionado").onClick(()->{
 			this.getModelObject().deleteMixedCriterion();	
 		});
 		
-		
-		
 	}
 	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Aceptar").onClick(this::accept);
+		new Button(actions).setCaption("Aceptar").onClick(() -> {
+			try{
+				accept();
+			} catch(EmptyFieldException e){
+				ErrorWindow.show(this, e);
+			}
+		});
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
-	}
-		
-	@Override
-	public void cancel(){
-		this.getModelObject().cancel();
-		super.cancel();
 	}
 	
 	@Override

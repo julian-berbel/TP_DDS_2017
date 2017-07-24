@@ -25,7 +25,7 @@ public class EditMethodVM
 	private List<FilterCriterion> filterCriteria = new ArrayList<FilterCriterion>();
 	private List<OrderCriterion> orderCriteria = new ArrayList<OrderCriterion>();
 	private List<MixedCriterion> mixedCriteria = new ArrayList<MixedCriterion>();
-	private Optional<Method> targetMethod;
+	private Optional<Method> targetMethod = Optional.empty();
 	private Boolean editing = false;
 	private Criterion selectedFilterCriterion;
 	private OrderCriterion selectedOrderCriterion;
@@ -35,9 +35,9 @@ public class EditMethodVM
 	{
 		target.ifPresent(_target -> {	
 				name = _target.getName();
-				filterCriteria = _target.getFilterCriteria();
-				orderCriteria = _target.getOrderCriteria();
-				mixedCriteria = _target.getMixedCriteria();
+				filterCriteria = new ArrayList<FilterCriterion>(_target.getFilterCriteria());
+				orderCriteria = new ArrayList<OrderCriterion>(_target.getOrderCriteria());
+				mixedCriteria = new ArrayList<MixedCriterion>(_target.getMixedCriteria());
 				editing = true;
 			});
 	}
@@ -86,23 +86,25 @@ public class EditMethodVM
 		this.mixedCriteria = mixedCriteria;
 	}
 	
-	public void addFilterCriterion(FilterCriterion filterCriterion)
+	public void addFilterCriterion(Optional<FilterCriterion> filterCriterion)
 	{
-		filterCriteria.add(filterCriterion);
+		filterCriterion.ifPresent(_filterCriterion -> filterCriteria.add(_filterCriterion));
 		refreshList();
 	}
 	
-	public void addOrderCriterion(OrderCriterion orderCriterion)
+	public void addOrderCriterion(Optional<OrderCriterion> orderCriterion)
 	{
-		orderCriteria.add(orderCriterion);
+		orderCriterion.ifPresent(_orderCriterion -> orderCriteria.add(_orderCriterion));
 		refreshList();
 	}
 	
-	public void addMixedCriterion(MixedCriterion mixedCriterion)
+	public void addMixedCriterion(Optional<MixedCriterion> mixedCriterion)
 	{
-		mixedCriteria.add(mixedCriterion);
-		filterCriteria.add(mixedCriterion.getFilterCriterion());
-		orderCriteria.add(mixedCriterion.getOrderCriterion());
+		mixedCriterion.ifPresent(_mixedCriterion -> {
+			mixedCriteria.add(_mixedCriterion);
+			filterCriteria.add(_mixedCriterion.getFilterCriterion());
+			orderCriteria.add(_mixedCriterion.getOrderCriterion());
+		});
 		refreshList();
 	}
 	
@@ -146,10 +148,12 @@ public class EditMethodVM
 	
 	public void deleteMixedCriterion() 
 	{
-		filterCriteria.remove(selectedMixedCriterion.getFilterCriterion());
-		orderCriteria.remove(selectedMixedCriterion.getOrderCriterion());
-		mixedCriteria.remove(selectedMixedCriterion);
-		refreshList();
+		if(selectedMixedCriterion != null){
+			filterCriteria.remove(selectedMixedCriterion.getFilterCriterion());
+			orderCriteria.remove(selectedMixedCriterion.getOrderCriterion());
+			mixedCriteria.remove(selectedMixedCriterion);
+			refreshList();
+		}
 	}
 
 	public void refreshList()
@@ -163,10 +167,6 @@ public class EditMethodVM
 		if(!editing && MethodRepository.alreadyExists(name)) throw new ExistingIndicatorException(name);
 		
 		targetMethod = Optional.of(new Method(name, filterCriteria, orderCriteria, mixedCriteria));
-	}
-	
-	public void cancel(){
-		targetMethod = Optional.empty();
 	}
 	
 	private Boolean belongsToMixedCriterion(Criterion criterion){
@@ -183,7 +183,13 @@ public class EditMethodVM
 	
 	public void swapWithRelativePosition(int b){
 		int selectedIndex = orderCriteria.indexOf(selectedOrderCriterion);
-		Collections.swap(orderCriteria, selectedIndex, selectedIndex + b);
+		
+		try{
+			Collections.swap(orderCriteria, selectedIndex, selectedIndex + b);
+		} catch(IndexOutOfBoundsException e){
+			
+		}
+		
 		OrderCriterion auxCriterion = selectedOrderCriterion;	// por alguna razon al swappear para arriba la vista no se actualiza
 		List<OrderCriterion> auxList = orderCriteria;			// y un firePropertyChanged no lo arregla tampoco
 		orderCriteria = null;									// ENCONTRAR UN FIX MEJOR! ESTO ES HORRIBLE! TODO
