@@ -6,14 +6,21 @@ import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 import org.uqbar.commons.utils.Observable;
 
+import modelo.ModelEntity;
 import modelo.indicator.Indicator;
 
 @Observable
-public class Enterprise 
-{
+@Entity
+public class Enterprise extends ModelEntity
+{	
 	private String name;
+	
+	@OneToMany
 	private List<Period> periods;
 	
 	public Enterprise(String name, List<Period> periods)
