@@ -1,13 +1,16 @@
 package modelo.enterprise;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
 import java.util.List;
 import java.util.ArrayList;
 
-public class EnterpriseRepository 
+public class EnterpriseRepository implements WithGlobalEntityManager
 {
 	private static List<Enterprise> enterprises = new ArrayList<Enterprise>();
 	
-	public static void addEnterprise(Enterprise ent)
+	public void addEnterprise(Enterprise ent)
 	{
+		entityManager().persist(ent);
 		enterprises.add(ent);
 	}
 	
