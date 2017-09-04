@@ -1,6 +1,7 @@
 package modelo.enterprise;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 
@@ -9,12 +10,14 @@ import org.uqbar.commons.utils.Observable;
 
 import modelo.ModelEntity;
 
-@Entity
 @Observable
+@Entity
 public class Calculation extends ModelEntity
 {
+	@Column(nullable = false)
 	private String name;
 	
+	@Column(nullable = false)
 	@Convert(converter = BigDecimalConverter.class)
 	private BigDecimal value;
 	
@@ -32,5 +35,4 @@ public class Calculation extends ModelEntity
 	{
 		return value;
 	}
-
 }

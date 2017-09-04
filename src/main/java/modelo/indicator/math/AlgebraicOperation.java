@@ -2,11 +2,17 @@ package modelo.indicator.math;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+
 import modelo.enterprise.Enterprise;
 import modelo.indicator.Indicator;
 
-public abstract class AlgebraicOperation implements Operable {
+public abstract class AlgebraicOperation extends Operable {
+	
+	@Column(nullable = false)
 	private Operable firstOperand;
+	
+	@Column(nullable = false)
 	private Operable secondOperand;
 	
 	public AlgebraicOperation(Operable firstOperand, Operable secondOperand){

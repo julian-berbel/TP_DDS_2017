@@ -6,7 +6,9 @@ import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import org.uqbar.commons.utils.Observable;
@@ -17,11 +19,13 @@ import modelo.indicator.Indicator;
 @Observable
 @Entity
 public class Enterprise extends ModelEntity
-{	
+{
+	@Column(nullable = false)
 	private String name;
 	
 	@OneToMany
-	private List<Period> periods;
+	@JoinColumn(referencedColumnName = "id")			//Apunta al atributo 'id' de un periodo
+	private List<Period> periods;							//Una empresa tiene muchos periodos, pero un periodo pertenece a una sola empresa
 	
 	public Enterprise(String name, List<Period> periods)
 	{

@@ -1,4 +1,5 @@
 package modelo.enterprise;
+
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import java.util.List;

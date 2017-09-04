@@ -3,17 +3,26 @@ package modelo.indicator;
 import java.math.BigDecimal;
 import java.util.NoSuchElementException;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+
 import org.uqbar.commons.utils.Observable;
 import exceptions.EmptyFieldException;
 import modelo.enterprise.Enterprise;
 import modelo.indicator.math.Operable;
 import modelo.indicator.parser.IndicatorParser;
 
+@Entity
 @Observable
-public class Indicator implements Operable
+public class Indicator extends Operable
 {
+	
+	@Column(nullable = false)
 	private String name;
 	private String formula;
+	
+	@JoinColumn(referencedColumnName = "id")
 	private Operable value;
 
 	public Indicator(String name, String formula){
