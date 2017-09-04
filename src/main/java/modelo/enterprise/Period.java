@@ -1,16 +1,19 @@
 package modelo.enterprise;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import exceptions.MissingCalculationInPeriodException;
 import modelo.ModelEntity;
 
+@Entity
 public class Period extends ModelEntity
 {
 	private int year;
 	
-	@ManyToOne
+	@OneToMany
 	private List<Calculation> calculations;
 	
 	public Period(int year, List<Calculation> calculations)
