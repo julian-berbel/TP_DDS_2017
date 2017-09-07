@@ -3,6 +3,7 @@ package vista;
 import viewModel.MainVM;
 import vista.enterprise.ConsultAccountsWindow;
 import vista.enterprise.LoadCalculationsWindow;
+
 import vista.indicator.AnalyzeEnterpriseWindow;
 import vista.indicator.IndicatorsWindow;
 import vista.method.MethodWindow;
@@ -51,7 +52,7 @@ public class MainView extends MainWindow<MainVM>
 			.setWidth(300);	
 		
 		new Button(panel1)
-			.setCaption("Consultar Cuentas")
+			.setCaption("Manejar Cuentas")
 			.onClick(()->{ 
 				try
 				{

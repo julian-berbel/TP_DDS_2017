@@ -7,6 +7,7 @@ import exceptions.NoFileSelectedException;
 import exceptions.ReadingFileException;
 import modelo.FileLoader;
 import modelo.JsonMapper;
+import modelo.enterprise.EnterpriseRepository;
 
 @Observable
 public class LoadCalculationsVM 
@@ -49,8 +50,8 @@ public class LoadCalculationsVM
 		{
 			FileLoader fileLoader = new FileLoader(filePath);
 			JsonMapper jsonMapper = new JsonMapper();
-			jsonMapper.mapper(fileLoader.reader());		
-		
+			jsonMapper.mapperFromJson(fileLoader.reader());		
+			EnterpriseRepository.setFilePath(filePath);
 		}
 		catch(FileNotFoundException fileReaderException)	
 		{						

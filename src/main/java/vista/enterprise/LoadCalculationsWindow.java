@@ -6,6 +6,7 @@ import org.uqbar.arena.windows.WindowOwner;
 import exceptions.JsonMappingException;
 import exceptions.NoFileSelectedException;
 import exceptions.ReadingFileException;
+import exceptions.RepeatedEnterpriseFileException;
 import viewModel.enterprise.LoadCalculationsVM;
 import vista.ErrorWindow;
 
@@ -38,7 +39,7 @@ public class LoadCalculationsWindow extends SimpleWindow<LoadCalculationsVM>
 				this.getModelObject().parseFile();
 				this.close();
 			}
-			catch(ReadingFileException | JsonMappingException | NoFileSelectedException e)
+			catch(RepeatedEnterpriseFileException|ReadingFileException | JsonMappingException | NoFileSelectedException e)
 			{
 					ErrorWindow.show(this, e.getMessage());
 			}	

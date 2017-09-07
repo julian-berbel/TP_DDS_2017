@@ -1,4 +1,6 @@
 package modelo;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +12,38 @@ import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 
 public class JsonMapper {
-
-	public void mapper(JsonReader reader)
+	
+	public void mapperFromJson(JsonReader reader)
 	{
 		Gson gson = new Gson();
 		
 		
 		ArrayList<Enterprise> enterpriseList = gson.fromJson(reader, new TypeToken<List<Enterprise>>(){}.getType());
 		EnterpriseRepository.setEnterpriseList(enterpriseList);
+		
+	}
+	public void mapperToFile()
+	{
+		Gson gson = new Gson();
+		String json = gson.toJson(EnterpriseRepository.getEnterpriseList());
+		 FileWriter fichero = null;
+	        PrintWriter pw = null;
+	        try
+	        {
+	            fichero = new FileWriter(EnterpriseRepository.getFilePath());
+	            pw = new PrintWriter(fichero);
+                pw.print(json);
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	           try {
+	           //El finally para asegurarnos que se cierra el fichero.
+	           if (null != fichero)
+	              fichero.close();
+	           } catch (Exception e2) {
+	              e2.printStackTrace();
+	           }
+	        }
 	}
 }

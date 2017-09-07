@@ -12,6 +12,7 @@ import modelo.indicator.IndicatorRepository;
 public class EditIndicatorVM {
 	
 	private String name;
+	private String originalName;
 	private String formula;
 	private Optional<Indicator> targetIndicator = Optional.empty();
 	private Boolean editing = false;
@@ -23,6 +24,7 @@ public class EditIndicatorVM {
 	public EditIndicatorVM(Optional<Indicator> target){
 		target.ifPresent(_target -> {
 			name = _target.getName();
+			originalName = _target.getName();
 			formula = _target.getFormula();
 			editing = true;
 		});
@@ -46,8 +48,16 @@ public class EditIndicatorVM {
 
 	public void accept(){
 		if(!editing && IndicatorRepository.alreadyExists(name)) throw new ExistingIndicatorException(name);
-		
+		if(editing)
+		{
+			if(!name.equals(originalName) && IndicatorRepository.alreadyExists(name))
+			{
+				throw new ExistingIndicatorException(name);
+			}
+			
+		}
 		targetIndicator = Optional.of(new Indicator(name, formula));
+		
 	}
 	
 }
