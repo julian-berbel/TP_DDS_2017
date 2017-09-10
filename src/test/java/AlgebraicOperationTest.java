@@ -7,7 +7,11 @@ import org.junit.Test;
 
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.Period;
-import modelo.indicator.math.*;
+import modelo.indicator.math.Addition;
+import modelo.indicator.math.Constant;
+import modelo.indicator.math.Division;
+import modelo.indicator.math.Multiplication;
+import modelo.indicator.math.Subtraction;
 
 public class AlgebraicOperationTest {
 	Constant firstOperand = new Constant(new BigDecimal(4));

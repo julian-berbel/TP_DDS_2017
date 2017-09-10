@@ -1,6 +1,7 @@
 package viewModel.method.criteria.filter;
 
 import java.math.BigDecimal;
+
 import org.uqbar.commons.utils.Observable;
 
 @Observable

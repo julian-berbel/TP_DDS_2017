@@ -8,8 +8,7 @@ public abstract class MixedCriterion extends Criterion
 	private OrderCriterion orderCriterion;
 	private FilterCriterion filterCriterion;
 	
-	public MixedCriterion(OrderCriterion orderCriterion, FilterCriterion filterCriterion, String description) {
-		super(description);
+	public MixedCriterion(OrderCriterion orderCriterion, FilterCriterion filterCriterion) {
 		this.orderCriterion = orderCriterion;
 		this.filterCriterion = filterCriterion;
 	}

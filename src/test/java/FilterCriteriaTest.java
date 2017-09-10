@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -11,7 +11,14 @@ import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.Period;
 import modelo.indicator.Indicator;
-import modelo.method.criteria.filter.*;
+import modelo.method.criteria.filter.DecreasingIndicatorValueCriterion;
+import modelo.method.criteria.filter.IncreasingIndicatorValueCriterion;
+import modelo.method.criteria.filter.IndicatorAverageHigherThanCriterion;
+import modelo.method.criteria.filter.IndicatorAverageLowerThanCriterion;
+import modelo.method.criteria.filter.IndicatorMedianHigherThanCriterion;
+import modelo.method.criteria.filter.IndicatorMedianLowerThanCriterion;
+import modelo.method.criteria.filter.IndicatorValueHigherThanCriterion;
+import modelo.method.criteria.filter.IndicatorValueLowerThanCriterion;
 
 public class FilterCriteriaTest {
 	
@@ -32,48 +39,48 @@ public class FilterCriteriaTest {
 	@Test
 	public void increasingIndicatorValue()
 	{
-		assertTrue(FilterCriteria.increasingIndicatorValue(anIndicator, 3).test(anEnterprise));
+		assertTrue(new IncreasingIndicatorValueCriterion(anIndicator, 3).test(anEnterprise));
 	}
 	
 	@Test
 	public void decreasingIndicatorValue()
 	{
-		assertTrue(FilterCriteria.decreasingIndicatorValue(anIndicator, 3).test(anotherEnterprise));
+		assertTrue(new DecreasingIndicatorValueCriterion(anIndicator, 3).test(anotherEnterprise));
 	}
 	
 	@Test
 	public void indicatorAverageHigherThan()
 	{
-		assertTrue(FilterCriteria.indicatorAverageHigherThan(anIndicator, new BigDecimal("2.49"), 3).test(anEnterprise));
+		assertTrue(new IndicatorAverageHigherThanCriterion(anIndicator, new BigDecimal("2.49"), 3).test(anEnterprise));
 	}
 	
 	@Test
 	public void indicatorAverageLowerThan()
 	{
-		assertTrue(FilterCriteria.indicatorAverageLowerThan(anIndicator, new BigDecimal("2.51"), 3).test(anEnterprise));
+		assertTrue(new IndicatorAverageLowerThanCriterion(anIndicator, new BigDecimal("2.51"), 3).test(anEnterprise));
 	}
 	
 	@Test
 	public void indicatorMedianHigherThan()
 	{
-		assertTrue(FilterCriteria.indicatorMedianHigherThan(anIndicator, new BigDecimal("2.49"), 3).test(anEnterprise));
+		assertTrue(new IndicatorMedianHigherThanCriterion(anIndicator, new BigDecimal("2.49"), 3).test(anEnterprise));
 	}
 	
 	@Test
 	public void indicatorMedianLowerThan()
 	{
-		assertTrue(FilterCriteria.indicatorMedianLowerThan(anIndicator, new BigDecimal("2.51"), 3).test(anEnterprise));
+		assertTrue(new IndicatorMedianLowerThanCriterion(anIndicator, new BigDecimal("2.51"), 3).test(anEnterprise));
 	}
 	
 	@Test
 	public void indicatorValueHigherThan()
 	{
-		assertTrue(FilterCriteria.indicatorValueHigherThan(anIndicator, new BigDecimal("0.99"), 3).test(anEnterprise));
+		assertTrue(new IndicatorValueHigherThanCriterion(anIndicator, new BigDecimal("0.99"), 3).test(anEnterprise));
 	}
 	
 	@Test
 	public void indicatorValueLowerThan()
 	{
-		assertTrue(FilterCriteria.indicatorValueLowerThan(anIndicator, new BigDecimal("4.01"), 3).test(anEnterprise));
+		assertTrue(new IndicatorValueLowerThanCriterion(anIndicator, new BigDecimal("4.01"), 3).test(anEnterprise));
 	}
 }

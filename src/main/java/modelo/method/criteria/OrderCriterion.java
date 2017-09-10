@@ -10,8 +10,4 @@ import modelo.enterprise.Enterprise;
 public abstract class OrderCriterion extends Criterion implements Comparator<Enterprise>
 {	
 	public abstract int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise);
-
-	public OrderCriterion(String description){
-		super(description);
-	}
 }

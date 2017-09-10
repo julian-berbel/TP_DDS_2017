@@ -3,22 +3,12 @@ package modelo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public class ModelEntity {
-	
 	@Id
 	@GeneratedValue
 	private long id;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 }

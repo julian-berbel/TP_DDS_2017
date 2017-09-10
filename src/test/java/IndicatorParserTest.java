@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.Period;
-import modelo.indicator.parser.*;
+import modelo.indicator.parser.IndicatorParser;
 
 public class IndicatorParserTest {
 	Enterprise dummyEnterprise = new Enterprise("", new ArrayList<Period>()); 

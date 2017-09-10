@@ -16,7 +16,8 @@ import modelo.method.Method;
 import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
 import modelo.method.criteria.OrderCriterion;
-import modelo.method.criteria.filter.FilterCriteria;
+import modelo.method.criteria.filter.IndicatorValueHigherThanCriterion;
+import modelo.method.criteria.filter.IndicatorValueLowerThanCriterion;
 import modelo.method.criteria.order.MaximizeIndicatorCriterion;
 import modelo.method.result.Fail;
 import modelo.method.result.Pass;
@@ -57,8 +58,8 @@ public class MethodTest {
 	@Test
 	public void TestMethodWithMultipleFilters()
 	{
-		filterCriteria.add(FilterCriteria.indicatorValueHigherThan(anIndicator, new BigDecimal("2"), 0));
-		filterCriteria.add(FilterCriteria.indicatorValueLowerThan(anIndicator, new BigDecimal("5"), 0));
+		filterCriteria.add(new IndicatorValueHigherThanCriterion(anIndicator, new BigDecimal("2"), 0));
+		filterCriteria.add(new IndicatorValueLowerThanCriterion(anIndicator, new BigDecimal("5"), 0));
 				
 		assertEquals(aMethod.apply(enterprises), Arrays.asList(	new Fail(enterprise11), 
 																new Fail(enterprise21), 

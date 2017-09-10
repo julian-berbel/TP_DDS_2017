@@ -1,18 +1,11 @@
 package modelo.method.criteria;
 
 public abstract class Criterion {
-	private String description;
 	
-	public Criterion(String description){
-		this.description = description;
-	}
-	
-	public String getDescription(){
-		return description;
-	}
+	protected abstract String buildDescription();
 	
 	@Override
 	public String toString(){
-		return description;
+		return buildDescription();
 	}
 }
