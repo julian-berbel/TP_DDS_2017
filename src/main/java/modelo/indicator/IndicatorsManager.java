@@ -19,6 +19,7 @@ public class IndicatorsManager
 {
 	private static String filePath;
 	private static String sheetName;	
+	public static Boolean fileLoaded = false;
 	
 	public static void setFilePath(String path)
 	{
@@ -69,6 +70,7 @@ public class IndicatorsManager
 		        	
 		       	rowIndex++;	        	
 		    }
+		    	fileLoaded = true;
 		       	w.close();
 		       	/* se estaban leyendo todos los indicadores y recien a lo ultimo se agregaban a indicatorRepository, entonces al 
 		       	   leer la cuenta 'Margen' que usa el @IngresoNeto tiraba error porque @IngresoNeto no existia en indicatorRepository todavia */
@@ -194,4 +196,9 @@ public class IndicatorsManager
 	        workbook.close();
 
 	}		
+		
+	public static Boolean fileLoaded()
+	{
+		return fileLoaded;
+	}
 }
