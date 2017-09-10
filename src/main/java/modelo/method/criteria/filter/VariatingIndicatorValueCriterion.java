@@ -4,11 +4,14 @@ package modelo.method.criteria.filter;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
 
 import modelo.indicator.Indicator;
 
+@Entity
 public abstract class VariatingIndicatorValueCriterion extends IndicatorRelatedCriterion
 {
 	public VariatingIndicatorValueCriterion(Indicator indicator, int years, ComparisonCriterion comparisonCriterion) 

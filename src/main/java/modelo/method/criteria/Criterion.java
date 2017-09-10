@@ -1,6 +1,11 @@
 package modelo.method.criteria;
 
-public abstract class Criterion {
+import javax.persistence.MappedSuperclass;
+
+import modelo.ModelEntity;
+
+@MappedSuperclass
+public abstract class Criterion extends ModelEntity{
 	
 	protected abstract String buildDescription();
 	

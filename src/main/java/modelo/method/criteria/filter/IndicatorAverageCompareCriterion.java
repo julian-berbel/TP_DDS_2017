@@ -3,8 +3,11 @@ package modelo.method.criteria.filter;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import modelo.indicator.Indicator;
 
+@Entity
 public abstract class IndicatorAverageCompareCriterion extends IndicatorStatisticCompareCriterion
 {
 	public IndicatorAverageCompareCriterion(Indicator indicator, BigDecimal value, int years, ComparisonCriterion comparisonCriterion) 
