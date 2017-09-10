@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
 import org.uqbar.commons.utils.Observable;
@@ -34,7 +35,7 @@ public class Indicator extends ModelEntity implements Operable
 		this.value = IndicatorParser.parseIndicator(formula);
 	}
 	
-	public Indicator(){}
+	protected Indicator(){}
 	
 	public String getName() 
 	{
@@ -45,13 +46,13 @@ public class Indicator extends ModelEntity implements Operable
 		return formula;
 	}
 	
-	public Operable getValue() {
-		if(value == null) value = IndicatorParser.parseIndicator(formula);
-		return value;
+	@PostLoad
+	protected void postLoad(){
+		value = IndicatorParser.parseIndicator(formula);
 	}
 
 	public BigDecimal reduce(Enterprise enterprise, int year){
-		return getValue().reduce(enterprise, year);
+		return value.reduce(enterprise, year);
 	}
 	
 	public boolean tryReduce(Enterprise enterprise, int year)
@@ -68,7 +69,7 @@ public class Indicator extends ModelEntity implements Operable
 	
 	
 	public String normalize(){
-		return getValue().toString();
+		return value.toString();
 	}
 	
 	@Override
@@ -77,10 +78,10 @@ public class Indicator extends ModelEntity implements Operable
 	}
 	
 	public Boolean uses(Indicator indicator){
-		return getValue().includes(indicator);
+		return value.includes(indicator);
 	}
 	
 	public Boolean includes(Indicator indicator){
-		return this == indicator || getValue().includes(indicator);
+		return this == indicator || value.includes(indicator);
 	}
 }

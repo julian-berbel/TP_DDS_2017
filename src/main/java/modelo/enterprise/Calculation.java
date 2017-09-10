@@ -26,7 +26,7 @@ public class Calculation extends ModelEntity
 		this.value = value;
 	}
 	
-	public Calculation(){}
+	protected Calculation(){}
 	
 	public String getName()
 	{

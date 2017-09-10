@@ -11,7 +11,7 @@ public class EnterpriseMinimumLongevityCriterion extends FilterCriterion
 	{
 		minimumAge = years;
 	}
-
+	
 	public boolean test(Enterprise enterprise) {
 		return enterprise.age() > minimumAge;
 	}

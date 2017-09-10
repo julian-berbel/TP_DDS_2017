@@ -25,6 +25,8 @@ public class Period extends ModelEntity
 		this.calculations = calculations;
 	}
 	
+	protected Period(){}
+	
 	public List<Calculation> getCalculations()
 	{
 		return calculations;
@@ -41,9 +43,7 @@ public class Period extends ModelEntity
 	{
 		calculations.replaceAll(calculation -> calculation == oldCalculation ? newCalculation:calculation);
 	}
-	
-	
-	
+		
 	public Calculation getCalculation(String name){
 		return calculations.stream()
 				.filter(calculation -> calculation.getName().equals(name))

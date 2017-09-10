@@ -32,7 +32,7 @@ public class Enterprise extends ModelEntity
 		this.periods = periods;
 	}
 	
-	public Enterprise(){}
+	protected Enterprise(){}
 	
 	public List<Period> getPeriods()
 	{
