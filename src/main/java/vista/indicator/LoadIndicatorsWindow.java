@@ -4,6 +4,7 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import exceptions.RepeatedIndicatorExcelException;
 import exceptions.RepeatedIndicatorInSystemException;
+import exceptions.NoFileSelectedException;
 import jxl.read.biff.BiffException;
 import viewModel.indicator.LoadIndicatorsVM;
 import vista.ErrorWindow;
@@ -48,14 +49,19 @@ public class LoadIndicatorsWindow extends SimpleWindow<LoadIndicatorsVM>
 			{
 				ErrorWindow.show(this, "Archivo invalido o no es un archivo Excel (.xls)");
 			}
-			catch(RepeatedIndicatorExcelException repeatedIndicator)
+			catch(RepeatedIndicatorExcelException repeatedInExcel)
 			{
-				ErrorWindow.show(this, "El indicador: "+repeatedIndicator.getMessage()+" esta repetido en la hoja de excel, modifiquela y vuelva a cargar el archivo");
+				ErrorWindow.show(this, "El indicador: "+repeatedInExcel.getMessage()+" esta repetido en la hoja de excel, modifiquela y vuelva a cargar el archivo");
 			}
 			catch(RepeatedIndicatorInSystemException repeatedIndicator)
 			{
 				ErrorWindow.show(this, "El indicador: " + repeatedIndicator.getMessage()+" de la hoja de excel ya existe en el sistema. Modifique el archivo y vuelva a cargarlo");
 			}
+			catch(NoFileSelectedException ex)
+			{
+				ErrorWindow.show(this, ex.getMessage());
+			}
+			
 		
 		});
 	}

@@ -3,8 +3,8 @@ package exceptions;
 	@SuppressWarnings("serial")
 	public class NoFileSelectedException extends RuntimeException{
 
-		public NoFileSelectedException(String msj)
+		public NoFileSelectedException()
 		{
-			super(msj);
+			super("No se ha seleccionado un archivo. Seleccione uno antes de continuar.");
 		}
 	}

@@ -4,6 +4,7 @@ import org.uqbar.commons.utils.Observable;
 
 import jxl.read.biff.BiffException;
 import modelo.indicator.IndicatorsManager;
+import exceptions.NoFileSelectedException;;
 
 
 @Observable
@@ -27,8 +28,11 @@ public class LoadIndicatorsVM {
 			this.filePath = filePath_;
 	}
 	
-	public void loadIndicators() throws IOException, BiffException
+	public void loadIndicators() throws IOException, BiffException, NoFileSelectedException
 	{
+		if((filePath == "") || (filePath == null))		//Verifico ambos casos por las dudas
+			throw new NoFileSelectedException();
+		
 		IndicatorsManager.setFilePath(filePath);	
 		IndicatorsManager.read();		
 	}	

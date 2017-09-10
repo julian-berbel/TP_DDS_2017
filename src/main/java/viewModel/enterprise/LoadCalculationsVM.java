@@ -37,7 +37,7 @@ public class LoadCalculationsVM
 		}
 		else
 		{
-			throw new NoFileSelectedException("No se ha cargado un archivo");
+			throw new NoFileSelectedException();
 		}
 		
 	}		
