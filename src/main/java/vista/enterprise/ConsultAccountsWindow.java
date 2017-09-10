@@ -1,11 +1,9 @@
 package vista.enterprise;
 
 
-import java.io.IOException;
 import java.util.Optional;
 
 import org.uqbar.arena.layout.ColumnLayout;
-import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -16,18 +14,13 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import exceptions.DeleteUsedIndicatorException;
 import exceptions.MissingFileException;
-import jxl.read.biff.BiffException;
-import jxl.write.WriteException;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
-import modelo.indicator.Indicator;
 import viewModel.enterprise.ConsultAccountVM;
 import vista.ErrorWindow;
 import vista.SaveChangesWindow;
-import vista.indicator.EditIndicatorWindow;
 
 
 

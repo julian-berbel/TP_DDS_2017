@@ -11,6 +11,8 @@
         <class>modelo.enterprise.Enterprise</class>
     	<class>modelo.enterprise.Calculation</class>
     	<class>modelo.enterprise.Period</class>
+        <class>modelo.indicator.Indicator</class>
+        <class>modelo.method.Method</class>
     	
     	 
         <properties> 

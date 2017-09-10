@@ -12,8 +12,6 @@ import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.enterprise.Period;
-import modelo.indicator.Indicator;
-import modelo.indicator.IndicatorRepository;
 
 @Observable
 public class ConsultAccountVM {

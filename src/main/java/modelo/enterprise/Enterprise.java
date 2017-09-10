@@ -2,7 +2,6 @@ package modelo.enterprise;
 
 import java.math.BigDecimal;
 import java.time.Year;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +23,7 @@ public class Enterprise extends ModelEntity
 	private String name;
 	
 	@OneToMany
-	@JoinColumn(referencedColumnName = "id")			//Apunta al atributo 'id' de un periodo
+	@JoinColumn(referencedColumnName = "enterprise_id")			//Apunta al atributo 'id' de un periodo
 	private List<Period> periods;							//Una empresa tiene muchos periodos, pero un periodo pertenece a una sola empresa
 	
 	public Enterprise(String name, List<Period> periods)
@@ -32,6 +31,8 @@ public class Enterprise extends ModelEntity
 		this.name = name;
 		this.periods = periods;
 	}
+	
+	public Enterprise(){}
 	
 	public List<Period> getPeriods()
 	{

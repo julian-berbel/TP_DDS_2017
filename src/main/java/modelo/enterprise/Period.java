@@ -6,12 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import org.uqbar.commons.utils.Observable;
-
 import exceptions.MissingCalculationInPeriodException;
-
 import modelo.ModelEntity;
-import modelo.indicator.Indicator;
 
 @Entity
 public class Period extends ModelEntity
@@ -20,7 +16,7 @@ public class Period extends ModelEntity
 	private int year;
 	
 	@OneToMany
-	@JoinColumn(referencedColumnName = "CalculationId")			//Un periodo tiene muchas cuentas, pero cada cuenta pertenece solo a un periodo		
+	@JoinColumn(referencedColumnName = "period_id")			//Un periodo tiene muchas cuentas, pero cada cuenta pertenece solo a un periodo		
 	private List<Calculation> calculations;						//(porque cada cuenta tiene un valor distinto, aunque varias tengan el mismo nombre)
 	
 	public Period(int year, List<Calculation> calculations)

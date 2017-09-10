@@ -2,14 +2,11 @@ package modelo.indicator.math;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-
 import modelo.enterprise.Enterprise;
 import modelo.indicator.Indicator;
 
-public class Negative extends Operable {
+public class Negative implements Operable {
 
-	@Column(nullable = false)
 	private Operable value;
 	
 	public Negative(Operable value) {

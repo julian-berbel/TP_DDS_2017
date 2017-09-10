@@ -1,8 +1,11 @@
 package modelo.method.criteria;
 
+import javax.persistence.Entity;
+
 import org.uqbar.commons.utils.Observable;
 
 @Observable
+@Entity
 public abstract class MixedCriterion extends Criterion
 {
 	private OrderCriterion orderCriterion;

@@ -5,24 +5,25 @@ import java.util.NoSuchElementException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.Transient;
 
 import org.uqbar.commons.utils.Observable;
 import exceptions.EmptyFieldException;
+import modelo.ModelEntity;
 import modelo.enterprise.Enterprise;
 import modelo.indicator.math.Operable;
 import modelo.indicator.parser.IndicatorParser;
 
 @Entity
 @Observable
-public class Indicator extends Operable
+public class Indicator extends ModelEntity implements Operable
 {
 	
 	@Column(nullable = false)
 	private String name;
 	private String formula;
 	
-	@JoinColumn(referencedColumnName = "id")
+	@Transient
 	private Operable value;
 
 	public Indicator(String name, String formula){
@@ -32,6 +33,8 @@ public class Indicator extends Operable
 		this.formula = formula;
 		this.value = IndicatorParser.parseIndicator(formula);
 	}
+	
+	public Indicator(){}
 	
 	public String getName() 
 	{
@@ -43,11 +46,12 @@ public class Indicator extends Operable
 	}
 	
 	public Operable getValue() {
+		if(value == null) value = IndicatorParser.parseIndicator(formula);
 		return value;
 	}
 
 	public BigDecimal reduce(Enterprise enterprise, int year){
-		return value.reduce(enterprise, year);
+		return getValue().reduce(enterprise, year);
 	}
 	
 	public boolean tryReduce(Enterprise enterprise, int year)
@@ -64,7 +68,7 @@ public class Indicator extends Operable
 	
 	
 	public String normalize(){
-		return value.toString();
+		return getValue().toString();
 	}
 	
 	@Override
@@ -73,10 +77,10 @@ public class Indicator extends Operable
 	}
 	
 	public Boolean uses(Indicator indicator){
-		return value.includes(indicator);
+		return getValue().includes(indicator);
 	}
 	
 	public Boolean includes(Indicator indicator){
-		return this == indicator || value.includes(indicator);
+		return this == indicator || getValue().includes(indicator);
 	}
 }

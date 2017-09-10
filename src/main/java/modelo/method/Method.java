@@ -4,10 +4,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
+
 import org.jooq.lambda.Seq;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.EmptyFieldException;
+import modelo.ModelEntity;
 import modelo.enterprise.Enterprise;
 import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
@@ -17,11 +22,21 @@ import modelo.method.result.Pass;
 import modelo.method.result.Result;
 
 @Observable
-public class Method {
+public class Method extends ModelEntity{
 
 	private String name;
+	
+	@OneToMany
+	@JoinColumn(referencedColumnName = "method_id")
 	private List<FilterCriterion> filterCriteria;
+	
+	@OneToMany
+	@JoinColumn(referencedColumnName = "method_id")
+	@OrderColumn
 	private List<OrderCriterion> orderCriteria;
+	
+	@OneToMany
+	@JoinColumn(referencedColumnName = "method_id")
 	private List<MixedCriterion> mixedCriteria;
 
 	public Method(String name, List<FilterCriterion> filterCriteria, List<OrderCriterion> orderCriteria, List<MixedCriterion> mixedCriteria)

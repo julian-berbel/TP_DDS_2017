@@ -1,9 +1,8 @@
 package viewModel.enterprise;
 
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar; 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,12 +13,10 @@ import org.uqbar.commons.utils.Observable;
 import exceptions.EmptyEnterpriseException;
 import exceptions.EmptyFieldException;
 import exceptions.ExistingEnterpriseException;
-import exceptions.ExistingIndicatorException;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.enterprise.Period;
-import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 
 

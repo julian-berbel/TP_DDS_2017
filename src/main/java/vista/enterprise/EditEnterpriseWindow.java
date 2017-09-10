@@ -2,13 +2,11 @@ package vista.enterprise;
 
 import java.util.Optional;
 
-import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.List;
-import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
@@ -19,16 +17,10 @@ import org.uqbar.arena.windows.WindowOwner;
 import exceptions.EmptyEnterpriseException;
 import exceptions.EmptyFieldException;
 import exceptions.ExistingEnterpriseException;
-import exceptions.ExistingIndicatorException;
-import exceptions.FormulaErrorException;
-import exceptions.MissingIndicatorException;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
-import modelo.indicator.Indicator;
-
 import viewModel.enterprise.EditEnterpriseVM;
 import vista.ErrorWindow;
-import vista.indicator.EditIndicatorWindow;
 
 
 @SuppressWarnings("serial")
