@@ -12,6 +12,8 @@ public abstract class IndicatorStatisticCompareCriterion extends IndicatorRelate
 		super(indicator, years, comparisonCriterion);
 		this.value = value;
 	}
+	
+	protected IndicatorStatisticCompareCriterion(){}
 
 	public String buildDescription(String statisticType) {
 		return super.buildDescription(statisticType + " del indicador " + indicator.getName() + comparisonCriterion.getComparisonType() + value.toString());

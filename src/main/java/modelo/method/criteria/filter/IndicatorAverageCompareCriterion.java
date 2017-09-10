@@ -12,6 +12,8 @@ public abstract class IndicatorAverageCompareCriterion extends IndicatorStatisti
 		super(indicator, value, years, comparisonCriterion);
 	}
 	
+	protected IndicatorAverageCompareCriterion() {}
+	
 	protected boolean test(List<BigDecimal> values) 
 	{		
 		BigDecimal average = values.stream()

@@ -12,6 +12,8 @@ public abstract class IndicatorMedianCompareCriterion extends IndicatorStatistic
 	{
 		super(indicator, value, years, comparisonCriterion);
 	}
+	
+	protected IndicatorMedianCompareCriterion() {}
 
 	protected boolean test(List<BigDecimal> values) 
 	{

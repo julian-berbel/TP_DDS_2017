@@ -21,6 +21,8 @@ public abstract class IndicatorRelatedCriterion extends FilterCriterion
 		this.comparisonCriterion = comparisonCriterion;
 	}
 	
+	protected IndicatorRelatedCriterion(){}
+	
 	public boolean test(Enterprise enterprise){
 		return test(enterprise.getIndicatorValueFromLastNYears(indicator, lastNYears));
 	}

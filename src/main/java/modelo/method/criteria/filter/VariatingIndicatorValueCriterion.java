@@ -16,6 +16,8 @@ public abstract class VariatingIndicatorValueCriterion extends IndicatorRelatedC
 		super(indicator, years, comparisonCriterion);
 	}
 	
+	protected VariatingIndicatorValueCriterion() {}
+	
 	protected boolean test(List<BigDecimal> values) 
 	{		
 		if(values.isEmpty()) return true;

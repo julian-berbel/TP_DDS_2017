@@ -11,6 +11,8 @@ public abstract class IndicatorValueCompareCriterion extends IndicatorStatisticC
 	{
 		super(indicator, value, years, comparisonCriterion);
 	}
+	
+	protected IndicatorValueCompareCriterion() {}
 
 	protected boolean test(List<BigDecimal> values) 
 	{

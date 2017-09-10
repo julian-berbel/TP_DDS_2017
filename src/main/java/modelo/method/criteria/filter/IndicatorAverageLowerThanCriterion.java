@@ -10,4 +10,9 @@ public class IndicatorAverageLowerThanCriterion extends IndicatorAverageCompareC
 	{
 		super(indicator, value, years, ComparisonCriterion.LowerThan);
 	}
+	
+	protected IndicatorAverageLowerThanCriterion() 
+	{
+		this.comparisonCriterion = ComparisonCriterion.LowerThan;
+	}
 }

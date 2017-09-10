@@ -8,4 +8,9 @@ public class DecreasingIndicatorValueCriterion extends VariatingIndicatorValueCr
 	{
 		super(indicator, years, ComparisonCriterion.HigherThan);
 	}
+	
+	protected DecreasingIndicatorValueCriterion() 
+	{
+		this.comparisonCriterion = ComparisonCriterion.HigherThan;
+	}
 }

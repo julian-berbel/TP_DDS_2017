@@ -10,4 +10,9 @@ public class IndicatorMedianLowerThanCriterion extends IndicatorMedianCompareCri
 	{
 		super(indicator, value, years, ComparisonCriterion.LowerThan);
 	}
+	
+	protected IndicatorMedianLowerThanCriterion() 
+	{
+		this.comparisonCriterion = ComparisonCriterion.LowerThan;
+	}
 }

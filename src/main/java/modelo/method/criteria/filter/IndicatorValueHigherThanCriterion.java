@@ -10,4 +10,9 @@ public class IndicatorValueHigherThanCriterion extends IndicatorValueCompareCrit
 	{
 		super(indicator, value, years, ComparisonCriterion.HigherThan);
 	}
+	
+	protected IndicatorValueHigherThanCriterion() 
+	{
+		this.comparisonCriterion = ComparisonCriterion.HigherThan;
+	}
 }
