@@ -112,7 +112,7 @@ public class IndicatorParser implements IndicatorParserConstants {
   final public Operable Indicator() throws ParseException {Token t;
     jj_consume_token(10);
     t = jj_consume_token(IDENTIFIER);
-{if ("" != null) return IndicatorRepository.getIndicator(t.image);}
+{if ("" != null) return IndicatorRepository.getInstance().getIndicator(t.image);}
     throw new Error("Missing return statement in function");
   }
 

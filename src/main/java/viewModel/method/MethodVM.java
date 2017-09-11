@@ -12,7 +12,7 @@ import modelo.method.MethodRepository;
 @Observable
 public class MethodVM {
 
-	private List<Method> methods = MethodRepository.getMethods();;
+	private List<Method> methods = MethodRepository.getInstance().getMethods();;
 	private Method selectedMethod;
 	private Boolean methodsChanged = false;
 	
@@ -33,7 +33,7 @@ public class MethodVM {
 	}
 
 	public void addNewMethod(Optional<Method> newMethod) {
-		newMethod.ifPresent(method ->MethodRepository.addMethod(method));
+		newMethod.ifPresent(method -> MethodRepository.getInstance().addMethod(method));
 		refreshList();
 	}
 
@@ -56,7 +56,7 @@ public class MethodVM {
 	}
 	
 	public void replaceSelectedMethodWith(Optional<Method> newMethod){
-		newMethod.ifPresent(method -> MethodRepository.replace(selectedMethod, method));
+		newMethod.ifPresent(method -> MethodRepository.getInstance().replace(selectedMethod, method));
 		refreshList();
 	}
 	

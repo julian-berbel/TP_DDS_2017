@@ -16,7 +16,7 @@ public class IndicatorsTest {
 	public void testAddNewIndicator()
 	{
 		Indicator indicator = new Indicator("Indicator1", "#C1+#C2");
-		IndicatorRepository.addIndicator(indicator);	
+		IndicatorRepository.getInstance().addIndicator(indicator);	
 		
 		IndicatorsVM indicators = new IndicatorsVM();		
 		Indicator indicator2 = new Indicator("Indicator2", "#C1*#C2");
@@ -28,14 +28,14 @@ public class IndicatorsTest {
 		indicatorList.add(indicator);
 		indicatorList.add(indicator2);
 		
-		assertEquals(IndicatorRepository.getIndicatorList(), indicatorList);
+		assertEquals(IndicatorRepository.getInstance().getIndicatorList(), indicatorList);
 	}
 	
 	@Test
 	public void testDeleteIndicator()
 	{
 		Indicator indicator = new Indicator("Indicator1", "#C1+#C2");
-		IndicatorRepository.addIndicator(indicator);
+		IndicatorRepository.getInstance().addIndicator(indicator);
 		
 		IndicatorsVM indicators = new IndicatorsVM();
 		indicators.setSelectedIndicator(indicator);

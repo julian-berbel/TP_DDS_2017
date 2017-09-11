@@ -88,7 +88,7 @@ Operable Identifier() : {Operable op;}
 
 Operable Indicator() : {Token t;}
 {
-	"@" t=<IDENTIFIER> { return IndicatorRepository.getIndicator(t.image); }
+	"@" t=<IDENTIFIER> { return IndicatorRepository.getInstance().getIndicator(t.image); }
 }
 
 Operable Calculation() : {Token t;}

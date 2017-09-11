@@ -47,10 +47,10 @@ public class EditIndicatorVM {
 	}
 
 	public void accept(){
-		if(!editing && IndicatorRepository.alreadyExists(name)) throw new ExistingIndicatorException(name);
+		if(!editing && IndicatorRepository.getInstance().alreadyExists(name)) throw new ExistingIndicatorException(name);
 		if(editing)
 		{
-			if(!name.equals(originalName) && IndicatorRepository.alreadyExists(name))
+			if(!name.equals(originalName) && IndicatorRepository.getInstance().alreadyExists(name))
 			{
 				throw new ExistingIndicatorException(name);
 			}

@@ -25,7 +25,7 @@ public class LoadIndicatorsTest {
 		try
 		{
 			loader.setFilePath("testfiles/TestIndicadores.xls");
-			assertEquals(IndicatorRepository.getIndicatorList(), indicatorList);			
+			assertEquals(IndicatorRepository.getInstance().getIndicatorList(), indicatorList);			
 		}
 		catch(BiffException e)
 		{

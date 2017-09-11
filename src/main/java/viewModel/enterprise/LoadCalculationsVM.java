@@ -1,7 +1,10 @@
 package viewModel.enterprise;
 import java.io.FileNotFoundException;
+
 import org.uqbar.commons.utils.Observable;
+
 import com.google.gson.JsonSyntaxException;
+
 import exceptions.JsonMappingException;
 import exceptions.NoFileSelectedException;
 import exceptions.ReadingFileException;

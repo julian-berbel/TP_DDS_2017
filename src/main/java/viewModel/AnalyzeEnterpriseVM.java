@@ -2,6 +2,7 @@ package viewModel;
 
 import java.math.BigDecimal;
 import java.util.List;
+
 import org.uqbar.commons.utils.Observable;
 
 import modelo.enterprise.Enterprise;
@@ -88,7 +89,7 @@ public class AnalyzeEnterpriseVM {
 	
 	public void setSelectedPeriod(Period selectedPeriod){
 		this.selectedPeriod = selectedPeriod;
-		indicators = IndicatorRepository.getAvailableIndicatorForPeriodList(selectedEnterprise,selectedPeriod);
+		indicators = IndicatorRepository.getInstance().getAvailableIndicatorForPeriodList(selectedEnterprise,selectedPeriod);
 	}	
 	
 }

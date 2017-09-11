@@ -15,7 +15,7 @@ public class IndicatorsManagerTest {
 		Indicator dummyIndicator = new Indicator("IngresoNeto", "#C1 + #C2");
 		try{
 			IndicatorsManager.read();
-			assertEquals(IndicatorRepository.getIndicator("IngresoNeto"), dummyIndicator);
+			assertEquals(IndicatorRepository.getInstance().getIndicator("IngresoNeto"), dummyIndicator);
 		}
 		catch(Exception e){
 			fail("El archivo no existe");

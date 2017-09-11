@@ -65,7 +65,7 @@ public class IndicatorsManager
 		       
 		       	Indicator indicator = new Indicator(name, formula);
    
-		       	IndicatorRepository.addIndicator(indicator);
+		       	IndicatorRepository.getInstance().addIndicator(indicator);
 		        	
 		       	rowIndex++;	        	
 		    }
@@ -106,7 +106,7 @@ public class IndicatorsManager
 			 Cell cell = sheet.getCell(columnNumber, i);
 	         String indicatorName = cell.getContents();
 	         
-	        if(IndicatorRepository.alreadyExists(indicatorName)){
+	        if(IndicatorRepository.getInstance().alreadyExists(indicatorName)){
 	        	return indicatorName;
 	        }	        
 	     }
@@ -181,11 +181,11 @@ public class IndicatorsManager
 	        Label label2 = new Label(columnNumber+1, rowNumber, "Formula");
 	        sheet.addCell(label2);
             
-	        for(int index =0;index<IndicatorRepository.getIndicatorList().size();index++)
+	        for(int index =0;index<IndicatorRepository.getInstance().getIndicatorList().size();index++)
 	        {
-	        	Label indicator = new Label(columnIndex, rowIndex, IndicatorRepository.getIndicatorList().get(index).getName());
+	        	Label indicator = new Label(columnIndex, rowIndex, IndicatorRepository.getInstance().getIndicatorList().get(index).getName());
 		        sheet.addCell(indicator);
-		        Label formula = new Label(columnIndex+1, rowIndex, IndicatorRepository.getIndicatorList().get(index).getFormula());
+		        Label formula = new Label(columnIndex+1, rowIndex, IndicatorRepository.getInstance().getIndicatorList().get(index).getFormula());
 		        sheet.addCell(formula);
 		        rowIndex++;
 	        } 

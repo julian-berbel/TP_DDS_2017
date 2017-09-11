@@ -1,5 +1,10 @@
 package vista.enterprise;
 
+import org.uqbar.arena.layout.VerticalLayout;
+import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.FileSelector;
+import org.uqbar.arena.widgets.Label;
+import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
@@ -9,12 +14,6 @@ import exceptions.ReadingFileException;
 import exceptions.RepeatedEnterpriseFileException;
 import viewModel.enterprise.LoadCalculationsVM;
 import vista.ErrorWindow;
-
-import org.uqbar.arena.layout.VerticalLayout;
-import org.uqbar.arena.widgets.Button;
-import org.uqbar.arena.widgets.Label;
-import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.FileSelector;
 
 @SuppressWarnings("serial")
 public class LoadCalculationsWindow extends SimpleWindow<LoadCalculationsVM>

@@ -3,12 +3,10 @@ package viewModel.enterprise;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.EmptyFieldException;
 import exceptions.ExistingCalculationException;
-import exceptions.ExistingIndicatorException;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Period;
 

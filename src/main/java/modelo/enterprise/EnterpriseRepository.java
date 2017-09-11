@@ -15,7 +15,7 @@ public class EnterpriseRepository implements WithGlobalEntityManager
 	private static EnterpriseRepository repository;
 
 
-	private static String filePath;
+	private String filePath;
 	
 
 	private Boolean fileLoaded= false;
@@ -29,18 +29,19 @@ public class EnterpriseRepository implements WithGlobalEntityManager
 		return repository;
 	}
 
-	
 	public String getFilePath() {
 		return filePath;
 	}
+	
 	public void setFilePath(String filePath) {
-		EnterpriseRepository.filePath = filePath;
+		this.filePath = filePath;
 	}
+	
 	public Boolean getFileLoaded() {
 		return fileLoaded;
 	}
+	
 	public void addEnterprise(Enterprise ent)
-
 	{
 		enterprises.add(ent);		// no persistir desde cada clase
 	}

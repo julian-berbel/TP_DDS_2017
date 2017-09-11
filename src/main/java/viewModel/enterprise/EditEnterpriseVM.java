@@ -1,9 +1,8 @@
 package viewModel.enterprise;
 
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar; 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,12 +13,10 @@ import org.uqbar.commons.utils.Observable;
 import exceptions.EmptyEnterpriseException;
 import exceptions.EmptyFieldException;
 import exceptions.ExistingEnterpriseException;
-import exceptions.ExistingIndicatorException;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.enterprise.Period;
-import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 
 
@@ -204,7 +201,7 @@ public class EditEnterpriseVM {
 			
 		if(!editing && EnterpriseRepository.getInstance().alreadyExists(enterpriseName)) throw new ExistingEnterpriseException(enterpriseName);
 		if(enterpriseName== null) throw new EmptyFieldException("Nombre de la empresa"); 
-		if(editing && !enterpriseName.equals(originalEnterpriseName) && IndicatorRepository.alreadyExists(enterpriseName))
+		if(editing && !enterpriseName.equals(originalEnterpriseName) && IndicatorRepository.getInstance().alreadyExists(enterpriseName))
 		{
 			throw new ExistingEnterpriseException(enterpriseName);
 		}

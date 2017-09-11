@@ -6,12 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import org.uqbar.commons.utils.Observable;
-
 import exceptions.MissingCalculationInPeriodException;
-
 import modelo.ModelEntity;
-import modelo.indicator.Indicator;
 
 @Entity
 public class Period extends ModelEntity

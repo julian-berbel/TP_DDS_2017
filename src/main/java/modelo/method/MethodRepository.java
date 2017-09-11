@@ -3,16 +3,27 @@ package modelo.method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MethodRepository {
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-	private static List<Method> methods = new ArrayList<Method>();
+public class MethodRepository implements WithGlobalEntityManager {
 
-	public static void addMethod(Method method)
+	private static MethodRepository instance;
+	
+	private List<Method> methods = new ArrayList<Method>();
+	
+	private MethodRepository(){}
+	
+	public static MethodRepository getInstance(){
+		if(instance==null)instance = new MethodRepository();
+		return instance;
+	}
+
+	public void addMethod(Method method)
 	{
 		methods.add(method);
 	}
 	
-	public static List<Method> getMethods()
+	public List<Method> getMethods()
 	{
 		return methods;
 	}
@@ -22,14 +33,14 @@ public class MethodRepository {
 		methods = methodList;
 	}
 	
-	public static Boolean alreadyExists(String newMethodName)
+	public Boolean alreadyExists(String newMethodName)
 	{
 		 return methods.stream()
 						.map(indicator -> indicator.getName())
 						.anyMatch(indicatorName->indicatorName.equals(newMethodName));
 	}
 	
-	public static void replace(Method oldMethod, Method newMethod)
+	public void replace(Method oldMethod, Method newMethod)
 	{
 		methods.replaceAll(method -> method == oldMethod ? newMethod:method);
 	}

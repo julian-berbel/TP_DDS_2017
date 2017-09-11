@@ -44,23 +44,23 @@ public class IndicatorsVM {
 	}
 	
 	public void replaceSelectedIndicatorWith(Optional<Indicator> newIndicator){
-		newIndicator.ifPresent(indicator -> IndicatorRepository.replace(selectedIndicator, indicator));
+		newIndicator.ifPresent(indicator -> IndicatorRepository.getInstance().replace(selectedIndicator, indicator));
 		refreshList();
 	}
 
 	public void deleteIndicator(){
-		if(IndicatorRepository.anyUses(selectedIndicator)) throw new DeleteUsedIndicatorException();
+		if(IndicatorRepository.getInstance().anyUses(selectedIndicator)) throw new DeleteUsedIndicatorException();
 		indicators.remove(selectedIndicator);
 		refreshList();
 	}
 	
 	public void addNewIndicator(Optional<Indicator> newIndicator){
-		newIndicator.ifPresent(indicator -> IndicatorRepository.addIndicator(indicator));
+		newIndicator.ifPresent(indicator -> IndicatorRepository.getInstance().addIndicator(indicator));
 		refreshList();
 	}
 	
 	public void refreshList(){
-		indicators = IndicatorRepository.getIndicatorList();
+		indicators = IndicatorRepository.getInstance().getIndicatorList();
 		ObservableUtils.firePropertyChanged(this, "indicators");
 		indicatorsChanged = true;
 	}
