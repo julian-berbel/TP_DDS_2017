@@ -31,7 +31,7 @@ public class AnalyzeEnterpriseVM {
 
 	public AnalyzeEnterpriseVM()
 	{
-		enterprises =  EnterpriseRepository.getEnterpriseList();
+		enterprises =  EnterpriseRepository.getInstance().getEnterpriseList();
 	}	
 	
 	public List<Enterprise> getEnterprises() 

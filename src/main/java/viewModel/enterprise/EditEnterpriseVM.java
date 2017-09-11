@@ -202,7 +202,7 @@ public class EditEnterpriseVM {
 	}
 	public void accept(){
 			
-		if(!editing && EnterpriseRepository.alreadyExists(enterpriseName)) throw new ExistingEnterpriseException(enterpriseName);
+		if(!editing && EnterpriseRepository.getInstance().alreadyExists(enterpriseName)) throw new ExistingEnterpriseException(enterpriseName);
 		if(enterpriseName== null) throw new EmptyFieldException("Nombre de la empresa"); 
 		if(editing && !enterpriseName.equals(originalEnterpriseName) && IndicatorRepository.alreadyExists(enterpriseName))
 		{

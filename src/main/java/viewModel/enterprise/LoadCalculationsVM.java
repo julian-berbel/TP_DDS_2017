@@ -51,7 +51,7 @@ public class LoadCalculationsVM
 			FileLoader fileLoader = new FileLoader(filePath);
 			JsonMapper jsonMapper = new JsonMapper();
 			jsonMapper.mapperFromJson(fileLoader.reader());		
-			EnterpriseRepository.setFilePath(filePath);
+			EnterpriseRepository.getInstance().setFilePath(filePath);
 		}
 		catch(FileNotFoundException fileReaderException)	
 		{						

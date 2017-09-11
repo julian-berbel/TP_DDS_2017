@@ -24,7 +24,7 @@ public class SaveChangesWindow extends Dialog<SaveChangesVM>
 		this.setTitle("Save changes...");
 		mainPanel.setLayout(new VerticalLayout());
 		
-		new Label(mainPanel).setText("¿Desea guardar los cambios?");	
+		new Label(mainPanel).setText("Desea guardar los cambios?");
 	}
 
 	@Override
