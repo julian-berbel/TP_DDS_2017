@@ -13,7 +13,7 @@ import modelo.indicator.Indicator;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)		//Lo pongo así por que no me gusta que haya campos que puedan ser nulos													
+@Inheritance(strategy = InheritanceType.JOINED)		//Lo pongo asi por que no me gusta que haya campos que puedan ser nulos
 public abstract class Operable {					//(que una single-table permite), aparte que los atributos cambian bastante entre las clases
 	
 	@Id

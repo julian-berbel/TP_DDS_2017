@@ -68,11 +68,11 @@ public class EditMethodWindow extends Dialog<EditMethodVM> {
 
 		Panel panel4 = new Panel(panel3).setLayout(new VerticalLayout());
 		
-		new Button(panel4).setCaption("ª").onClick(()->{
+		new Button(panel4).setCaption("").onClick(()->{
 			this.getModelObject().switchUp();
 		});
 		
-		new Button(panel4).setCaption("«").onClick(()->{
+		new Button(panel4).setCaption("").onClick(()->{
 			this.getModelObject().switchDown();
 		});
 		

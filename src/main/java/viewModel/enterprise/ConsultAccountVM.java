@@ -26,7 +26,7 @@ public class ConsultAccountVM {
 	private Boolean enterprisesChanged=false;
 	public ConsultAccountVM()
 	{
-		enterprises =  EnterpriseRepository.getEnterpriseList();		
+		enterprises =  EnterpriseRepository.getInstance().getEnterpriseList();		
 	}	
 	
 	public List<Enterprise> getEnterprises() 
@@ -81,25 +81,25 @@ public class ConsultAccountVM {
 			calculations = selectedPeriod.getCalculations();
 	}	
 	public void addNewEnterprise(Optional<Enterprise> newEnterprise){
-		newEnterprise.ifPresent(enterprise -> EnterpriseRepository.addEnterprise(enterprise));
+		newEnterprise.ifPresent(enterprise -> EnterpriseRepository.getInstance().addEnterprise(enterprise));
 		refreshList();
 	}
 	public void refreshList(){
-		enterprises =  EnterpriseRepository.getEnterpriseList();
+		enterprises =  EnterpriseRepository.getInstance().getEnterpriseList();
 		ObservableUtils.firePropertyChanged(this, "enterprises");
 		enterprisesChanged = true;
 	}
 	
 	public void replaceSelectedEnterpriseWith(Optional<Enterprise> targetEnterprise){
-		targetEnterprise.ifPresent(enterprise -> EnterpriseRepository.replaceEnterprise(selectedEnterprise, enterprise));
+		targetEnterprise.ifPresent(enterprise -> EnterpriseRepository.getInstance().replaceEnterprise(selectedEnterprise, enterprise));
 		refreshList();
 	}
 	
 	public void deleteEnterprise()
 	{
 		
-		EnterpriseRepository.deleteEnterprise(selectedEnterprise);
-		enterprises =  EnterpriseRepository.getEnterpriseList();
+		EnterpriseRepository.getInstance().deleteEnterprise(selectedEnterprise);
+		enterprises =  EnterpriseRepository.getInstance().getEnterpriseList();
 		ObservableUtils.firePropertyChanged(this, "enterprises");
 		enterprisesChanged = true;
 	}
@@ -111,7 +111,7 @@ public class ConsultAccountVM {
 	
 	public void saveChanges()
 	{
-		if(EnterpriseRepository.getFileLoaded()==false) throw new MissingFileException("Debe cargar el archivo de cuentas antes de poder guardar los cambios");
+		if(EnterpriseRepository.getInstance().getFileLoaded()==false) throw new MissingFileException("Debe cargar el archivo de cuentas antes de poder guardar los cambios");
 		JsonMapper jsonMapper= new JsonMapper();
 		jsonMapper.mapperToFile();
 	}

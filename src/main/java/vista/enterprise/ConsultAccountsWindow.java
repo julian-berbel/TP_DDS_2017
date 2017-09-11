@@ -113,7 +113,7 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 	{
 		if(this.getModelObject().verifyIfSomethingChanged())
 		{
-			if(EnterpriseRepository.getEnterpriseList().size()>0)
+			if(EnterpriseRepository.getInstance().getEnterpriseList().size()>0)
 			{	
 				SaveChangesWindow window = new SaveChangesWindow(this);			
 				window.onAccept(()->applySave());

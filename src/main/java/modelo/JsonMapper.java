@@ -19,18 +19,18 @@ public class JsonMapper {
 		
 		
 		ArrayList<Enterprise> enterpriseList = gson.fromJson(reader, new TypeToken<List<Enterprise>>(){}.getType());
-		EnterpriseRepository.setEnterpriseList(enterpriseList);
+		EnterpriseRepository.getInstance().setEnterpriseList(enterpriseList);
 		
 	}
 	public void mapperToFile()
 	{
 		Gson gson = new Gson();
-		String json = gson.toJson(EnterpriseRepository.getEnterpriseList());
+		String json = gson.toJson(EnterpriseRepository.getInstance().getEnterpriseList());
 		 FileWriter fichero = null;
 	        PrintWriter pw = null;
 	        try
 	        {
-	            fichero = new FileWriter(EnterpriseRepository.getFilePath());
+	            fichero = new FileWriter(EnterpriseRepository.getInstance().getFilePath());
 	            pw = new PrintWriter(fichero);
                 pw.print(json);
 
