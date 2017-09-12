@@ -5,24 +5,26 @@ import java.util.NoSuchElementException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.PostLoad;
+import javax.persistence.Transient;
 
 import org.uqbar.commons.utils.Observable;
 import exceptions.EmptyFieldException;
+import modelo.ModelEntity;
 import modelo.enterprise.Enterprise;
 import modelo.indicator.math.Operable;
 import modelo.indicator.parser.IndicatorParser;
 
 @Entity
 @Observable
-public class Indicator extends Operable
+public class Indicator extends ModelEntity implements Operable
 {
 	
 	@Column(nullable = false)
 	private String name;
 	private String formula;
 	
-	@JoinColumn(referencedColumnName = "id")
+	@Transient
 	private Operable value;
 
 	public Indicator(String name, String formula){
@@ -33,6 +35,8 @@ public class Indicator extends Operable
 		this.value = IndicatorParser.parseIndicator(formula);
 	}
 	
+	protected Indicator(){}
+	
 	public String getName() 
 	{
 		return name;
@@ -42,8 +46,9 @@ public class Indicator extends Operable
 		return formula;
 	}
 	
-	public Operable getValue() {
-		return value;
+	@PostLoad
+	protected void postLoad(){
+		value = IndicatorParser.parseIndicator(formula);
 	}
 
 	public BigDecimal reduce(Enterprise enterprise, int year){

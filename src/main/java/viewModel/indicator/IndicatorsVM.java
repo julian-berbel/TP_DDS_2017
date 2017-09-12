@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.DeleteUsedIndicatorException;
+import exceptions.MissingFileException;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import modelo.indicator.Indicator;
@@ -24,7 +25,7 @@ public class IndicatorsVM {
 	
 	public IndicatorsVM(){
 		indicatorsChanged = false;
-		refreshList();
+		indicators = IndicatorRepository.getInstance().getIndicatorList();
 	}
 	
 	public List<Indicator> getIndicators() {
@@ -77,6 +78,9 @@ public class IndicatorsVM {
 	
 	public void saveChanges() throws BiffException, WriteException, IOException
 	{		
+		if(!IndicatorsManager.fileLoaded()) throw new MissingFileException("Debe cargar el archivo de cuentas antes de poder guardar los cambios");
+		
 		IndicatorsManager.writeExcel();		
 	}
+	
 }

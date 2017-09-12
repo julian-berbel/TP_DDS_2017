@@ -2,18 +2,11 @@ package modelo.indicator.math;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-
-import org.apache.commons.beanutils.converters.BigDecimalConverter;
-
 import modelo.enterprise.Enterprise;
 import modelo.indicator.Indicator;
 
-public class Constant extends Operable {
+public class Constant implements Operable {
 	
-	@Column(nullable = false)
-	@Convert(converter = BigDecimalConverter.class)
 	public BigDecimal value;
 	
 	public Constant(BigDecimal value){

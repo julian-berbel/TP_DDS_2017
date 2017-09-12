@@ -11,6 +11,30 @@
         <class>modelo.enterprise.Enterprise</class>
     	<class>modelo.enterprise.Calculation</class>
     	<class>modelo.enterprise.Period</class>
+        <class>modelo.indicator.Indicator</class>
+        <class>modelo.method.Method</class>
+        <class>modelo.method.criteria.filter.DecreasingIndicatorValueCriterion</class>
+        <class>modelo.method.criteria.filter.IncreasingIndicatorValueCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorAverageCompareCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorAverageHigherThanCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorAverageLowerThanCriterion.java</class>
+        <class>modelo.method.criteria.filter.IndicatorMedianCompareCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorMedianHigherThanCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorMedianLowerThanCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorRelatedCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorStatisticCompareCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorValueCompareCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorValueHigherThanCriterion</class>
+        <class>modelo.method.criteria.filter.IndicatorValueLowerThanCriterion</class>
+        <class>modelo.method.criteria.filter.VariatingIndicatorValueCriterion</class>
+        <class>modelo.method.criteria.mixed.EnterpriseLongevityHigherThan</class>
+        <class>modelo.method.criteria.order.MaximizeIndicatorCriterion</class>
+        <class>modelo.method.criteria.order.MinimizeIndicatorCriterion</class>
+        <class>modelo.method.criteria.FilterCriterion</class>
+        <class>modelo.method.criteria.MixedCriterion</class>
+        <class>modelo.method.criteria.OrderCriterion</class>
+        <class>modelo.method.criteria.Criterion</class>
+        <class>modelo.ModelEntity</class>
     	
     	 
         <properties> 

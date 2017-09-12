@@ -13,6 +13,7 @@ import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 import exceptions.DeleteUsedIndicatorException;
+import exceptions.MissingFileException;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import modelo.indicator.Indicator;
@@ -101,13 +102,14 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		{
 			//Si se hicieron cambios, muestro un dialogo preguntando si se quieren guardar esos cambios
 			//Luego guardo los cambios o salgo de la ventana, dependiendo de la eleccion del usuario
-			
+	
 			SaveChangesWindow window = new SaveChangesWindow(this);			
 			window.onAccept(()->applySave());
 			window.open();
 		}		
 		
 		this.close();
+		
 	}
 	
 	private void applySave()
@@ -131,7 +133,12 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 			ErrorWindow.show(this, "El archivo que se intenta abrir no existe");
 			e.printStackTrace();
 		}
-		
+		catch(MissingFileException e)	
+		{	
+			ErrorWindow.show(this, e.getMessage());
+		//	e.printStackTrace();
+		}
+
 	}
 }
 
