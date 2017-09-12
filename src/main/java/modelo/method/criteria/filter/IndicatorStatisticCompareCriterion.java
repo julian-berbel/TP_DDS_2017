@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 
-import org.apache.commons.beanutils.converters.BigDecimalConverter;
+import modelo.BigDecimalConverter;
 
 import modelo.indicator.Indicator;
 

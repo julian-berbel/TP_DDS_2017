@@ -11,7 +11,7 @@ import modelo.indicator.Indicator;
 import modelo.method.criteria.OrderCriterion;
 
 @Entity
-@DiscriminatorValue("MI")
+@DiscriminatorValue("mI")
 public class MinimizeIndicatorCriterion extends OrderCriterion {
 	
 	@ManyToOne

@@ -2,6 +2,7 @@ package modelo.enterprise;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import exceptions.RepeatedEnterpriseFileException;

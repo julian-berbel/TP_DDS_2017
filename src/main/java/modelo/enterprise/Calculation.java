@@ -5,9 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 
-import org.apache.commons.beanutils.converters.BigDecimalConverter;
 import org.uqbar.commons.utils.Observable;
 
+import modelo.BigDecimalConverter;
 import modelo.ModelEntity;
 
 @Observable

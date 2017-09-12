@@ -23,7 +23,7 @@ public class Enterprise extends ModelEntity
 	private String name;
 	
 	@OneToMany
-	@JoinColumn(referencedColumnName = "enterprise_id")			//Apunta al atributo 'id' de un periodo
+	@JoinColumn(name = "enterprise_id", referencedColumnName = "id")			//Apunta al atributo 'id' de un periodo
 	private List<Period> periods;							//Una empresa tiene muchos periodos, pero un periodo pertenece a una sola empresa
 	
 	public Enterprise(String name, List<Period> periods)
