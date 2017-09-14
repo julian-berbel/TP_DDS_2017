@@ -1,6 +1,5 @@
 package vista.enterprise;
 
-
 import java.util.Optional;
 
 import org.uqbar.arena.layout.ColumnLayout;
@@ -82,7 +81,7 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 			if(this.getModelObject().getSelectedEnterprise() != null)
 			{
 				Optional<Enterprise> targetEnterprise = new EditEnterpriseWindow(this, Optional.of(this.getModelObject().getSelectedEnterprise())).openWithReturn();
-				this.getModelObject().replaceSelectedEnterpriseWith(targetEnterprise);	
+				this.getModelObject().updateEnterprise(targetEnterprise);	
 			}
 		});
 		new Button(panel2).setCaption("Borrar Empresa").onClick(()->{ 
@@ -96,12 +95,18 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 		
 	}	
 	
+	public void saveAndQuit(){
+		this.getModelObject().saveChanges();
+		super.close();
+	}
 	
 	@Override	
 	protected void addActions(Panel actions)
 	{
-		new Button(actions).setCaption("Volver").onClick(()->{this.verifyChangesAndSave();});
+		new Button(actions).setCaption("Volver").onClick(this::saveAndQuit);
 	}
+	
+	@SuppressWarnings("unused")
 	private void verifyChangesAndSave()
 	{
 		if(this.getModelObject().verifyIfSomethingChanged())
@@ -121,7 +126,7 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 	{
 		try
 		{				
-			this.getModelObject().saveChanges();
+			this.getModelObject().exportToFile();
 		}
 		catch(MissingFileException e)	
 		{	

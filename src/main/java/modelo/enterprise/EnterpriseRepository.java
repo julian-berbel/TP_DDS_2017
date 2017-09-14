@@ -1,20 +1,28 @@
 package modelo.enterprise;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-
-import exceptions.RepeatedEnterpriseFileException;
 
 public class EnterpriseRepository implements WithGlobalEntityManager
 {
 	private static EnterpriseRepository instance;
+	
+	private EntityTransaction transaction;
+	
+	public void initTransaction(){
+		transaction = entityManager().getTransaction();
+		transaction.begin();
+	}
+	
+	private EnterpriseRepository(){}
 
 	private String filePath;
 
 	private Boolean fileLoaded= false;
-	private List<Enterprise> enterprises = new ArrayList<Enterprise>();
 
 	public static EnterpriseRepository getInstance(){
 		if(instance == null)
@@ -35,52 +43,45 @@ public class EnterpriseRepository implements WithGlobalEntityManager
 		return fileLoaded;
 	}
 	
-	public void addEnterprise(Enterprise ent)
-	{
-		enterprises.add(ent);		// no persistir desde cada clase
+	public void addEnterprise(Enterprise enterprise){
+		entityManager().persist(enterprise);
 	}
 	
-	public List<Enterprise> getEnterpriseList()
-	{
-		return enterprises;
+	public void updateEnterprise(Enterprise enterprise){
+		entityManager().merge(enterprise);
 	}
 	
-	public void setEnterpriseList(List<Enterprise> enterprises2)
-	{
-		if(enterprises.isEmpty())
-		{
-			
-			enterprises = enterprises2;
-		}
-		else
-		{
-			
-			if(enterprises.stream()
-					.anyMatch(enterprise->
-						enterprises2.stream()
-							.anyMatch(aEnterprise->
-								aEnterprise.getName()
-									.equals(enterprise.getName())))) throw new RepeatedEnterpriseFileException("El archivo contiene una o mas empresas con un nombre ya cargado, modifiquelo y vuelva a cargar");
-			else enterprises.addAll(enterprises2);
-		}
-		fileLoaded=true;
+	public List<Enterprise> getEnterpriseList(){
+		return entityManager()
+		        .createQuery("from Enterprise", Enterprise.class)
+		        .getResultList();
 	}
 	
-	public Boolean alreadyExists(String newEnterpriseName)
-	{
-		
-		return enterprises.stream()
-			.map(enterprise -> enterprise.getName())
-			.anyMatch(enterpriseName->enterpriseName.equals(newEnterpriseName));
+	public Optional<Enterprise> fetchEnterprise(String name){
+		return entityManager()
+		        .createQuery("from Enterprise where name like :name", Enterprise.class)
+		        .setParameter("name", "%" + name + "%")
+		        .getResultList().stream()
+		        .findFirst();
 	}
 	
-	public void replaceEnterprise(Enterprise oldEnterprise, Enterprise newEnterprise)
-	{
-		enterprises.replaceAll(enterprise -> enterprise == oldEnterprise ? newEnterprise:enterprise);
+	public void importEnterprises(List<Enterprise> enterprises){
+		enterprises.forEach(enterprise -> {
+			entityManager().persist(enterprise);
+		});
+
+		entityManager().flush();
 	}
 	
-	public void deleteEnterprise(Enterprise enterprise)
-	{
-		enterprises.remove(enterprise);
+	public Boolean alreadyExists(String name){
+		return fetchEnterprise(name).isPresent();
+	}
+	
+	public void deleteEnterprise(Enterprise enterprise){
+		entityManager().remove(enterprise);
+	}
+
+	public void saveChanges() {
+		transaction.commit();
 	}
 }

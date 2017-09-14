@@ -4,9 +4,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
+import javax.persistence.Table;
 
 import org.jooq.lambda.Seq;
 import org.uqbar.commons.utils.Observable;
@@ -22,21 +24,24 @@ import modelo.method.result.Pass;
 import modelo.method.result.Result;
 
 @Observable
+@Entity
+@Table(name = "Methods")
 public class Method extends ModelEntity{
 
 	private String name;
 	
-	@OneToMany
-	@JoinColumn(referencedColumnName = "method_id")
+	
+	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
+	@JoinColumn(name = "method_id", referencedColumnName = "id")
 	private List<FilterCriterion> filterCriteria;
 	
-	@OneToMany
-	@JoinColumn(referencedColumnName = "method_id")
+	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
+	@JoinColumn(name = "method_id", referencedColumnName = "id")
 	@OrderColumn
 	private List<OrderCriterion> orderCriteria;
 	
-	@OneToMany
-	@JoinColumn(referencedColumnName = "method_id")
+	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
+	@JoinColumn(name = "method_id", referencedColumnName = "id")
 	private List<MixedCriterion> mixedCriteria;
 
 	public Method(String name, List<FilterCriterion> filterCriteria, List<OrderCriterion> orderCriteria, List<MixedCriterion> mixedCriteria)
@@ -46,6 +51,12 @@ public class Method extends ModelEntity{
 		this.filterCriteria = filterCriteria;
 		this.orderCriteria = orderCriteria;
 		this.mixedCriteria = mixedCriteria;
+	}
+	
+	public Method(String name, List<FilterCriterion> filterCriteria, List<OrderCriterion> orderCriteria, List<MixedCriterion> mixedCriteria, Long id)
+	{
+		this(name, filterCriteria, orderCriteria, mixedCriteria);
+		this.id = id;
 	}
 
 	public String getName()

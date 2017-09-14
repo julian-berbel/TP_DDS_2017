@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import exceptions.ExistingIndicatorException;
+import exceptions.ExistingMethodException;
 import exceptions.SelectedCriterionBelongsToMixedCriterionException;
 import modelo.method.Method;
 import modelo.method.MethodRepository;
@@ -25,20 +25,19 @@ public class EditMethodVM
 	private List<FilterCriterion> filterCriteria = new ArrayList<FilterCriterion>();
 	private List<OrderCriterion> orderCriteria = new ArrayList<OrderCriterion>();
 	private List<MixedCriterion> mixedCriteria = new ArrayList<MixedCriterion>();
-	private Optional<Method> targetMethod = Optional.empty();
-	private Boolean editing = false;
+	private Optional<Method> targetMethod;
 	private Criterion selectedFilterCriterion;
 	private OrderCriterion selectedOrderCriterion;
 	private MixedCriterion selectedMixedCriterion;
 
 	public EditMethodVM(Optional<Method> target) 
 	{
+		targetMethod = target;
 		target.ifPresent(_target -> {	
 				name = _target.getName();
 				filterCriteria = new ArrayList<FilterCriterion>(_target.getFilterCriteria());
 				orderCriteria = new ArrayList<OrderCriterion>(_target.getOrderCriteria());
 				mixedCriteria = new ArrayList<MixedCriterion>(_target.getMixedCriteria());
-				editing = true;
 			});
 	}
 	
@@ -162,11 +161,22 @@ public class EditMethodVM
 		ObservableUtils.firePropertyChanged(this, "orderCriteria");
 		ObservableUtils.firePropertyChanged(this, "mixedCriteria");
 	}
+	
+	private boolean editing(){
+		return targetMethod.isPresent();
+	}
+	
+	private boolean nameViolation(){
+		return (!editing() && MethodRepository.getInstance().alreadyExists(name)) ||
+				(editing() && !name.equals(targetMethod.get().getName()) && MethodRepository.getInstance().alreadyExists(name));
+	}
 
 	public void accept(){
-		if(!editing && MethodRepository.getInstance().alreadyExists(name)) throw new ExistingIndicatorException(name);
+		if(nameViolation()) throw new ExistingMethodException(name);
 		
-		targetMethod = Optional.of(new Method(name, filterCriteria, orderCriteria, mixedCriteria));
+		
+		targetMethod = Optional.of(
+				editing() ? new Method(name, filterCriteria, orderCriteria, mixedCriteria, targetMethod.get().getId()) : new Method(name, filterCriteria, orderCriteria, mixedCriteria));
 	}
 	
 	private Boolean belongsToMixedCriterion(Criterion criterion){

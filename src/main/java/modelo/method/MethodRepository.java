@@ -1,7 +1,9 @@
 package modelo.method;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
@@ -9,8 +11,13 @@ public class MethodRepository implements WithGlobalEntityManager {
 
 	private static MethodRepository instance;
 	
-	private List<Method> methods = new ArrayList<Method>();
+	private EntityTransaction transaction;
 	
+	public void initTransaction(){
+		transaction = entityManager().getTransaction();
+		transaction.begin();
+	}
+		
 	private MethodRepository(){}
 	
 	public static MethodRepository getInstance(){
@@ -18,31 +25,38 @@ public class MethodRepository implements WithGlobalEntityManager {
 		return instance;
 	}
 
-	public void addMethod(Method method)
-	{
-		methods.add(method);
+	public void addMethod(Method method){
+		entityManager().persist(method);
 	}
 	
-	public List<Method> getMethods()
-	{
-		return methods;
+	public void deleteMethod(Method method){
+		entityManager().remove(method);
 	}
 	
-	public void setMethodList(List<Method> methodList)
-	{
-		methods = methodList;
+	public List<Method> getMethods(){
+		return entityManager()
+		        .createQuery("from Method", Method.class)
+		        .getResultList();
 	}
 	
-	public Boolean alreadyExists(String newMethodName)
-	{
-		 return methods.stream()
-						.map(indicator -> indicator.getName())
-						.anyMatch(indicatorName->indicatorName.equals(newMethodName));
+	public Optional<Method> fetchMethod(String name){
+		return entityManager()
+		        .createQuery("from Method where name like :name", Method.class)
+		        .setParameter("name", "%" + name + "%")
+		        .getResultList().stream()
+		        .findFirst();
 	}
 	
-	public void replace(Method oldMethod, Method newMethod)
-	{
-		methods.replaceAll(method -> method == oldMethod ? newMethod:method);
+	public Boolean alreadyExists(String name){
+		 return fetchMethod(name).isPresent();
+	}
+
+	public void updateMethod(Method method) {
+		entityManager().merge(method);
+	}
+
+	public void saveChanges() {
+		transaction.commit();
 	}
 	
 }

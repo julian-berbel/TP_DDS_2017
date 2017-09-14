@@ -61,7 +61,7 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 			if(this.getModelObject().getSelectedIndicator() != null)
 			{
 				Optional<Indicator> targetIndicator = new EditIndicatorWindow(this, Optional.of(this.getModelObject().getSelectedIndicator())).openWithReturn();
-				this.getModelObject().replaceSelectedIndicatorWith(targetIndicator);	
+				this.getModelObject().updateIndicator(targetIndicator);	
 			}
 		});
 		
@@ -84,8 +84,7 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Volver").onClick(()->verifyChangesAndSave()); // el "() -> <metodo>" lo transforma en tipo 'Action' 
-																					  // y permite ejecutar ese metodo
+		new Button(actions).setCaption("Volver").onClick(this::saveAndQuit);
 	}
 	
 	protected void showMessageBox(String message, MessageBox.Type messageType)
@@ -95,6 +94,13 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		msgBox.open();
 	}
 	
+	public void saveAndQuit(){
+		this.getModelObject().saveChanges();
+		super.close();
+ 	}
+
+	
+	@SuppressWarnings("unused")
 	private void verifyChangesAndSave()
 	{
 		//Verifico si se hicieron cambios
@@ -116,7 +122,7 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 	{
 		try
 		{				
-			this.getModelObject().saveChanges();
+			this.getModelObject().exportToFile();
 		}
 		catch(BiffException e)	//es la excepcion que tira al invocar el metodo, que a su vez contiene la excepcion que tira el metodo
 		{	

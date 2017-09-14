@@ -1,46 +1,34 @@
 package viewModel.enterprise;
 
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import exceptions.EmptyEnterpriseException;
-import exceptions.EmptyFieldException;
 import exceptions.ExistingEnterpriseException;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.enterprise.Period;
-import modelo.indicator.IndicatorRepository;
-
-
-
 
 @Observable
 public class EditEnterpriseVM {
 	private String enterpriseName;
-	private String originalEnterpriseName;
 	private List<Period> periods = new ArrayList<Period>();;	
 	private List<Integer> year;
 	private Integer selectedYear;
 	private List<Calculation> calculations=new ArrayList<Calculation>();;	
 	private Calculation selectedCalculation;
-	private Optional<Enterprise> targetEnterprise = Optional.empty();
-	private Boolean editing= false;
+	private Optional<Enterprise> targetEnterprise;
 	
 	public EditEnterpriseVM(Optional<Enterprise> enterprise)
 	{		
 		enterprise.ifPresent(enterprise1 -> {
 			enterpriseName=enterprise1.getName();
-			originalEnterpriseName=enterprise1.getName();
 			periods=enterprise1.getPeriods();
-			editing = true;
 		});
 				
 		this.yearInitiation();
@@ -93,7 +81,6 @@ public class EditEnterpriseVM {
 			
 			this.refreshList();
 			
-			
 		}
 		else
 		{
@@ -140,7 +127,7 @@ public class EditEnterpriseVM {
 	
 	public Period getPeriod()
 	{
-		return periods.stream().filter(period->period.getYear()==selectedYear).collect(Collectors.toList()).get(0);
+		return periods.stream().filter(period->period.getYear()==selectedYear).findFirst().get();
 	}
 	
 	private Boolean periodsContainsSelectedYear()
@@ -151,7 +138,7 @@ public class EditEnterpriseVM {
 	
 	public void createPeriod()
 	{
-		if(periods.size()==0 )
+		if(periods.isEmpty() )
 		{
 			periods.add(new Period(selectedYear, new ArrayList<Calculation>()));
 		}else if(!periodsContainsSelectedYear())
@@ -174,7 +161,7 @@ public class EditEnterpriseVM {
 			refreshList();
 			});
 		
-		if(getPeriod().getCalculations().size()==0){
+		if(getPeriod().getCalculations().isEmpty()){
 			periods.remove(getPeriod());
 		}		
 	}
@@ -188,7 +175,7 @@ public class EditEnterpriseVM {
 	
 	public void deleteCalculation(){
 		this.getPeriod().getCalculations().remove(selectedCalculation);
-		if(getPeriod().getCalculations().size()==0){
+		if(getPeriod().getCalculations().isEmpty()){
 			periods.remove(getPeriod());
 		}
 		else
@@ -197,25 +184,22 @@ public class EditEnterpriseVM {
 			refreshList();
 		}
 	}
-	public void accept(){
-			
-		if(!editing && EnterpriseRepository.getInstance().alreadyExists(enterpriseName)) throw new ExistingEnterpriseException(enterpriseName);
-		if(enterpriseName== null) throw new EmptyFieldException("Nombre de la empresa"); 
-		if(editing && !enterpriseName.equals(originalEnterpriseName) && IndicatorRepository.getInstance().alreadyExists(enterpriseName))
-		{
-			throw new ExistingEnterpriseException(enterpriseName);
-		}
-			
-		if(periods.size()>0)
-		{
-			targetEnterprise = Optional.of(new Enterprise(enterpriseName,periods));
-		}
-		else
-		{
-			throw new EmptyEnterpriseException();
-		}
+	
+	private boolean editing(){
+		return targetEnterprise.isPresent();
 	}
 	
-	
+	private boolean nameViolation(){
+		return (!editing() && EnterpriseRepository.getInstance().alreadyExists(enterpriseName)) ||
+				(editing() && !enterpriseName.equals(targetEnterprise.get().getName()) && EnterpriseRepository.getInstance().alreadyExists(enterpriseName));
+	}
+
+	public void accept(){
+		if(nameViolation()) throw new ExistingEnterpriseException(enterpriseName);
+		
+		
+		targetEnterprise = Optional.of(
+				editing() ? new Enterprise(enterpriseName, periods, targetEnterprise.get().getId()) : new Enterprise(enterpriseName, periods));
+	}
 
 }

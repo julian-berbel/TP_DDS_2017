@@ -36,7 +36,7 @@ public class LoadCalculationsWindow extends SimpleWindow<LoadCalculationsVM>
 			try
 			{
 				this.getModelObject().parseFile();
-				this.close();
+				this.saveAndQuit();
 			}
 			catch(RepeatedEnterpriseFileException|ReadingFileException | JsonMappingException | NoFileSelectedException e)
 			{
@@ -49,6 +49,11 @@ public class LoadCalculationsWindow extends SimpleWindow<LoadCalculationsVM>
 	@Override	
 	protected void addActions(Panel actions)
 	{
-		new Button(actions).setCaption("Volver").onClick(this:: close);
+		new Button(actions).setCaption("Volver").onClick(this:: saveAndQuit);
+	}
+	
+	private void saveAndQuit(){
+		this.getModelObject().saveChanges();
+		this.close();
 	}
 }

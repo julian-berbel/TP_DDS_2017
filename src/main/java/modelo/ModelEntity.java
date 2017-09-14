@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 public class ModelEntity {
 	@Id
 	@GeneratedValue
-	private long id;
+	protected long id;
 
 	public long getId() {
 		return id;

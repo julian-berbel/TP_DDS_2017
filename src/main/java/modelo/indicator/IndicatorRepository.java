@@ -1,6 +1,9 @@
 package modelo.indicator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
@@ -8,12 +11,11 @@ import exceptions.MissingIndicatorException;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.Period;
 
-import java.util.ArrayList;
-
 public class IndicatorRepository implements WithGlobalEntityManager
 {
 	private static IndicatorRepository instance;
-	private List<Indicator> indicators = new ArrayList<Indicator>();
+	
+	private EntityTransaction transaction;
 	
 	private IndicatorRepository(){}
 	
@@ -22,50 +24,58 @@ public class IndicatorRepository implements WithGlobalEntityManager
 		return instance;
 	}
 	
-	public void addIndicator(Indicator indicator)
-	{
-		indicators.add(indicator);
-	}
-		
-	public List<Indicator> getIndicatorList()
-	{
-		return indicators;
+	public void initTransaction(){
+		transaction = entityManager().getTransaction();
+		transaction.begin();
 	}
 	
-	public void setIndicatorList(List<Indicator> _indicators)
-	{
-		indicators = _indicators;
+	public void addIndicator(Indicator indicator){
+		System.out.println("addIndicator " + indicator.getName() + " " + indicator.getFormula());
+		entityManager().persist(indicator);
+	}
+	
+	public void deleteIndicator(Indicator indicator){
+		entityManager().remove(indicator);
+	}
+	
+	public List<Indicator> getIndicatorList(){
+		return entityManager()
+		        .createQuery("from Indicator", Indicator.class)
+		        .getResultList();
+	}
+	
+	public Optional<Indicator> fetchIndicator(String name){
+		return entityManager()
+		        .createQuery("from Indicator where name like :name", Indicator.class)
+		        .setParameter("name", "%" + name + "%")
+		        .getResultList().stream()
+		        .findFirst();
 	}
 
-	public Indicator getIndicator(String name)
-	{
-		return indicators.stream()
-				.filter(indicator -> indicator.getName().equals(name))
-				.findFirst()
-				.orElseThrow(() -> new MissingIndicatorException(name));
+	public Indicator getIndicator(String name){
+		return fetchIndicator(name).orElseThrow(() -> new MissingIndicatorException(name));
 	}
 	
-	public Boolean alreadyExists(String newIndicatorName)
-	{
-		 return indicators.stream()
-			.map(indicator -> indicator.getName())
-			.anyMatch(indicatorName->indicatorName.equals(newIndicatorName));
+	public Boolean alreadyExists(String name){
+		 return fetchIndicator(name).isPresent();
 	}
 	
-	public void replace(Indicator oldIndicator, Indicator newIndicator)
-	{
-		indicators.replaceAll(indicator -> indicator == oldIndicator ? newIndicator:indicator);
+	public void updateIndicator(Indicator indicator) {
+		entityManager().merge(indicator);
 	}
 	
-	public Boolean anyUses(Indicator indicator)
-	{
-		return indicators.stream().anyMatch(_indicator -> _indicator.uses(indicator));
+	public Boolean anyUses(Indicator indicator){
+		return !entityManager().createQuery("from Indicator where formula like :name", Indicator.class)
+		        .setParameter("name", "%{$" + indicator.getName() + "}%")
+		        .getResultList().isEmpty();
 	}
 	
-	public List<Indicator> getAvailableIndicatorForPeriodList(Enterprise enterprise,Period period)
-	{
-		return indicators.stream()
+	public List<Indicator> getAvailableIndicatorForPeriodList(Enterprise enterprise, Period period){
+		return getIndicatorList().stream()
 				.filter(indicator -> indicator.tryReduce(enterprise, period.getYear())).collect(Collectors.toList());
-				
+	}
+
+	public void saveChanges() {
+		transaction.commit();
 	}
 }

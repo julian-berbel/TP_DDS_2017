@@ -9,27 +9,37 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.uqbar.commons.utils.Observable;
 
+import exceptions.EmptyFieldException;
 import modelo.ModelEntity;
 import modelo.indicator.Indicator;
 
 @Observable
 @Entity
+@Table(name = "Enterprises")
 public class Enterprise extends ModelEntity
 {
 	@Column(nullable = false)
 	private String name;
 	
-	@OneToMany
-	@JoinColumn(name = "enterprise_id", referencedColumnName = "id")			//Apunta al atributo 'id' de un periodo
-	private List<Period> periods;							//Una empresa tiene muchos periodos, pero un periodo pertenece a una sola empresa
+	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
+	@JoinColumn(name = "enterprise_id", referencedColumnName = "id")
+	private List<Period> periods;
 	
 	public Enterprise(String name, List<Period> periods)
 	{
+		if(name == null) throw new EmptyFieldException("Nombre de la empresa"); 
 		this.name = name;
 		this.periods = periods;
+	}
+	
+	public Enterprise(String name, List<Period> periods, Long id)
+	{
+		this(name, periods);
+		this.id = id;
 	}
 	
 	protected Enterprise(){}

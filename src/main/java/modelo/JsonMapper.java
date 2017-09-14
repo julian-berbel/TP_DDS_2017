@@ -19,8 +19,7 @@ public class JsonMapper {
 		
 		
 		ArrayList<Enterprise> enterpriseList = gson.fromJson(reader, new TypeToken<List<Enterprise>>(){}.getType());
-		EnterpriseRepository.getInstance().setEnterpriseList(enterpriseList);
-		
+		EnterpriseRepository.getInstance().importEnterprises(enterpriseList);		
 	}
 	public void mapperToFile()
 	{

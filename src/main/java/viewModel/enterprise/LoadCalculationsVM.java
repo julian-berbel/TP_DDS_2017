@@ -19,7 +19,7 @@ public class LoadCalculationsVM
 	
 	public LoadCalculationsVM()
 	{
-
+		EnterpriseRepository.getInstance().initTransaction();
 		filePath = "";
 	}
 	
@@ -65,5 +65,9 @@ public class LoadCalculationsVM
 		{
 			throw new JsonMappingException("Error en el formato del archivo de Empresas");
 		}	
+	}
+	
+	public void saveChanges(){
+		EnterpriseRepository.getInstance().saveChanges();
 	}
 }

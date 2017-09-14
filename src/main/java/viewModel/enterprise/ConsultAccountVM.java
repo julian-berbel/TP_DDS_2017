@@ -24,7 +24,8 @@ public class ConsultAccountVM {
 	private Boolean enterprisesChanged=false;
 	public ConsultAccountVM()
 	{
-		enterprises =  EnterpriseRepository.getInstance().getEnterpriseList();		
+		enterprises = EnterpriseRepository.getInstance().getEnterpriseList();
+		EnterpriseRepository.getInstance().initTransaction();
 	}	
 	
 	public List<Enterprise> getEnterprises() 
@@ -77,29 +78,31 @@ public class ConsultAccountVM {
 	
 	public void setSelectedPeriod(Period selectedPeriod){
 			calculations = selectedPeriod.getCalculations();
-	}	
-	public void addNewEnterprise(Optional<Enterprise> newEnterprise){
-		newEnterprise.ifPresent(enterprise -> EnterpriseRepository.getInstance().addEnterprise(enterprise));
+	}
+	
+	public void addNewEnterprise(Optional<Enterprise> enterprise){
+		enterprise.ifPresent(newEnterprise -> {
+			EnterpriseRepository.getInstance().addEnterprise(newEnterprise);
+			enterprises.add(newEnterprise);
+		});
 		refreshList();
 	}
+	
 	public void refreshList(){
-		enterprises =  EnterpriseRepository.getInstance().getEnterpriseList();
 		ObservableUtils.firePropertyChanged(this, "enterprises");
 		enterprisesChanged = true;
 	}
 	
-	public void replaceSelectedEnterpriseWith(Optional<Enterprise> targetEnterprise){
-		targetEnterprise.ifPresent(enterprise -> EnterpriseRepository.getInstance().replaceEnterprise(selectedEnterprise, enterprise));
+	private int selectedIndex(){
+		return enterprises.indexOf(selectedEnterprise);
+	}
+	
+	public void updateEnterprise(Optional<Enterprise> enterprise){
+		enterprise.ifPresent(newEnterprise -> {
+			EnterpriseRepository.getInstance().updateEnterprise(newEnterprise);
+			enterprises.set(selectedIndex(), newEnterprise);
+		});
 		refreshList();
-	}
-	
-	public void deleteEnterprise()
-	{
-		
-		EnterpriseRepository.getInstance().deleteEnterprise(selectedEnterprise);
-		enterprises =  EnterpriseRepository.getInstance().getEnterpriseList();
-		ObservableUtils.firePropertyChanged(this, "enterprises");
-		enterprisesChanged = true;
 	}
 	
 	public Boolean verifyIfSomethingChanged()
@@ -107,11 +110,21 @@ public class ConsultAccountVM {
 		return enterprisesChanged;
 	}
 	
-	public void saveChanges()
+	public void deleteEnterprise(){
+		EnterpriseRepository.getInstance().deleteEnterprise(selectedEnterprise);
+		enterprises.remove(selectedEnterprise);
+		refreshList();
+	}
+	
+	public void exportToFile()
 	{
 		if(EnterpriseRepository.getInstance().getFileLoaded()==false) throw new MissingFileException("Debe cargar el archivo de cuentas antes de poder guardar los cambios");
 		JsonMapper jsonMapper= new JsonMapper();
 		jsonMapper.mapperToFile();
 	}
 	
+	public void saveChanges(){
+		EnterpriseRepository.getInstance().saveChanges();
+	}
+		
 }

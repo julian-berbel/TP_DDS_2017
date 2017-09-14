@@ -5,17 +5,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import exceptions.MissingCalculationInPeriodException;
 import modelo.ModelEntity;
 
 @Entity
+@Table(name = "Periods")
 public class Period extends ModelEntity
 {	
 	@Column(nullable = false)
 	private int year;
 	
-	@OneToMany
+	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
 	@JoinColumn(name = "period_id", referencedColumnName = "id")			//Un periodo tiene muchas cuentas, pero cada cuenta pertenece solo a un periodo		
 	private List<Calculation> calculations;						//(porque cada cuenta tiene un valor distinto, aunque varias tengan el mismo nombre)
 	

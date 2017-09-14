@@ -26,6 +26,7 @@ public class IndicatorsVM {
 	public IndicatorsVM(){
 		indicatorsChanged = false;
 		indicators = IndicatorRepository.getInstance().getIndicatorList();
+		IndicatorRepository.getInstance().initTransaction();
 	}
 	
 	public List<Indicator> getIndicators() {
@@ -44,19 +45,30 @@ public class IndicatorsVM {
 		this.selectedIndicator = selectedIndicator;
 	}
 	
-	public void replaceSelectedIndicatorWith(Optional<Indicator> newIndicator){
-		newIndicator.ifPresent(indicator -> IndicatorRepository.getInstance().replace(selectedIndicator, indicator));
+	private int selectedIndex(){
+		return indicators.indexOf(selectedIndicator);
+	}
+	
+	public void updateIndicator(Optional<Indicator> indicator){
+		indicator.ifPresent(newIndicator -> {
+			IndicatorRepository.getInstance().updateIndicator(newIndicator);
+			indicators.set(selectedIndex(), newIndicator);
+		});
 		refreshList();
 	}
 
 	public void deleteIndicator(){
 		if(IndicatorRepository.getInstance().anyUses(selectedIndicator)) throw new DeleteUsedIndicatorException();
+		IndicatorRepository.getInstance().deleteIndicator(selectedIndicator);
 		indicators.remove(selectedIndicator);
 		refreshList();
 	}
 	
-	public void addNewIndicator(Optional<Indicator> newIndicator){
-		newIndicator.ifPresent(indicator -> IndicatorRepository.getInstance().addIndicator(indicator));
+	public void addNewIndicator(Optional<Indicator> indicator){
+		indicator.ifPresent(newIndicator -> {
+			IndicatorRepository.getInstance().addIndicator(newIndicator);
+			indicators.add(newIndicator);
+		});
 		refreshList();
 	}
 	
@@ -76,11 +88,15 @@ public class IndicatorsVM {
 		indicatorsChanged = true;
 	}
 	
-	public void saveChanges() throws BiffException, WriteException, IOException
+	public void exportToFile() throws BiffException, WriteException, IOException
 	{		
 		if(!IndicatorsManager.fileLoaded()) throw new MissingFileException("Debe cargar el archivo de cuentas antes de poder guardar los cambios");
 		
 		IndicatorsManager.writeExcel();		
 	}
+	
+	public void saveChanges(){		
+		IndicatorRepository.getInstance().saveChanges();
+ 	}
 	
 }

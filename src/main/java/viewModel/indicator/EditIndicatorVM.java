@@ -12,21 +12,18 @@ import modelo.indicator.IndicatorRepository;
 public class EditIndicatorVM {
 	
 	private String name;
-	private String originalName;
 	private String formula;
-	private Optional<Indicator> targetIndicator = Optional.empty();
-	private Boolean editing = false;
+	private Optional<Indicator> targetIndicator;
 	
 	public Optional<Indicator> getTargetIndicator() {
 		return targetIndicator;
 	}
 
 	public EditIndicatorVM(Optional<Indicator> target){
+		targetIndicator = target;
 		target.ifPresent(_target -> {
 			name = _target.getName();
-			originalName = _target.getName();
 			formula = _target.getFormula();
-			editing = true;
 		});
 	}
 	
@@ -45,19 +42,21 @@ public class EditIndicatorVM {
 	public void setFormula(String formula) {
 		this.formula = formula;
 	}
+	
+	private boolean nameViolation(){
+		return (!editing() && IndicatorRepository.getInstance().alreadyExists(name)) ||
+				(editing() && !name.equals(targetIndicator.get().getName()) && IndicatorRepository.getInstance().alreadyExists(name));
+	}
 
 	public void accept(){
-		if(!editing && IndicatorRepository.getInstance().alreadyExists(name)) throw new ExistingIndicatorException(name);
-		if(editing)
-		{
-			if(!name.equals(originalName) && IndicatorRepository.getInstance().alreadyExists(name))
-			{
-				throw new ExistingIndicatorException(name);
-			}
-			
-		}
-		targetIndicator = Optional.of(new Indicator(name, formula));
-		
+		if(nameViolation()) throw new ExistingIndicatorException(name);
+
+		targetIndicator = Optional.of(
+				editing() ? new Indicator(name, formula, targetIndicator.get().getId()) : new Indicator(name, formula));
+	}
+	
+	private boolean editing(){
+		return targetIndicator.isPresent();
 	}
 	
 }

@@ -45,7 +45,7 @@ public class MethodWindow extends SimpleWindow<MethodVM> {
 		new Button(panel1).setCaption("Editar").onClick(()->{
 			if(this.getModelObject().getSelectedMethod() != null){
 				Optional<Method> targetMethod = new EditMethodWindow(this, Optional.of(this.getModelObject().getSelectedMethod())).openWithReturn();
-				this.getModelObject().replaceSelectedMethodWith(targetMethod);
+				this.getModelObject().updateMethod(targetMethod);
 			}
 		});
 		
@@ -56,7 +56,12 @@ public class MethodWindow extends SimpleWindow<MethodVM> {
 	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Volver").onClick(this::close); //hacer lo de guardar
+		new Button(actions).setCaption("Volver").onClick(this::saveAndQuit);
+	}
+	
+	public void saveAndQuit(){
+		this.getModelObject().saveChanges();
+		super.close();
 	}
 	
 	

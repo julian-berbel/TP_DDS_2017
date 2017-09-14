@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.uqbar.commons.utils.Observable;
 
 @Observable
 @Entity
+@Table(name = "MixedCriteria")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
 public abstract class MixedCriterion extends Criterion

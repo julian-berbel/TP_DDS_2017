@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PostLoad;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.uqbar.commons.utils.Observable;
@@ -17,6 +18,7 @@ import modelo.indicator.parser.IndicatorParser;
 
 @Entity
 @Observable
+@Table(name = "Indicators")
 public class Indicator extends ModelEntity implements Operable
 {
 	
@@ -33,6 +35,11 @@ public class Indicator extends ModelEntity implements Operable
 		this.name = name;
 		this.formula = formula;
 		this.value = IndicatorParser.parseIndicator(formula);
+	}
+	
+	public Indicator(String name, String formula, Long id){
+		this(name, formula);
+		this.id = id;
 	}
 	
 	protected Indicator(){}
