@@ -18,7 +18,7 @@ public class LoadIndicatorsTest {
 	public void testMethods()
 	{
 		LoadIndicatorsVM loader = new LoadIndicatorsVM();
-		Indicator dummyIndicator = new Indicator("IngresoNeto", "#C1 + #C2");
+		Indicator dummyIndicator = new Indicator("IngresoNeto", "#ingresosOperacionesContinuas + #ingresosOperacionesDiscontinuas");
 		List<Indicator> indicatorList = Arrays.asList(dummyIndicator);
 	
 		try
