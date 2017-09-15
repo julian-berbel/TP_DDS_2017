@@ -1,8 +1,8 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -18,14 +18,14 @@ public class LoadIndicatorsTest {
 	public void testMethods()
 	{
 		LoadIndicatorsVM loader = new LoadIndicatorsVM();
-		List<Indicator> indicatorList = new ArrayList<Indicator>();
 		Indicator dummyIndicator = new Indicator("IngresoNeto", "#C1 + #C2");
-		indicatorList.add(dummyIndicator);
-		
+		List<Indicator> indicatorList = Arrays.asList(dummyIndicator);
+	
 		try
 		{
-			loader.setFilePath("testfiles/TestIndicadores.xls");
-			assertEquals(IndicatorRepository.getInstance().getIndicatorList(), indicatorList);			
+			loader.setFilePath("files/TestIndicadores.xls");
+			assertTrue(IndicatorRepository.getInstance().getIndicatorList().get(0).equals(indicatorList.get(0)) );
+		
 		}
 		catch(BiffException e)
 		{
