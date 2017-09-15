@@ -7,6 +7,8 @@ import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import exceptions.RepeatedEnterpriseFileException;
+
 public class EnterpriseRepository implements WithGlobalEntityManager
 {
 	private static EnterpriseRepository instance;
@@ -66,11 +68,15 @@ public class EnterpriseRepository implements WithGlobalEntityManager
 	}
 	
 	public void importEnterprises(List<Enterprise> enterprises){
-		enterprises.forEach(enterprise -> {
-			entityManager().persist(enterprise);
-		});
-
-		entityManager().flush();
+		try{
+			enterprises.forEach(enterprise -> {
+				entityManager().persist(enterprise);
+			});
+		}catch(Exception e){	// TODO la excepcion que tira realmente es com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
+			cancel();			// pero no me deja catchearla, me dice unreachable catch code
+			throw new RepeatedEnterpriseFileException();
+		}
+		
 	}
 	
 	public Boolean alreadyExists(String name){
@@ -86,5 +92,10 @@ public class EnterpriseRepository implements WithGlobalEntityManager
 
 	public void saveChanges() {
 		transaction.commit();
+	}
+	
+	public void cancel(){
+		transaction.rollback();
+		initTransaction();
 	}
 }
