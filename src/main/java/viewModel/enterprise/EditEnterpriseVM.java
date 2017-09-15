@@ -22,12 +22,13 @@ public class EditEnterpriseVM {
 	private Integer selectedYear;
 	private List<Calculation> calculations=new ArrayList<Calculation>();;	
 	private Calculation selectedCalculation;
-	private Optional<Enterprise> targetEnterprise;
+	private Optional<Enterprise> targetEnterprise=Optional.empty();
 	
 	public EditEnterpriseVM(Optional<Enterprise> enterprise)
 	{		
 		enterprise.ifPresent(enterprise1 -> {
 			enterpriseName=enterprise1.getName();
+			targetEnterprise = enterprise;
 			periods=enterprise1.getPeriods();
 		});
 				

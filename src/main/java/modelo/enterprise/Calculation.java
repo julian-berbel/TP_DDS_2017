@@ -27,6 +27,11 @@ public class Calculation extends ModelEntity
 		this.name = name;
 		this.value = value;
 	}
+	public Calculation(String name, BigDecimal value,Long id){
+		
+		this(name,value);
+		this.id=id;
+	}
 	
 	protected Calculation(){}
 	

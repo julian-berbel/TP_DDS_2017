@@ -8,6 +8,7 @@ import org.uqbar.commons.utils.Observable;
 import exceptions.EmptyFieldException;
 import exceptions.ExistingCalculationException;
 import modelo.enterprise.Calculation;
+import modelo.enterprise.Enterprise;
 import modelo.enterprise.Period;
 
 @Observable
@@ -22,10 +23,12 @@ public class EditCalculationVM {
 	public EditCalculationVM(Period actualPeriod,Optional<Calculation> targetCalculation){
 		period=actualPeriod;
 		targetCalculation.ifPresent(_target -> {
+			this.targetCalculation=targetCalculation;
 			calculationName = _target.getName();
 			calculationOriginalName = _target.getName();
 			calculationValue = _target.getValue();
 			editing = true;
+			
 		});
 	}
 	
@@ -78,9 +81,11 @@ public class EditCalculationVM {
 		{
 			throw new ExistingCalculationException(calculationName);
 		}
-			
 		
-		targetCalculation = Optional.of(new Calculation(calculationName, calculationValue));
+		targetCalculation = Optional.of(
+				editing ? new Calculation(calculationName, calculationValue, targetCalculation.get().getId()) : new Calculation(calculationName, calculationValue));
+	
+	
 		
 	}
 	
