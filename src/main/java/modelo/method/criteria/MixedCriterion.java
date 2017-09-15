@@ -40,4 +40,8 @@ public abstract class MixedCriterion extends Criterion
 	public Boolean uses(Criterion criterion){
 		return orderCriterion == criterion || filterCriterion == criterion;
 	}
+	
+	public String buildDescription(){
+		return filterCriterion.toString() + " y " + orderCriterion.toString();
+	}
 }

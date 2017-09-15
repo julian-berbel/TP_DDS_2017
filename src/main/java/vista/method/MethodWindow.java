@@ -31,6 +31,7 @@ public class MethodWindow extends SimpleWindow<MethodVM> {
 		MethodList.bindItemsToProperty("methods");
 		MethodList.bindValueToProperty("selectedMethod");
 		MethodList.setWidth(300);
+		MethodList.setHeight(300);
 		
 		Panel panel1 = new Panel(mainPanel);
 		panel1.setLayout(new ColumnLayout(4));
@@ -39,7 +40,7 @@ public class MethodWindow extends SimpleWindow<MethodVM> {
 		{
 			Optional<Method> newMethod = new EditMethodWindow(this, Optional.empty()).openWithReturn();
 			
-			this.getModelObject().addNewMethod(newMethod);	
+			this.getModelObject().addNewMethod(newMethod);
 		});
 		
 		new Button(panel1).setCaption("Editar").onClick(()->{

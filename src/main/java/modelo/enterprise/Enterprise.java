@@ -22,7 +22,7 @@ import modelo.indicator.Indicator;
 @Table(name = "Enterprises")
 public class Enterprise extends ModelEntity
 {
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String name;
 	
 	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)

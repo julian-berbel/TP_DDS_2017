@@ -30,7 +30,6 @@ public class Method extends ModelEntity{
 
 	private String name;
 	
-	
 	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
 	@JoinColumn(name = "method_id", referencedColumnName = "id")
 	private List<FilterCriterion> filterCriteria;
@@ -58,6 +57,8 @@ public class Method extends ModelEntity{
 		this(name, filterCriteria, orderCriteria, mixedCriteria);
 		this.id = id;
 	}
+	
+	protected Method(){}
 
 	public String getName()
 	{
