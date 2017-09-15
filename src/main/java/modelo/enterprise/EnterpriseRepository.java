@@ -78,6 +78,9 @@ public class EnterpriseRepository implements WithGlobalEntityManager
 	}
 	
 	public void deleteEnterprise(Enterprise enterprise){
+		enterprise.getPeriods().stream().forEach(period->{period.getCalculations().stream().forEach(calculation->entityManager().remove(calculation));
+		entityManager().remove(period);
+		});
 		entityManager().remove(enterprise);
 	}
 
