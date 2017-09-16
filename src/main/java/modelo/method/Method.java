@@ -4,7 +4,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
@@ -30,16 +32,22 @@ public class Method extends ModelEntity{
 
 	private String name;
 	
-	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
+	@OneToMany(	cascade = CascadeType.ALL,
+				orphanRemoval = true,
+				fetch = FetchType.LAZY)
 	@JoinColumn(name = "method_id", referencedColumnName = "id")
 	private List<FilterCriterion> filterCriteria;
 	
-	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
+	@OneToMany(	cascade = CascadeType.ALL,
+				orphanRemoval = true,
+				fetch = FetchType.LAZY)
 	@JoinColumn(name = "method_id", referencedColumnName = "id")
 	@OrderColumn
 	private List<OrderCriterion> orderCriteria;
 	
-	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
+	@OneToMany(	cascade = CascadeType.ALL,
+				orphanRemoval = true,
+				fetch = FetchType.LAZY)
 	@JoinColumn(name = "method_id", referencedColumnName = "id")
 	private List<MixedCriterion> mixedCriteria;
 

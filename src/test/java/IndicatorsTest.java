@@ -16,7 +16,7 @@ public class IndicatorsTest {
 	public void testAddNewIndicator()
 	{
 		Indicator indicator = new Indicator("Indicator1", "#C1+#C2");
-		IndicatorRepository.getInstance().addIndicator(indicator);	
+		IndicatorRepository.getInstance().addElement(indicator);	
 		
 		IndicatorsVM indicators = new IndicatorsVM();		
 		Indicator indicator2 = new Indicator("Indicator2", "#C1*#C2");
@@ -35,7 +35,7 @@ public class IndicatorsTest {
 	public void testDeleteIndicator()
 	{
 		Indicator indicator = new Indicator("Indicator1", "#C1+#C2");
-		IndicatorRepository.getInstance().addIndicator(indicator);
+		IndicatorRepository.getInstance().addElement(indicator);
 		
 		IndicatorsVM indicators = new IndicatorsVM();
 		indicators.setSelectedIndicator(indicator);

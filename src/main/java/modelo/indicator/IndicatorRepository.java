@@ -3,39 +3,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityTransaction;
-
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-
 import exceptions.MissingIndicatorException;
+import modelo.Repository;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.Period;
 
-public class IndicatorRepository implements WithGlobalEntityManager
+public class IndicatorRepository extends Repository<Indicator>
 {
-	private static IndicatorRepository instance;
-	
-	private EntityTransaction transaction;
-	
+	private static IndicatorRepository instance = new IndicatorRepository();
+
 	private IndicatorRepository(){}
 	
 	public static IndicatorRepository getInstance(){
-		if(instance==null) instance = new IndicatorRepository();
 		return instance;
-	}
-	
-	public void initTransaction(){
-		transaction = entityManager().getTransaction();
-		transaction.begin();
-	}
-	
-	public void addIndicator(Indicator indicator){
-		System.out.println("addIndicator " + indicator.getName() + " " + indicator.getFormula());
-		entityManager().persist(indicator);
-	}
-	
-	public void deleteIndicator(Indicator indicator){
-		entityManager().remove(indicator);
 	}
 	
 	public List<Indicator> getIndicatorList(){
@@ -44,7 +24,7 @@ public class IndicatorRepository implements WithGlobalEntityManager
 		        .getResultList();
 	}
 	
-	public Optional<Indicator> fetchIndicator(String name){
+	public Optional<Indicator> fetchElement(String name){
 		return entityManager()
 		        .createQuery("from Indicator where name like :name", Indicator.class)
 		        .setParameter("name", "%" + name + "%")
@@ -53,15 +33,7 @@ public class IndicatorRepository implements WithGlobalEntityManager
 	}
 
 	public Indicator getIndicator(String name){
-		return fetchIndicator(name).orElseThrow(() -> new MissingIndicatorException(name));
-	}
-	
-	public Boolean alreadyExists(String name){
-		 return fetchIndicator(name).isPresent();
-	}
-	
-	public void updateIndicator(Indicator indicator) {
-		entityManager().merge(indicator);
+		return fetchElement(name).orElseThrow(() -> new MissingIndicatorException(name));
 	}
 	
 	public Boolean anyUses(Indicator indicator){
@@ -75,7 +47,4 @@ public class IndicatorRepository implements WithGlobalEntityManager
 				.filter(indicator -> indicator.tryReduce(enterprise, period.getYear())).collect(Collectors.toList());
 	}
 
-	public void saveChanges() {
-		transaction.commit();
-	}
 }

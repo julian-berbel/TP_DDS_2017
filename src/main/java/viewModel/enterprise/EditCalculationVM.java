@@ -8,7 +8,6 @@ import org.uqbar.commons.utils.Observable;
 import exceptions.EmptyFieldException;
 import exceptions.ExistingCalculationException;
 import modelo.enterprise.Calculation;
-import modelo.enterprise.Enterprise;
 import modelo.enterprise.Period;
 
 @Observable

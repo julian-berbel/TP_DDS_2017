@@ -19,7 +19,6 @@ public class LoadCalculationsVM
 	
 	public LoadCalculationsVM()
 	{
-		EnterpriseRepository.getInstance().initTransaction();
 		filePath = "";
 	}
 	
@@ -43,9 +42,7 @@ public class LoadCalculationsVM
 			throw new NoFileSelectedException();
 		}
 		
-	}		
-
-	
+	}
 	
 	private void parseJson()  
 	{
@@ -67,7 +64,4 @@ public class LoadCalculationsVM
 		}	
 	}
 	
-	public void saveChanges(){
-		EnterpriseRepository.getInstance().saveChanges();
-	}
 }

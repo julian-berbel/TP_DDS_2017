@@ -15,10 +15,6 @@ public class MethodVM {
 	private List<Method> methods = MethodRepository.getInstance().getMethods();;
 	private Method selectedMethod;
 	private Boolean methodsChanged = false;
-	
-	public MethodVM(){
-		MethodRepository.getInstance().initTransaction();
-	}
 
 	public List<Method> getMethods() {
 		return methods;
@@ -38,7 +34,7 @@ public class MethodVM {
 
 	public void addNewMethod(Optional<Method> newMethod) {
 		newMethod.ifPresent(method -> {
-			MethodRepository.getInstance().addMethod(method);
+			MethodRepository.getInstance().addElement(method);
 			methods.add(method);
 		});
 		refreshList();
@@ -58,7 +54,7 @@ public class MethodVM {
 	}
 	
 	public void deleteMethod(){
-		MethodRepository.getInstance().deleteMethod(selectedMethod);
+		MethodRepository.getInstance().deleteElement(selectedMethod);
 		methods.remove(selectedMethod);
 		refreshList();
 	}
@@ -69,14 +65,10 @@ public class MethodVM {
 	
 	public void updateMethod(Optional<Method> method){
 		method.ifPresent(newMethod -> {
-			MethodRepository.getInstance().updateMethod(newMethod);
+			MethodRepository.getInstance().updateElement(newMethod);
 			methods.set(selectedIndex(), newMethod);
 		});
  		refreshList();
  	}
-
-	public void saveChanges() {
-		MethodRepository.getInstance().saveChanges();
-	}
 
 }

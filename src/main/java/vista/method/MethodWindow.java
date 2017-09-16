@@ -50,20 +50,14 @@ public class MethodWindow extends SimpleWindow<MethodVM> {
 			}
 		});
 		
-		new Button(panel1).setCaption("Borrar").onClick(()->this.getModelObject().deleteMethod());
+		new Button(panel1).setCaption("Borrar").onClick(this.getModelObject()::deleteMethod);
 		
-		new Button(panel1).setCaption("Ejecutar").onClick(()-> new MethodResultWindow(this, this.getModelObject().getSelectedMethod()).open());
+		new Button(panel1).setCaption("Ejecutar").onClick(() -> new MethodResultWindow(this, this.getModelObject().getSelectedMethod()).open());
 	}
 	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Volver").onClick(this::saveAndQuit);
-	}
-	
-	public void saveAndQuit(){
-		this.getModelObject().saveChanges();
-		super.close();
-	}
-	
+		new Button(actions).setCaption("Volver").onClick(this::close);
+	}	
 	
 }

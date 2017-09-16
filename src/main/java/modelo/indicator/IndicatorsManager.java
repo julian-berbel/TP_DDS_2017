@@ -66,7 +66,7 @@ public class IndicatorsManager
 		       
 		       	Indicator indicator = new Indicator(name, formula);
    
-		       	IndicatorRepository.getInstance().addIndicator(indicator);
+		       	IndicatorRepository.getInstance().addElement(indicator);
 		        	
 		       	rowIndex++;	        	
 		    }

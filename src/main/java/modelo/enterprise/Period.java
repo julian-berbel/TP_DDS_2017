@@ -1,8 +1,10 @@
 package modelo.enterprise;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,9 +19,11 @@ public class Period extends ModelEntity
 	@Column(nullable = false)
 	private int year;
 	
-	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
-	@JoinColumn(name = "period_id", referencedColumnName = "id")			//Un periodo tiene muchas cuentas, pero cada cuenta pertenece solo a un periodo		
-	private List<Calculation> calculations;						//(porque cada cuenta tiene un valor distinto, aunque varias tengan el mismo nombre)
+	@OneToMany(	cascade = CascadeType.ALL,
+				orphanRemoval = true,
+				fetch = FetchType.LAZY)
+	@JoinColumn(name = "period_id", referencedColumnName = "id")
+	private List<Calculation> calculations;
 	
 	public Period(int year, List<Calculation> calculations)
 	{

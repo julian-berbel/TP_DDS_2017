@@ -84,7 +84,7 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 	
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Volver").onClick(this::saveAndQuit);
+		new Button(actions).setCaption("Volver").onClick(this::close);
 	}
 	
 	protected void showMessageBox(String message, MessageBox.Type messageType)
@@ -93,12 +93,6 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 		msgBox.setMessage(message);
 		msgBox.open();
 	}
-	
-	public void saveAndQuit(){
-		this.getModelObject().saveChanges();
-		super.close();
- 	}
-
 	
 	@SuppressWarnings("unused")
 	private void verifyChangesAndSave()

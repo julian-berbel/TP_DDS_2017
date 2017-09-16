@@ -93,17 +93,12 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 		});
 		
 		
-	}	
-	
-	public void saveAndQuit(){
-		this.getModelObject().saveChanges();
-		super.close();
 	}
 	
 	@Override	
 	protected void addActions(Panel actions)
 	{
-		new Button(actions).setCaption("Volver").onClick(this::saveAndQuit);
+		new Button(actions).setCaption("Volver").onClick(this::close);
 	}
 	
 	@SuppressWarnings("unused")

@@ -5,8 +5,10 @@ import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,7 +27,9 @@ public class Enterprise extends ModelEntity
 	@Column(nullable = false, unique = true)
 	private String name;
 	
-	@OneToMany(cascade = javax.persistence.CascadeType.PERSIST)
+	@OneToMany(	cascade = CascadeType.ALL,
+				orphanRemoval = true,
+				fetch = FetchType.LAZY)
 	@JoinColumn(name = "enterprise_id", referencedColumnName = "id")
 	private List<Period> periods;
 	

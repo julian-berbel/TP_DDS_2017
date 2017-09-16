@@ -25,7 +25,6 @@ public class ConsultAccountVM {
 	public ConsultAccountVM()
 	{
 		enterprises = EnterpriseRepository.getInstance().getEnterpriseList();
-		EnterpriseRepository.getInstance().initTransaction();
 	}	
 	
 	public List<Enterprise> getEnterprises() 
@@ -82,7 +81,7 @@ public class ConsultAccountVM {
 	
 	public void addNewEnterprise(Optional<Enterprise> enterprise){
 		enterprise.ifPresent(newEnterprise -> {
-			EnterpriseRepository.getInstance().addEnterprise(newEnterprise);
+			EnterpriseRepository.getInstance().addElement(newEnterprise);
 			enterprises.add(newEnterprise);
 		});
 		refreshList();
@@ -99,7 +98,7 @@ public class ConsultAccountVM {
 	
 	public void updateEnterprise(Optional<Enterprise> enterprise){
 		enterprise.ifPresent(newEnterprise -> {
-			EnterpriseRepository.getInstance().updateEnterprise(newEnterprise);
+			EnterpriseRepository.getInstance().updateElement(newEnterprise);
 			enterprises.set(selectedIndex(), newEnterprise);
 		});
 		refreshList();
@@ -111,7 +110,7 @@ public class ConsultAccountVM {
 	}
 	
 	public void deleteEnterprise(){
-		EnterpriseRepository.getInstance().deleteEnterprise(selectedEnterprise);
+		EnterpriseRepository.getInstance().deleteElement(selectedEnterprise);
 		enterprises.remove(selectedEnterprise);
 		refreshList();
 	}
@@ -121,10 +120,6 @@ public class ConsultAccountVM {
 		if(EnterpriseRepository.getInstance().getFileLoaded()==false) throw new MissingFileException("Debe cargar el archivo de cuentas antes de poder guardar los cambios");
 		JsonMapper jsonMapper= new JsonMapper();
 		jsonMapper.mapperToFile();
-	}
-	
-	public void saveChanges(){
-		EnterpriseRepository.getInstance().saveChanges();
 	}
 		
 }
