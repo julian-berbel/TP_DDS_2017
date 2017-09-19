@@ -20,6 +20,8 @@ public class MaximizeIndicatorCriterion extends OrderCriterion {
 	public MaximizeIndicatorCriterion(Indicator indicator){
 		this.indicator = indicator;
 	}
+	
+	public MaximizeIndicatorCriterion(){}
 
 	public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
 		int currentYear = Year.now().getValue();

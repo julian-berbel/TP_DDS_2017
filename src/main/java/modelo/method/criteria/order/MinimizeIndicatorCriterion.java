@@ -20,6 +20,8 @@ public class MinimizeIndicatorCriterion extends OrderCriterion {
 	public MinimizeIndicatorCriterion(Indicator indicator){
 		this.indicator = indicator;
 	}
+	
+	public MinimizeIndicatorCriterion(){}
 
 	public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
 		int currentYear = Year.now().getValue();
