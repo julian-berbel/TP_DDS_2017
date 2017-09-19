@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import exceptions.MissingFileException;
-import modelo.JsonMapper;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
@@ -21,7 +19,7 @@ public class ConsultAccountVM {
 	private List<Period> periods;
 	private Period selectedPeriod;
 	private List<Calculation> calculations;	
-	private Boolean enterprisesChanged=false;
+	
 	public ConsultAccountVM()
 	{
 		enterprises = EnterpriseRepository.getInstance().getEnterpriseList();
@@ -89,7 +87,6 @@ public class ConsultAccountVM {
 	
 	public void refreshList(){
 		ObservableUtils.firePropertyChanged(this, "enterprises");
-		enterprisesChanged = true;
 	}
 	
 	private int selectedIndex(){
@@ -104,22 +101,12 @@ public class ConsultAccountVM {
 		refreshList();
 	}
 	
-	public Boolean verifyIfSomethingChanged()
-	{
-		return enterprisesChanged;
-	}
-	
 	public void deleteEnterprise(){
-		EnterpriseRepository.getInstance().deleteElement(selectedEnterprise);
-		enterprises.remove(selectedEnterprise);
-		refreshList();
-	}
-	
-	public void exportToFile()
-	{
-		if(EnterpriseRepository.getInstance().getFileLoaded()==false) throw new MissingFileException("Debe cargar el archivo de cuentas antes de poder guardar los cambios");
-		JsonMapper jsonMapper= new JsonMapper();
-		jsonMapper.mapperToFile();
+		if(selectedEnterprise != null){
+			EnterpriseRepository.getInstance().deleteElement(selectedEnterprise);
+			enterprises.remove(selectedEnterprise);
+			refreshList();
+		}
 	}
 		
 }

@@ -91,10 +91,5 @@ public class Indicator extends ModelEntity implements Operable
 	public Boolean includes(Indicator indicator){
 		return this == indicator || value.includes(indicator);
 	}
-	
-	public boolean equals(Indicator indicator)
-	{
-		return formula.equals(indicator.getFormula()) && name.equals(indicator.getName());
-	}
 
 }

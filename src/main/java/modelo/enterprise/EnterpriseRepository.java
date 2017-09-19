@@ -47,7 +47,7 @@ public class EnterpriseRepository extends Repository<Enterprise>
 	}
 	
 	public void importEnterprises(List<Enterprise> enterprises){
-		if(enterprises.stream().map(enterprise -> enterprise.getName()).anyMatch(this::alreadyExists)) throw new RepeatedEnterpriseFileException();
+		if(enterprises.stream().anyMatch(enterprise -> alreadyExists(enterprise.getName()))) throw new RepeatedEnterpriseFileException();
 		withTransaction(() ->
 			enterprises.forEach(this::addElement)
 		);

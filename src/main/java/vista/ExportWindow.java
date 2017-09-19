@@ -6,14 +6,16 @@ import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
+
+import exceptions.MissingFileException;
 import viewModel.SaveChangesVM;
 
 
 @SuppressWarnings("serial")
-public class SaveChangesWindow extends Dialog<SaveChangesVM> 
+public class ExportWindow extends Dialog<SaveChangesVM> 
 {
 	
-	public SaveChangesWindow(WindowOwner owner)
+	public ExportWindow(WindowOwner owner)
 	{		
 		super(owner, new SaveChangesVM());
 	}
@@ -30,9 +32,21 @@ public class SaveChangesWindow extends Dialog<SaveChangesVM>
 	@Override
 	protected void addActions(Panel actions) 
 	{
-		new Button(actions).setCaption("Si").onClick(this::accept);
+		new Button(actions).setCaption("Si").onClick(this::export);
 				
 		new Button(actions).setCaption("No").onClick(this::cancel);
-	}	
+	}
+	
+	private void export()
+	{
+		try
+		{				
+			this.getModelObject().exportToFile();
+		}
+		catch(MissingFileException e)	
+		{	
+			ErrorWindow.show(this, e.getMessage());
+		}		
+	}
 }
 

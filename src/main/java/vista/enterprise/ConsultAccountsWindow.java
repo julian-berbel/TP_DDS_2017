@@ -13,15 +13,10 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import exceptions.MissingFileException;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
-import modelo.enterprise.EnterpriseRepository;
 import viewModel.enterprise.ConsultAccountVM;
-import vista.ErrorWindow;
-import vista.SaveChangesWindow;
-
-
+import vista.ExportWindow;
 
 @SuppressWarnings("serial")
 public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
@@ -43,11 +38,8 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 		new Label(panel1).setText("Empresas");
 		new Label(panel1).setText("Periodos");
 		
-		
-		
 		Panel panel2 = new Panel(mainPanel);
 		panel2.setLayout(new ColumnLayout(3));
-		
 		
 		List<Enterprise> lstEnterprises = new List<Enterprise>(panel1);
 		lstEnterprises.bindItemsToProperty("enterprises");
@@ -84,14 +76,10 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 				this.getModelObject().updateEnterprise(targetEnterprise);	
 			}
 		});
-		new Button(panel2).setCaption("Borrar Empresa").onClick(()->{ 
-			if(this.getModelObject().getSelectedEnterprise() != null)
-			{
-				
-				this.getModelObject().deleteEnterprise();
-			}
-		});
 		
+		new Button(panel2).setCaption("Borrar Empresa").onClick(()->{ 
+			this.getModelObject().deleteEnterprise();
+		});
 		
 	}
 	
@@ -104,31 +92,9 @@ public class ConsultAccountsWindow extends SimpleWindow<ConsultAccountVM>
 	@SuppressWarnings("unused")
 	private void verifyChangesAndSave()
 	{
-		if(this.getModelObject().verifyIfSomethingChanged())
-		{
-			if(EnterpriseRepository.getInstance().getEnterpriseList().size()>0)
-			{	
-				SaveChangesWindow window = new SaveChangesWindow(this);			
-				window.onAccept(()->applySave());
-				window.open();
-			}	
-		}		
+		ExportWindow window = new ExportWindow(this);
+		window.open();
 		
 		this.close();
-	}
-	
-	private void applySave()
-	{
-		try
-		{				
-			this.getModelObject().exportToFile();
-		}
-		catch(MissingFileException e)	
-		{	
-			ErrorWindow.show(this, e.getMessage());
-		//	e.printStackTrace();
-		}
-	
-		
 	}
 }

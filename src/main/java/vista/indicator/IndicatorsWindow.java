@@ -19,7 +19,7 @@ import jxl.write.WriteException;
 import modelo.indicator.Indicator;
 import viewModel.indicator.IndicatorsVM;
 import vista.ErrorWindow;
-import vista.SaveChangesWindow;
+import vista.ExportWindow;
 
 @SuppressWarnings("serial")
 public class IndicatorsWindow extends SimpleWindow<IndicatorsVM> 
@@ -103,7 +103,7 @@ public class IndicatorsWindow extends SimpleWindow<IndicatorsVM>
 			//Si se hicieron cambios, muestro un dialogo preguntando si se quieren guardar esos cambios
 			//Luego guardo los cambios o salgo de la ventana, dependiendo de la eleccion del usuario
 	
-			SaveChangesWindow window = new SaveChangesWindow(this);			
+			ExportWindow window = new ExportWindow(this);			
 			window.onAccept(()->applySave());
 			window.open();
 		}		
