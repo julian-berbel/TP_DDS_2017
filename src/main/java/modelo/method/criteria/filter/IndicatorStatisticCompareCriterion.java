@@ -5,8 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 
-import modelo.BigDecimalConverter;
-
+import modelo.db.BigDecimalConverter;
 import modelo.indicator.Indicator;
 
 @Entity

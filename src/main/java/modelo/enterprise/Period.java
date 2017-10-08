@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import exceptions.MissingCalculationInPeriodException;
-import modelo.ModelEntity;
+import modelo.db.ModelEntity;
 
 @Entity
 @Table(name = "Periods")

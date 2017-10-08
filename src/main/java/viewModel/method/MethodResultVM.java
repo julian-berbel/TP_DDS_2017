@@ -22,7 +22,7 @@ public class MethodResultVM {
 	private List<Error> errors;
 	
 	public MethodResultVM(Method selectedMethod){
-		List<Result> results = selectedMethod.apply(EnterpriseRepository.getInstance().getEnterpriseList());
+		List<Result> results = selectedMethod.apply(EnterpriseRepository.getInstance().getList());
 		
 		passes = getMappedBy(results, Pass.class, result -> result.getEnterprise());
 		

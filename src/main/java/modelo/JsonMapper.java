@@ -24,7 +24,7 @@ public class JsonMapper {
 	public void mapperToFile()
 	{
 		Gson gson = new Gson();
-		String json = gson.toJson(EnterpriseRepository.getInstance().getEnterpriseList());
+		String json = gson.toJson(EnterpriseRepository.getInstance().getList());
 		 FileWriter fichero = null;
 	        PrintWriter pw = null;
 	        try

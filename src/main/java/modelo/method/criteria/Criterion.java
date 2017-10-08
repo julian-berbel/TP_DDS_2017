@@ -2,7 +2,7 @@ package modelo.method.criteria;
 
 import javax.persistence.MappedSuperclass;
 
-import modelo.ModelEntity;
+import modelo.db.ModelEntity;
 
 @MappedSuperclass
 public abstract class Criterion extends ModelEntity{

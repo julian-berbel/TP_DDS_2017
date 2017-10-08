@@ -3,9 +3,10 @@ package modelo.method;
 import java.util.List;
 import java.util.Optional;
 
-import modelo.Repository;
+import modelo.db.Repository;
+import modelo.db.withFetchableName;
 
-public class MethodRepository extends Repository<Method> {
+public class MethodRepository extends Repository<Method> implements withFetchableName<Method>{
 
 	private static MethodRepository instance = new MethodRepository();
 		
@@ -15,18 +16,16 @@ public class MethodRepository extends Repository<Method> {
 		return instance;
 	}
 	
-	public List<Method> getMethods(){
-		return entityManager()
-		        .createQuery("from Method", Method.class)
-		        .getResultList();
+	public List<Method> getList(){
+		return getList("Method", Method.class);
 	}
 	
-	public Optional<Method> fetchElement(String name){
-		return entityManager()
-		        .createQuery("from Method where name like :name", Method.class)
-		        .setParameter("name", "%" + name + "%")
-		        .getResultList().stream()
-		        .findFirst();
+	public Optional<Method> fetchByName(String name){
+		return fetchElement("name", name, "Method", Method.class);
+	}
+	
+	public Optional<Method> getById(long id){
+		return fetchElement("id", id, "Method", Method.class);
 	}
 	
 }

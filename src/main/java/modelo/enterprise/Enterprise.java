@@ -13,13 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.uqbar.commons.utils.Observable;
-
 import exceptions.EmptyFieldException;
-import modelo.ModelEntity;
+import modelo.db.ModelEntity;
 import modelo.indicator.Indicator;
 
-@Observable
 @Entity
 @Table(name = "Enterprises")
 public class Enterprise extends ModelEntity

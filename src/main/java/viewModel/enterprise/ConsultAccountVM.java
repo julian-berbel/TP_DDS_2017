@@ -22,7 +22,7 @@ public class ConsultAccountVM {
 	
 	public ConsultAccountVM()
 	{
-		enterprises = EnterpriseRepository.getInstance().getEnterpriseList();
+		enterprises = EnterpriseRepository.getInstance().getList();
 	}	
 	
 	public List<Enterprise> getEnterprises() 

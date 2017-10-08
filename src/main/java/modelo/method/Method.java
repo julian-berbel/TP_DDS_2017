@@ -13,10 +13,9 @@ import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 import org.jooq.lambda.Seq;
-import org.uqbar.commons.utils.Observable;
 
 import exceptions.EmptyFieldException;
-import modelo.ModelEntity;
+import modelo.db.ModelEntity;
 import modelo.enterprise.Enterprise;
 import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
@@ -25,7 +24,6 @@ import modelo.method.criteria.order.Unordered;
 import modelo.method.result.Pass;
 import modelo.method.result.Result;
 
-@Observable
 @Entity
 @Table(name = "Methods")
 public class Method extends ModelEntity{

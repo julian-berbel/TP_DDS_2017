@@ -6,12 +6,9 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.uqbar.commons.utils.Observable;
+import modelo.db.BigDecimalConverter;
+import modelo.db.ModelEntity;
 
-import modelo.BigDecimalConverter;
-import modelo.ModelEntity;
-
-@Observable
 @Entity
 @Table(name = "Calculations")
 public class Calculation extends ModelEntity

@@ -10,7 +10,7 @@ import modelo.indicator.IndicatorRepository;
 @Observable
 public abstract class IndicatorRelatedCriterionVM<CriterionType> extends CriterionVM<CriterionType> {
 
-	protected List<Indicator> indicators = IndicatorRepository.getInstance().getIndicatorList();
+	protected List<Indicator> indicators = IndicatorRepository.getInstance().getList();
 	protected Indicator selectedIndicator;
 	
 	public List<Indicator> getIndicators() {

@@ -25,7 +25,7 @@ public class IndicatorsVM {
 	
 	public IndicatorsVM(){
 		indicatorsChanged = false;
-		indicators = IndicatorRepository.getInstance().getIndicatorList();
+		indicators = IndicatorRepository.getInstance().getList();
 	}
 	
 	public List<Indicator> getIndicators() {
@@ -72,7 +72,7 @@ public class IndicatorsVM {
 	}
 	
 	public void refreshList(){
-		indicators = IndicatorRepository.getInstance().getIndicatorList();
+		indicators = IndicatorRepository.getInstance().getList();
 		ObservableUtils.firePropertyChanged(this, "indicators");
 		indicatorsChanged = true;
 	}

@@ -12,7 +12,7 @@ import modelo.method.MethodRepository;
 @Observable
 public class MethodVM {
 
-	private List<Method> methods = MethodRepository.getInstance().getMethods();;
+	private List<Method> methods = MethodRepository.getInstance().getList();;
 	private Method selectedMethod;
 	private Boolean methodsChanged = false;
 

@@ -9,15 +9,13 @@ import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.uqbar.commons.utils.Observable;
 import exceptions.EmptyFieldException;
-import modelo.ModelEntity;
+import modelo.db.ModelEntity;
 import modelo.enterprise.Enterprise;
 import modelo.indicator.math.Operable;
 import modelo.indicator.parser.IndicatorParser;
 
 @Entity
-@Observable
 @Table(name = "Indicators")
 public class Indicator extends ModelEntity implements Operable
 {

@@ -1,4 +1,4 @@
-package modelo;
+package modelo.db;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

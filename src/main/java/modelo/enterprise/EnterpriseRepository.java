@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import exceptions.RepeatedEnterpriseFileException;
-import modelo.Repository;
+import modelo.db.Repository;
+import modelo.db.withFetchableName;
 
-public class EnterpriseRepository extends Repository<Enterprise>
+public class EnterpriseRepository extends Repository<Enterprise> implements withFetchableName<Enterprise>
 {
 	private static EnterpriseRepository instance = new EnterpriseRepository();
 		
@@ -32,18 +33,16 @@ public class EnterpriseRepository extends Repository<Enterprise>
 		return fileLoaded;
 	}
 	
-	public List<Enterprise> getEnterpriseList(){
-		return entityManager()
-		        .createQuery("from Enterprise", Enterprise.class)
-		        .getResultList();
+	public List<Enterprise> getList(){
+		return getList("Enterprise", Enterprise.class);
 	}
 	
-	public Optional<Enterprise> fetchElement(String name){
-		return entityManager()
-		        .createQuery("from Enterprise where name like :name", Enterprise.class)
-		        .setParameter("name", "%" + name + "%")
-		        .getResultList().stream()
-		        .findFirst();
+	public Optional<Enterprise> fetchByName(String name){
+		return fetchElement("name", name, "Enterprise", Enterprise.class);
+	}
+	
+	public Optional<Enterprise> getById(long id){
+		return fetchElement("id", id, "Enterprise", Enterprise.class);
 	}
 	
 	public void importEnterprises(List<Enterprise> enterprises){

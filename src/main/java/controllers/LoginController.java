@@ -1,5 +1,10 @@
 package controllers;
 
+import java.util.NoSuchElementException;
+
+import exceptions.WrongCredentialsException;
+import modelo.user.User;
+import modelo.user.UserRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -10,8 +15,18 @@ public class LoginController {
 	}
 	
 	public Void login(Request req, Response res){
-		res.cookie("Email", req.queryParams("Email"));
-		res.redirect("/home");
+		try{
+			User user = UserRepository.getInstance().getByEmail(req.queryParams("Email"));
+			
+			if(!user.validatePassword(req.queryParams("Password"))) throw new WrongCredentialsException();
+			
+			res.cookie("UserId", String.valueOf(user.getId()));
+			res.redirect("/home");
+		}catch(NoSuchElementException | WrongCredentialsException e){
+			//TODO mostrar un mensaje de credenciales invalidas
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	

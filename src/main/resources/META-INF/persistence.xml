@@ -35,6 +35,7 @@
         <class>modelo.method.criteria.OrderCriterion</class>
         <class>modelo.method.criteria.Criterion</class>
         <class>modelo.ModelEntity</class>
+        <class>modelo.user.User</class>
     	
     	 
         <properties> 

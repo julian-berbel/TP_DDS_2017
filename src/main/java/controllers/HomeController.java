@@ -1,17 +1,17 @@
 package controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import modelo.user.User;
+import modelo.user.UserRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
 public class HomeController {
 	public static ModelAndView home(Request req, Response res){
-		Email email = new Email(req.cookie("Email"));
+		User user = UserRepository	.getInstance()
+									.getById(Long.valueOf(req.cookie("UserId")));
 		
-		return new ModelAndView(email, "home/home.hbs");
+		return new ModelAndView(user, "home/home.hbs");
 	}
 	
 }

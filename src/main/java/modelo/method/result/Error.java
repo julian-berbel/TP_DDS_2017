@@ -1,10 +1,7 @@
 package modelo.method.result;
 
-import org.uqbar.commons.utils.Observable;
-
 import modelo.enterprise.Enterprise;
 
-@Observable
 public class Error extends Result {
 	private Exception exception;
 		

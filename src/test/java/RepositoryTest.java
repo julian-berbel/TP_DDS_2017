@@ -32,7 +32,7 @@ public class RepositoryTest implements TransactionalOps, WithGlobalEntityManager
 		IndicatorRepository.getInstance().addElement(indicator);
 		IndicatorRepository.getInstance().deleteElement(indicator);
 		
-		assertTrue(IndicatorRepository.getInstance().getIndicatorList().isEmpty());
+		assertTrue(IndicatorRepository.getInstance().getList().isEmpty());
 	}
 	
 	@Test

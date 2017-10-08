@@ -4,11 +4,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import exceptions.MissingIndicatorException;
-import modelo.Repository;
+import modelo.db.Repository;
+import modelo.db.withFetchableName;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.Period;
 
-public class IndicatorRepository extends Repository<Indicator>
+public class IndicatorRepository extends Repository<Indicator> implements withFetchableName<Indicator>
 {
 	private static IndicatorRepository instance = new IndicatorRepository();
 
@@ -18,22 +19,12 @@ public class IndicatorRepository extends Repository<Indicator>
 		return instance;
 	}
 	
-	public List<Indicator> getIndicatorList(){
-		return entityManager()
-		        .createQuery("from Indicator", Indicator.class)
-		        .getResultList();
-	}
-	
-	public Optional<Indicator> fetchElement(String name){
-		return entityManager()
-		        .createQuery("from Indicator where name like :name", Indicator.class)
-		        .setParameter("name", "%" + name + "%")
-		        .getResultList().stream()
-		        .findFirst();
+	public List<Indicator> getList(){
+		return getList("Indicator", Indicator.class);
 	}
 
 	public Indicator getIndicator(String name){
-		return fetchElement(name).orElseThrow(() -> new MissingIndicatorException(name));
+		return fetchByName(name).orElseThrow(() -> new MissingIndicatorException(name));
 	}
 	
 	public Boolean anyUses(Indicator indicator){
@@ -43,8 +34,16 @@ public class IndicatorRepository extends Repository<Indicator>
 	}
 	
 	public List<Indicator> getAvailableIndicatorForPeriodList(Enterprise enterprise, Period period){
-		return getIndicatorList().stream()
+		return getList().stream()
 				.filter(indicator -> indicator.tryReduce(enterprise, period.getYear())).collect(Collectors.toList());
+	}
+
+	public Optional<Indicator> fetchByName(String name) {
+		return fetchElement("name", name, "Indicator", Indicator.class);
+	}
+	
+	public Optional<Indicator> getById(long id){
+		return fetchElement("id", id, "Indicator", Indicator.class);
 	}
 
 }

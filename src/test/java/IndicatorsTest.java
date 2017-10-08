@@ -28,7 +28,7 @@ public class IndicatorsTest {
 		indicatorList.add(indicator);
 		indicatorList.add(indicator2);
 		
-		assertEquals(IndicatorRepository.getInstance().getIndicatorList(), indicatorList);
+		assertEquals(IndicatorRepository.getInstance().getList(), indicatorList);
 	}
 	
 	@Test

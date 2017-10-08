@@ -183,11 +183,11 @@ public class IndicatorsManager
 	        Label label2 = new Label(columnNumber+1, rowNumber, "Formula");
 	        sheet.addCell(label2);
             
-	        for(int index =0;index<IndicatorRepository.getInstance().getIndicatorList().size();index++)
+	        for(int index =0;index<IndicatorRepository.getInstance().getList().size();index++)
 	        {
-	        	Label indicator = new Label(columnIndex, rowIndex, IndicatorRepository.getInstance().getIndicatorList().get(index).getName());
+	        	Label indicator = new Label(columnIndex, rowIndex, IndicatorRepository.getInstance().getList().get(index).getName());
 		        sheet.addCell(indicator);
-		        Label formula = new Label(columnIndex+1, rowIndex, IndicatorRepository.getInstance().getIndicatorList().get(index).getFormula());
+		        Label formula = new Label(columnIndex+1, rowIndex, IndicatorRepository.getInstance().getList().get(index).getFormula());
 		        sheet.addCell(formula);
 		        rowIndex++;
 	        } 
