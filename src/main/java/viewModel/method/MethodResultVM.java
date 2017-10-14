@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.uqbar.commons.utils.Observable;
-
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.method.Method;
@@ -14,7 +12,7 @@ import modelo.method.result.Fail;
 import modelo.method.result.Pass;
 import modelo.method.result.Result;
 
-@Observable
+
 public class MethodResultVM {
 
 	private List<Enterprise> passes;

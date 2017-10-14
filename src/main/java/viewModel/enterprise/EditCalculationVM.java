@@ -3,14 +3,12 @@ package viewModel.enterprise;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import org.uqbar.commons.utils.Observable;
-
 import exceptions.EmptyFieldException;
 import exceptions.ExistingCalculationException;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Period;
 
-@Observable
+
 public class EditCalculationVM {
 	private String calculationName;
 	private String calculationOriginalName;

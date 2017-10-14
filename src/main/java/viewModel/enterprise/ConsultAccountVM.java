@@ -3,15 +3,12 @@ package viewModel.enterprise;
 import java.util.List;
 import java.util.Optional;
 
-import org.uqbar.commons.model.ObservableUtils;
-import org.uqbar.commons.utils.Observable;
-
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.enterprise.Period;
 
-@Observable
+
 public class ConsultAccountVM {
 
 	private List<Enterprise> enterprises;
@@ -82,12 +79,9 @@ public class ConsultAccountVM {
 			EnterpriseRepository.getInstance().addElement(newEnterprise);
 			enterprises.add(newEnterprise);
 		});
-		refreshList();
+		
 	}
 	
-	public void refreshList(){
-		ObservableUtils.firePropertyChanged(this, "enterprises");
-	}
 	
 	private int selectedIndex(){
 		return enterprises.indexOf(selectedEnterprise);
@@ -98,14 +92,14 @@ public class ConsultAccountVM {
 			EnterpriseRepository.getInstance().updateElement(newEnterprise);
 			enterprises.set(selectedIndex(), newEnterprise);
 		});
-		refreshList();
+		
 	}
 	
 	public void deleteEnterprise(){
 		if(selectedEnterprise != null){
 			EnterpriseRepository.getInstance().deleteElement(selectedEnterprise);
 			enterprises.remove(selectedEnterprise);
-			refreshList();
+			
 		}
 	}
 		

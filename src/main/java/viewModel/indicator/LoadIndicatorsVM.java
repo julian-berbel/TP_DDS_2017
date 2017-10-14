@@ -1,13 +1,11 @@
 package viewModel.indicator;
 import java.io.IOException;
-import org.uqbar.commons.utils.Observable;
 
 import jxl.read.biff.BiffException;
 import modelo.indicator.IndicatorsManager;
 import exceptions.NoFileSelectedException;;
 
 
-@Observable
 public class LoadIndicatorsVM {
 	private String filePath;
 

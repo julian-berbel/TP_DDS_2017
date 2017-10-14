@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.uqbar.commons.utils.Observable;
 
 import exceptions.DeleteUsedIndicatorException;
 import exceptions.MissingFileException;
@@ -13,10 +12,7 @@ import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 import modelo.indicator.IndicatorsManager;
 
-import org.uqbar.commons.model.ObservableUtils;
 
-
-@Observable
 public class IndicatorsVM {
 	
 	private List<Indicator> indicators;
@@ -73,7 +69,6 @@ public class IndicatorsVM {
 	
 	public void refreshList(){
 		indicators = IndicatorRepository.getInstance().getList();
-		ObservableUtils.firePropertyChanged(this, "indicators");
 		indicatorsChanged = true;
 	}
 	

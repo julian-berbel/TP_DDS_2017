@@ -2,9 +2,7 @@ package viewModel.method.criteria;
 
 import java.util.Optional;
 
-import org.uqbar.commons.utils.Observable;
 
-@Observable
 public abstract class CriterionVM<CriterionType> {
 	protected Optional<CriterionType> targetCriterion = Optional.empty();
 	

@@ -3,13 +3,10 @@ package viewModel.method;
 import java.util.List;
 import java.util.Optional;
 
-import org.uqbar.commons.model.ObservableUtils;
-import org.uqbar.commons.utils.Observable;
-
 import modelo.method.Method;
 import modelo.method.MethodRepository;
 
-@Observable
+
 public class MethodVM {
 
 	private List<Method> methods = MethodRepository.getInstance().getList();;
@@ -49,7 +46,6 @@ public class MethodVM {
 	}
 	
 	public void refreshList(){
-		ObservableUtils.firePropertyChanged(this, "methods");
 		methodsChanged = true;
 	}
 	

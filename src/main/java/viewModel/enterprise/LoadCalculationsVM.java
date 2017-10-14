@@ -1,7 +1,6 @@
 package viewModel.enterprise;
 import java.io.FileNotFoundException;
 
-import org.uqbar.commons.utils.Observable;
 
 import com.google.gson.JsonSyntaxException;
 
@@ -12,7 +11,7 @@ import modelo.FileLoader;
 import modelo.JsonMapper;
 import modelo.enterprise.EnterpriseRepository;
 
-@Observable
+
 public class LoadCalculationsVM 
 {
 	private String filePath;

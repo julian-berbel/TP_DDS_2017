@@ -5,16 +5,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
-import org.uqbar.commons.model.ObservableUtils;
-import org.uqbar.commons.utils.Observable;
-
 import exceptions.ExistingEnterpriseException;
 import modelo.enterprise.Calculation;
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.enterprise.Period;
 
-@Observable
+
 public class EditEnterpriseVM {
 	private String enterpriseName;
 	private List<Period> periods = new ArrayList<Period>();;	
@@ -77,17 +74,13 @@ public class EditEnterpriseVM {
 		
 		if (periodsContainsSelectedYear())
 		{
-			
 			calculations= getPeriod().getCalculations();
-			
-			this.refreshList();
-			
 		}
 		else
 		{
 			
 			calculations = new ArrayList<Calculation>();//No me gusta eso pero no se me ocurre otra forma de actualizar calculations
-			refreshList();								//dado que en caso de entrar aca no existe ningun periodo todavia.
+																											//dado que en caso de entrar aca no existe ningun periodo todavia.
 		}
 	}
 	
@@ -149,17 +142,11 @@ public class EditEnterpriseVM {
 		}
 	}
 	
-	public void refreshList()
-	{
-		ObservableUtils.firePropertyChanged(this, "calculations");
-	}
-	
 	public void addNewCalculation(Optional<Calculation> newCalculation)
 	{
 		newCalculation.ifPresent(calculation ->{
 			getPeriod().addCalculation(calculation);
 			calculations= getPeriod().getCalculations();
-			refreshList();
 			});
 		
 		if(getPeriod().getCalculations().isEmpty()){
@@ -171,7 +158,6 @@ public class EditEnterpriseVM {
 	public void replaceSelectedCalculationWith(Optional<Calculation> targetCalculation)
 	{
 		targetCalculation.ifPresent(calculation -> getPeriod().replaceCalculation(selectedCalculation, calculation));
-		refreshList();
 	}
 	
 	public void deleteCalculation(){
@@ -182,7 +168,6 @@ public class EditEnterpriseVM {
 		else
 		{
 			calculations= getPeriod().getCalculations();
-			refreshList();
 		}
 	}
 	

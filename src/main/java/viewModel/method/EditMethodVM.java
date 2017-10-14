@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.uqbar.commons.model.ObservableUtils;
-import org.uqbar.commons.utils.Observable;
-
 import exceptions.ExistingMethodException;
 import exceptions.SelectedCriterionBelongsToMixedCriterionException;
 import modelo.method.Method;
@@ -17,7 +14,6 @@ import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
 import modelo.method.criteria.OrderCriterion;
 
-@Observable
 public class EditMethodVM 
 {
 
@@ -88,13 +84,11 @@ public class EditMethodVM
 	public void addFilterCriterion(Optional<FilterCriterion> filterCriterion)
 	{
 		filterCriterion.ifPresent(_filterCriterion -> filterCriteria.add(_filterCriterion));
-		refreshList();
 	}
 	
 	public void addOrderCriterion(Optional<OrderCriterion> orderCriterion)
 	{
 		orderCriterion.ifPresent(_orderCriterion -> orderCriteria.add(_orderCriterion));
-		refreshList();
 	}
 	
 	public void addMixedCriterion(Optional<MixedCriterion> mixedCriterion)
@@ -104,7 +98,6 @@ public class EditMethodVM
 			filterCriteria.add(_mixedCriterion.getFilterCriterion());
 			orderCriteria.add(_mixedCriterion.getOrderCriterion());
 		});
-		refreshList();
 	}
 	
 	public Criterion getSelectedFilterCriterion() {
@@ -135,14 +128,12 @@ public class EditMethodVM
 	{
 		if(belongsToMixedCriterion(selectedFilterCriterion)) throw new SelectedCriterionBelongsToMixedCriterionException();
 		filterCriteria.remove(selectedFilterCriterion);
-		refreshList();
 	}
 	
 	public void deleteOrderCriterion() 
 	{
 		if(belongsToMixedCriterion(selectedOrderCriterion)) throw new SelectedCriterionBelongsToMixedCriterionException();
 		orderCriteria.remove(selectedOrderCriterion);
-		refreshList();
 	}
 	
 	public void deleteMixedCriterion() 
@@ -151,15 +142,7 @@ public class EditMethodVM
 			filterCriteria.remove(selectedMixedCriterion.getFilterCriterion());
 			orderCriteria.remove(selectedMixedCriterion.getOrderCriterion());
 			mixedCriteria.remove(selectedMixedCriterion);
-			refreshList();
 		}
-	}
-
-	public void refreshList()
-	{
-		ObservableUtils.firePropertyChanged(this, "filterCriteria");
-		ObservableUtils.firePropertyChanged(this, "orderCriteria");
-		ObservableUtils.firePropertyChanged(this, "mixedCriteria");
 	}
 	
 	private boolean editing(){

@@ -3,15 +3,13 @@ package viewModel;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.uqbar.commons.utils.Observable;
-
 import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.enterprise.Period;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 
-@Observable
+
 public class AnalyzeEnterpriseVM {
 
 	private List<Enterprise> enterprises;
