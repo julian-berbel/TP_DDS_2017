@@ -1,0 +1,36 @@
+{{#partial "contenido"}}
+
+	<h1> Empresa {{name}} </h1>
+	
+	<table class="table table-stripped">
+		<tr>
+			<th>Periodo</th>
+			<th>Cuentas</th>
+		</tr>
+		
+		{{#each periods}}
+			<tr>
+				<td>{{year}}</td>
+				<td>
+					<table class="table table-stripped">
+						<tr>
+							<th>Cuenta</th>
+							<th>Valor</th>
+						</tr>
+						
+						{{#each calculations}}
+							<tr>
+								<td>{{name}}</td>
+								<td>{{value}}</td>
+							</tr>
+						{{/each}}
+					</table>
+					
+				</td>
+			</tr>
+		{{/each}}
+	</table>
+	
+{{/partial}}
+
+{{>layout.hbs}}

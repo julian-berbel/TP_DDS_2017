@@ -20,7 +20,7 @@ import modelo.indicator.parser.IndicatorParser;
 public class Indicator extends ModelEntity implements Operable
 {
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String name;
 	private String formula;
 	
@@ -72,14 +72,12 @@ public class Indicator extends ModelEntity implements Operable
 		}
 	}
 	
-	
 	public String normalize(){
 		return value.toString();
 	}
 	
-	@Override
-	public String toString(){
-		return "@" + name;
+	public String getUrl(){
+		return "indicators/" + id;
 	}
 	
 	public Boolean uses(Indicator indicator){

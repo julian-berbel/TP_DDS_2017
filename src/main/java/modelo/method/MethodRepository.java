@@ -24,8 +24,8 @@ public class MethodRepository extends Repository<Method> implements withFetchabl
 		return fetchElement("name", name, "Method", Method.class);
 	}
 	
-	public Optional<Method> getById(long id){
-		return fetchElement("id", id, "Method", Method.class);
+	public Method getById(long id){
+		return getElement("id", id, "Method", Method.class);
 	}
 	
 }

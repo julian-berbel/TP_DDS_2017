@@ -77,8 +77,7 @@ public class Enterprise extends ModelEntity
 											.getAsInt();
 	}
 	
-	@Override
-	public String toString(){
-		return name;
+	public String getUrl(){
+		return "enterprises/" + id;
 	}
 }

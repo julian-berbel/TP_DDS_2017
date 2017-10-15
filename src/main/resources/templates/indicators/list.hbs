@@ -1,0 +1,19 @@
+{{#partial "contenido"}}
+
+	<table class="table table-stripped">
+		<tr>
+			<th>Nombre</th>
+			<th>Formula</th>
+		</tr>
+		
+		{{#each}}
+			<tr>
+				<td>{{name}}</td>
+				<td>{{formula}}</td>
+			</tr>
+		{{/each}}
+	</table>
+
+{{/partial}}
+
+{{>layout.hbs}}

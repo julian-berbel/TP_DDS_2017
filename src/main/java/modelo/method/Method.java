@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -28,6 +29,7 @@ import modelo.method.result.Result;
 @Table(name = "Methods")
 public class Method extends ModelEntity{
 
+	@Column(nullable = false, unique = true)
 	private String name;
 	
 	@OneToMany(	cascade = CascadeType.ALL,
@@ -100,8 +102,7 @@ public class Method extends ModelEntity{
 				.collect(Collectors.toList());
 	}
 	
-	@Override
-	public String toString(){
-		return name;
+	public String getUrl(){
+		return "methods/" + id;
 	}
 }

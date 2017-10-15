@@ -41,8 +41,8 @@ public class EnterpriseRepository extends Repository<Enterprise> implements with
 		return fetchElement("name", name, "Enterprise", Enterprise.class);
 	}
 	
-	public Optional<Enterprise> getById(long id){
-		return fetchElement("id", id, "Enterprise", Enterprise.class);
+	public Enterprise getById(long id){
+		return getElement("id", id, "Enterprise", Enterprise.class);
 	}
 	
 	public void importEnterprises(List<Enterprise> enterprises){

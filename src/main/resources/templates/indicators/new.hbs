@@ -1,0 +1,23 @@
+{{#partial "contenido"}}
+	
+	<form action="/indicators" method="POST">
+		
+		<div class="form-group">
+			<label for="nombre">Nombre</label>
+			<input type="text" placeholder="Nombre del Indicador" name="name">
+		</div>
+	
+		<div class="form-group">
+			<label for="costoEstimado">Fórmula</label>
+			<input type="number" placeholder="Fórmula del Indicador" name="formula">
+		</div>
+		
+		<p>Referencia:</p>
+		<p>Indicadores: @&lt;nombre del indicador&gt;</p>
+		<p>Cuentas: #&lt;nombre de la cuenta&gt;</p>
+		
+		<input class="btn btn-primary btn-lg" type="submit" value="Guardar">
+	</form>
+{{/partial}}
+
+{{>layout.hbs}}

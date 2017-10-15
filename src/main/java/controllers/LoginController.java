@@ -21,7 +21,7 @@ public class LoginController {
 			if(!user.validatePassword(req.queryParams("Password"))) throw new WrongCredentialsException();
 			
 			res.cookie("UserId", String.valueOf(user.getId()));
-			res.redirect("/home");
+			res.redirect("/");
 		}catch(NoSuchElementException | WrongCredentialsException e){
 			//TODO mostrar un mensaje de credenciales invalidas
 			e.printStackTrace();

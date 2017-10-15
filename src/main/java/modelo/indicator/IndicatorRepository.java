@@ -42,8 +42,8 @@ public class IndicatorRepository extends Repository<Indicator> implements withFe
 		return fetchElement("name", name, "Indicator", Indicator.class);
 	}
 	
-	public Optional<Indicator> getById(long id){
-		return fetchElement("id", id, "Indicator", Indicator.class);
+	public Indicator getById(long id){
+		return getElement("id", id, "Indicator", Indicator.class);
 	}
 
 }

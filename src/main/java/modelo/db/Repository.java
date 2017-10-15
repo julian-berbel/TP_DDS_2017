@@ -27,6 +27,10 @@ public abstract class Repository<Type> implements WithGlobalEntityManager, Trans
 		        .getResultList().stream()
 		        .findFirst();
 	}
+	
+	protected Type getElement(String searchField, Object value, String table, Class<Type> resultClass){
+		return fetchElement(searchField, value, table, resultClass).get();
+	}
 
 	public abstract List<Type> getList();
 	

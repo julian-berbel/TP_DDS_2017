@@ -59,7 +59,6 @@ public class User extends ModelEntity {
 	}
 
 	public boolean validatePassword(String password) {
-		System.out.println(password + " " + this.password);
 		return this.password.equals(password);
 	}
 
