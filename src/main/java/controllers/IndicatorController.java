@@ -17,6 +17,15 @@ public class IndicatorController {
 	public Void create(Request req, Response res){
 		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"));
 		IndicatorRepository.getInstance().addElement(indicator);
+		res.redirect("/indicators");
+		return null;
+	}
+	
+	public Void edit(Request req, Response res){
+		long indicatorId = Long.valueOf(req.queryParams("id"));
+		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"), indicatorId);
+		IndicatorRepository.getInstance().updateElement(indicator);
+//		res.redirect("/indicators");
 		return null;
 	}
 	
@@ -24,10 +33,28 @@ public class IndicatorController {
 		return new ModelAndView(null, "indicators/new.hbs");
 	}
 	
+	public ModelAndView renderEditForm(Request req, Response res){
+		String indicatorId = req.params("id");
+		res.cookie("indicatorId", indicatorId);
+		Indicator indicator = IndicatorRepository.getInstance().getById(Long.valueOf(indicatorId));
+		return new ModelAndView(indicator, "indicators/edit.hbs");
+	}
+	
 	public ModelAndView show(Request req, Response res){
 		String id = req.params("id");
 		
 		Indicator indicator = IndicatorRepository.getInstance().getById(Integer.valueOf(id));
 		return new ModelAndView(indicator, "indicators/show.hbs");
+	}
+	
+	public Void delete(Request req, Response res){
+		String id = req.params("id");
+		
+		Indicator indicator = IndicatorRepository.getInstance().getById(Integer.valueOf(id));
+		IndicatorRepository.getInstance().deleteElement(indicator);
+
+		res.redirect("/indicators");
+		
+		return null;
 	}
 }

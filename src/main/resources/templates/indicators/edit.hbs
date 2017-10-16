@@ -1,0 +1,30 @@
+{{#partial "contenido"}}
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	    crossorigin="anonymous">
+    </script>
+
+	<script src="/js/put.js" type="text/javascript"></script>
+	
+	<input hidden id="id" value="{{id}}">
+
+	<div class="form-group">
+		<label for="nombre">Nombre</label>
+		<input id="name" type="text" placeholder="Nombre del Indicador" name="name" value="{{name}}">
+	</div>
+
+	<div class="form-group">
+		<label for="costoEstimado">Fórmula</label>
+		<input id="formula" placeholder="Fórmula del Indicador" name="formula" value="{{formula}}">
+	</div>
+	
+	<p>Referencia:</p>
+	<p>Indicadores: @&lt;nombre del indicador&gt;</p>
+	<p>Cuentas: #&lt;nombre de la cuenta&gt;</p>
+	
+	<input id="put" class="btn btn-primary btn-lg" value="Guardar">
+
+{{/partial}}
+
+{{>layout.hbs}}
