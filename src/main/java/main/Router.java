@@ -36,11 +36,13 @@ public class Router {
 		
 		Spark.get("/indicators", indicatorController::list, engine);
 		Spark.post("/indicators", indicatorController::create);
+		Spark.get("/indicators/evaluate", indicatorController::evaluate, engine);
 		Spark.get("/indicators/new", indicatorController::renderNewForm, engine);
 		Spark.put("/indicators/:id", indicatorController::edit);
 		Spark.get("/indicators/:id", indicatorController::show, engine);
 		Spark.delete("/indicators/:id", indicatorController::delete);
 		Spark.get("/indicators/:id/edit", indicatorController::renderEditForm, engine);
+		
 		
 		Spark.get("/methods", methodController::list, engine);
 		Spark.post("/methods", methodController::create);
