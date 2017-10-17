@@ -38,12 +38,13 @@ public class Router {
 		path("/indicators", () -> {
 			get("", indicatorController::list, engine);
 			post("", indicatorController::create);
-			get("/indicators/evaluate", indicatorController::evaluate, engine);
+			get("/evaluate", indicatorController::evaluate, engine);
 			get("/new", indicatorController::renderNewForm, engine);
 			get("/:id", indicatorController::show, engine);
 			put("/:id", indicatorController::edit);
 			delete("/:id", indicatorController::delete);
 			get("/:id/edit", indicatorController::renderEditForm, engine);
+			
 		});
 		
 		path("/methods", () -> {

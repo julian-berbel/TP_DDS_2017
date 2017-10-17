@@ -14,16 +14,16 @@ body {
 a.navbar-brand {
 	font-size:20;
 	font-weight:bold;
-	color:white;
+	color:black;
 }
 .nav.navbar-nav li a{
 	font-size:20;
-    color: white;
+    color: black;
 }
 .nav.navbar-nav li.logout a{
 	font-size:20;
 	padding-left:70%;
-    color: white;
+    color: black;
 }
 .usr {
 	padding-top:16px;
