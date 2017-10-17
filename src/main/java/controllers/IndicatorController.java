@@ -29,7 +29,7 @@ public class IndicatorController {
 		long indicatorId = Long.valueOf(req.queryParams("id"));
 		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"), indicatorId);
 		IndicatorRepository.getInstance().updateElement(indicator);
-//		res.redirect("/indicators");
+		res.redirect("/indicators", 200);
 		return null;
 	}
 	

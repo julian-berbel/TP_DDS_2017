@@ -39,6 +39,6 @@ public abstract class MixedCriterion extends Criterion
 	}
 	
 	public String buildDescription(){
-		return filterCriterion.toString() + " y " + orderCriterion.toString();
+		return filterCriterion.getDescription() + " y " + orderCriterion.getDescription();
 	}
 }

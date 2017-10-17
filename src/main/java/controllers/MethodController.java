@@ -2,8 +2,10 @@ package controllers;
 
 import java.util.List;
 
+import modelo.enterprise.EnterpriseRepository;
 import modelo.method.Method;
 import modelo.method.MethodRepository;
+import modelo.method.result.MethodReport;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -28,5 +30,14 @@ public class MethodController {
 		
 		Method method = MethodRepository.getInstance().getById(Integer.valueOf(id));
 		return new ModelAndView(method, "methods/show.hbs");
+	}
+	
+	public ModelAndView eval(Request req, Response res){
+		String id = req.params("id");
+		
+		Method method = MethodRepository.getInstance().getById(Integer.valueOf(id));
+		
+		MethodReport report = method.eval(EnterpriseRepository.getInstance().getList());
+		return new ModelAndView(report, "methods/eval.hbs");
 	}
 }

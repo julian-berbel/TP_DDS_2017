@@ -1,0 +1,40 @@
+{{#partial "contenido"}}
+	
+	<h3>Aprobados</h3>
+	<ol>
+		{{#each passes}}
+			{{#with enterprise}}
+				<li>{{name}}</li>
+			{{/with}}
+		{{/each}}
+	</ol>
+	
+	<h3>No Aprobados</h3>
+	<ul>
+		{{#each failures}}
+			{{#with enterprise}}
+				<li>{{name}}</li>
+			{{/with}}
+		{{/each}}
+	</ul>
+	
+	<h3>Errores</h3>
+	<table class="table table-striped">
+		<tr>
+			<th class="ppal">Empresa</th>
+			<th class="ppal">Error</th>
+		</tr>
+		
+		{{#each errors}}
+			<tr>
+				{{#with enterprise}}
+					<td>{{name}}</td>
+				{{/with}}
+				<td>{{errorMessage}}</td>
+			</tr>
+		{{/each}}
+	</table>
+		
+{{/partial}}
+
+{{>layout.hbs}}

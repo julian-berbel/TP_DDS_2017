@@ -17,7 +17,11 @@ $(function() {
         	formula: formula
         },
         success: function() {
-            console.out("awwww yissssss")
+        	alert("Edición exitosa!")
+        	window.location.href = "/indicators";
+        },
+        error: function(a, b, c) {
+        	alert(c)
         }
     });
   });

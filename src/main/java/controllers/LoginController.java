@@ -30,4 +30,10 @@ public class LoginController {
 		return null;
 	}
 	
+	public ModelAndView logout(Request req, Response res){
+		res.removeCookie("UserId");
+		res.redirect("/login");
+		return null;
+	}
+	
 }

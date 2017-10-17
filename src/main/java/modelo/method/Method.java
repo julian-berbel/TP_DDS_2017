@@ -2,6 +2,7 @@ package modelo.method;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
@@ -22,6 +23,9 @@ import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
 import modelo.method.criteria.OrderCriterion;
 import modelo.method.criteria.order.Unordered;
+import modelo.method.result.Error;
+import modelo.method.result.Fail;
+import modelo.method.result.MethodReport;
 import modelo.method.result.Pass;
 import modelo.method.result.Result;
 
@@ -99,6 +103,25 @@ public class Method extends ModelEntity{
 					Seq.seq(filterCriteria.stream())
 						.foldLeft((Result) new Pass(enterprise), (seed, filterCriterion) -> 
 							seed.eval(filterCriterion)))
+				.collect(Collectors.toList());
+	}
+	
+	public MethodReport eval(List<Enterprise> enterprises){
+		List<Result> results = apply(enterprises);
+		
+		List<Pass> passes = getMappedBy(results, Pass.class, result -> (Pass) result);
+		
+		List<Fail> failures = getMappedBy(results, Fail.class, result -> (Fail) result);
+		
+		List<Error> errors = getMappedBy(results, Error.class, result -> (Error) result);
+		
+		return new MethodReport(passes, failures, errors);
+	}
+	
+	private <T> List<T> getMappedBy(List<Result> results, Class<?> a, Function<Result, T> f){
+		return results.stream()
+				.filter(result -> a.isInstance(result))
+				.map(f)
 				.collect(Collectors.toList());
 	}
 	

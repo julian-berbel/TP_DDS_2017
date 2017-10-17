@@ -5,7 +5,7 @@ import controllers.LoginController;
 import controllers.EnterpriseController;
 import controllers.IndicatorController;
 import controllers.MethodController;
-import spark.Spark;
+import static spark.Spark.*;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.BooleanHelper;
 import spark.utils.HandlebarsTemplateEngineBuilder;
@@ -19,36 +19,40 @@ public class Router {
 				.withHelper("isTrue", BooleanHelper.isTrue)
 				.build();
 
-		Spark.staticFiles.location("/public");
+		staticFiles.location("/public");
 
 		LoginController loginController = new LoginController();
 		EnterpriseController enterpriseController = new EnterpriseController();
 		MethodController methodController = new MethodController();
 		IndicatorController indicatorController = new IndicatorController();
 		
-		Spark.get("/", HomeController::home, engine);
+		get("/", HomeController::home, engine);
 		
-		Spark.get("/login", loginController::render, engine);
-		Spark.post("/login", loginController::login);
+		get("/login", loginController::render, engine);
+		get("/logout", loginController::logout, engine);
+		post("/login", loginController::login);
 		
-		Spark.get("/enterprises", enterpriseController::list, engine);
-		Spark.get("/enterprises/:id", enterpriseController::show, engine);
+		get("/enterprises", enterpriseController::list, engine);
+		get("/enterprises/:id", enterpriseController::show, engine);
 		
-		Spark.get("/indicators", indicatorController::list, engine);
-		Spark.post("/indicators", indicatorController::create);
-		Spark.get("/indicators/evaluate", indicatorController::evaluate, engine);
-		Spark.get("/indicators/new", indicatorController::renderNewForm, engine);
-		Spark.put("/indicators/:id", indicatorController::edit);
-		Spark.get("/indicators/:id", indicatorController::show, engine);
-		Spark.delete("/indicators/:id", indicatorController::delete);
-		Spark.get("/indicators/:id/edit", indicatorController::renderEditForm, engine);
+		path("/indicators", () -> {
+			get("", indicatorController::list, engine);
+			post("", indicatorController::create);
+			get("/indicators/evaluate", indicatorController::evaluate, engine);
+			get("/new", indicatorController::renderNewForm, engine);
+			get("/:id", indicatorController::show, engine);
+			put("/:id", indicatorController::edit);
+			delete("/:id", indicatorController::delete);
+			get("/:id/edit", indicatorController::renderEditForm, engine);
+		});
 		
-		
-		Spark.get("/methods", methodController::list, engine);
-		Spark.post("/methods", methodController::create);
-		Spark.get("/methods/new", methodController::renderNewForm, engine);
-		Spark.get("/methods/:id", methodController::show, engine);
-		
+		path("/methods", () -> {
+			get("", methodController::list, engine);
+			post("", methodController::create);
+			get("/new", methodController::renderNewForm, engine);
+			get("/:id", methodController::show, engine);
+			get("/:id/eval", methodController::eval, engine);
+		});		
 	}
 
 }

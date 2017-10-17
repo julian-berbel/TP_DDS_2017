@@ -9,8 +9,7 @@ public abstract class Criterion extends ModelEntity{
 	
 	protected abstract String buildDescription();
 	
-	@Override
-	public String toString(){
+	public String getDescription(){
 		return buildDescription();
 	}
 }

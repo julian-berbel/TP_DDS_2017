@@ -1,0 +1,30 @@
+{{#partial "contenido"}}
+
+	<h1> Metodologia {{name}} </h1>
+	
+	<h3>Criterios de Filtro</h3>
+	<ul>
+		{{#each filterCriteria}}
+			<li>{{description}}</li>
+		{{/each}}
+	</ul>
+	
+	<h3>Criterios de Orden</h3>
+	<ol>
+		{{#each orderCriteria}}
+			<li>{{description}}</li>
+		{{/each}}
+	</ol>
+	
+	<h3>Criterios Mixtos</h3>
+	<ul>
+		{{#each mixedCriteria}}
+			<li>{{description}}</li>
+		{{/each}}
+	</ul>
+	
+	<a href="/methods/{{id}}/eval">Evaluar!</a>
+		
+{{/partial}}
+
+{{>layout.hbs}}
