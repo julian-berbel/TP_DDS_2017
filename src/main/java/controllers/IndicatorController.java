@@ -1,17 +1,21 @@
 package controllers;
 
+
+import java.util.Arrays;
 import java.util.List;
 
+import modelo.enterprise.EnterpriseIndicators;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import viewModel.AnalyzeEnterpriseVM;
 
 public class IndicatorController {
 	public ModelAndView list(Request req, Response res){
 		List<Indicator> indicators = IndicatorRepository.getInstance().getList();
-		return new ModelAndView(indicators, "indicators/list.hbs");
+		return new ModelAndView(indicators, "indicators/list.hbs");		
 	}
 	
 	public Void create(Request req, Response res){
@@ -41,6 +45,7 @@ public class IndicatorController {
 	}
 	
 	public ModelAndView show(Request req, Response res){
+	
 		String id = req.params("id");
 		
 		Indicator indicator = IndicatorRepository.getInstance().getById(Integer.valueOf(id));
@@ -56,5 +61,19 @@ public class IndicatorController {
 		res.redirect("/indicators");
 		
 		return null;
+	}
+	
+	
+	public ModelAndView evaluate(Request req, Response res){
+		System.out.println("HOLA");
+		System.out.println(req.queryParams().size());
+		List<String> listEnterprises = Arrays.asList(req.queryParamsValues("selected"));
+		
+		
+		int year= Integer.parseInt(req.queryParams("quantity"));
+		
+		List<EnterpriseIndicators> list= new AnalyzeEnterpriseVM().reduceIndicatorsForAllEnterprises(listEnterprises, year);
+		
+		return new ModelAndView(list, "indicators/evaluate.hbs");
 	}
 }

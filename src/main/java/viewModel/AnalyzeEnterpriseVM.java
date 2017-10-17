@@ -2,8 +2,11 @@ package viewModel;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import modelo.enterprise.Enterprise;
+import modelo.enterprise.EnterpriseIndicators;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.enterprise.Period;
 import modelo.indicator.Indicator;
@@ -89,5 +92,11 @@ public class AnalyzeEnterpriseVM {
 		this.selectedPeriod = selectedPeriod;
 		indicators = IndicatorRepository.getInstance().getAvailableIndicatorForPeriodList(selectedEnterprise,selectedPeriod);
 	}	
+	
+	public List<EnterpriseIndicators> reduceIndicatorsForAllEnterprises(List<String> list,int year)
+	{
+		return EnterpriseRepository.getInstance().getList().stream()
+				.map(enterprise->new EnterpriseIndicators(enterprise.getName(), list, year)).collect(Collectors.toList());	
+	}
 	
 }

@@ -1,0 +1,43 @@
+{{#partial "contenido"}}
+	<head>
+		<link rel="stylesheet" href="/tables.css">
+	</head>
+	
+	<table class="table table-stripped" align="right">	
+		<tr>
+			<th>Nombre Empresa</th>
+			<th>Indicadores</th>
+			<th></th>
+		</tr>
+		
+		{{#each}}
+			<tr>
+				<td>{{name}}</td>
+				<td>
+					<table class="table table-stripped">
+					<col width="200">
+  					<col width="200">
+						<tr>
+							<th align="center">Indicador</th>
+							<th align="center">Valor</th>
+						</tr>
+						
+						{{#each indicators}}
+							<tr>
+								<td align="center">{{name}}</td>
+								<td align="center">{{value}}</td>
+							</tr>
+						{{/each}}
+					</table>
+					
+				</td>
+			</tr>			
+		{{/each}}	
+	</table>
+		
+	</form>	
+	
+
+{{/partial}}
+
+{{>layout.hbs}}
