@@ -1,6 +1,12 @@
-th, td {
+th.li, td.li {
     text-align: center;
     vertical-align: middle;
-     <col width="130">
-  <col width="80">
+}
+th.ppal {
+	background-color:#00BFFF;
+	font-size:20;
+	color:white;
+}
+td {
+	font-size:20;
 }

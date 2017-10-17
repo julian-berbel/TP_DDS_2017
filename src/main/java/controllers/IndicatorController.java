@@ -65,8 +65,6 @@ public class IndicatorController {
 	
 	
 	public ModelAndView evaluate(Request req, Response res){
-		System.out.println("HOLA");
-		System.out.println(req.queryParams().size());
 		List<String> listEnterprises = Arrays.asList(req.queryParamsValues("selected"));
 		
 		

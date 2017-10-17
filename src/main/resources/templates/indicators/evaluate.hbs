@@ -5,27 +5,27 @@
 	
 	<table class="table table-stripped" align="right">	
 		<tr>
-			<th>Nombre Empresa</th>
-			<th>Indicadores</th>
+			<th class="ppal"><center>Nombre Empresa</center></th>
+			<th class="ppal"><center>Indicadores</center></th>
 			<th></th>
 		</tr>
 		
 		{{#each}}
 			<tr>
-				<td>{{name}}</td>
+				<td class="li">{{name}}</td>
 				<td>
 					<table class="table table-stripped">
 					<col width="200">
   					<col width="200">
 						<tr>
-							<th align="center">Indicador</th>
-							<th align="center">Valor</th>
+							<th class="li">Indicador</th>
+							<th class="li">Valor</th>
 						</tr>
 						
 						{{#each indicators}}
 							<tr>
-								<td align="center">{{name}}</td>
-								<td align="center">{{value}}</td>
+								<td class="li">{{name}}</td>
+								<td class="li">{{value}}</td>
 							</tr>
 						{{/each}}
 					</table>
