@@ -1,16 +1,20 @@
 {{#partial "contenido"}}
 
-	<h1> Empresa {{name}} </h1>
+<link rel="stylesheet" href="/tables.css">
+	
+	<title>Indicadores de {{name}}</title>
+	
+	<h1><b> Empresa: {{name}} </b></h1>
 	
 	<table class="table table-stripped">
 		<tr>
-			<th>Periodo</th>
-			<th>Cuentas</th>
+			<th class="ppal">Periodo</th>
+			<th class="ppal"><center>Cuentas</center></th>
 		</tr>
 		
 		{{#each periods}}
 			<tr>
-				<td>{{year}}</td>
+				<td class="period">{{year}}</td>
 				<td>
 					<table class="table table-stripped">
 						<tr>

@@ -4,9 +4,19 @@ th.li, td.li {
 }
 th.ppal {
 	background-color:#00BFFF;
-	font-size:20;
+	font-size:25;
 	color:white;
+}
+th {
+	font-size:25;
+	text-decoration:bold;
 }
 td {
 	font-size:20;
+}
+td.period {
+	font-size:25;
+}
+h1 {
+	color:#00BFFF;
 }
