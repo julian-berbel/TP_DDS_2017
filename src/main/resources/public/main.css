@@ -11,3 +11,28 @@ body {
   width: 100%;
   height: 60px;
 }
+a.navbar-brand {
+	font-size:20;
+	font-weight:bold;
+	color:white;
+}
+.nav.navbar-nav li a{
+	font-size:20;
+    color: white;
+}
+.nav.navbar-nav li.logout a{
+	font-size:20;
+	padding-left:70%;
+    color: white;
+}
+.usr {
+	padding-top:16px;
+	font-size:35;
+	font-weight:bold;
+}
+p.title {
+	color:#00BFFF;
+	font-size:35;
+	text-decoration:underline;
+	padding-bottom:12px;
+}
