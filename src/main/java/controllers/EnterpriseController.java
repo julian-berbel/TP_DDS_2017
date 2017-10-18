@@ -8,9 +8,9 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class EnterpriseController {
+public class EnterpriseController implements Controller {
 	public ModelAndView list(Request req, Response res){
-		List<Enterprise> enterprises = EnterpriseRepository.getInstance().getList();
+		List<Enterprise> enterprises = currentUser(req).getEnterprises();
 		return new ModelAndView(enterprises, "enterprises/list.hbs");
 	}
 	

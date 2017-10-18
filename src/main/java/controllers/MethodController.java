@@ -10,9 +10,9 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class MethodController {
+public class MethodController implements Controller {
 	public ModelAndView list(Request req, Response res){
-		List<Method> methods = MethodRepository.getInstance().getList();
+		List<Method> methods = currentUser(req).getMethods();
 		return new ModelAndView(methods, "methods/list.hbs");
 	}
 	

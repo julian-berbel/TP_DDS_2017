@@ -7,20 +7,25 @@ import java.util.List;
 import modelo.enterprise.EnterpriseIndicators;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
+import modelo.user.User;
+import modelo.user.UserRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import viewModel.AnalyzeEnterpriseVM;
 
-public class IndicatorController {
+public class IndicatorController implements Controller {
 	public ModelAndView list(Request req, Response res){
-		List<Indicator> indicators = IndicatorRepository.getInstance().getList();
+		List<Indicator> indicators = currentUser(req).getIndicators();
 		return new ModelAndView(indicators, "indicators/list.hbs");		
 	}
 	
 	public Void create(Request req, Response res){
 		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"));
-		IndicatorRepository.getInstance().addElement(indicator);
+		
+		User currentUser = currentUser(req);
+		currentUser.addIndicator(indicator);
+		UserRepository.getInstance().updateElement(currentUser);
 		res.redirect("/indicators");
 		return null;
 	}
