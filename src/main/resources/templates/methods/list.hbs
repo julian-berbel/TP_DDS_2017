@@ -1,6 +1,4 @@
-{{#partial "contenido"}}
-
-<link rel="stylesheet" href="/tables.css">
+{{#partial "contenido"}}	
 	<title>Metodologías</title>
 	<p class="title"><b>Metodologías</b></p>
 
@@ -8,12 +6,14 @@
 		<tr>
 			<th class="ppal">Nombre</th>
 			<th class="ppal"></th>
+			<th class="ppal"></th>
 		</tr>
 		
 		{{#each}}
 			<tr>
 				<td>{{name}}</td>
 				<td><a href="{{url}}">Ver</a></td>
+				<td><a class= "clickable" onclick="erase({{id}})">Borrar</a></td>
 			</tr>
 		{{/each}}
 	</table>

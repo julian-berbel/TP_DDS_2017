@@ -1,32 +1,34 @@
 {{#partial "contenido"}}
-
-<form action="/indicators" method="get">
-
-<link rel="stylesheet" href="/tables.css">
-	<title>Indicadores</title>
-	<p class="title"><b>Indicadores</b></p>
+	<form action="/indicators" method="get">
 	
-	<table class="table table-stripped">
-		<tr>
-			<th class="ppal">Nombre</th>
-			<th class="ppal">Fórmula</th>
-			<th class="ppal"></th>
-		</tr>
+		<title>Indicadores</title>
+		<p class="title"><b>Indicadores</b></p>
 		
-		{{#each}}
+		<table class="table table-stripped">
 			<tr>
-				<td>{{name}}</td>
-				<td>{{formula}}</td>		
-				<td><input type="checkbox" name="selected" value={{name}}></td>	
-			</tr>			
-		{{/each}}	
-	</table>
-	
-	
-	<button type="submit" formaction="/indicators/evaluate">Analizar Empresas segun indicadores seleccionados</button>
-	<label>En el año:</label>
-	<input type="number" name="quantity" min="1900" max="2018" required><br>
-	
+				<th class="ppal">Nombre</th>
+				<th class="ppal">Fórmula</th>
+				<th class="ppal"></th>
+				<th class="ppal"></th>
+				<th class="ppal"></th>
+			</tr>
+			
+			{{#each}}
+				<tr>
+					<td>{{name}}</td>
+					<td>{{formula}}</td>	
+					<td><a href="indicators/{{id}}/edit">Editar</a></td>
+					<td><a class="clickable" onclick="erase({{id}})">Borrar</a></td>
+					<td><input type="checkbox" name="selected" value={{name}}></td>	
+				</tr>
+			{{/each}}
+		</table>
+		<div><a href="indicators/new">+ Nuevo Indicador</a></div>
+		
+		<button type="submit" formaction="/indicators/evaluate">Analizar Empresas segun indicadores seleccionados</button>
+		<label>En el año:</label>
+		<input type="number" name="quantity" min="1900" max="2018" required><br>
+		
 	</form>	
 	
 

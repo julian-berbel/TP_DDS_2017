@@ -73,18 +73,6 @@ public class User extends ModelEntity {
 	public void addMethod(Method method) {
 		methods.add(method);
 	}
-	
-	public void removeEnterprise(Enterprise enterprise) {
-		enterprises.remove(enterprise);
-	}
-	
-	public void removeIndicator(Indicator indicator) {
-		indicators.remove(indicator);
-	}
-	
-	public void removeMethod(Method method) {
-		methods.remove(method);
-	}
 
 	public List<Enterprise> getEnterprises() {
 		return enterprises;

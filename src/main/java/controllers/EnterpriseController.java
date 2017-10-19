@@ -14,10 +14,14 @@ public class EnterpriseController implements Controller {
 		return new ModelAndView(enterprises, "enterprises/list.hbs");
 	}
 	
-	public ModelAndView show(Request req, Response res){
-		String id = req.params("id");
-		
-		Enterprise enterprise = EnterpriseRepository.getInstance().getById(Integer.valueOf(id));
+	public ModelAndView show(Request req, Response res){		
+		Enterprise enterprise = EnterpriseRepository.getInstance().getById(id(req));
 		return new ModelAndView(enterprise, "enterprises/show.hbs");
+	}
+	
+	public Response delete(Request req, Response res){
+		Enterprise enteprise = EnterpriseRepository.getInstance().getById(id(req));
+		EnterpriseRepository.getInstance().deleteElement(enteprise);
+		return res;
 	}
 }

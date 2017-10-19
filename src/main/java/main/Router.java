@@ -32,8 +32,11 @@ public class Router {
 		get("/logout", loginController::logout, engine);
 		post("/login", loginController::login);
 		
-		get("/enterprises", enterpriseController::list, engine);
-		get("/enterprises/:id", enterpriseController::show, engine);
+		path("/enterprises", () -> {
+			get("", enterpriseController::list, engine);
+			get("/:id", enterpriseController::show, engine);
+			delete("/:id", enterpriseController::delete);
+		});
 		
 		path("/indicators", () -> {
 			get("", indicatorController::list, engine);
@@ -44,7 +47,6 @@ public class Router {
 			put("/:id", indicatorController::edit);
 			delete("/:id", indicatorController::delete);
 			get("/:id/edit", indicatorController::renderEditForm, engine);
-			
 		});
 		
 		path("/methods", () -> {
@@ -52,6 +54,7 @@ public class Router {
 			post("", methodController::create);
 			get("/new", methodController::renderNewForm, engine);
 			get("/:id", methodController::show, engine);
+			delete("/:id", methodController::delete);
 			get("/:id/eval", methodController::eval, engine);
 		});		
 	}

@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import exceptions.MissingEnterpriseException;
-import exceptions.MissingIndicatorException;
 import exceptions.RepeatedEnterpriseFileException;
 import modelo.db.Repository;
 import modelo.db.withFetchableName;
-import modelo.indicator.Indicator;
 
 public class EnterpriseRepository extends Repository<Enterprise> implements withFetchableName<Enterprise>
 {

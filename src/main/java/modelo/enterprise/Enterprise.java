@@ -76,8 +76,5 @@ public class Enterprise extends ModelEntity
 											.min()
 											.getAsInt();
 	}
-	
-	public String getUrl(){
-		return "enterprises/" + id;
-	}
+
 }

@@ -1,10 +1,11 @@
 package controllers;
 
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import modelo.enterprise.EnterpriseIndicators;
+import modelo.enterprise.EnterpriseRepository;
 import modelo.indicator.Indicator;
 import modelo.indicator.IndicatorRepository;
 import modelo.user.User;
@@ -12,7 +13,6 @@ import modelo.user.UserRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import viewModel.AnalyzeEnterpriseVM;
 
 public class IndicatorController implements Controller {
 	public ModelAndView list(Request req, Response res){
@@ -20,22 +20,20 @@ public class IndicatorController implements Controller {
 		return new ModelAndView(indicators, "indicators/list.hbs");		
 	}
 	
-	public Void create(Request req, Response res){
+	public Response create(Request req, Response res){
 		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"));
 		
 		User currentUser = currentUser(req);
 		currentUser.addIndicator(indicator);
 		UserRepository.getInstance().updateElement(currentUser);
 		res.redirect("/indicators");
-		return null;
+		return res;
 	}
 	
-	public Void edit(Request req, Response res){
-		long indicatorId = Long.valueOf(req.queryParams("id"));
-		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"), indicatorId);
+	public Response edit(Request req, Response res){
+		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"), id(req));
 		IndicatorRepository.getInstance().updateElement(indicator);
-		res.redirect("/indicators", 200);
-		return null;
+		return res;
 	}
 	
 	public ModelAndView renderNewForm(Request req, Response res){
@@ -43,40 +41,34 @@ public class IndicatorController implements Controller {
 	}
 	
 	public ModelAndView renderEditForm(Request req, Response res){
-		String indicatorId = req.params("id");
-		res.cookie("indicatorId", indicatorId);
-		Indicator indicator = IndicatorRepository.getInstance().getById(Long.valueOf(indicatorId));
+		Indicator indicator = IndicatorRepository.getInstance().getById(id(req));
 		return new ModelAndView(indicator, "indicators/edit.hbs");
 	}
 	
-	public ModelAndView show(Request req, Response res){
-	
-		String id = req.params("id");
-		
-		Indicator indicator = IndicatorRepository.getInstance().getById(Integer.valueOf(id));
+	public ModelAndView show(Request req, Response res){		
+		Indicator indicator = IndicatorRepository.getInstance().getById(id(req));
 		return new ModelAndView(indicator, "indicators/show.hbs");
 	}
 	
-	public Void delete(Request req, Response res){
-		String id = req.params("id");
-		
-		Indicator indicator = IndicatorRepository.getInstance().getById(Integer.valueOf(id));
-		IndicatorRepository.getInstance().deleteElement(indicator);
-
-		res.redirect("/indicators");
-		
-		return null;
+	public Response delete(Request req, Response res){
+		Indicator indicator = IndicatorRepository.getInstance().getById(id(req));
+		IndicatorRepository.getInstance().deleteElement(indicator);		
+		return res;
 	}
-	
 	
 	public ModelAndView evaluate(Request req, Response res){
 		List<String> listEnterprises = Arrays.asList(req.queryParamsValues("selected"));
 		
+		int year = Integer.parseInt(req.queryParams("quantity"));
 		
-		int year= Integer.parseInt(req.queryParams("quantity"));
-		
-		List<EnterpriseIndicators> list= new AnalyzeEnterpriseVM().reduceIndicatorsForAllEnterprises(listEnterprises, year);
+		List<EnterpriseIndicators> list = reduceIndicatorsForAllEnterprises(listEnterprises, year);
 		
 		return new ModelAndView(list, "indicators/evaluate.hbs");
+	}
+	
+	private List<EnterpriseIndicators> reduceIndicatorsForAllEnterprises(List<String> list,int year)
+	{
+		return EnterpriseRepository.getInstance().getList().stream()
+				.map(enterprise->new EnterpriseIndicators(enterprise.getName(), list, year)).collect(Collectors.toList());	
 	}
 }
