@@ -15,7 +15,7 @@ function put(id){
 	    	window.location.href = "/indicators";
         },
         error: function(a, b, c) {
-        	alert(c)
+        	alert("Nombre de indicador repetido, ingrese otro")
         }
 	});
 };

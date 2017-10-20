@@ -22,17 +22,19 @@ public class IndicatorController implements Controller {
 	}
 	
 	public Response create(Request req, Response res){
-		
+		System.out.println("LLEGUE");
+		System.out.println(req.queryParams("name"));
 		
 		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"));
+		
 		User currentUser = currentUser(req);
-		try{
+		//try{
 			currentUser.addIndicator(indicator);
 			UserRepository.getInstance().updateElement(currentUser);
 			res.redirect("/indicators");
-		}catch (ExistingIndicatorException e) {
+	/*	}catch (ExistingIndicatorException e) {
 			res.redirect("/indicators/new");
-		}
+		}*/
 		
 		return res;
 	}
