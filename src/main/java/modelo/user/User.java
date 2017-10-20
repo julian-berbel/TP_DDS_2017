@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import exceptions.EmptyFieldException;
+import exceptions.ExistingIndicatorException;
 import modelo.db.ModelEntity;
 import modelo.enterprise.Enterprise;
 import modelo.indicator.Indicator;
@@ -67,6 +68,10 @@ public class User extends ModelEntity {
 	}
 	
 	public void addIndicator(Indicator indicator) {
+		if(indicators.stream().anyMatch(indicator2->indicator2.getName().equals(indicator.getName())))
+		{
+			throw new ExistingIndicatorException(indicator.getName());
+		}
 		indicators.add(indicator);
 	}
 	

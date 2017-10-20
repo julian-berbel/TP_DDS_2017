@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import exceptions.ExistingIndicatorException;
 import modelo.enterprise.EnterpriseIndicators;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.indicator.Indicator;
@@ -21,12 +22,18 @@ public class IndicatorController implements Controller {
 	}
 	
 	public Response create(Request req, Response res){
-		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"));
 		
+		
+		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"));
 		User currentUser = currentUser(req);
-		currentUser.addIndicator(indicator);
-		UserRepository.getInstance().updateElement(currentUser);
-		res.redirect("/indicators");
+		try{
+			currentUser.addIndicator(indicator);
+			UserRepository.getInstance().updateElement(currentUser);
+			res.redirect("/indicators");
+		}catch (ExistingIndicatorException e) {
+			res.redirect("/indicators/new");
+		}
+		
 		return res;
 	}
 	
