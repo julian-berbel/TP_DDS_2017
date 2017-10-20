@@ -36,3 +36,9 @@ p.title {
 	text-decoration:underline;
 	padding-bottom:12px;
 }
+.nav.navbar-nav li a.logout {
+	text-align:right;
+	font-size:20;
+	padding-left:70%;
+    color: black;
+}

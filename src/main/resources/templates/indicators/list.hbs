@@ -1,4 +1,12 @@
 {{#partial "contenido"}}
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	    crossorigin="anonymous">
+    </script>
+
+	<script src="/js/error.js" type="text/javascript"></script>
+	
 	<form action="/indicators" method="get">
 	
 		<title>Indicadores</title>
@@ -19,17 +27,28 @@
 					<td>{{formula}}</td>	
 					<td><a href="indicators/{{id}}/edit">Editar</a></td>
 					<td><a class="clickable" onclick="erase({{id}})">Borrar</a></td>
-					<td><input type="checkbox" name="selected" value={{name}}></td>	
+					<td><input type="checkbox" name="selected" value={{name}} ></td>	
 				</tr>
 			{{/each}}
 		</table>
-		<div><a href="indicators/new">+ Nuevo Indicador</a></div>
 		
-		<button type="submit" formaction="/indicators/evaluate">Analizar Empresas segun indicadores seleccionados</button>
-		<label>En el año:</label>
-		<input type="number" name="quantity" min="1900" max="2018" required><br>
+	
+		
+		
+	 	<p style="text-align: center;">
+	 		
+	 		<button type="submit" formaction="indicators/new" form="form1">Nuevo Indicador</button><br>
+		
+			<button type="submit" formaction="/indicators/evaluate">Analizar Empresas segun indicadores seleccionados</button>
+			<label>En el año:</label>
+			<input type="number" name="quantity" min="1900" max="2018" required><br>
+			
+		</p>
 		
 	</form>	
+	
+	<form  id="form1">  		
+	</form>
 	
 
 {{/partial}}
