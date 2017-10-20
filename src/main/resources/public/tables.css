@@ -20,3 +20,12 @@ td.period {
 h1 {
 	color:#00BFFF;
 }
+h3 {
+	font-size:30;
+	text-decoration: underline;
+}
+.submit{
+	font-size: 20;
+	margin-top:5px;
+	margin-bottom:5px;
+}

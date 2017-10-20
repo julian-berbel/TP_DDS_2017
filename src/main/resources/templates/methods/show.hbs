@@ -1,30 +1,42 @@
 {{#partial "contenido"}}
 
-	<h1> Metodologia {{name}} </h1>
+<title>Metodología: {{name}}</title>
+<form action="/methods" method="get">
+	<h1><u> Metodologia {{name}} </u></h1>
 	
-	<h3>Criterios de Filtro</h3>
-	<ul>
+	<table class="table table-striped">
+	
+	<tr>
+	<td><h3>Criterios de Filtro:</h3></td>
+	<td><ul>
 		{{#each filterCriteria}}
 			<li>{{description}}</li>
 		{{/each}}
-	</ul>
+	</ul></td>
+	</tr>
 	
-	<h3>Criterios de Orden</h3>
-	<ol>
+	<tr>
+	<td>
+	<h3>Criterios de Orden:</h3></td>
+	<td><ol>
 		{{#each orderCriteria}}
 			<li>{{description}}</li>
 		{{/each}}
-	</ol>
+	</ol></td>
+	</tr>
 	
-	<h3>Criterios Mixtos</h3>
-	<ul>
+	<tr>
+	<td><h3>Criterios Mixtos:</h3></td>
+	<td><ul>
 		{{#each mixedCriteria}}
 			<li>{{description}}</li>
 		{{/each}}
-	</ul>
+	</ul></td>
+	</tr>
+	</table>
 	
-	<a href="/methods/{{id}}/eval">Evaluar!</a>
-		
+	<button class="submit" type="submit" formaction="/methods/{{id}}/eval" > Evaluar Indicador contra todas las empresas</button><br>
+		</form>
 {{/partial}}
 
 {{>layout.hbs}}
