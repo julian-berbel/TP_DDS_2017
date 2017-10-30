@@ -5,15 +5,15 @@
 	<table class="table table-striped">
 		<tr>
 			<th class="ppal">Nombre</th>
-			<th class="ppal"></th>
-			<th class="ppal"></th>
+			<th class="ppal">Ver</th>
+			<th class="ppal">Borrar</th>
 		</tr>
 		
 		{{#each}}
 			<tr>
 				<td>{{name}}</td>
-				<td><a href="enterprises/{{id}}">Ver</a></td>
-				<td><a class="clickable" onclick="erase({{id}})"">Borrar</a></td>				
+				<td><a class="fa fa-eye" href="enterprises/{{id}}"></a></td>
+				<td><a class="fa fa-trash-o clickable" onclick="erase({{id}})"></a></td>				
 			</tr>
 		{{/each}}
 	</table>

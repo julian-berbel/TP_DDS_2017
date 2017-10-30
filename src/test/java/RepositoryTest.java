@@ -23,7 +23,7 @@ public class RepositoryTest implements TransactionalOps, WithGlobalEntityManager
 	public void testAddNewIndicator()
 	{
 		IndicatorRepository.getInstance().addElement(indicator);
-		assertEquals(IndicatorRepository.getInstance().getIndicator("Indicator"), indicator);
+		assertEquals(IndicatorRepository.getInstance().getByName("Indicator"), indicator);
 	}
 	
 	@Test

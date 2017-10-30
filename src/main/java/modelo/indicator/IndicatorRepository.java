@@ -1,9 +1,7 @@
 package modelo.indicator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import exceptions.MissingIndicatorException;
 import modelo.db.Repository;
 import modelo.db.withFetchableName;
 import modelo.enterprise.Enterprise;
@@ -13,18 +11,12 @@ public class IndicatorRepository extends Repository<Indicator> implements withFe
 {
 	private static IndicatorRepository instance = new IndicatorRepository();
 
-	private IndicatorRepository(){}
+	private IndicatorRepository(){
+		super("Indicator", Indicator.class);
+	}
 	
 	public static IndicatorRepository getInstance(){
 		return instance;
-	}
-	
-	public List<Indicator> getList(){
-		return getList("Indicator", Indicator.class);
-	}
-
-	public Indicator getIndicator(String name){
-		return fetchByName(name).orElseThrow(() -> new MissingIndicatorException(name));
 	}
 	
 	public Boolean anyUses(Indicator indicator){
@@ -37,13 +29,4 @@ public class IndicatorRepository extends Repository<Indicator> implements withFe
 		return getList().stream()
 				.filter(indicator -> indicator.tryReduce(enterprise, period.getYear())).collect(Collectors.toList());
 	}
-
-	public Optional<Indicator> fetchByName(String name) {
-		return fetchElement("name", name, "Indicator", Indicator.class);
-	}
-	
-	public Indicator getById(long id){
-		return getElement("id", id, "Indicator", Indicator.class);
-	}
-
 }

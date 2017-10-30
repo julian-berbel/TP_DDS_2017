@@ -10,14 +10,13 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class MethodController implements Controller {
+public class MethodController extends Controller {
 	public ModelAndView list(Request req, Response res){
-		List<Method> methods = currentUser(req).getMethods();
+		List<Method> methods = withTransaction(()-> currentUser(req).getMethods());
 		return new ModelAndView(methods, "methods/list.hbs");
 	}
 	
 	public Response create(Request req, Response res){
-		
 		return res;
 	}
 	
@@ -26,21 +25,24 @@ public class MethodController implements Controller {
 	}
 	
 	public ModelAndView show(Request req, Response res){
-		Method method = MethodRepository.getInstance().getById(id(req));
+		Method method = withTransaction(()-> MethodRepository.getInstance().getById(id(req)));
 		return new ModelAndView(method, "methods/show.hbs");
 	}
 	
 	public ModelAndView eval(Request req, Response res){
-		Method method = MethodRepository.getInstance().getById(id(req));
-		
-		User user = currentUser(req);
-		MethodReport report = method.eval(user.getEnterprises());
+		MethodReport report = withTransaction(()-> {
+			Method method = MethodRepository.getInstance().getById(id(req));
+			User user = currentUser(req);
+			return method.eval(user.getEnterprises());
+		});
 		return new ModelAndView(report, "methods/eval.hbs");
 	}
 	
 	public Response delete(Request req, Response res){
-		Method method = MethodRepository.getInstance().getById(id(req));
-		MethodRepository.getInstance().deleteElement(method);
+		withTransaction(()-> {
+			Method method = MethodRepository.getInstance().getById(id(req));
+			MethodRepository.getInstance().deleteElement(method);
+		});
 		return res;
 	}
 }

@@ -6,38 +6,49 @@ import java.util.Optional;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
+import exceptions.MissingElementException;
+
 public abstract class Repository<Type> implements WithGlobalEntityManager, TransactionalOps{
+	private String tableName;
+	private Class<Type> classType;
+	
+	public Repository(String tableName, Class<Type> classType){
+		this.tableName = tableName;
+		this.classType = classType;
+	}
 
 	public void addElement(Type entity){
-		withTransaction(() -> entityManager().persist(entity)); 
+		entityManager().persist(entity);
 	}
 	
 	public void updateElement(Type entity){
-		withTransaction(() -> entityManager().merge(entity));
+		entityManager().merge(entity);
 	}
 	
 	public void deleteElement(Type entity){
-		withTransaction(() -> entityManager().remove(entity));
+		entityManager().remove(entity);
 	}
 	
-	protected Optional<Type> fetchElement(String searchField, Object value, String table, Class<Type> resultClass){
+	public Optional<Type> fetchElement(String searchField, Object value){
 		return entityManager()
-		        .createQuery("from " + table + " where " + searchField + " = :" + searchField , resultClass)
+		        .createQuery("from " + tableName + " where " + searchField + " = :" + searchField , classType)
 		        .setParameter(searchField, value)
 		        .getResultList().stream()
 		        .findFirst();
 	}
 	
-	protected Type getElement(String searchField, Object value, String table, Class<Type> resultClass){
-		return fetchElement(searchField, value, table, resultClass).get();
+	public Type getElement(String searchField, Object value){
+		return fetchElement(searchField, value).orElseThrow(() -> new MissingElementException(searchField, value, tableName));
 	}
-
-	public abstract List<Type> getList();
 	
-	protected List<Type> getList(String table, Class<Type> resultClass){
+	public Type getById(long id){
+		return getElement("id", id);
+	}
+	
+	public List<Type> getList(){
 		return entityManager()
-		        .createQuery("from " + table, resultClass)
+		        .createQuery("from " + tableName, classType)
 		        .getResultList();
 	}
-	
+		
 }

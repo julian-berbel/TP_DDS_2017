@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import exceptions.ExistingIndicatorException;
 import modelo.enterprise.EnterpriseIndicators;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.indicator.Indicator;
@@ -15,33 +14,29 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class IndicatorController implements Controller {
+public class IndicatorController extends Controller {
 	public ModelAndView list(Request req, Response res){
-		List<Indicator> indicators = currentUser(req).getIndicators();
+		List<Indicator> indicators = withTransaction(()-> currentUser(req).getIndicators());
 		return new ModelAndView(indicators, "indicators/list.hbs");		
 	}
 	
 	public Response create(Request req, Response res){
-		System.out.println("LLEGUE");
-		System.out.println(req.queryParams("name"));
-		
 		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"));
 		
-		User currentUser = currentUser(req);
-		//try{
+		withTransaction(()-> {
+			User currentUser = currentUser(req);
 			currentUser.addIndicator(indicator);
 			UserRepository.getInstance().updateElement(currentUser);
-			res.redirect("/indicators");
-	/*	}catch (ExistingIndicatorException e) {
-			res.redirect("/indicators/new");
-		}*/
+		});
+		
+		res.redirect("/indicators");
 		
 		return res;
 	}
 	
 	public Response edit(Request req, Response res){
 		Indicator indicator = new Indicator(req.queryParams("name"), req.queryParams("formula"), id(req));
-		IndicatorRepository.getInstance().updateElement(indicator);
+		withTransaction(()-> IndicatorRepository.getInstance().updateElement(indicator));
 		return res;
 	}
 	
@@ -50,18 +45,20 @@ public class IndicatorController implements Controller {
 	}
 	
 	public ModelAndView renderEditForm(Request req, Response res){
-		Indicator indicator = IndicatorRepository.getInstance().getById(id(req));
+		Indicator indicator = withTransaction(()-> IndicatorRepository.getInstance().getById(id(req)));
 		return new ModelAndView(indicator, "indicators/edit.hbs");
 	}
 	
 	public ModelAndView show(Request req, Response res){		
-		Indicator indicator = IndicatorRepository.getInstance().getById(id(req));
+		Indicator indicator = withTransaction(()-> IndicatorRepository.getInstance().getById(id(req)));
 		return new ModelAndView(indicator, "indicators/show.hbs");
 	}
 	
 	public Response delete(Request req, Response res){
-		Indicator indicator = IndicatorRepository.getInstance().getById(id(req));
-		IndicatorRepository.getInstance().deleteElement(indicator);		
+		withTransaction(()-> {
+			Indicator indicator = IndicatorRepository.getInstance().getById(id(req));
+			IndicatorRepository.getInstance().deleteElement(indicator);
+		});
 		return res;
 	}
 	

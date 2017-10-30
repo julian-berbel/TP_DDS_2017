@@ -12,7 +12,7 @@ public class IndicatorValue {
 		this.name = name;		
 		try
 		{
-			value = IndicatorRepository.getInstance().getIndicator(name).reduce(EnterpriseRepository.getInstance().getEnterprise(enterpriseName), year).toString();
+			value = IndicatorRepository.getInstance().getByName(name).reduce(EnterpriseRepository.getInstance().getByName(enterpriseName), year).toString();
 		}
 		catch(Exception e)
 		{

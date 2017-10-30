@@ -25,8 +25,9 @@ public class Router {
 		EnterpriseController enterpriseController = new EnterpriseController();
 		MethodController methodController = new MethodController();
 		IndicatorController indicatorController = new IndicatorController();
+		HomeController homeController = new HomeController();
 		
-		get("/", HomeController::home, engine);
+		get("/", homeController::home, engine);
 		
 		get("/login", loginController::render, engine);
 		get("/logout", loginController::logout, engine);

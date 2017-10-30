@@ -23,9 +23,8 @@ public class IndicatorsManager
 	
 	public static void setFilePath(String path)
 	{
-		filePath=path;
+		filePath = path;
 	}
-	
 	
 	public static void read() throws IOException, BiffException
 	{

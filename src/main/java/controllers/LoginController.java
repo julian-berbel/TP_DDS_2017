@@ -9,14 +9,14 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class LoginController {
+public class LoginController extends Controller{
 	public ModelAndView render(Request req, Response res){
 		return new ModelAndView(null, "login/login.hbs");
 	}
 	
 	public Void login(Request req, Response res){
 		try{
-			User user = UserRepository.getInstance().getByEmail(req.queryParams("Email"));
+			User user = withTransaction(()-> UserRepository.getInstance().getByEmail(req.queryParams("Email")));
 			
 			if(!user.validatePassword(req.queryParams("Password"))) throw new WrongCredentialsException();
 			
