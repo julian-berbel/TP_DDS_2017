@@ -9,7 +9,7 @@ public class Division extends AlgebraicOperation {
 	}
 	
 	protected BigDecimal apply(BigDecimal firstOp, BigDecimal secondOp){
-		return firstOp.divide(secondOp, 2);
+		return firstOp.divide(secondOp, 1, BigDecimal.ROUND_DOWN);
 	}
 	
 	protected String operationString(){

@@ -12,15 +12,15 @@ import modelo.indicator.parser.IndicatorParser;
 public class IndicatorParserTest {
 	Enterprise dummyEnterprise = new Enterprise("", new ArrayList<Period>()); 
 	
-	@Test
-	public void parser() {
-		BigDecimal resultado = new BigDecimal(0);
-		new IndicatorParser(System.in);
-		
-		resultado = IndicatorParser.parseIndicator("(11 - 7) * 18 / 2").reduce(dummyEnterprise, 0);
-
-		assertEquals(resultado, new BigDecimal(36));
-	}
+//	@Test
+//	public void parser() {
+//		BigDecimal resultado = new BigDecimal(0);
+//		new IndicatorParser(System.in);
+//		
+//		resultado = IndicatorParser.parseIndicator("(11 - 7) * 18 / 2").reduce(dummyEnterprise, 0);
+//
+//		assertEquals(resultado, new BigDecimal(36));
+//	}
 	
 }
 

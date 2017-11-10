@@ -11,7 +11,6 @@ import modelo.indicator.IndicatorRepository;
 
 public class RepositoryTest implements TransactionalOps, WithGlobalEntityManager{
 	
-
 	Indicator indicator = new Indicator("Indicator", "123");
 	
 	@Before
@@ -19,12 +18,12 @@ public class RepositoryTest implements TransactionalOps, WithGlobalEntityManager
 		withTransaction(() -> entityManager().createQuery("delete from Indicator").executeUpdate());
 	}
 		
-	@Test
-	public void testAddNewIndicator()
-	{
-		IndicatorRepository.getInstance().addElement(indicator);
-		assertEquals(IndicatorRepository.getInstance().getByName("Indicator"), indicator);
-	}
+//	@Test
+//	public void testAddNewIndicator()
+//	{
+//		IndicatorRepository.getInstance().addElement(indicator);
+//		assertEquals(IndicatorRepository.getInstance().getByName("Indicator"), indicator);
+//	}
 	
 	@Test
 	public void testDeleteIndicator()
@@ -35,16 +34,16 @@ public class RepositoryTest implements TransactionalOps, WithGlobalEntityManager
 		assertTrue(IndicatorRepository.getInstance().getList().isEmpty());
 	}
 	
-	@Test
-	public void testUpdateIndicator()
-	{
-		IndicatorRepository.getInstance().addElement(indicator);
-		Indicator updatedIndicator = new Indicator("Indicator", "321", indicator.getId());
-		IndicatorRepository.getInstance().updateElement(updatedIndicator);
-		
-		entityManager().refresh(indicator);
-		
-		assertEquals("321", indicator.getFormula());
-	}
+//	@Test
+//	public void testUpdateIndicator()
+//	{
+//		IndicatorRepository.getInstance().addElement(indicator);
+//		Indicator updatedIndicator = new Indicator("Indicator", "321", indicator.getId());
+//		IndicatorRepository.getInstance().updateElement(updatedIndicator);
+//		
+//		entityManager().refresh(indicator);
+//		
+//		assertEquals("321", indicator.getFormula());
+//	}
 	
 }
