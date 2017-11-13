@@ -21,7 +21,7 @@ public class LoginController extends Controller{
 			if(!user.validatePassword(req.queryParams("Password"))) throw new WrongCredentialsException();
 			
 			res.cookie("UserId", String.valueOf(user.getId()));
-			res.redirect("/");
+			res.redirect("/home");
 		}catch(NoSuchElementException | WrongCredentialsException e){
 			//TODO mostrar un mensaje de credenciales invalidas
 			e.printStackTrace();
@@ -32,7 +32,7 @@ public class LoginController extends Controller{
 	
 	public ModelAndView logout(Request req, Response res){
 		res.removeCookie("UserId");
-		res.redirect("/login");
+		res.redirect("/");
 		return null;
 	}
 	

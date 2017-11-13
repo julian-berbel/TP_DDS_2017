@@ -2,6 +2,7 @@ package main;
 
 import controllers.HomeController;
 import controllers.LoginController;
+import controllers.MainController;
 import controllers.EnterpriseController;
 import controllers.IndicatorController;
 import controllers.MethodController;
@@ -27,7 +28,8 @@ public class Router {
 		IndicatorController indicatorController = new IndicatorController();
 		HomeController homeController = new HomeController();
 		
-		get("/", homeController::home, engine);
+		get("/", MainController::main, engine);
+		get("/home", homeController::home,engine);
 		
 		get("/login", loginController::render, engine);
 		get("/logout", loginController::logout, engine);
