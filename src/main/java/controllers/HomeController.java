@@ -12,7 +12,7 @@ public class HomeController extends Controller {
 		{
 			User user = withTransaction(() -> UserRepository.getInstance()
 															.getById(Long.valueOf(req.cookie("UserId"))));
-			return new ModelAndView(user, "home/home.hbs");
+			return new ModelAndView(user, user.homeView());
 		}catch(NumberFormatException e)
 		{
 			return new ModelAndView(null, "login/login.hbs");

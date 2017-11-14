@@ -12,6 +12,7 @@
     	<class>modelo.enterprise.Calculation</class>
     	<class>modelo.enterprise.Period</class>
         <class>modelo.indicator.Indicator</class>
+        <class>modelo.indicator.cache.PreCalculation</class>
         <class>modelo.method.Method</class>
         <class>modelo.method.criteria.filter.DecreasingIndicatorValueCriterion</class>
         <class>modelo.method.criteria.filter.IncreasingIndicatorValueCriterion</class>
@@ -36,7 +37,7 @@
         <class>modelo.method.criteria.Criterion</class>
         <class>modelo.ModelEntity</class>
         <class>modelo.user.User</class>
-    	
+        <class>modelo.user.SysAdmin</class>
     	 
         <properties> 
 	        <property name="hibernate.archive.autodetection" value="class"/>

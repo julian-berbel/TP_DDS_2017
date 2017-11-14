@@ -41,6 +41,8 @@ public class Router {
 			delete("/:id", enterpriseController::delete);
 		});
 		
+		post("/batch", enterpriseController::batchLoad);
+		
 		path("/indicators", () -> {
 			get("", indicatorController::list, engine);
 			post("", indicatorController::create);

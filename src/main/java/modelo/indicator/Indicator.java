@@ -12,6 +12,8 @@ import javax.persistence.Transient;
 import exceptions.EmptyFieldException;
 import modelo.db.ModelEntity;
 import modelo.enterprise.Enterprise;
+import modelo.indicator.cache.CalculationCache;
+import modelo.indicator.cache.PreCalculation;
 import modelo.indicator.math.Operable;
 import modelo.indicator.parser.IndicatorParser;
 
@@ -57,7 +59,15 @@ public class Indicator extends ModelEntity implements Operable
 	}
 
 	public BigDecimal reduce(Enterprise enterprise, int year){
-		return value.reduce(enterprise, year);
+		return CalculationCache.getInstance()
+								.fetchCalculation(enterprise, year, normalize())
+								.orElseGet(() -> {
+									BigDecimal result = value.reduce(enterprise, year);
+									
+									CalculationCache.getInstance().addElement(new PreCalculation(normalize(), enterprise.getId(), year, result));
+									
+									return result;
+								});
 	}
 	
 	public boolean tryReduce(Enterprise enterprise, int year)

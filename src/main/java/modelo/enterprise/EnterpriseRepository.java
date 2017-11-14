@@ -2,7 +2,6 @@ package modelo.enterprise;
 
 import java.util.List;
 
-import exceptions.RepeatedEnterpriseFileException;
 import modelo.db.Repository;
 import modelo.db.withFetchableName;
 
@@ -34,10 +33,7 @@ public class EnterpriseRepository extends Repository<Enterprise> implements with
 		return fileLoaded;
 	}
 	
-	public void importEnterprises(List<Enterprise> enterprises){
-		if(enterprises.stream().anyMatch(enterprise -> alreadyExists(enterprise.getName()))) throw new RepeatedEnterpriseFileException();
-		withTransaction(() ->
-			enterprises.forEach(this::addElement)
-		);
+	public void batchLoad(List<Enterprise> enterprises){
+		enterprises.forEach(this::upsertElement);
 	}
 }

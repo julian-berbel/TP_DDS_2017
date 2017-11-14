@@ -1,0 +1,17 @@
+{{#partial "contenido"}}
+
+<title>Home</title>
+
+<div>
+	<p class="usr">¡Cosas de Admin aquí! </p>
+</div>
+
+<h2>Carga batch de cuentas</h2>
+<form action="/batch" enctype="multipart/form-data" method="post">
+	<input type="file" name="file" accept=".txt" placeholder="Seleccionar un archivo de empresas...">
+	<input type="submit">
+</form>
+	
+{{/partial}}
+
+{{>layout.hbs}}

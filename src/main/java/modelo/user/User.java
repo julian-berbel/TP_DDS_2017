@@ -3,8 +3,12 @@ package modelo.user;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -12,23 +16,19 @@ import javax.persistence.Table;
 import exceptions.EmptyFieldException;
 import exceptions.ExistingIndicatorException;
 import modelo.db.ModelEntity;
-import modelo.enterprise.Enterprise;
 import modelo.indicator.Indicator;
 import modelo.method.Method;
 
 @Entity
 @Table(name = "Users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
+@DiscriminatorValue("U")
 public class User extends ModelEntity {
 	
 	private String email;
 	private String password;
 
-	@OneToMany(	cascade = CascadeType.ALL,
-				orphanRemoval = true,
-				fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private List<Enterprise> enterprises;
-	
 	@OneToMany(	cascade = CascadeType.ALL,
 				orphanRemoval = true,
 				fetch = FetchType.LAZY)
@@ -62,11 +62,7 @@ public class User extends ModelEntity {
 	public boolean validatePassword(String password) {
 		return this.password.equals(password);
 	}
-	
-	public void addEnterprise(Enterprise enterprise) {
-		enterprises.add(enterprise);
-	}
-	
+		
 	public void addIndicator(Indicator indicator) {
 		if(indicators.stream().anyMatch(indicator2->indicator2.getName().equals(indicator.getName())))
 		{
@@ -79,16 +75,16 @@ public class User extends ModelEntity {
 		methods.add(method);
 	}
 
-	public List<Enterprise> getEnterprises() {
-		return enterprises;
-	}
-
 	public List<Indicator> getIndicators() {
 		return indicators;
 	}
 
 	public List<Method> getMethods() {
 		return methods;
+	}
+
+	public String homeView() {
+		return "home/home.hbs";
 	}
 
 }

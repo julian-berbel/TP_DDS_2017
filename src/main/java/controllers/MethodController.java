@@ -2,10 +2,10 @@ package controllers;
 
 import java.util.List;
 
+import modelo.enterprise.EnterpriseRepository;
 import modelo.method.Method;
 import modelo.method.MethodRepository;
 import modelo.method.result.MethodReport;
-import modelo.user.User;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -32,8 +32,7 @@ public class MethodController extends Controller {
 	public ModelAndView eval(Request req, Response res){
 		MethodReport report = withTransaction(()-> {
 			Method method = MethodRepository.getInstance().getById(id(req));
-			User user = currentUser(req);
-			return method.eval(user.getEnterprises());
+			return method.eval(EnterpriseRepository.getInstance().getList());
 		});
 		return new ModelAndView(report, "methods/eval.hbs");
 	}
