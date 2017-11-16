@@ -2,8 +2,6 @@ package modelo.method;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,9 +21,8 @@ import modelo.enterprise.Enterprise;
 import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
 import modelo.method.criteria.OrderCriterion;
+import modelo.method.criteria.filter.CanBeOrderedCriterion;
 import modelo.method.criteria.order.Unordered;
-import modelo.method.result.Error;
-import modelo.method.result.Fail;
 import modelo.method.result.MethodReport;
 import modelo.method.result.Pass;
 import modelo.method.result.Result;
@@ -48,7 +45,7 @@ public class Method extends ModelEntity implements withName{
 				fetch = FetchType.LAZY)
 	@JoinColumn(name = "method_id", referencedColumnName = "id")
 	@OrderColumn
-	private List<OrderCriterion> orderCriteria;
+	private List<OrderCriterion<?>> orderCriteria;
 	
 	@OneToMany(	cascade = CascadeType.ALL,
 				orphanRemoval = true,
@@ -56,7 +53,7 @@ public class Method extends ModelEntity implements withName{
 	@JoinColumn(name = "method_id", referencedColumnName = "id")
 	private List<MixedCriterion> mixedCriteria;
 
-	public Method(String name, List<FilterCriterion> filterCriteria, List<OrderCriterion> orderCriteria, List<MixedCriterion> mixedCriteria)
+	public Method(String name, List<FilterCriterion> filterCriteria, List<OrderCriterion<?>> orderCriteria, List<MixedCriterion> mixedCriteria)
 	{
 		if(name == null) throw new EmptyFieldException("nombre");
 		this.name = name;
@@ -65,7 +62,7 @@ public class Method extends ModelEntity implements withName{
 		this.mixedCriteria = mixedCriteria;
 	}
 	
-	public Method(String name, List<FilterCriterion> filterCriteria, List<OrderCriterion> orderCriteria, List<MixedCriterion> mixedCriteria, Long id)
+	public Method(String name, List<FilterCriterion> filterCriteria, List<OrderCriterion<?>> orderCriteria, List<MixedCriterion> mixedCriteria, Long id)
 	{
 		this(name, filterCriteria, orderCriteria, mixedCriteria);
 		this.id = id;
@@ -83,7 +80,7 @@ public class Method extends ModelEntity implements withName{
 		return filterCriteria;
 	}
 	
-	public List<OrderCriterion> getOrderCriteria() 
+	public List<OrderCriterion<?>> getOrderCriteria() 
 	{
 		return orderCriteria;
 	}
@@ -97,33 +94,20 @@ public class Method extends ModelEntity implements withName{
 				.foldLeft((Comparator<Enterprise>) new Unordered(), (seed, comp) -> seed.thenComparing(comp));
 	}
 	
-	public List<Result> apply(List<Enterprise> enterprises){
-		return enterprises.stream()
-				.sorted(buildComparator())
-				.map(enterprise -> 
-					Seq.seq(filterCriteria.stream())
-						.foldLeft((Result) new Pass(enterprise), (seed, filterCriterion) -> 
-							seed.eval(filterCriterion)))
-				.collect(Collectors.toList());
-	}
-	
-	public MethodReport eval(List<Enterprise> enterprises){
-		List<Result> results = apply(enterprises);
+	public MethodReport apply(List<Enterprise> enterprises){
+	  MethodReport report = new MethodReport();
+		enterprises.stream()
+      				  .forEach(enterprise -> {
+      				      Result result = Seq.seq(filterCriteria.stream())
+      				                          .append(new CanBeOrderedCriterion(orderCriteria))
+                        						    .foldLeft((Result) new Pass(enterprise), (seed, filterCriterion) -> 
+                          							    seed.eval(filterCriterion));
+      				      
+      				      result.insertInto(report);
+    				    });
 		
-		List<Pass> passes = getMappedBy(results, Pass.class, result -> (Pass) result);
-		
-		List<Fail> failures = getMappedBy(results, Fail.class, result -> (Fail) result);
-		
-		List<Error> errors = getMappedBy(results, Error.class, result -> (Error) result);
-		
-		return new MethodReport(passes, failures, errors);
-	}
-	
-	private <T> List<T> getMappedBy(List<Result> results, Class<?> a, Function<Result, T> f){
-		return results.stream()
-				.filter(result -> a.isInstance(result))
-				.map(f)
-				.collect(Collectors.toList());
+		report.sortPasses(buildComparator());
+		return report;
 	}
 	
 	public String getUrl(){

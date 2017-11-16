@@ -13,4 +13,8 @@ public class Error extends Result {
 	public String getErrorMessage(){
 		return exception.getMessage();
 	}
+	
+	public void insertInto(MethodReport report) {
+    report.addError(this);
+  }
 }

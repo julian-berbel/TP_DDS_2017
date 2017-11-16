@@ -8,9 +8,13 @@ import modelo.method.criteria.OrderCriterion;
 
 @Entity
 @DiscriminatorValue("EA")
-public class EnterpriseAgeCriterion extends OrderCriterion {
+public class EnterpriseAgeCriterion extends OrderCriterion<Integer> {
+  public Integer weigh(Enterprise enterprise) {
+    return enterprise.age();
+  }
+  
 	public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
-		return oneEnterprise.age() - anotherEnterprise.age();
+		return weigh(oneEnterprise) - weigh(anotherEnterprise);
 	}
 
 	protected String buildDescription() {

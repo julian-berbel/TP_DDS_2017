@@ -14,19 +14,19 @@ import javax.persistence.Table;
 public abstract class MixedCriterion extends Criterion
 {
 	@ManyToOne
-	protected OrderCriterion orderCriterion;
+	protected OrderCriterion<?> orderCriterion;
 	
 	@ManyToOne
 	protected FilterCriterion filterCriterion;
 	
-	public MixedCriterion(OrderCriterion orderCriterion, FilterCriterion filterCriterion) {
+	public MixedCriterion(OrderCriterion<?> orderCriterion, FilterCriterion filterCriterion) {
 		this.orderCriterion = orderCriterion;
 		this.filterCriterion = filterCriterion;
 	}
 	
 	protected MixedCriterion() {}
 	
-	public OrderCriterion getOrderCriterion() {
+	public OrderCriterion<?> getOrderCriterion() {
 		return orderCriterion;
 	}
 

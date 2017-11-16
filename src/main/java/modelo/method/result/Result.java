@@ -23,4 +23,6 @@ public abstract class Result{
 	public boolean equals(Object r){
 		return this.getClass() == r.getClass() && enterprise == ((Result)r).enterprise;
 	}
+	
+	abstract public void insertInto(MethodReport report);
 }

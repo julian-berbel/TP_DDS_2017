@@ -32,7 +32,7 @@ public class MethodController extends Controller {
 	public ModelAndView eval(Request req, Response res){
 		MethodReport report = withTransaction(()-> {
 			Method method = MethodRepository.getInstance().getById(id(req));
-			return method.eval(EnterpriseRepository.getInstance().getList());
+			return method.apply(EnterpriseRepository.getInstance().getList());
 		});
 		return new ModelAndView(report, "methods/eval.hbs");
 	}

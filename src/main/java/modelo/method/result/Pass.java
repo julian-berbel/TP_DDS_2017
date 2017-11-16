@@ -20,4 +20,9 @@ public class Pass extends Result {
 		
 		return result;
 	}
+	
+	public void insertInto(MethodReport report) {
+	  report.addPass(this);
+	}
+	
 }

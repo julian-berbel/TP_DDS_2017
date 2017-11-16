@@ -1,5 +1,6 @@
 package modelo.method.criteria.order;
 
+import java.math.BigDecimal;
 import java.time.Year;
 
 import javax.persistence.DiscriminatorValue;
@@ -12,7 +13,7 @@ import modelo.method.criteria.OrderCriterion;
 
 @Entity
 @DiscriminatorValue("mI")
-public class MinimizeIndicatorCriterion extends OrderCriterion {
+public class MinimizeIndicatorCriterion extends OrderCriterion<BigDecimal> {
 	
 	@ManyToOne
 	private Indicator indicator;
@@ -23,9 +24,12 @@ public class MinimizeIndicatorCriterion extends OrderCriterion {
 	
 	public MinimizeIndicatorCriterion(){}
 
+	public BigDecimal weigh(Enterprise enterprise) {
+	  return indicator.reduce(enterprise, Year.now().getValue());
+	}
+	
 	public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
-		int currentYear = Year.now().getValue();
-		return indicator.reduce(oneEnterprise, currentYear).compareTo(indicator.reduce(anotherEnterprise, currentYear));
+		return weigh(oneEnterprise).compareTo(weigh(anotherEnterprise));
 	}
 
 	protected String buildDescription() {
