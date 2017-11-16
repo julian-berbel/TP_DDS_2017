@@ -15,11 +15,12 @@ import javax.persistence.Table;
 
 import exceptions.EmptyFieldException;
 import modelo.db.ModelEntity;
+import modelo.db.withName;
 import modelo.indicator.Indicator;
 
 @Entity
 @Table(name = "Enterprises")
-public class Enterprise extends ModelEntity
+public class Enterprise extends ModelEntity implements withName
 {
 	@Column(nullable = false, unique = true)
 	private String name;

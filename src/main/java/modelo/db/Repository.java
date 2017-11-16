@@ -12,7 +12,7 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import exceptions.MissingElementException;
 
-public abstract class Repository<Type extends ModelEntity> implements WithGlobalEntityManager, TransactionalOps{
+public abstract class Repository<Type extends ModelEntity & withName> implements WithGlobalEntityManager, TransactionalOps{
 	private String tableName;
 	private Class<Type> classType;
 	
@@ -27,12 +27,15 @@ public abstract class Repository<Type extends ModelEntity> implements WithGlobal
 	
 	public void updateElement(Type entity){
 		entityManager().merge(entity);
-	}
+	}	
 	
-	public void upsertElement(Type entity){
-		if(fetchById(entity.getId()).isPresent()) updateElement(entity);
-		else addElement(entity);
-	}
+	public void upsertByName(Type entity){
+		  Optional<Type> maybeEntity = fetchByName(entity.getName());
+		  if(maybeEntity.isPresent()){
+		    entity.setId(maybeEntity.get().getId());
+		    updateElement(entity);
+		  } else addElement(entity);
+		}
 	
 	public void deleteElement(Type entity){
 		entityManager().remove(entity);
@@ -75,6 +78,10 @@ public abstract class Repository<Type extends ModelEntity> implements WithGlobal
 		return entityManager()
 		        .createQuery("from " + tableName, classType)
 		        .getResultList();
+	}
+	
+	public Optional<Type> fetchByName(String name){
+		return fetchElement("name", name);
 	}
 		
 }

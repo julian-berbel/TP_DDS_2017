@@ -11,6 +11,7 @@ import javax.persistence.Transient;
 
 import exceptions.EmptyFieldException;
 import modelo.db.ModelEntity;
+import modelo.db.withName;
 import modelo.enterprise.Enterprise;
 import modelo.indicator.cache.CalculationCache;
 import modelo.indicator.cache.PreCalculation;
@@ -19,7 +20,7 @@ import modelo.indicator.parser.IndicatorParser;
 
 @Entity
 @Table(name = "Indicators")
-public class Indicator extends ModelEntity implements Operable
+public class Indicator extends ModelEntity implements Operable,withName
 {
 	
 	@Column(nullable = false, unique = true)

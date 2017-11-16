@@ -34,6 +34,6 @@ public class EnterpriseRepository extends Repository<Enterprise> implements with
 	}
 	
 	public void batchLoad(List<Enterprise> enterprises){
-		enterprises.forEach(this::upsertElement);
+		enterprises.forEach(this::upsertByName);
 	}
 }

@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import exceptions.EmptyFieldException;
 import exceptions.ExistingIndicatorException;
 import modelo.db.ModelEntity;
+import modelo.db.withName;
 import modelo.indicator.Indicator;
 import modelo.method.Method;
 
@@ -24,7 +25,7 @@ import modelo.method.Method;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
 @DiscriminatorValue("U")
-public class User extends ModelEntity {
+public class User extends ModelEntity implements withName {
 	
 	private String email;
 	private String password;
@@ -85,6 +86,11 @@ public class User extends ModelEntity {
 
 	public String homeView() {
 		return "home/home.hbs";
+	}
+
+	@Override
+	public String getName() {		
+		return email;
 	}
 
 }
