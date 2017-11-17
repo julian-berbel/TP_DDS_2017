@@ -4,47 +4,52 @@
 	<script src = "/js/validateChkBox.js" type="text/javascript"></script>
 	
 	<form action="/indicators" method="get">
-	
-		<title>Indicadores</title>
-		<p class="title"><b>Indicadores</b></p>
 		
-		<table class="table table-stripped">
-			<tr>
-				<th class="ppal">Nombre</th>
-				<th class="ppal">Fórmula</th>
-				<th class="ppal">Editar</th>
-				<th class="ppal">Borrar</th>
-				<th class="ppal"></th>
-			</tr>
+	<title>Indicadores</title>
+	<p class="title">Indicadores</p>
 			
-			{{#each}}
+	{{#if model}}
+			<table class="table table-stripped">
 				<tr>
-					<td>{{name}}</td>
-					<td>{{formula}}</td>	
-					<td><a class="fa fa-pencil" href="indicators/{{id}}/edit"></a></td>
-					<td><a class="fa fa-trash-o" onclick="erase({{id}})"></a></td>
-					<td><input type="checkbox" name="selected" value={{name}} ></td>	
+					<th class="ppal">Nombre</th>
+					<th class="ppal">Fórmula</th>
+					<th class="ppal">Editar</th>
+					<th class="ppal">Borrar</th>
+					<th class="ppal"></th>
 				</tr>
-			{{/each}}
-		</table>
+				
+				{{#each}}
+					<tr>
+						<td>{{name}}</td>
+						<td>{{formula}}</td>	
+						<td><a class="fa fa-pencil" href="indicators/{{id}}/edit"></a></td>
+						<td><a class="fa fa-trash-o" onclick="erase({{id}})"></a></td>
+						<td><input type="checkbox" name="selected" value={{name}} ></td>	
+					</tr>
+				{{/each}}
+			</table>
+			
+		 	<div style="text-align: center;">
+		 		
+		 		<button class="submit" type="submit" formaction="indicators/new" form="form1">Nuevo Indicador</button><br>
+		 		
+				<input class="submit" type="submit" value="Analizar Empresas según los indicadores seleccionados" id="checkBtn" formaction="/indicators/evaluate">
+				
+				<label class="submit">En el año:</label>
+				
+				<input type="number" name="quantity" min="1900" max="2018" required><br>
+				
+			</div>
+			
+		</form>	
 		
-	 	<div style="text-align: center;">
-	 		
-	 		<button class="submit" type="submit" formaction="indicators/new" form="form1">Nuevo Indicador</button><br>
-	 		
-			<input class="submit" type="submit" value="Analizar Empresas según los indicadores seleccionados" id="checkBtn" formaction="/indicators/evaluate">
-			
-			<label class="submit">En el año:</label>
-			
-			<input type="number" name="quantity" min="1900" max="2018" required><br>
-			
+		<form  id="form1">  		
+		</form>
+	{{else}}
+		<div class="alert alert-danger" role="alert">
+  			No hay indicadores para mostrar
 		</div>
-		
-	</form>	
-	
-	<form  id="form1">  		
-	</form>
-	
+	{{/if}}
 </body>
 {{/partial}}
 

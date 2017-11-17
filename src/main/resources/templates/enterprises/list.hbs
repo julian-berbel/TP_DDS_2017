@@ -1,22 +1,28 @@
 {{#partial "contenido"}}
 	<title>Empresas</title>
-	<p class="title"><b>Empresas</b></p>
+	<p class="title">Empresas</p>
 
-	<table class="table table-striped">
-		<tr>
-			<th class="ppal">Nombre</th>
-			<th class="ppal">Ver</th>
-			<th class="ppal">Borrar</th>
-		</tr>
-		
-		{{#each}}
+	{{#if model}}
+		<table class="table table-striped">
 			<tr>
-				<td>{{name}}</td>
-				<td><a class="fa fa-eye" href="enterprises/{{id}}"></a></td>
-				<td><a class="fa fa-trash-o clickable" onclick="erase({{id}})"></a></td>				
+				<th class="ppal">Nombre</th>
+				<th class="ppal">Ver</th>
+				<th class="ppal">Borrar</th>
 			</tr>
-		{{/each}}
-	</table>
+			
+			{{#each}}
+				<tr>
+					<td>{{name}}</td>
+					<td><a class="fa fa-eye" href="enterprises/{{id}}"></a></td>
+					<td><a class="fa fa-trash-o clickable" onclick="erase({{id}})"></a></td>				
+				</tr>
+			{{/each}}
+		</table>
+	{{else}}
+		<div class="alert alert-danger" role="alert">
+  			No hay empresas para mostrar
+		</div>
+	{{/if}}
 
 {{/partial}}
 

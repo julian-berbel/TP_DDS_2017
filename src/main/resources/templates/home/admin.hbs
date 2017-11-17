@@ -1,17 +1,38 @@
 {{#partial "contenido"}}
 
-<title>Home</title>
+<title>Panel de administrador</title>
 
 <div>
-	<p class="usr">¡Cosas de Admin aquí! </p>
+	<p class="usr">Panel de administrador</p>
 </div>
 
-<h2>Carga batch de cuentas</h2>
+<h2 style="color: #C0C0C0;">Cargar batch de cuentas</h2>
 <form action="/batch" enctype="multipart/form-data" method="post">
-	<input type="file" name="file" accept=".txt" placeholder="Seleccionar un archivo de empresas...">
-	<input type="submit">
+	<span class="btn btn-default btn-file">
+        <i class="glyphicon glyphicon-file"></i> Examinar <input type="file" name="fileselect" accept=".json, .txt">
+    </span>
+    <p style="color: #C0C0C0;" name="label1">Seleccione un archivo</p>
 </form>
 	
+<script>    
+$(document).on('change', ':file', function() {
+	var input = document.getElementsByName('fileselect')[0];
+	var label = document.getElementsByName('label1')[0];
+	
+	if(input.value != "") {
+		var fileExtension = input.value.split('.')[1];
+			
+		if((fileExtension.toUpperCase() != "JSON") && (fileExtension.toUpperCase() != "TXT")) {
+			label.innerHTML = 'Se selecciono un archivo con extension incorrecta.<br>Solo se permiten archivos .json y .txt'; 
+		}
+		else {
+			label.innerHTML = 'Archivo seleccionado correctamente!';
+			input.form.submit();
+		}
+	}
+});
+</script>
+
 {{/partial}}
 
-{{>layout.hbs}}
+{{>layout-admin.hbs}}

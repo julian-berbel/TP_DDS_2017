@@ -1,19 +1,37 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/login.css">
+<!DOCTYPE html>
+<html>
+	<head>
+	  	<title>Login</title>
+	  	
+	  	<!-- Required meta tags -->
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  	
+	  	<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/login.css">
+	</head>
 
-<form action="/login" method="post">  
-	<div class="imgcontainer">
-    	<img src="https://static.fintonic.com/resources/img/landing/Candado_v0.png" alt="Login" class="login">
-    </div>
-
-  <div class="container">
-    <label class="l1"><b>Email:</b></label>
-    <input type="text" placeholder="ejemplo@ejemplo.com" name="Email" required><br>
-
-    <label class="l2"><b>Contraseña:</b></label>
-    <input type="password" placeholder="**********" name="Password" required><br>
-
-    <button type="submit"><b>Login</b></button>
-  </div>
-
-</form>
+	<body>
+		<form action="/login" method="post">  
+			<div class="imgcontainer">
+		    	<img src="http://www.pixelimage.tv/CONTENT_wp-content/uploads/2015/01/private-xxl.png" alt="Login" class="login">
+		    </div>
+		
+		  <div class="container">
+		    <label class="l1"><b>Email:</b></label>
+		    <input type="text" placeholder="ejemplo@ejemplo.com" name="Email" required><br>
+		
+		    <label class="l2"><b>Contraseña:</b></label>
+		    <input type="password" placeholder="**********" name="Password" required><br>
+		
+		    <button type="submit" class="btn-default"><b>Login</b></button>
+		  </div>
+		
+		</form>
+		
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>		
+	</body>
+</html>

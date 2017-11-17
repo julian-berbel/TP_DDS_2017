@@ -3,9 +3,9 @@ th.li, td.li {
     vertical-align: middle;
 }
 th.ppal {
-	background-color:#00BFFF;
+	background-color:#696969;
 	font-size:25;
-	color:white;
+	color:#C0C0C0;
 }
 th {
 	font-size:25;
@@ -18,7 +18,7 @@ td.period {
 	font-size:25;
 }
 h1 {
-	color:#00BFFF;
+	color:#696969;
 }
 h3 {
 	font-size:30;
