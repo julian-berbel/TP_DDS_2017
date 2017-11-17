@@ -4,41 +4,33 @@
 	
 	<form action="/methods" method="get">
 	
-	<p class="title"> Metodologia {{name}} </p>
-	<br>
 	
-	<table class="table table-striped">
-	
-	<tr>
-	<td><h3>Criterios de Filtro:</h3></td>
+	<p class="title"> Metodologia: {{name}} </p><br>
+
+	<p class="title"> Criterios de Filtro: </p>
 	<td><ul>
 		{{#each filterCriteria}}
 			<li>{{description}}</li>
 		{{/each}}
 	</ul></td>
-	</tr>
 	
-	<tr>
-	<td>
-	<h3>Criterios de Orden:</h3></td>
+		<p class="title"> Criterios de Orden: </p>
 	<td><ol>
 		{{#each orderCriteria}}
 			<li>{{description}}</li>
 		{{/each}}
-	</ol></td>
-	</tr>
+		
+	</ol></td>	
 	
-	<tr>
-	<td><h3>Criterios Mixtos:</h3></td>
+	<p class="title"> Criterios Mixtos: </p>
 	<td><ul>
 		{{#each mixedCriteria}}
 			<li>{{description}}</li>
 		{{/each}}
 	</ul></td>
-	</tr>
-	</table>
-	
-	<button class="submit" type="submit" formaction="/methods/{{id}}/eval" > Evaluar Indicador contra todas las empresas</button><br>
+	<br>
+	<input class="btn btn-warning" type="submit" style="float: left;" value="Volver" formaction="/methods">
+	<input class="btn btn-warning" type="submit" style="float: right;" value="Evaluar Indicador contra todas las empresas" formaction="/methods/{{id}}/eval">
 		</form>
 {{/partial}}
 

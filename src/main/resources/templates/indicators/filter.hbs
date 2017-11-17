@@ -25,14 +25,16 @@
 					<tr>
 						<td>{{name}}</td>
 						<td>{{formula}}</td>	
-						<td><a class="fa fa-pencil" style="color:#EF7F50;" href="{{id}}/edit"></a></td>
+						<td><a class="fa fa-pencil"  href="{{id}}/edit"></a></td>
 						<td><a class="fa fa-trash-o" onclick="eraseIndicator({{id}})"></a></td>
 						<td><input type="checkbox" name="selected" value={{name}} ></td>	
 					</tr>
 				{{/each}}
 			</table>	
 			
-			
+					<form>
+		<input class="btn btn-warning" type="submit" style="float: left;" value="Volver" formaction="/indicators">
+	</form>
 			
 			<div class="container evaluate-container">
 				<p class="title2">Analizar empresas para los indicadores seleccionados</p>
@@ -46,7 +48,7 @@
 						<input type="number" name="quantity" min="1900" max="2018" required>
 					</div>
 					<div class="col-sm-2">
-						<input class="btn btn-evaluate" type="submit" value="Analizar Empresas" id="checkBtn" formaction="/indicators/evaluate">
+						<input class="btn btn-warning" type="submit" value="Analizar Empresas" id="checkBtn" formaction="/indicators/evaluate">
 					</div>
 				</div>				
 			</div>

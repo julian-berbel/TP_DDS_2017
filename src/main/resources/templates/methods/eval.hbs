@@ -1,53 +1,32 @@
 {{#partial "contenido"}}
 	<title>Resultados</title>
-	<h1><u>Resultados</u></h1>
+<p class = "title">Resultados</p>
 	
-	<table class="table table-striped">
 	
-		<tr>
-			<th class="ppal">Aprobados</th>
-			<th class="ppal">No Aprobados</th>
-		</tr>
 	
-		<tr>
-			<td>
-				<ol>
+<p class="title">  Aprobados: </p>
+	<td><ol>
 				{{#each passes}}
 				{{#with enterprise}}
 					<li>{{name}}</li>
 				{{/with}}
 				{{/each}}
-				</ol>
-			</td>
-			
-			<td>
-				<ul>
+				</ol></td>
+	
+	<p class="title">  Desaprobados: </p>
+	<td><ul>
 				{{#each failures}}
 				{{#with enterprise}}
 					<li>{{name}}</li>
 				{{/with}}
 				{{/each}}
-				</ul>
-			</td>
-		</tr>
-</table>
+				</ul></td>
 	
-	<h3>Errores</h3>
-	<table class="table table-striped">
-		<tr>
-			<th class="ppal">Empresa</th>
-			<th class="ppal">Error</th>
-		</tr>
-		
-		{{#each errors}}
-			<tr>
-				{{#with enterprise}}
-					<td>{{name}}</td>
-				{{/with}}
-				<td>{{errorMessage}}</td>
-			</tr>
-		{{/each}}
-	</table>
+	
+
+	<form>
+		<input class="btn btn-warning" type="submit" style="float: left;" value="Volver" formaction="/methods">
+	</form>
 		
 {{/partial}}
 

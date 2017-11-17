@@ -14,18 +14,18 @@
 			<tr>
 				<td class="li">{{name}}</td>
 				<td>
-					<table class="table inside-table" style="background-color:#A9A9A9;">
+					<table class="table inside-table" style="background-color:#C0C0C0;">
 					<col width="200">
   					<col width="200">
 						<tr>
-							<th class="li">Indicador</th>
-							<th class="li">Valor</th>
+							<th class="ppal">Indicador</th>
+							<th class="ppal">Valor</th>
 						</tr>
 						
 						{{#each indicators}}
-							<tr>
-								<td class="li">{{name}}</td>
-								<td class="li">{{value}}</td>
+							<tr class="warning">
+								<td >{{name}}</td>
+								<td >{{value}}</td>
 							</tr>
 						{{/each}}
 					</table>
@@ -36,7 +36,9 @@
 	</table>
 		
 	</form>	
-	
+		<form>
+		<input class="btn btn-warning" type="submit" style="float: left;" value="Volver" formaction="/indicators">
+	</form>
 
 {{/partial}}
 

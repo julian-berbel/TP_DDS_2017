@@ -18,7 +18,7 @@
 						<input type="text" name="name" placeholder="Nombre Indicador" required>
 					</div>
 					<div class="col-sm-2">
-						<input class="btn btn-evaluate" type="submit" value="filtrar"  formaction="/indicators/filter"></br></br>
+						<input class="btn btn-evaluate" type="submit" value="Filtrar"  formaction="/indicators/filter"></br></br>
 					</div>
 					<div style="margin-left:89%;">
 						<button class="btn btn-newIndicator" type="submit" form="form1" formaction="indicators/new">Nuevo Indicador</button><br/><br/>
@@ -39,7 +39,7 @@
 					<tr>
 						<td>{{name}}</td>
 						<td>{{formula}}</td>	
-						<td><a class="fa fa-pencil" style="color:#EF7F50;" href="indicators/{{id}}/edit"></a></td>
+						<td><a class="fa fa-pencil" href="indicators/{{id}}/edit"></a></td>
 						<td><a class="fa fa-trash-o" onclick="eraseIndicator({{id}})"></a></td>
 						<td><input type="checkbox" name="selected" value={{name}} ></td>	
 					</tr>

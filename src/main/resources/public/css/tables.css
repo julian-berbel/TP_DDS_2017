@@ -13,6 +13,7 @@ th {
 }
 td {
 	font-size:20;
+	color:#6E6E6E;
 }
 td.period {
 	font-size:25;
@@ -30,20 +31,15 @@ h3 {
 	margin-bottom:5px;
 }
 .table-dark{
-	background-color: #696969;	
+	background-color: #F3E2A9;	
 	color:#C0C0C0;
 	border: 1px solid white;
 }
 .inside-table{	
-	color:#595959;
+	color:#F3E2A9;
 	border: 1px solid white;
 }
-.fa-eye{
-	color: #EF7F50;
-}
-.fa-trash-o{
-	color:#EF7F50;
-}
-fa-pencil:hover{
-	color:#EF7F50;
+li{
+	color: #C0C0C0;
+	font-size: 20;
 }
