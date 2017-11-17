@@ -6,11 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import modelo.db.ModelEntity;
-import modelo.db.withName;
 
 @Entity
 @Table(name = "PreCalculations")
-public class PreCalculation extends ModelEntity implements withName {
+public class PreCalculation extends ModelEntity {
 	
 	public String formula;
 	public Long enterpriseId;
@@ -28,10 +27,5 @@ public class PreCalculation extends ModelEntity implements withName {
 	
 	public BigDecimal getResult() {
 		return result;
-	}
-
-	@Override
-	public String getName() {		
-		return null;
 	}
 }

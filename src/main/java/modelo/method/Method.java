@@ -16,7 +16,6 @@ import org.jooq.lambda.Seq;
 
 import exceptions.EmptyFieldException;
 import modelo.db.ModelEntity;
-import modelo.db.withName;
 import modelo.enterprise.Enterprise;
 import modelo.method.criteria.FilterCriterion;
 import modelo.method.criteria.MixedCriterion;
@@ -29,7 +28,7 @@ import modelo.method.result.Result;
 
 @Entity
 @Table(name = "Methods")
-public class Method extends ModelEntity implements withName{
+public class Method extends ModelEntity {
 
 	@Column(nullable = false, unique = true)
 	private String name;

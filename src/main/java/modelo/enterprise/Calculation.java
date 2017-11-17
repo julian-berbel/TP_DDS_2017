@@ -41,4 +41,9 @@ public class Calculation extends ModelEntity
 	{
 		return value;
 	}
+	public void merge(Calculation calculation) {
+		Calculation newCalculation = new Calculation(name, value, calculation.getId());
+		System.out.println("cuentanueva= " + newCalculation.getName() + " " + newCalculation.getValue().toString() + " " + newCalculation.getId());
+		CalculationRepository.getInstance().updateElement(newCalculation);
+	}
 }

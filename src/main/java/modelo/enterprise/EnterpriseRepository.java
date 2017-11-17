@@ -1,6 +1,7 @@
 package modelo.enterprise;
 
 import java.util.List;
+import java.util.Optional;
 
 import modelo.db.Repository;
 import modelo.db.withFetchableName;
@@ -13,27 +14,16 @@ public class EnterpriseRepository extends Repository<Enterprise> implements with
 		super("Enterprise", Enterprise.class);
 	}
 
-	private String filePath;
-
-	private Boolean fileLoaded= false;
-
 	public static EnterpriseRepository getInstance(){
 		return instance;
 	}
 
-	public String getFilePath() {
-		return filePath;
-	}
-	
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-	
-	public Boolean getFileLoaded() {
-		return fileLoaded;
-	}
-	
 	public void batchLoad(List<Enterprise> enterprises){
-		enterprises.forEach(this::upsertByName);
+		enterprises.forEach(enterprise -> {
+			Optional<Enterprise> maybeEnterprise = EnterpriseRepository.getInstance().fetchByName(enterprise.getName());
+			if(maybeEnterprise.isPresent()){
+				enterprise.merge(maybeEnterprise.get());
+			}else addElement(enterprise);
+		});
 	}
 }

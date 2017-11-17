@@ -1,5 +1,8 @@
 package modelo.enterprise;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -60,5 +63,23 @@ public class Period extends ModelEntity
 	@Override
 	public String toString(){
 		return String.valueOf(year);
+	}
+
+	public void merge(Period period) {
+		calculations.forEach(c -> System.out.println("Calculation " + c.getName() + " " + c.getValue()));
+		calculations.stream().forEach(calculation -> {
+			Map<String, Object> searchCriteria = new HashMap<>();
+			searchCriteria.put("period_id", period.getId());
+			searchCriteria.put("name", calculation.getName());
+			Optional<Calculation> maybeCalculation = CalculationRepository.getInstance().fetchElement(searchCriteria);
+			
+			if(maybeCalculation.isPresent()){
+				calculation.merge(maybeCalculation.get());
+			}else {
+				CalculationRepository.getInstance().addElement(calculation);
+				period.addCalculation(calculation);
+				PeriodRepository.getInstance().updateElement(period);
+			}
+		});
 	}
 }

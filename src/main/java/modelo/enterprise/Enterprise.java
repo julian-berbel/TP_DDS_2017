@@ -2,7 +2,10 @@ package modelo.enterprise;
 
 import java.math.BigDecimal;
 import java.time.Year;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
@@ -15,12 +18,11 @@ import javax.persistence.Table;
 
 import exceptions.EmptyFieldException;
 import modelo.db.ModelEntity;
-import modelo.db.withName;
 import modelo.indicator.Indicator;
 
 @Entity
 @Table(name = "Enterprises")
-public class Enterprise extends ModelEntity implements withName
+public class Enterprise extends ModelEntity
 {
 	@Column(nullable = false, unique = true)
 	private String name;
@@ -76,6 +78,27 @@ public class Enterprise extends ModelEntity implements withName
 											.mapToInt(period -> period.getYear())
 											.min()
 											.getAsInt();
+	}
+	
+	public void addPeriod(Period period){
+		periods.add(period);
+	}
+
+	public void merge(Enterprise oldEnterprise) {
+		periods.stream().forEach(period -> {
+			Map<String, Object> searchCriteria = new HashMap<>();
+			searchCriteria.put("enterprise_id", oldEnterprise.getId());
+			searchCriteria.put("year", period.getYear());
+			Optional<Period> maybePeriod = PeriodRepository.getInstance().fetchElement(searchCriteria);
+			
+			if(maybePeriod.isPresent()){
+				period.merge(maybePeriod.get());
+			}else {
+				PeriodRepository.getInstance().addElement(period);
+				oldEnterprise.addPeriod(period);
+				EnterpriseRepository.getInstance().updateElement(oldEnterprise);
+			}
+		});
 	}
 
 }
