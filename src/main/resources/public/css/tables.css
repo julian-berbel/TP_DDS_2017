@@ -32,5 +32,18 @@ h3 {
 .table-dark{
 	background-color: #696969;	
 	color:#C0C0C0;
-	border-color:white;
+	border: 1px solid white;
+}
+.inside-table{	
+	color:#595959;
+	border: 1px solid white;
+}
+.fa-eye{
+	color: #EF7F50;
+}
+.fa-trash-o{
+	color:#EF7F50;
+}
+fa-pencil:hover{
+	color:#EF7F50;
 }

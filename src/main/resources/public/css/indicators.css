@@ -1,0 +1,93 @@
+/* For the '/indicators/list' view */
+
+.btn-noIndicator {
+    background-color: #FF7F50;
+    font-size:20;
+    color: white;
+    padding: 8px 0px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    transition: all 0.5s ease 0s;
+    margin-left: 35%;
+}
+.btn-noIndicator:hover,
+.btn-noIndicator:focus,
+.btn-noIndicator:active{
+	background-color: #000000;
+	color: white;
+}
+.btn-newIndicator{
+	background-color: #FF7F50;
+    font-size:15;
+    color: white;
+    padding: 8px 0px;
+    margin: -10px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.5s ease 0s;
+}
+.btn-newIndicator:hover,
+.btn-newIndicator:focus,
+.btn-newIndicator:active{
+	background-color: #000000;
+	color: white;
+}
+.btn-evaluate{
+	background-color: #FF7F50;
+    font-size:15;
+    color: white;
+    padding: 8px 0px;
+    margin: -5px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.5s ease 0s;
+}
+.btn-evaluate:hover,
+.btn-evaluate:focus,
+.btn-evaluate:active{
+	background-color: #000000;
+	color: white;
+}
+.evaluate-container{
+	margin: 75px 0;
+}
+
+/* For the '/indicators/new' view */
+
+.crazy-row{
+	margin-left:33%;
+}
+.newIndicatorLbl{
+	color: #C0C0C0;
+	font-size:20;
+	font-weight: normal;
+}
+.newIndicatorLbl2{
+	color: #C0C0C0;
+	font-size:20;
+}
+.newIndicatorLbl3{
+	color: #C0C0C0;
+	font-size:15;
+}
+.btn-createIndicator {
+    background-color: #FF7F50;
+    font-size:20;
+    color: white;
+    padding: 8px 0px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    transition: all 0.5s ease 0s;
+}
+.btn-createIndicator:hover,
+.btn-createIndicator:focus,
+.btn-createIndicator:active{
+	background-color: #000000;
+	color: white;
+}

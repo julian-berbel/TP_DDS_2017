@@ -4,9 +4,10 @@
 	
 	<title>Indicadores de {{name}}</title>
 	
-	<h1 class="inline"><b> Empresa: {{name}} </b></h1>
+	<p class="title"> Empresa: {{name}} </p>
+	<br>
 	
-	<table class="table table-stripped">
+	<table class="table table-dark">
 		<tr>
 			<th class="ppal">Periodo</th>
 			<th class="ppal"><center>Cuentas</center></th>
@@ -14,9 +15,9 @@
 		
 		{{#each periods}}
 			<tr>
-				<td class="period">{{year}}</td>
+				<td class="period"><center>{{year}}</center></td>
 				<td>
-					<table class="table table-stripped">
+					<table class="table inside-table" style="background-color:#A9A9A9;">
 						<tr>
 							<th>Cuenta</th>
 							<th>Valor</th>

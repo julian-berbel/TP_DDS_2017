@@ -28,9 +28,14 @@ a.navbar-brand {
     text-align:center;
     text-decoration: underline;
 }
-p.title {
+p.title{
 	color:#C0C0C0;
 	font-size:35;
+	padding-bottom:12px;
+}
+p.title2{
+	color:#C0C0C0;
+	font-size:30;
 	padding-bottom:12px;
 }
 .nav.navbar-nav li a.logout {
@@ -86,12 +91,17 @@ p.title {
 }
 .crazy-btn{
 	background-color: #FF7F50;
+	color: white;
     transition: all 0.5s ease 0s;
 }
 .crazy-btn:hover,
 .crazy-btn:focus,
 .crazy-btn:active{
 	background-color: #000000;
+	color: white;
+}
+.crazy-input{
+	width:200%;
 }
 .crazy-text{
 	color:#E6E6E6;
