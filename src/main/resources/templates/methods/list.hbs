@@ -1,29 +1,44 @@
-{{#partial "contenido"}}	
-	<title>Metodologías</title>
-	<p class="title">Metodologías</p>
+{{#partial "contenido"}} 
+ <title>Metodologias</title>
+ <p class="title">Metodologias</p>
 
-	{{#if}}
-		<table class="table table-dark">
-			<tr>
-				<th class="ppal">Nombre</th>
-				<th class="ppal">Ver</th>
-				<th class="ppal">Borrar</th>
-			</tr>
-			
-			{{#each}}
-				<tr>
-					<td>{{name}}</td>
-					<td><a class="fa fa-eye" href="{{url}}"></a></td>
-					<td><a class="fa fa-trash-o clickable" onclick="erase({{id}})"></a></td>				
-				</tr>
-			{{/each}}
-		</table>
-	{{else}}
-		<div class="alert alert-danger" role="alert">
-  			No hay metodologias para mostrar
-		</div>
-	{{/if}}
-	
+
+ {{#if}}
+  <div class="row">	
+			<form>				
+					<div class="col-sm-2">										
+						<input type="text" name="name" placeholder="Nombre metodologia" required>
+					</div>
+					<div class="col-sm-2">
+						<input class="btn btn-evaluate" type="submit" value="filtrar"  formaction="/methods/filter"></br></br>
+					</div>
+					<div style="margin-left:89%;">
+						<button class="btn btn-newIndicator" type="submit" form="form1" formaction="indicators/new">Nuevo Indicador</button><br/><br/>
+					</div>
+			</form>	
+			</div>	
+  <table class="table table-dark">
+   <tr>
+    <th class="ppal">Nombre</th>
+    <th class="ppal">Ver</th>
+    <th class="ppal">Borrar</th>
+   </tr>
+   
+   {{#each}}
+    <tr>
+     <td>{{name}}</td>
+     <td><a class="fa fa-eye" href="methods/{{id}}"></a></td>
+     <td><a class="fa fa-trash-o clickable" onclick="eraseMethod({{id}})"></a></td>    
+    </tr>
+   {{/each}}
+  </table>
+  
+ {{else}}
+  <div class="alert alert-danger" role="alert">
+     No hay metodologias para mostrar
+  </div>
+ {{/if}}
+
 {{/partial}}
 
 {{>layout.hbs}}
