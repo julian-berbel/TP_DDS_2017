@@ -9,14 +9,17 @@
 <h2 style="color: #C0C0C0;">Cargar batch de cuentas</h2>
 <form action="/batch" enctype="multipart/form-data" method="post">
 	<span class="btn btn-default btn-file">
-        <i class="glyphicon glyphicon-file"></i> Examinar <input type="file" name="fileselect" accept=".json, .txt">
+        <i class="glyphicon glyphicon-file"></i> Examinar <input type="file" name="file" onchange="this.form.submit()" accept=".json, .txt">
     </span>
     <p style="color: #C0C0C0;" name="label1">Seleccione un archivo</p>
 </form>
-	
+
+
+<!-- Con este script tira un NullPointerException en el controlador (metodo 'batchLoad', linea del 'try(final...)')	
+
 <script>    
 $(document).on('change', ':file', function() {
-	var input = document.getElementsByName('fileselect')[0];
+	var input = document.getElementById('file');
 	var label = document.getElementsByName('label1')[0];
 	
 	if(input.value != "") {
@@ -32,6 +35,8 @@ $(document).on('change', ':file', function() {
 	}
 });
 </script>
+
+-->
 
 {{/partial}}
 
