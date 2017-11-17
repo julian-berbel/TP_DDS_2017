@@ -11,6 +11,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import exceptions.MissingElementException;
+import modelo.indicator.Indicator;
 
 public abstract class Repository<Type extends ModelEntity> implements WithGlobalEntityManager, TransactionalOps{
 	private String tableName;
@@ -70,5 +71,13 @@ public abstract class Repository<Type extends ModelEntity> implements WithGlobal
 		return entityManager()
 		        .createQuery("from " + tableName, classType)
 		        .getResultList();
+	}	
+		
+	public List<Type> filterByName(String name){		
+		return entityManager()
+		        .createQuery("select t from " + tableName+" t where name like :name", classType)
+		        .setParameter("name", "%" + name + "%")
+		        .getResultList();
+	
 	}
 }
