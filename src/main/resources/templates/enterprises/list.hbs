@@ -2,8 +2,11 @@
 	<title>Empresas</title>
 	<p class="title">Empresas</p>
 
-	{{#if model}}
-		<table class="table table-striped">
+<!-- Si no le tiras nada al lado del #if o #each el tipo asume que queres hacer referencia al modelo de la vista
+	 de lo contrario, asume que le queres pasar un valor y, en este caso, no va a andar -->
+
+	{{#if}}
+		<table class="table table-dark">
 			<tr>
 				<th class="ppal">Nombre</th>
 				<th class="ppal">Ver</th>
@@ -23,7 +26,6 @@
   			No hay empresas para mostrar
 		</div>
 	{{/if}}
-
 {{/partial}}
 
 {{>layout.hbs}}
