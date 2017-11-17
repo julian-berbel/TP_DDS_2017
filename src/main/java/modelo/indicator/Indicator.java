@@ -20,7 +20,7 @@ import modelo.indicator.parser.IndicatorParser;
 
 @Entity
 @Table(name = "Indicators")
-public class Indicator extends ModelEntity implements Operable,withName
+public class Indicator extends ModelEntity implements Operable, withName
 {
 	
 	@Column(nullable = false, unique = true)
