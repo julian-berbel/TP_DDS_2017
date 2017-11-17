@@ -1,12 +1,28 @@
 {{#partial "contenido"}}
 
+	<link rel="stylesheet" href="/css/indicators.css">	
+	
+	<form>
 	<title>Empresas</title>
 	<p class="title">Empresas</p>
 
 <!-- Si no le tiras nada al lado del #if o #each el tipo asume que queres hacer referencia al modelo de la vista
 	 de lo contrario, asume que le queres pasar un valor y, en este caso, no va a andar -->
-
+	
 	{{#if}}
+		
+
+				<div class="row">					
+					<div class="col-sm-2">										
+						<input type="text" name="name" placeholder="Nombre Empresa" required>
+					</div>
+					<div class="col-sm-2">
+						<input class="btn btn-evaluate" type="submit" value="filtrar"  formaction="/enterprises/filter"></br></br>
+					</div>
+				</div>				
+			
+		
+		
 		<table class="table table-dark">
 			<tr>
 				<th class="ppal">Nombre</th>
@@ -18,7 +34,7 @@
 				<tr>
 					<td>{{name}}</td>
 					<td><a class="fa fa-eye" href="enterprises/{{id}}"></a></td>
-					<td><a class="fa fa-trash-o clickable" onclick="erase({{id}})"></a></td>				
+					<td><a class="fa fa-trash-o clickable" onclick="eraseEnterprise({{id}})"></a></td>				
 				</tr>
 			{{/each}}
 		</table>
@@ -27,6 +43,8 @@
   			No hay empresas para mostrar
 		</div>
 	{{/if}}
+	
+	</form>	
 {{/partial}}
 
 {{>layout.hbs}}
