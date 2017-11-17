@@ -48,7 +48,9 @@ public class EnterpriseController extends Controller {
 			e.printStackTrace();
 		}
         
-		return null;
+        res.redirect("/home");
+        
+        return null;
 	}
 	
 	public Response delete(Request req, Response res){

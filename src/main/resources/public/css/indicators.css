@@ -76,9 +76,9 @@
 }
 .btn-createIndicator {
     background-color: #FF7F50;
-    font-size:20;
+    font-size:15;
     color: white;
-    padding: 8px 0px;
+    padding: 20px 0px;
     margin: 8px 0;
     border: none;
     cursor: pointer;

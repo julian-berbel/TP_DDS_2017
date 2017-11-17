@@ -3,6 +3,7 @@ package main;
 import controllers.HomeController;
 import controllers.LoginController;
 import controllers.MainController;
+import controllers.DeadEndController;
 import controllers.EnterpriseController;
 import controllers.IndicatorController;
 import controllers.MethodController;
@@ -27,6 +28,8 @@ public class Router {
 		MethodController methodController = new MethodController();
 		IndicatorController indicatorController = new IndicatorController();
 		HomeController homeController = new HomeController();
+		
+		DeadEndController deadEndController = new DeadEndController();
 		
 		get("/", MainController::main, engine);
 		get("/home", homeController::home,engine);
@@ -61,7 +64,9 @@ public class Router {
 			get("/:id", methodController::show, engine);
 			delete("/:id", methodController::delete);
 			get("/:id/eval", methodController::eval, engine);
-		});		
+		});	
+		
+		get("/deadend", deadEndController::get, engine);
 	}
 
 }
