@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.List;
 
+import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.method.Method;
 import modelo.method.MethodRepository;
@@ -43,5 +44,9 @@ public class MethodController extends Controller {
 			MethodRepository.getInstance().deleteElement(method);
 		});
 		return res;
+	}
+	public ModelAndView filter(Request req, Response res){		
+		List<Method> methods = withTransaction(() -> MethodRepository.getInstance().filterByName(req.queryParams("name")));
+		return new ModelAndView(methods, "methods/filter.hbs");
 	}
 }

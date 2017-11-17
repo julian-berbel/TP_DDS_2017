@@ -65,10 +65,14 @@ public class Router {
 		path("/methods", () -> {
 			get("", methodController::list, engine);
 			post("", methodController::create);
+			get("/filter",methodController::filter, engine);
+			get("/filter/:id",methodController::show, engine);
+			delete("/filter/:id",methodController::delete);
 			get("/new", methodController::renderNewForm, engine);
 			get("/:id", methodController::show, engine);
 			delete("/:id", methodController::delete);
 			get("/:id/eval", methodController::eval, engine);
+			
 		});		
 	}
 
