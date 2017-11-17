@@ -48,16 +48,8 @@ img.login {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 15%;
+    width: 30%;
     transition: all 0.5s ease 0s;
-    
-    /*	Estas 4 lineas magicas te centran las cosas en la pantalla. 
-    	Modificando top y left, se mueve. Tambien modificando el translate */
-    
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%,-50%);
 }
 
 .btn-default:hover,
@@ -72,5 +64,7 @@ img.login {
     margin-right: 30%;
 
 }
-
+.magic-block{
+	margin-left: 21.5%;
+}
 

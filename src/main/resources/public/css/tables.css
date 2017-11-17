@@ -29,3 +29,8 @@ h3 {
 	margin-top:5px;
 	margin-bottom:5px;
 }
+.table-dark{
+	background-color: #696969;	
+	color:#C0C0C0;
+	border-color:white;
+}
