@@ -22,10 +22,10 @@
 			
 			<div class="row crazy-row">	
 				<div class="col-sm-2">				
-					<label class="newIndicatorLbl" for="costoEstimado">FÃ³rmula:</label>
+					<label class="newIndicatorLbl" for="costoEstimado">Fórmula:</label>
 				</div>
 				<div class="col-sm-2">
-					<input class="crazy-input" id="formula" placeholder="FÃ³rmula del Indicador" name="formula" value="{{formula}}">
+					<input class="crazy-input" id="formula" placeholder="Fórmula del Indicador" name="formula" value="{{formula}}">
 				</div>
 			</div>			
 			
@@ -42,9 +42,11 @@
 			</div>
 			
 			<br>
+			<form>
+			<input class="btn btn-createIndicator" type="submit" value="Volver" formaction="/indicators">
 			
-			<input onclick="put({{id}})" class="btn btn-createIndicator" value="Guardar">
-			
+			<input onclick="postIndicator()" class="btn btn-createIndicator" value="Guardar">
+			</form>
 		</div>
 	</body>
 

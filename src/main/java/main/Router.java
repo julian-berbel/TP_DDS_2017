@@ -40,8 +40,12 @@ public class Router {
 		
 		path("/enterprises", () -> {
 			get("", enterpriseController::list, engine);
-			get("/:id", enterpriseController::show, engine);
+			get("/filter",enterpriseController::filter, engine);
+			get("/filter/:id",enterpriseController::show, engine);
+			delete("/filter/:id", enterpriseController::delete);
+			get("/:id", enterpriseController::show, engine);			
 			delete("/:id", enterpriseController::delete);
+				
 		});
 		
 		post("/batch", enterpriseController::batchLoad);
@@ -49,6 +53,10 @@ public class Router {
 		path("/indicators", () -> {
 			get("", indicatorController::list, engine);
 			post("", indicatorController::create);
+			get("/filter",indicatorController::filter, engine);
+			get("/filter/:id/edit",indicatorController::renderEditForm, engine);
+//			put("/filter/:id/edit",indicatorController::edit);
+			delete("/filter/:id", indicatorController::delete);
 			get("/evaluate", indicatorController::evaluate, engine);
 			get("/new", indicatorController::renderNewForm, engine);
 			get("/:id", indicatorController::show, engine);
@@ -60,13 +68,16 @@ public class Router {
 		path("/methods", () -> {
 			get("", methodController::list, engine);
 			post("", methodController::create);
+			get("/filter",methodController::filter, engine);
+			get("/filter/:id",methodController::show, engine);
+			delete("/filter/:id",methodController::delete);
 			get("/new", methodController::renderNewForm, engine);
 			get("/:id", methodController::show, engine);
 			delete("/:id", methodController::delete);
 			get("/:id/eval", methodController::eval, engine);
+			
 		});	
 		
 		get("/deadend", deadEndController::get, engine);
 	}
-
 }
