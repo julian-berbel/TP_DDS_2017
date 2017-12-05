@@ -9,15 +9,12 @@ import modelo.indicator.Indicator;
 
 @Entity
 @DiscriminatorValue("IML")
-public class IndicatorMedianLowerThanCriterion extends IndicatorMedianCompareCriterion
-{
-	public IndicatorMedianLowerThanCriterion(Indicator indicator, BigDecimal value, int years) 
-	{
-		super(indicator, value, years, ComparisonCriterion.LowerThan);
-	}
-	
-	protected IndicatorMedianLowerThanCriterion() 
-	{
-		this.comparisonCriterion = ComparisonCriterion.LowerThan;
-	}
+public class IndicatorMedianLowerThanCriterion extends IndicatorMedianCompareCriterion {
+  public IndicatorMedianLowerThanCriterion(Indicator indicator, BigDecimal value, int years) {
+    super(indicator, value, years, ComparisonCriterion.LowerThan);
+  }
+
+  protected IndicatorMedianLowerThanCriterion() {
+    this.comparisonCriterion = ComparisonCriterion.LowerThan;
+  }
 }

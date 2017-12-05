@@ -9,15 +9,12 @@ import modelo.indicator.Indicator;
 
 @Entity
 @DiscriminatorValue("IAL")
-public class IndicatorAverageLowerThanCriterion extends IndicatorAverageCompareCriterion
-{
-	public IndicatorAverageLowerThanCriterion(Indicator indicator, BigDecimal value, int years) 
-	{
-		super(indicator, value, years, ComparisonCriterion.LowerThan);
-	}
-	
-	protected IndicatorAverageLowerThanCriterion() 
-	{
-		this.comparisonCriterion = ComparisonCriterion.LowerThan;
-	}
+public class IndicatorAverageLowerThanCriterion extends IndicatorAverageCompareCriterion {
+  public IndicatorAverageLowerThanCriterion(Indicator indicator, BigDecimal value, int years) {
+    super(indicator, value, years, ComparisonCriterion.LowerThan);
+  }
+
+  protected IndicatorAverageLowerThanCriterion() {
+    this.comparisonCriterion = ComparisonCriterion.LowerThan;
+  }
 }

@@ -7,15 +7,12 @@ import modelo.indicator.Indicator;
 
 @Entity
 @DiscriminatorValue("IIV")
-public class IncreasingIndicatorValueCriterion extends VariatingIndicatorValueCriterion
-{
-	public IncreasingIndicatorValueCriterion(Indicator indicator, int years) 
-	{
-		super(indicator, years, ComparisonCriterion.LowerThan);
-	}
-	
-	protected IncreasingIndicatorValueCriterion() 
-	{
-		this.comparisonCriterion = ComparisonCriterion.LowerThan;
-	}
+public class IncreasingIndicatorValueCriterion extends VariatingIndicatorValueCriterion {
+  public IncreasingIndicatorValueCriterion(Indicator indicator, int years) {
+    super(indicator, years, ComparisonCriterion.LowerThan);
+  }
+
+  protected IncreasingIndicatorValueCriterion() {
+    this.comparisonCriterion = ComparisonCriterion.LowerThan;
+  }
 }

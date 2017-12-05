@@ -12,13 +12,13 @@ public class EnterpriseAgeCriterion extends OrderCriterion<Integer> {
   public Integer weigh(Enterprise enterprise) {
     return enterprise.age();
   }
-  
-	public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
-		return weigh(oneEnterprise) - weigh(anotherEnterprise);
-	}
 
-	protected String buildDescription() {
-		return "mientras mas antigua sea mejor";
-	}
+  public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
+    return weigh(oneEnterprise) - weigh(anotherEnterprise);
+  }
+
+  protected String buildDescription() {
+    return "mientras mas antigua sea mejor";
+  }
 
 }

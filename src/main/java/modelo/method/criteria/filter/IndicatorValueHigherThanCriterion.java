@@ -9,15 +9,12 @@ import modelo.indicator.Indicator;
 
 @Entity
 @DiscriminatorValue("IVH")
-public class IndicatorValueHigherThanCriterion extends IndicatorValueCompareCriterion
-{
-	public IndicatorValueHigherThanCriterion(Indicator indicator, BigDecimal value, int years) 
-	{
-		super(indicator, value, years, ComparisonCriterion.HigherThan);
-	}
-	
-	protected IndicatorValueHigherThanCriterion() 
-	{
-		this.comparisonCriterion = ComparisonCriterion.HigherThan;
-	}
+public class IndicatorValueHigherThanCriterion extends IndicatorValueCompareCriterion {
+  public IndicatorValueHigherThanCriterion(Indicator indicator, BigDecimal value, int years) {
+    super(indicator, value, years, ComparisonCriterion.HigherThan);
+  }
+
+  protected IndicatorValueHigherThanCriterion() {
+    this.comparisonCriterion = ComparisonCriterion.HigherThan;
+  }
 }

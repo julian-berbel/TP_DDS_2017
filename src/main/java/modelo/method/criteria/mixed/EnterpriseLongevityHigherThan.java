@@ -9,12 +9,12 @@ import modelo.method.criteria.order.EnterpriseAgeCriterion;
 
 @Entity
 @DiscriminatorValue("LH")
-public class EnterpriseLongevityHigherThan extends MixedCriterion{
-		
-	public EnterpriseLongevityHigherThan(int years)
-	{
-		super(new EnterpriseAgeCriterion(), new EnterpriseMinimumLongevityCriterion(years));
-	}
-	
-	protected EnterpriseLongevityHigherThan(){}
+public class EnterpriseLongevityHigherThan extends MixedCriterion {
+
+  public EnterpriseLongevityHigherThan(int years) {
+    super(new EnterpriseAgeCriterion(), new EnterpriseMinimumLongevityCriterion(years));
+  }
+
+  protected EnterpriseLongevityHigherThan() {
+  }
 }

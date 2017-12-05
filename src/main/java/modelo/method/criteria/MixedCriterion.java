@@ -11,34 +11,34 @@ import javax.persistence.Table;
 @Table(name = "MixedCriteria")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-public abstract class MixedCriterion extends Criterion
-{
-	@ManyToOne
-	protected OrderCriterion<?> orderCriterion;
-	
-	@ManyToOne
-	protected FilterCriterion filterCriterion;
-	
-	public MixedCriterion(OrderCriterion<?> orderCriterion, FilterCriterion filterCriterion) {
-		this.orderCriterion = orderCriterion;
-		this.filterCriterion = filterCriterion;
-	}
-	
-	protected MixedCriterion() {}
-	
-	public OrderCriterion<?> getOrderCriterion() {
-		return orderCriterion;
-	}
+public abstract class MixedCriterion extends Criterion {
+  @ManyToOne
+  protected OrderCriterion<?> orderCriterion;
 
-	public FilterCriterion getFilterCriterion() {
-		return filterCriterion;
-	}
-	
-	public Boolean uses(Criterion criterion){
-		return orderCriterion == criterion || filterCriterion == criterion;
-	}
-	
-	public String buildDescription(){
-		return filterCriterion.getDescription() + " y " + orderCriterion.getDescription();
-	}
+  @ManyToOne
+  protected FilterCriterion filterCriterion;
+
+  public MixedCriterion(OrderCriterion<?> orderCriterion, FilterCriterion filterCriterion) {
+    this.orderCriterion = orderCriterion;
+    this.filterCriterion = filterCriterion;
+  }
+
+  protected MixedCriterion() {
+  }
+
+  public OrderCriterion<?> getOrderCriterion() {
+    return orderCriterion;
+  }
+
+  public FilterCriterion getFilterCriterion() {
+    return filterCriterion;
+  }
+
+  public Boolean uses(Criterion criterion) {
+    return orderCriterion == criterion || filterCriterion == criterion;
+  }
+
+  public String buildDescription() {
+    return filterCriterion.getDescription() + " y " + orderCriterion.getDescription();
+  }
 }

@@ -14,9 +14,8 @@ import modelo.enterprise.Enterprise;
 @Table(name = "OrderCriteria")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-public abstract class OrderCriterion<Type> extends Criterion implements Comparator<Enterprise>
-{	
-	public abstract int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise);
-	
-	public abstract Type weigh(Enterprise enterprise);
+public abstract class OrderCriterion<Type> extends Criterion implements Comparator<Enterprise> {
+  public abstract int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise);
+
+  public abstract Type weigh(Enterprise enterprise);
 }

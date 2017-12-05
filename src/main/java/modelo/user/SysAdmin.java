@@ -7,14 +7,15 @@ import javax.persistence.Entity;
 @DiscriminatorValue("A")
 public class SysAdmin extends User {
 
-	public SysAdmin(String email, String password) {
-		super(email, password);
-	}
-	
-	protected SysAdmin(){}
+  public SysAdmin(String email, String password) {
+    super(email, password);
+  }
 
-	@Override
-	public String homeView(){
-		return "home/admin.hbs";
-	}
+  protected SysAdmin() {
+  }
+
+  @Override
+  public String homeView() {
+    return "home/admin.hbs";
+  }
 }

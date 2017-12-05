@@ -14,26 +14,27 @@ import modelo.method.criteria.OrderCriterion;
 @Entity
 @DiscriminatorValue("MI")
 public class MaximizeIndicatorCriterion extends OrderCriterion<BigDecimal> {
-	
-	@ManyToOne
-	private Indicator indicator;
-	
-	public MaximizeIndicatorCriterion(Indicator indicator){
-		this.indicator = indicator;
-	}
-	
-	public MaximizeIndicatorCriterion(){}
 
-	public BigDecimal weigh(Enterprise enterprise) {
-	  return indicator.reduce(enterprise, Year.now().getValue());
-	}
-	
-	public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
-		return weigh(anotherEnterprise).compareTo(weigh(oneEnterprise));
-	}
+  @ManyToOne
+  private Indicator indicator;
 
-	protected String buildDescription() {
-		return "Maximizar indicador " + indicator.getName();
-	}
+  public MaximizeIndicatorCriterion(Indicator indicator) {
+    this.indicator = indicator;
+  }
+
+  public MaximizeIndicatorCriterion() {
+  }
+
+  public BigDecimal weigh(Enterprise enterprise) {
+    return indicator.reduce(enterprise, Year.now().getValue());
+  }
+
+  public int compare(Enterprise oneEnterprise, Enterprise anotherEnterprise) {
+    return weigh(anotherEnterprise).compareTo(weigh(oneEnterprise));
+  }
+
+  protected String buildDescription() {
+    return "Maximizar indicador " + indicator.getName();
+  }
 
 }

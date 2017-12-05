@@ -12,7 +12,6 @@ import modelo.enterprise.Enterprise;
 @Table(name = "FilterCriteria")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-public abstract class FilterCriterion extends Criterion
-{
-	public abstract boolean test(Enterprise enterprise);
+public abstract class FilterCriterion extends Criterion {
+  public abstract boolean test(Enterprise enterprise);
 }
