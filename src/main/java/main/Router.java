@@ -8,11 +8,14 @@ import controllers.EnterpriseController;
 import controllers.IndicatorController;
 import controllers.MethodController;
 import static spark.Spark.*;
+
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.BooleanHelper;
 import spark.utils.HandlebarsTemplateEngineBuilder;
 
-public class Router {
+public class Router implements WithGlobalEntityManager {
 
 	public static void configure() {
 		HandlebarsTemplateEngine engine = HandlebarsTemplateEngineBuilder
@@ -75,9 +78,10 @@ public class Router {
 			get("/:id", methodController::show, engine);
 			delete("/:id", methodController::delete);
 			get("/:id/eval", methodController::eval, engine);
-			
 		});	
 		
 		get("/deadend", deadEndController::get, engine);
+		
+		after((request, response) -> new Router().entityManager().close());
 	}
 }
