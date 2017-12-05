@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import modelo.enterprise.Enterprise;
 import modelo.enterprise.EnterpriseIndicators;
 import modelo.enterprise.EnterpriseRepository;
 import modelo.indicator.Indicator;
@@ -59,7 +58,7 @@ public class IndicatorController extends Controller {
 		withTransaction(()-> {
 			Indicator indicator = IndicatorRepository.getInstance().getById(id(req));
 			IndicatorRepository.getInstance().deleteElement(indicator);
-		});		
+		});
 		return res;
 	}
 	
@@ -77,9 +76,5 @@ public class IndicatorController extends Controller {
 	{
 		return EnterpriseRepository.getInstance().getList().stream()
 				.map(enterprise->new EnterpriseIndicators(enterprise.getName(), list, year)).collect(Collectors.toList());	
-	}
-	public ModelAndView filter(Request req, Response res){		
-		List<Indicator> indicators = withTransaction(() -> IndicatorRepository.getInstance().filterByName(req.queryParams("name")));
-		return new ModelAndView(indicators, "indicators/filter.hbs");
 	}
 }

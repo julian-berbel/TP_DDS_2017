@@ -53,17 +53,11 @@ public class EnterpriseController extends Controller {
         return null;
 	}
 	
-	public Response delete(Request req, Response res){		
+	public Response delete(Request req, Response res){
 		withTransaction(() -> {
 			Enterprise enteprise = EnterpriseRepository.getInstance().getById(id(req));
 			EnterpriseRepository.getInstance().deleteElement(enteprise);
 		});
-		
-		
 		return res;
-	}
-	public ModelAndView filter(Request req, Response res){		
-		List<Enterprise> enterprises = withTransaction(() -> EnterpriseRepository.getInstance().filterByName(req.queryParams("name")));
-		return new ModelAndView(enterprises, "enterprises/filter.hbs");
 	}
 }
