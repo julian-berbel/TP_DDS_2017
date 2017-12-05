@@ -120,17 +120,3 @@ p.title2{
     left: 50%;
     transform: translate(-50%,-50%);
 }
-.hiddenLink{
-	color: #C0C0C0;
-	font-size: 10;
-}
-.surprise{
-	position: absolute;
-	margin-top: 30%;
-	margin-left: 50%;
-}
-.surpriseContainer{
-	position: absolute;
-	margin-top: 5%;
-	margin-left: 15%;
-}

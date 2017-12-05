@@ -3,7 +3,6 @@ package main;
 import controllers.HomeController;
 import controllers.LoginController;
 import controllers.MainController;
-import controllers.DeadEndController;
 import controllers.EnterpriseController;
 import controllers.IndicatorController;
 import controllers.MethodController;
@@ -31,8 +30,6 @@ public class Router implements WithGlobalEntityManager {
 		MethodController methodController = new MethodController();
 		IndicatorController indicatorController = new IndicatorController();
 		HomeController homeController = new HomeController();
-		
-		DeadEndController deadEndController = new DeadEndController();
 		
 		get("/", MainController::main, engine);
 		get("/home", homeController::home,engine);
@@ -63,16 +60,11 @@ public class Router implements WithGlobalEntityManager {
 		path("/methods", () -> {
 			get("", methodController::list, engine);
 			post("", methodController::create);
-			get("/filter",methodController::filter, engine);
-			get("/filter/:id",methodController::show, engine);
-			delete("/filter/:id",methodController::delete);
 			get("/new", methodController::renderNewForm, engine);
 			get("/:id", methodController::show, engine);
 			delete("/:id", methodController::delete);
 			get("/:id/eval", methodController::eval, engine);
-		});	
-		
-		get("/deadend", deadEndController::get, engine);
+		});
 		
 		after((request, response) -> new Router().entityManager().close());
 	}
